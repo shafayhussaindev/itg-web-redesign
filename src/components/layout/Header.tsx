@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 import logoOnDark from "@/assets/logo-trimmed-white.png";
 import logoOnLight from "@/assets/logo-trimmed.png";
 import { CommandPalette } from "@/components/CommandPalette";
+import { NavSearch } from "@/components/layout/NavSearch";
 
 type MenuItem = {
   title: string;
@@ -921,15 +922,7 @@ export function Header() {
           </NavigationMenu>
 
           <div className="flex items-center justify-end gap-2 lg:gap-3">
-            <button
-              onClick={() => setCommandPaletteOpen(true)}
-              className={cn(navItemClass, "hidden lg:flex items-center gap-2 text-sm")}
-              aria-label="Search navigation"
-            >
-              <Search className="w-3.5 h-3.5" />
-              <span>Search</span>
-              
-            </button>
+            <NavSearch onOpen={() => setCommandPaletteOpen(true)} onDark={isDarkHero} />
 
             {/* Theme toggle hidden — brand system v2.0 is light-only.
                 Kept commented so the dark-mode feature can be re-enabled later.
