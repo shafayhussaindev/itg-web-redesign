@@ -1,0 +1,236 @@
+/* ============================================================
+   ITG Technologies — Solutions page
+   Ported 1:1 from the approved static mockup.
+   Brand tokens follow ITG Brand Guidelines v2.0 (locked).
+   ============================================================ */
+
+.tier1-site *,.tier1-site *::before,.tier1-site *::after{box-sizing:border-box;margin:0;padding:0;}
+  .tier1-site{
+    --navy:#0D2140; --navy-mid:#1A3A6B; --sky:#D0E2F4; --ice:#EAF0F8;
+    --white:#FFFFFF; --charcoal:#4A5568; --light-text:#718096;
+    --brand-accent:#3D6FB4; --brand-accent-soft:#A8C6EA; --cyan:var(--brand-accent); --clay:#B03A42; --clay-deep:#8B2A32; --teal:var(--clay); --border:rgba(13,33,64,0.1);
+  }
+  /* Scrolling is smoothed by Lenis (see Tier1Route); CSS smooth scroll on
+     top of it makes anchor jumps fight the inertia. */
+  .tier1-site{scroll-behavior:auto;}
+  .tier1-site{font-family:'Sora',sans-serif;background:#fff;color:var(--navy);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  .tier1-site .wrap{max-width:1280px;margin:0 auto;padding:0 40px;}
+  .tier1-site a{text-decoration:none;color:inherit;}
+  /* Buttons do not inherit font-family from body — without this every CTA
+     falls back to the UA font (Arial) instead of Sora. */
+  .tier1-site button{font-family:inherit;}
+
+
+  .tier1-site .glass{background:rgba(255,255,255,0.14);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);border:1px solid rgba(255,255,255,0.35);box-shadow:0 12px 40px rgba(13,33,64,0.18);}
+  .tier1-site .glass-dark{background:rgba(13,33,64,0.4);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);border:1px solid rgba(255,255,255,0.14);}
+
+  /* NAV */
+  .tier1-site .nav-wrap{position:fixed;top:0;left:0;right:0;z-index:50;
+    background:linear-gradient(180deg,rgba(9,24,48,0.5) 0%,rgba(9,24,48,0.28) 100%);
+    backdrop-filter:blur(7px) saturate(1.15);-webkit-backdrop-filter:blur(7px) saturate(1.15);
+    border-bottom:1px solid rgba(255,255,255,0.12);transition:background .3s ease,border-color .3s ease;}
+  .tier1-site .nav-wrap.scrolled{background:rgba(11,28,56,0.88);border-bottom-color:rgba(255,255,255,0.1);}
+  .tier1-site nav{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 40px;max-width:1360px;margin:0 auto;}
+  .tier1-site .nav-logo-slot{position:relative;display:flex;align-items:center;flex-shrink:0;}
+  .tier1-site .nav-logo-white{height:32px;display:block;filter:drop-shadow(0 1px 6px rgba(6,18,38,0.55));}
+  .tier1-site .navlinks{display:flex;gap:30px;font-size:14px;font-weight:500;color:rgba(255,255,255,0.7);}
+  .tier1-site .navlinks a{position:relative;color:inherit;transition:color .25s ease;}
+  .tier1-site .navlinks a:hover,.tier1-site .navlinks a.active{color:#fff;}
+  .tier1-site .navlinks a.active::after{content:'';position:absolute;left:0;right:0;bottom:-8px;height:2px;border-radius:2px;background:var(--brand-accent-soft);}
+  .tier1-site .navright{display:flex;align-items:center;gap:18px;}
+  .tier1-site .navicon{color:rgba(255,255,255,0.55);font-size:15px;}
+  .tier1-site .navcta{background:var(--cyan);color:var(--navy);padding:10px 20px;border-radius:8px;font-size:13px;font-weight:700;
+    border:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;line-height:1.2;white-space:nowrap;
+    transition:filter .25s ease,box-shadow .25s ease;}
+  /* Hover/active shade via brightness rather than a new colour — the palette is closed at 8. */
+  .tier1-site .navcta:hover{filter:brightness(0.94);box-shadow:0 6px 18px rgba(6,18,38,0.28);}
+  .tier1-site .navcta:active{filter:brightness(0.88);box-shadow:0 2px 8px rgba(6,18,38,0.24);}
+  .tier1-site .navcta:focus-visible{outline:2px solid var(--white);outline-offset:3px;}
+
+  /* HERO */
+  .tier1-site .hero{position:relative;padding:180px 40px 120px;background:url('/assets/hero-bg.jpg') center/cover;overflow:hidden;min-height:720px;display:flex;align-items:center;}
+  .tier1-site .hero-overlay{position:absolute;inset:0;background:linear-gradient(95deg,rgba(9,24,48,0.5) 0%,rgba(10,26,52,0.28) 34%,rgba(13,33,64,0.05) 58%,rgba(13,33,64,0) 78%);z-index:0;}
+  .tier1-site .hero-glass{max-width:620px;padding:42px 42px 44px;border-radius:28px;
+    background:rgba(222,238,255,0.17);
+    backdrop-filter:blur(11px) saturate(1.2);-webkit-backdrop-filter:blur(11px) saturate(1.2);
+    border:1px solid rgba(255,255,255,0.3);
+    box-shadow:0 18px 48px rgba(6,18,38,0.2);
+    opacity:0;transform:translateY(26px);animation:heroRise .6s cubic-bezier(.2,.75,.25,1) .1s forwards;}
+  @keyframes heroRise{to{opacity:1;transform:translateY(0);}}
+  @keyframes heroFade{to{opacity:1;transform:translateY(0);}}
+  .tier1-site .hero-glass .eyebrow,.tier1-site .hero-glass h1,.tier1-site .hero-glass p,.tier1-site .hero-glass .cta-row{opacity:0;transform:translateY(14px);animation:heroFade .5s ease forwards;}
+  .tier1-site .hero-glass .eyebrow{animation-delay:.24s;}
+  .tier1-site .hero-glass h1{animation-delay:.34s;}
+  .tier1-site .hero-glass p{animation-delay:.44s;}
+  .tier1-site .hero-glass .cta-row{animation-delay:.54s;}
+  @media (prefers-reduced-motion: reduce){
+    .tier1-site .hero-glass,.tier1-site .hero-glass .eyebrow,.tier1-site .hero-glass h1,.tier1-site .hero-glass p,.tier1-site .hero-glass .cta-row{animation:none;opacity:1;transform:none;}
+  }
+  .tier1-site .hero-inner{max-width:1240px;width:100%;margin:0 auto;text-align:left;position:relative;z-index:2;}
+  .tier1-site .eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(93, 141, 205,0.2);color:#DCE9F8;font-size:10.5px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;padding:7px 15px;border-radius:20px;margin-bottom:20px;border:1px solid rgba(93, 141, 205,0.38);}
+  .tier1-site .hero h1{font-size:50px;font-weight:700;letter-spacing:-0.02em;line-height:1.14;margin-bottom:18px;color:#fff;text-shadow:0 2px 20px rgba(6,18,38,0.4);}
+  .tier1-site .hero h1 .accent{color:var(--brand-accent-soft);}
+  .tier1-site .hero p{font-size:15.5px;color:rgba(255,255,255,0.9);line-height:1.7;margin:0 0 30px;text-shadow:0 1px 12px rgba(6,18,38,0.35);}
+  .tier1-site .cta-row{display:flex;gap:14px;justify-content:flex-start;flex-wrap:wrap;}
+  /* Navy face shared with the header CTA; the tier-1 geometry (8px radius,
+     roomier padding) is what keeps these looking like page buttons. */
+  .tier1-site .btn-cyan{background:var(--btn-navy);color:#fff;font-weight:700;font-size:13px;padding:14px 26px;border-radius:8px;
+    border:1px solid var(--btn-navy-rim);box-shadow:var(--btn-navy-shadow);cursor:pointer;
+    transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s ease,background .3s ease;}
+  .tier1-site .btn-cyan:hover{transform:translateY(-2px);background:var(--btn-navy-hover);
+    border-color:var(--btn-navy-rim-hover);box-shadow:var(--btn-navy-shadow-hover);}
+  .tier1-site .btn-cyan:active{transform:translateY(0);}
+  .tier1-site .btn-glass{font-weight:600;font-size:13px;padding:13px 24px;border-radius:8px;color:#fff;cursor:pointer;}
+  .tier1-site .btn-outline-navy{font-weight:600;font-size:13px;padding:14px 28px;border-radius:10px;color:var(--navy);background:transparent;border:1.5px solid rgba(13,33,64,0.35);cursor:pointer;transition:background .28s ease,border-color .28s ease,color .28s ease;}
+  .tier1-site .btn-outline-navy:hover{background:rgba(13,33,64,0.05);border-color:var(--navy);}
+  .tier1-site .btn-ghost-white{font-weight:600;font-size:13px;padding:13px 10px;color:#fff;background:transparent;border:none;cursor:pointer;text-decoration:underline;text-underline-offset:3px;}
+
+  .tier1-site section{padding:96px 40px;}
+  .tier1-site .ice-bg{background:var(--ice);}
+
+  /* ---------- scroll reveal (Solutions page) --------------------------
+     One-way: useReveal adds .is-in the first time an element enters view.
+     Reveals are applied to section containers rather than to cards, because
+     the cards animate their own transform on hover and the two would fight.
+     `.reveal--late` trails its section heading so a block lands as a
+     sequence rather than all at once. */
+  .tier1-site .sol-page .reveal{opacity:0;transform:translateY(26px);
+    transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);}
+  .tier1-site .sol-page .reveal.is-in{opacity:1;transform:none;}
+  .tier1-site .sol-page .reveal--late{transition-delay:.12s;}
+
+  @media (prefers-reduced-motion: reduce){
+    .tier1-site .sol-page .reveal,
+    .tier1-site .sol-page .reveal.is-in,
+    .tier1-site .sol-page .reveal--late{opacity:1;transform:none;transition:none;}
+  }
+
+  .tier1-site .section-head{text-align:center;max-width:640px;margin:0 auto 56px;}
+  .tier1-site .section-head .kicker{display:inline-block;color:#8B2A32;background:rgba(176, 58, 66,0.1);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:14px;}
+  .tier1-site .section-head h2{font-size:30px;font-weight:700;letter-spacing:-0.01em;margin-bottom:12px;}
+  .tier1-site .section-head h2 span{color:var(--cyan);}
+  .tier1-site .section-head p{font-size:15px;color:var(--charcoal);line-height:1.6;}
+
+  /* HOW SOLUTIONS WORK - tablet mockup, nothing else */
+  .tier1-site .tablet-wrap{max-width:1000px;margin:0 auto;}
+  .tier1-site .tablet-frame{background:linear-gradient(160deg,#0D2140,#1A3A6B);border-radius:32px;padding:18px;box-shadow:0 30px 70px rgba(13,33,64,0.35);}
+  .tier1-site .tablet-screen{background:var(--ice);border-radius:20px;padding:20px;position:relative;overflow:hidden;}
+  .tier1-site .lottie-stage{width:100%;aspect-ratio:1200 / 742;position:relative;z-index:1;}
+  .tier1-site .lottie-stage svg{display:block;width:100%!important;height:100%!important;}
+  @supports not (aspect-ratio: 1 / 1){ .tier1-site .lottie-stage{height:560px;} }
+
+  /* SOLUTION CATEGORIES - minimal by default, single glass button reveals detail on hover, card grows on hover */
+  .tier1-site .cat-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:28px;align-items:start;}
+  .tier1-site .cat-card{position:relative;height:440px;border-radius:22px;overflow:hidden;box-shadow:0 12px 30px rgba(13,33,64,0.16);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease;color:#fff;}
+  .tier1-site .cat-card:hover,.tier1-site .cat-card.is-open{transform:scale(1.035);box-shadow:0 24px 50px rgba(13,33,64,0.3);z-index:2;}
+  .tier1-site .cat-card-bg{position:absolute;inset:0;background-size:cover;background-position:center;}
+  .tier1-site .cat-card-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(13,33,64,0.02) 0%, rgba(13,33,64,0.18) 55%, rgba(13,33,64,0.72) 100%);transition:background .35s ease;}
+  .tier1-site .cat-card:has(.cat-btn:hover) .cat-card-bg::after,.tier1-site .cat-card.is-open .cat-card-bg::after{background:linear-gradient(180deg, rgba(13,33,64,0.25) 0%, rgba(13,33,64,0.6) 45%, rgba(13,33,64,0.94) 100%);}
+  .tier1-site .cat-body{position:absolute;left:0;right:0;bottom:0;padding:22px;z-index:2;display:flex;flex-direction:column;gap:2px;}
+  .tier1-site .cat-title{font-size:17px;font-weight:700;line-height:1.3;margin-bottom:14px;}
+  .tier1-site .cat-reveal{max-height:0;opacity:0;overflow:hidden;transition:max-height .35s ease,opacity .3s ease,margin-bottom .35s ease;margin-bottom:0;}
+  .tier1-site .cat-card:has(.cat-btn:hover) .cat-reveal,.tier1-site .cat-card.is-open .cat-reveal{max-height:150px;opacity:1;margin-bottom:14px;}
+  .tier1-site .cat-reveal .sub{font-size:12px;font-weight:600;color:var(--brand-accent-soft);margin-bottom:6px;line-height:1.35;}
+  .tier1-site .cat-reveal p{font-size:12px;color:rgba(255,255,255,0.78);line-height:1.55;}
+  .tier1-site .cat-btn{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.16);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(255,255,255,0.4);color:#fff;font-size:12.5px;font-weight:700;padding:11px 20px;border-radius:26px;cursor:pointer;transition:background .25s ease,border-color .25s ease;}
+  .tier1-site .cat-btn:hover,.tier1-site .cat-card.is-open .cat-btn{background:rgba(255,255,255,0.28);border-color:rgba(255,255,255,0.6);}
+
+  /* INDUSTRIES */
+  .tier1-site .ind-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .tier1-site .ind-card{position:relative;height:260px;border-radius:18px;overflow:hidden;cursor:pointer;box-shadow:0 10px 26px rgba(13,33,64,0.14);transition:box-shadow .35s ease;}
+  .tier1-site .ind-card:hover,.tier1-site .ind-card.is-open{box-shadow:0 18px 40px rgba(13,33,64,0.24);}
+  .tier1-site .ind-card img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.95);transition:transform .38s cubic-bezier(.2,.8,.2,1);}
+  .tier1-site .ind-card:hover img,.tier1-site .ind-card.is-open img{transform:scale(1.04);}
+  .tier1-site .ind-scrim{position:absolute;inset:0;background:linear-gradient(180deg, rgba(13,33,64,0) 30%, rgba(13,33,64,0.55) 68%, rgba(13,33,64,0.9) 100%);transition:background .35s ease;}
+  .tier1-site .ind-card:hover .ind-scrim,.tier1-site .ind-card.is-open .ind-scrim{background:linear-gradient(180deg, rgba(13,33,64,0.15) 15%, rgba(13,33,64,0.72) 58%, rgba(13,33,64,0.96) 100%);}
+  .tier1-site .ind-body{position:absolute;left:0;right:0;bottom:0;padding:18px 20px 20px;color:#fff;z-index:2;}
+  .tier1-site .ind-title{font-size:14.5px;font-weight:700;line-height:1.35;}
+  .tier1-site .ind-detail{max-height:0;opacity:0;transform:translateY(10px);overflow:hidden;transition:max-height .36s ease,opacity .32s ease,transform .36s ease,margin-top .36s ease;margin-top:0;}
+  .tier1-site .ind-card:hover .ind-detail,.tier1-site .ind-card.is-open .ind-detail{max-height:120px;opacity:1;transform:translateY(0);margin-top:8px;}
+  .tier1-site .ind-detail p{font-size:12px;color:rgba(255,255,255,0.78);line-height:1.55;margin-bottom:8px;}
+  .tier1-site .ind-explore{font-size:12.5px;font-weight:700;color:var(--brand-accent-soft);display:inline-flex;align-items:center;gap:6px;}
+  .tier1-site .ind-center{text-align:center;margin-top:48px;}
+  .tier1-site .btn-outline-navy .btn-arrow{display:inline-block;margin-left:6px;transition:transform .3s ease;}
+  .tier1-site .btn-outline-navy:hover .btn-arrow{transform:translateX(4px);}
+
+  /* WHY ITG */
+  .tier1-site .why-band{background:linear-gradient(120deg,#3D5A85,#2C4568 60%,#1A3A6B);position:relative;overflow:hidden;}
+  .tier1-site .why-band::before{content:'';position:absolute;top:-90px;left:20%;width:280px;height:280px;border-radius:50%;background:rgba(93, 141, 205,0.1);filter:blur(10px);}
+  .tier1-site .why-band .section-head h2{color:#fff;}
+  .tier1-site .why-band .section-head .kicker{background:rgba(93, 141, 205,0.18);color:var(--brand-accent-soft);}
+  .tier1-site .why-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;position:relative;z-index:2;}
+  .tier1-site .why-card{border-radius:14px;padding:22px 20px;}
+  .tier1-site .why-icon{width:36px;height:36px;color:#fff;margin-bottom:16px;}
+  .tier1-site .why-card h4{font-size:14.5px;font-weight:600;color:#fff;margin-bottom:8px;line-height:1.35;}
+  .tier1-site .why-card p{font-size:12.5px;color:rgba(255,255,255,0.65);line-height:1.55;}
+
+  /* CTA */
+  .tier1-site .cta-section{padding:0;position:relative;}
+  .tier1-site .cta-bg{position:relative;padding:110px 40px;background-size:cover;background-position:center;}
+  .tier1-site .cta-bg::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(13,33,64,0.88), rgba(13,33,64,0.94));}
+  .tier1-site .cta-content{position:relative;z-index:2;max-width:640px;margin:0 auto;text-align:center;}
+  .tier1-site .cta-content h2{color:#fff;font-size:30px;font-weight:700;margin-bottom:14px;}
+  .tier1-site .cta-content p{color:rgba(255,255,255,0.6);font-size:15px;margin-bottom:32px;}
+  .tier1-site .cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;align-items:center;}
+
+  /* FOOTER */
+  .tier1-site footer{background:var(--navy);padding:64px 40px 28px;}
+  .tier1-site .foot-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:30px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,0.1);}
+  .tier1-site .foot-brand p{color:rgba(255,255,255,0.45);font-size:13px;line-height:1.6;margin-top:14px;max-width:220px;}
+  .tier1-site .foot-col h5{color:rgba(255,255,255,0.85);font-size:13px;font-weight:600;margin-bottom:16px;}
+  .tier1-site .foot-col a{display:block;color:rgba(255,255,255,0.45);font-size:13px;margin-bottom:11px;}
+  .tier1-site .foot-bottom{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding-top:22px;font-size:12px;color:rgba(255,255,255,0.35);}
+  .tier1-site .foot-social{display:flex;gap:14px;}
+
+  .tier1-site .note{max-width:1280px;margin:0 auto 40px;padding:16px 24px;background:#FFF9E6;border:1px solid #F0D98C;border-radius:10px;font-size:12.5px;color:#6B5A0A;line-height:1.6;}
+
+  /* Tablet: two columns rather than one — a single 670px-wide card per row
+     wastes most of the viewport at this size. */
+  @media(max-width:960px){
+    .tier1-site .ind-grid,.tier1-site .why-grid,.tier1-site .cat-grid,.tier1-site .foot-grid{grid-template-columns:repeat(2,1fr);}
+    .tier1-site .foot-brand{grid-column:1 / -1;}
+    .tier1-site section{padding:80px 32px;}
+  }
+  @media(max-width:1024px){
+    .tier1-site .hero{min-height:620px;padding:150px 32px 100px;background-position:72% center;}
+    .tier1-site .hero-glass{max-width:520px;padding:36px 34px 38px;}
+    .tier1-site .hero h1{font-size:36px;}
+    .tier1-site .hero p{font-size:14.5px;}
+    .tier1-site .navlinks{display:none;}
+  }
+  @media(max-width:680px){
+    .tier1-site .hero{min-height:auto;padding:130px 20px 70px;background-position:66% center;}
+    .tier1-site .hero-overlay{background:linear-gradient(180deg,rgba(9,24,48,0.55) 0%,rgba(10,26,52,0.35) 45%,rgba(13,33,64,0.15) 100%);}
+    .tier1-site .hero-glass{max-width:100%;padding:28px 24px 30px;border-radius:22px;}
+    .tier1-site .hero h1{font-size:29px;line-height:1.2;}
+    .tier1-site .hero p{font-size:14px;margin-bottom:24px;}
+    .tier1-site .cta-row{gap:10px;}
+    .tier1-site .cta-row button{width:100%;justify-content:center;}
+    .tier1-site nav{padding:12px 20px;}
+
+    /* Match the hero's 20px gutter. At 40px the content column was only
+       295px of a 375px screen. */
+    .tier1-site section{padding:64px 20px;}
+    .tier1-site .section-head{margin:0 auto 36px;}
+    .tier1-site .section-head h2{font-size:26px;}
+    .tier1-site .section-head p{font-size:14px;}
+    .tier1-site .ind-grid,.tier1-site .why-grid,.tier1-site .cat-grid{grid-template-columns:1fr;}
+
+    /* The tablet chrome ate 76px of an already narrow screen, leaving the
+       animation 219px wide — its baked-in step cards were unreadable. */
+    .tier1-site .tablet-frame{padding:10px;border-radius:22px;}
+    .tier1-site .tablet-screen{padding:10px;border-radius:14px;}
+
+    .tier1-site .cat-card{height:400px;}
+    .tier1-site .ind-card{height:240px;}
+
+    /* Touch targets: these sat at 38px. */
+    .tier1-site .btn-cyan,.tier1-site .btn-glass,.tier1-site .cat-btn,.tier1-site .btn-outline-navy,.tier1-site .btn-ghost-white,.tier1-site .navcta{min-height:44px;}
+    .tier1-site .cat-btn{padding:12px 20px;}
+
+    .tier1-site .cta-bg{padding:72px 20px;}
+    .tier1-site .cta-content h2{font-size:26px;}
+    .tier1-site footer{padding:48px 20px 24px;}
+    .tier1-site .foot-grid{gap:24px;}
+    .tier1-site .foot-bottom{flex-wrap:wrap;gap:12px;justify-content:center;text-align:center;}
+  }

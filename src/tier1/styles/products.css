@@ -1,0 +1,790 @@
+/* ============================================================
+   ITG Technologies — Products page
+   Extends the approved Solutions system (index.css). No new tokens,
+   no new fonts, no parallel design system: this file only adds the
+   layout patterns the Products page needs and reuses .btn-cyan,
+   .btn-outline-navy, .section-head, .ice-bg, section padding etc.
+
+   Accent discipline (brand v2.0):
+   - cyan  = the single action colour. Buttons and links only.
+   - teal  = decorative / diagram only. Used for the SVG ecosystem and
+             workflow accents, never on an interactive element.
+   - cyan and teal never share a visual block.
+   ============================================================ */
+
+/* ---- shared page scaffolding ---- */
+.tier1-site .pp-wrap { max-width: 1280px; margin: 0 auto; }
+.tier1-site .pp-section-head { max-width: 680px; margin: 0 auto 56px; text-align: center; }
+.tier1-site .pp-section-head h2 { font-size: 30px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 12px; }
+.tier1-site .pp-section-head p { font-size: 15px; color: var(--charcoal); line-height: 1.6; }
+
+/* Barely-there technical grid. Depth, not decoration. */
+.tier1-site .pp-grid-field { position: relative; }
+.tier1-site .pp-grid-field::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(rgba(13,33,64,0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(13,33,64,0.028) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(70% 60% at 50% 45%, #000 0%, transparent 78%);
+  -webkit-mask-image: radial-gradient(70% 60% at 50% 45%, #000 0%, transparent 78%);
+}
+.tier1-site .pp-grid-field > * { position: relative; z-index: 1; }
+
+/* Focus: same ring on every interactive element on the page. The Solutions
+   page rings .navcta in white over navy; on these light sections the ring is
+   navy so it stays visible without introducing a colour. */
+.tier1-site .pp-cat-cta:focus-visible,
+.tier1-site .pp-hero-ctas button:focus-visible,
+.tier1-site .pp-cta-btns button:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; border-radius: 4px; }
+
+/* Scroll-entry: opacity + small translate only. */
+/* --d staggers siblings that enter together (heading → copy → cards → routes) */
+.tier1-site .pp-reveal {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.2,.75,.25,1);
+  transition-delay: var(--d, 0ms);
+}
+.tier1-site .pp-reveal.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .tier1-site .pp-reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ============================================================
+   1 — HERO
+   Structurally the approved Solutions hero: a full-bleed environment
+   with a glassmorphism content panel sitting over it, same rhythm,
+   same radii, same entry motion (heroRise / heroFade from index.css).
+
+   The one deliberate inversion: the Solutions environment is a dark
+   photograph, so its panel is dark glass with white type. This
+   environment is a near-white ecosystem render, so the veil runs light
+   and the panel is white/blue-grey glass with navy type. Anything else
+   fails contrast against the render.
+   ============================================================ */
+.tier1-site .pp-hero {
+  position: relative; overflow: hidden; isolation: isolate;
+  display: flex; align-items: center;
+  /* The Products hero carries ~3× the Solutions hero's copy and none of it
+     may be cut, so the type and gutters are tuned to land the whole
+     composition inside one viewport rather than the hero being allowed to
+     grow. Nothing here is decorative slack. */
+  padding: 126px 40px 76px;
+  min-height: 700px;                          /* fallback for no svh */
+  min-height: clamp(660px, 100svh, 880px);
+  background: linear-gradient(180deg, #FFFFFF 0%, #F7FAFD 100%);
+}
+
+/* ---- environment ------------------------------------------------- */
+/* Bled 52px top and bottom so the drift and the scroll parallax below
+   never expose an edge inside the hero's own clip. */
+.tier1-site .pp-hero-env { position: absolute; inset: -52px 0; z-index: 0; pointer-events: none; overflow: hidden; }
+/* The render's canvas is deliberately wider and taller than the frame it is
+   shown in (2448×1130 against a ~1.7 hero), so `cover` stays keyed to height
+   at every desktop width. The whole architecture reads, the crop never
+   zooms in on wide screens, and the pale field extends past both edges. */
+.tier1-site .pp-hero-env-img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: 72% 50%;
+  will-change: transform;
+  animation: pp-env-drift 46s ease-in-out infinite;
+}
+/* extremely slow — the ecosystem breathes, it does not move */
+@keyframes pp-env-drift {
+  0%, 100% { transform: scale(1.03) translate3d(0, 0, 0); }
+  50%      { transform: scale(1.05) translate3d(-12px, -8px, 0); }
+}
+
+/* Atmosphere: a blue wash on the ecosystem's centre of mass, a deeper navy
+   pool under its right shoulder, and a vignette that closes the frame.
+   All three stay under 11% so the field reads light, never dark. */
+.tier1-site .pp-hero-atmos {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(44% 50% at 68% 45%, rgba(160,203,240,0.34) 0%, rgba(160,203,240,0) 72%),
+    radial-gradient(32% 36% at 86% 72%, rgba(26,58,107,0.13) 0%, rgba(26,58,107,0) 74%),
+    radial-gradient(118% 104% at 62% 46%, rgba(13,33,64,0) 46%, rgba(13,33,64,0.055) 80%, rgba(13,33,64,0.105) 100%);
+  animation: pp-atmos-breathe 26s ease-in-out infinite;
+}
+@keyframes pp-atmos-breathe { 0%, 100% { opacity: 0.76; } 50% { opacity: 1; } }
+
+/* Connection points, and light travelling the routes between them. Sky and
+   white, never cyan: cyan is the action colour and nothing decorative may
+   borrow it. Both drift on the render's isometric axes (~30°), so the motion
+   reads as following the architecture rather than crossing it. */
+.tier1-site .pp-node {
+  position: absolute; width: 10px; height: 10px; border-radius: 50%; opacity: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.98) 0%, rgba(168,206,240,0.9) 40%, rgba(208,226,244,0) 72%);
+  box-shadow: 0 0 20px 7px rgba(176,211,242,0.45);
+  animation: pp-node-pulse 9s ease-in-out infinite;
+}
+.tier1-site .pp-node--1 { left: 55%; top: 38%; }
+.tier1-site .pp-node--2 { left: 72%; top: 56%; animation-delay: 2.3s; }
+.tier1-site .pp-node--3 { left: 61%; top: 70%; animation-delay: 4.4s; }
+.tier1-site .pp-node--4 { left: 83%; top: 33%; width: 8px; height: 8px; animation-delay: 6.4s; }
+/* pulse and a few pixels of drift in one transform — they cannot compose */
+@keyframes pp-node-pulse {
+  0%, 100% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.7); }
+  45%      { opacity: 0.78; transform: translate3d(7px, 4px, 0) scale(1); }
+}
+
+.tier1-site .pp-trace {
+  position: absolute; width: 7px; height: 7px; border-radius: 50%; opacity: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.98) 0%, rgba(120,178,232,0.8) 42%, rgba(160,203,240,0) 72%);
+  box-shadow: 0 0 15px 5px rgba(150,196,238,0.4);
+}
+.tier1-site .pp-trace--1 { left: 52%; top: 43%; animation: pp-trace-a 21s linear infinite; }
+.tier1-site .pp-trace--2 { left: 78%; top: 39%; animation: pp-trace-b 26s linear infinite 6s; }
+.tier1-site .pp-trace--3 { left: 60%; top: 63%; animation: pp-trace-c 24s linear infinite 12s; }
+@keyframes pp-trace-a {   /* down-right along the near axis */
+  0%   { opacity: 0; transform: translate3d(0, 0, 0); }
+  14%  { opacity: 0.9; }
+  76%  { opacity: 0.9; }
+  100% { opacity: 0; transform: translate3d(178px, 103px, 0); }
+}
+@keyframes pp-trace-b {   /* down-left along the far axis */
+  0%   { opacity: 0; transform: translate3d(0, 0, 0); }
+  16%  { opacity: 0.85; }
+  74%  { opacity: 0.85; }
+  100% { opacity: 0; transform: translate3d(-152px, 88px, 0); }
+}
+@keyframes pp-trace-c {   /* up-right, back toward the core */
+  0%   { opacity: 0; transform: translate3d(0, 0, 0); }
+  15%  { opacity: 0.8; }
+  75%  { opacity: 0.8; }
+  100% { opacity: 0; transform: translate3d(146px, -84px, 0); }
+}
+
+/* Calms the left so the panel reads, then clears completely by 60% so the
+   ecosystem stays crisp — it clears earlier than before because the panel is
+   narrower and the render now carries its own contrast. Second layer feathers
+   top and bottom into the page rather than ending on a seam. */
+.tier1-site .pp-hero-veil {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(96deg,
+      rgba(255,255,255,0.90) 0%, rgba(255,255,255,0.74) 24%,
+      rgba(238,244,251,0.34) 42%, rgba(255,255,255,0) 60%),
+    linear-gradient(180deg,
+      rgba(255,255,255,0.46) 0%, rgba(255,255,255,0) 20%,
+      rgba(255,255,255,0) 78%, #F7FAFD 100%);
+}
+
+/* Scroll parallax, CSS-only. Chromium honours it; everywhere else simply
+   keeps the drift, which is the whole effect minus the depth. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .tier1-site .pp-hero-env {
+      animation: pp-env-parallax linear both;
+      animation-timeline: view();
+      animation-range: contain 0% exit 100%;
+    }
+  }
+}
+@keyframes pp-env-parallax { to { transform: translate3d(0, 38px, 0); } }
+
+/* ---- content ------------------------------------------------------ */
+.tier1-site .pp-hero-inner { position: relative; z-index: 2; max-width: 1280px; width: 100%; margin: 0 auto; }
+
+/* Architectural frosted glass, not a white card: the fill is blue-grey and
+   roughly half-transparent, so the ecosystem stays legible through it and the
+   blur does the readability work. ~44% of the 1280 content width, which
+   leaves the render most of the frame. */
+.tier1-site .pp-hero-glass {
+  max-width: 566px; padding: 32px 36px 34px; border-radius: 28px;
+  background: linear-gradient(152deg, rgba(255,255,255,0.56) 0%, rgba(208,226,244,0.34) 100%);
+  backdrop-filter: blur(13px) saturate(1.35); -webkit-backdrop-filter: blur(13px) saturate(1.35);
+  border: 1px solid rgba(255,255,255,0.60);
+  box-shadow:
+    0 28px 70px rgba(13,33,64,0.16),
+    0 2px 10px rgba(13,33,64,0.05),
+    inset 0 1px 0 rgba(255,255,255,0.72),
+    inset 0 -1px 0 rgba(255,255,255,0.20);
+  opacity: 0; transform: translateY(26px);
+  animation: heroRise .6s cubic-bezier(.2,.75,.25,1) .1s forwards;
+}
+/* same staggered settle as the Solutions hero */
+.tier1-site .pp-hero-glass > * { opacity: 0; transform: translateY(14px); animation: heroFade .5s ease forwards; }
+.tier1-site .pp-hero-eyebrow { animation-delay: .24s; }
+.tier1-site .pp-hero-glass h1 { animation-delay: .32s; }
+.tier1-site .pp-hero-sub      { animation-delay: .40s; }
+.tier1-site .pp-hero-body     { animation-delay: .48s; }
+.tier1-site .pp-hero-ctas     { animation-delay: .58s; }
+
+.tier1-site .pp-hero-eyebrow {
+  display: inline-flex; align-items: center;
+  background: rgba(93, 141, 205,0.18); color: var(--navy);
+  border: 1px solid rgba(93, 141, 205,0.42);
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 20px; margin-bottom: 16px;
+}
+.tier1-site .pp-hero h1 {
+  font-size: 48px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.04;
+  margin-bottom: 10px; color: var(--navy);
+}
+.tier1-site .pp-hero-sub {
+  font-size: 21px; font-weight: 600; line-height: 1.3; color: var(--navy);
+  margin-bottom: 16px; max-width: 24ch;
+}
+/* The Solutions headline puts its accent phrase in cyan on a dark panel.
+   On this light panel cyan type would sit near 1.9:1, so the accent is
+   carried by a cyan underline and the words stay navy. Same signal, legible. */
+.tier1-site .pp-accent {
+  position: relative; white-space: nowrap;
+  background-image: linear-gradient(var(--cyan), var(--cyan));
+  background-repeat: no-repeat;
+  background-size: 100% 3px;
+  background-position: 0 calc(100% - 1px);
+  padding-bottom: 3px;
+}
+.tier1-site .pp-hero-body { font-size: 14.5px; line-height: 1.64; color: var(--charcoal); margin-bottom: 9px; max-width: 60ch; }
+.tier1-site .pp-hero-body:last-of-type { margin-bottom: 0; }
+.tier1-site .pp-hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 24px; }
+
+/* subtle lift on hover — no colour change, the palette does the talking */
+.tier1-site .pp-hero-ctas .btn-cyan {
+  box-shadow: 0 8px 22px rgba(13,33,64,0.14);
+  transition: transform .28s cubic-bezier(.2,.75,.25,1), box-shadow .28s ease, filter .25s ease;
+}
+.tier1-site .pp-hero-ctas .btn-cyan:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(13,33,64,0.28); }
+.tier1-site .pp-hero-ctas .btn-outline-navy { background: rgba(255,255,255,0.55); transition: transform .28s cubic-bezier(.2,.75,.25,1), background .28s ease, border-color .28s ease; }
+.tier1-site .pp-hero-ctas .btn-outline-navy:hover { transform: translateY(-2px); background: rgba(255,255,255,0.85); border-color: var(--navy); }
+
+/* ---- benefits: a second glass layer, not a second card ----------------
+   It laps 20px up over the main panel's lower-right corner. That 20px lands
+   inside the main panel's 34px bottom padding, so it overlaps the glass and
+   never the CTA row. Thinner fill than the main panel so the layering, and
+   the main panel's edge running under it, both stay visible. */
+.tier1-site .pp-hero-panel {
+  position: relative; z-index: 1;
+  margin: -20px 0 0 190px; max-width: 520px;
+  padding: 16px 22px 18px; border-radius: 20px;
+  background: linear-gradient(152deg, rgba(255,255,255,0.44) 0%, rgba(208,226,244,0.28) 100%);
+  backdrop-filter: blur(11px) saturate(1.3); -webkit-backdrop-filter: blur(11px) saturate(1.3);
+  border: 1px solid rgba(255,255,255,0.52);
+  box-shadow:
+    0 20px 48px rgba(13,33,64,0.13),
+    inset 0 1px 0 rgba(255,255,255,0.62);
+  /* Slower and softer than the main panel's entry: it waits for that one to
+     settle, then fades up over a full second so it reads as a second layer
+     arriving, not a second card dropping in. Mostly opacity — 12px of travel
+     is all a fade this long can carry without feeling sluggish. */
+  animation: pp-panel-fade 1s cubic-bezier(.22,.7,.3,1) .9s both;
+}
+@keyframes pp-panel-fade {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.tier1-site .pp-hero-panel h2 { font-size: 13px; font-weight: 700; margin-bottom: 11px; color: var(--navy); }
+/* capability indicators, not a card grid: two columns, tick-led, no rules */
+.tier1-site .pp-hero-panel ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; }
+.tier1-site .pp-hero-panel li {
+  display: grid; grid-template-columns: 20px 1fr; gap: 9px; align-items: start;
+  font-size: 12.75px; line-height: 1.45; color: var(--charcoal);
+}
+/* teal is decorative-only and this panel is its own visual block, so it
+   carries no cyan — the rule holds. */
+.tier1-site .pp-tick {
+  width: 20px; height: 20px; border-radius: 6px; margin-top: 1px;
+  display: grid; place-items: center; color: var(--teal);
+  background: rgba(176, 58, 66,0.10); border: 1px solid rgba(176, 58, 66,0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tier1-site .pp-hero-env, .tier1-site .pp-hero-atmos, .tier1-site .pp-hero-glass, .tier1-site .pp-hero-glass > *, .tier1-site .pp-hero-panel {
+    animation: none; opacity: 1; transform: none;
+  }
+  .tier1-site .pp-hero-env-img { animation: none; transform: scale(1.03); }
+  .tier1-site .pp-node { animation: none; opacity: 0.4; }
+  .tier1-site .pp-trace { animation: none; opacity: 0; }
+}
+
+/* ============================================================
+   2 — PLATFORM-FIRST PHILOSOPHY
+   One platform architecture carrying four capabilities: the cards float
+   over the platform render and wire back to a single core in the lane to
+   their right. Nothing here is a diagram — the paths are hairlines and the
+   points that travel them are 5px.
+
+   Accent note: this block runs on cyan (core, routes, callout rule) at the
+   brief's direction, so the card icons drop their teal. Cyan and teal must
+   never share a block, and cyan is the accent that was asked for.
+   ============================================================ */
+.tier1-site .pp-philosophy { position: relative; overflow: hidden; background: var(--ice); }
+
+/* the section-level thread: left copy → architecture → capabilities */
+.tier1-site .pp-phil-thread { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.tier1-site .pp-phil-thread path {
+  fill: none; stroke: rgba(93, 141, 205,0.55); stroke-width: 1;
+  vector-effect: non-scaling-stroke; opacity: 0.5;
+  stroke-dasharray: 4 96; animation: pp-thread-run 22s linear infinite;
+}
+@keyframes pp-thread-run { to { stroke-dashoffset: -100; } }
+
+/* the platform render, placed so its glowing core lands in the card lane */
+/* It carries .pp-reveal, whose .is-in resolves to `opacity:1; transform:none`.
+   This element needs neither — it must settle at 0.42 and keep its own
+   centring transform — so both settled values are restated at .is-in
+   specificity, declared after the shared rule. --tf is the one place each
+   breakpoint sets that transform. */
+.tier1-site .pp-philosophy-bg {
+  position: absolute; left: 61%; top: 50%;
+  /* offset tuned so the render's own glowing dome lands on the SVG core
+     rather than beside it — two cores read as a mistake */
+  --tf: translateY(calc(-50% - 23px));
+  transform: var(--tf); opacity: 0;
+  width: 55%; max-width: 760px; pointer-events: none; z-index: 0;
+  mask-image: radial-gradient(58% 62% at 69% 56%, #000 26%, transparent 78%);
+  -webkit-mask-image: radial-gradient(58% 62% at 69% 56%, #000 26%, transparent 78%);
+}
+.tier1-site .pp-philosophy-bg.is-in { opacity: 0.42; transform: var(--tf); }
+.tier1-site .pp-philosophy-bg img { width: 100%; height: auto; display: block; }
+/* lifts the render's own core so it anchors the section */
+.tier1-site .pp-phil-halo {
+  position: absolute; left: 69%; top: 56%; width: 34%; aspect-ratio: 1;
+  transform: translate(-50%, -50%); border-radius: 50%;
+  background: radial-gradient(circle, rgba(93, 141, 205,0.20) 0%, rgba(93, 141, 205,0.07) 42%, rgba(93, 141, 205,0) 70%);
+  animation: pp-core-breathe 7s ease-in-out infinite;
+}
+@keyframes pp-core-breathe { 0%,100% { opacity: .68; transform: translate(-50%,-50%) scale(.97); } 50% { opacity: 1; transform: translate(-50%,-50%) scale(1.03); } }
+
+.tier1-site .pp-philosophy-inner {
+  position: relative; z-index: 1; max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: minmax(0,0.92fr) minmax(0,1fr); gap: 56px; align-items: center;
+}
+.tier1-site .pp-phil-copy { position: relative; z-index: 2; }
+.tier1-site .pp-philosophy h2 { font-size: 30px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 16px; }
+.tier1-site .pp-philosophy > .pp-philosophy-inner p.pp-lede,
+.tier1-site .pp-phil-copy p.pp-lede { font-size: 15px; line-height: 1.75; color: var(--charcoal); max-width: 52ch; }
+.tier1-site .pp-kicker {
+  display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+  color: var(--light-text); margin: 26px 0 10px;
+}
+.tier1-site .pp-kicker::before {
+  content: ''; display: inline-block; width: 16px; height: 2px; border-radius: 1px;
+  background: var(--cyan); vertical-align: middle; margin-right: 10px; margin-top: -2px;
+}
+.tier1-site .pp-note {
+  padding: 14px 18px; border-radius: 12px; background: rgba(255,255,255,0.8);
+  border: 1px solid var(--border); border-left: 2px solid var(--cyan);
+  font-size: 13.5px; line-height: 1.6; color: var(--charcoal); max-width: 46ch;
+}
+
+/* ---- capabilities ------------------------------------------------------
+   padding-right is the lane the routes and the core live in. It is also the
+   value the geometry reads, so changing it per breakpoint is enough. */
+.tier1-site .pp-principles { display: grid; gap: 14px; position: relative; padding-right: 74px; }
+.tier1-site .pp-principle-slot { position: relative; z-index: 2; }
+.tier1-site .pp-principle {
+  position: relative;
+  display: grid; grid-template-columns: 42px 1fr; gap: 16px; align-items: center;
+  padding: 18px 20px; border-radius: 14px;
+  background: linear-gradient(150deg, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.68) 100%);
+  border: 1px solid rgba(255,255,255,0.8);
+  box-shadow: 0 1px 2px rgba(13,33,64,0.04), 0 10px 26px rgba(13,33,64,0.06);
+  backdrop-filter: blur(7px) saturate(1.1); -webkit-backdrop-filter: blur(7px) saturate(1.1);
+  transition: transform .32s cubic-bezier(.2,.8,.2,1), box-shadow .32s ease, border-color .32s ease;
+}
+.tier1-site .pp-principle:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255,255,255,1);
+  box-shadow: 0 2px 4px rgba(13,33,64,0.05), 0 18px 38px rgba(13,33,64,0.10);
+}
+.tier1-site .pp-principle-icon {
+  width: 42px; height: 42px; border-radius: 11px; display: grid; place-items: center;
+  background: rgba(13,33,64,0.055); border: 1px solid rgba(13,33,64,0.07);
+  color: var(--navy); flex-shrink: 0;
+  transition: background .32s ease, border-color .32s ease;
+}
+.tier1-site .pp-principle:hover .pp-principle-icon { background: rgba(13,33,64,0.09); border-color: rgba(13,33,64,0.12); }
+.tier1-site .pp-principle-icon svg { transition: transform .32s cubic-bezier(.2,.8,.2,1); }
+.tier1-site .pp-principle:hover .pp-principle-icon svg { transform: scale(1.09) translateY(-0.5px); }
+.tier1-site .pp-principle p { font-size: 14px; font-weight: 500; line-height: 1.45; color: var(--navy); }
+
+/* ---- routes and core --------------------------------------------------- */
+.tier1-site .pp-phil-web { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.tier1-site .pp-phil-web svg { position: absolute; inset: 0; overflow: visible; }
+.tier1-site .pp-web-path {
+  fill: none; stroke: rgba(93, 141, 205,0.42); stroke-width: 1;
+  transition: stroke .3s ease, stroke-width .3s ease;
+}
+.tier1-site .pp-web-path.is-active { stroke: rgba(93, 141, 205,0.85); stroke-width: 1.4; }
+
+.tier1-site .pp-core-halo { fill: rgba(93, 141, 205,0.09); animation: pp-core-pulse 7s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+.tier1-site .pp-core-ring { fill: none; stroke: rgba(93, 141, 205,0.45); stroke-width: 1; }
+.tier1-site .pp-core-dot  { fill: rgba(93, 141, 205,0.8); }
+@keyframes pp-core-pulse { 0%,100% { opacity: .55; transform: scale(.94); } 50% { opacity: 1; transform: scale(1.06); } }
+
+/* Points travelling the routes. offset-path keeps them exactly on the same
+   curve the SVG draws, with no second source of truth. */
+@supports (offset-path: path("M0,0 L1,1")) {
+  .tier1-site .pp-flow {
+    position: absolute; top: 0; left: 0; width: 5px; height: 5px; border-radius: 50%;
+    margin: -2.5px 0 0 -2.5px; opacity: 0;
+    background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(93, 141, 205,0.85) 45%, rgba(93, 141, 205,0) 72%);
+    offset-distance: 0%; offset-rotate: 0deg;
+    animation: pp-flow-run 16s cubic-bezier(.45,0,.55,1) infinite;
+  }
+  .tier1-site .pp-flow--hot { width: 6px; height: 6px; margin: -3px 0 0 -3px; animation-duration: 1.5s; animation-timing-function: cubic-bezier(.3,0,.4,1); }
+}
+@keyframes pp-flow-run {
+  0%   { offset-distance: 0%;   opacity: 0; }
+  14%  { opacity: .55; }
+  80%  { opacity: .55; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tier1-site .pp-phil-thread path, .tier1-site .pp-phil-halo, .tier1-site .pp-core-halo { animation: none; }
+  .tier1-site .pp-flow { display: none; }
+}
+
+/* ============================================================
+   3 — PRODUCT CATEGORIES
+   One feature card over a 2×2 of equals, wired together by a spine and bar
+   that only ever show in the gutters. Palette here is navy/cyan/ice per the
+   section brief — the icons carry no teal, so cyan owns the block alone.
+   ============================================================ */
+.tier1-site .pp-cats { padding-top: 116px; padding-bottom: 112px; }
+.tier1-site .pp-cats .pp-section-head { margin-bottom: 64px; }
+
+.tier1-site .pp-cat-deck { position: relative; max-width: 1280px; margin: 0 auto; }
+/* feature → moderate gap → 2×2 */
+.tier1-site .pp-cat-slot--feature { display: flex; margin-bottom: 28px; }
+.tier1-site .pp-cat-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 1fr;              /* all four the same height, both rows */
+  gap: 24px;
+}
+.tier1-site .pp-cat-slot { display: flex; }
+.tier1-site .pp-cat {
+  position: relative; z-index: 1; overflow: hidden; flex: 1;
+  display: flex; flex-direction: column;
+  min-height: 340px; padding: 30px 32px; border-radius: 18px;
+  background: #fff; border: 1px solid var(--border);
+  box-shadow: 0 10px 28px rgba(13,33,64,0.055);
+  transition: transform .32s cubic-bezier(.2,.8,.2,1), box-shadow .32s ease, border-color .32s ease;
+}
+.tier1-site .pp-cat:hover { transform: translateY(-4px); border-color: rgba(13,33,64,0.16); box-shadow: 0 22px 46px rgba(13,33,64,0.11); }
+/* the feature reads first: taller, deeper, a touch more type */
+.tier1-site .pp-cat.is-feature {
+  min-height: 460px; padding: 40px 40px;
+  box-shadow: 0 16px 44px rgba(13,33,64,0.075);
+  background: linear-gradient(112deg, #FFFFFF 0%, #FFFFFF 52%, rgba(234,240,248,0.5) 100%);
+}
+.tier1-site .pp-cat.is-feature:hover { box-shadow: 0 28px 62px rgba(13,33,64,0.13); }
+.tier1-site .pp-cat.is-feature h3 { font-size: 23px; }
+.tier1-site .pp-cat.is-feature .pp-cat-lead { font-size: 14.5px; }
+
+/* the render is atmosphere, not a picture in a box: it bleeds past every
+   card edge and dissolves before it reaches the copy */
+.tier1-site .pp-cat-visual {
+  position: absolute; top: -5%; right: -4%; width: 44%; height: 110%;
+  pointer-events: none; overflow: hidden;
+}
+.tier1-site .pp-cat.is-feature .pp-cat-visual { width: 56%; right: -3%; }
+.tier1-site .pp-cat-visual img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  opacity: 0.82; transform: scale(1.02);
+  transition: transform .34s cubic-bezier(.2,.8,.2,1), opacity .34s ease;
+  mask-image:
+    linear-gradient(102deg, transparent 0%, rgba(0,0,0,0.30) 30%, #000 74%),
+    radial-gradient(118% 108% at 78% 72%, #000 34%, transparent 88%);
+  -webkit-mask-image:
+    linear-gradient(102deg, transparent 0%, rgba(0,0,0,0.30) 30%, #000 74%),
+    radial-gradient(118% 108% at 78% 72%, #000 34%, transparent 88%);
+  mask-composite: intersect; -webkit-mask-composite: source-in;
+}
+.tier1-site .pp-cat:hover .pp-cat-visual img { transform: scale(1.05); opacity: 0.92; }
+/* the blue that ties the render back into the card */
+.tier1-site .pp-cat-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(62% 58% at 70% 58%, rgba(160,203,240,0.24) 0%, rgba(160,203,240,0) 72%);
+}
+.tier1-site .pp-cat.is-feature .pp-cat-glow {
+  background:
+    radial-gradient(58% 62% at 66% 54%, rgba(93, 141, 205,0.13) 0%, rgba(93, 141, 205,0) 70%),
+    radial-gradient(70% 70% at 82% 76%, rgba(26,58,107,0.07) 0%, rgba(26,58,107,0) 74%);
+}
+
+.tier1-site .pp-cat-body { position: relative; z-index: 2; max-width: 64%; display: flex; flex-direction: column; height: 100%; }
+.tier1-site .pp-cat.is-feature .pp-cat-body { max-width: 47%; }
+.tier1-site .pp-cat-icon {
+  width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center;
+  background: rgba(13,33,64,0.055); border: 1px solid rgba(13,33,64,0.07);
+  color: var(--navy); margin-bottom: 16px;
+  transition: transform .3s ease, background .3s ease, border-color .3s ease;
+}
+.tier1-site .pp-cat:hover .pp-cat-icon { transform: translateY(-2px); background: rgba(13,33,64,0.09); border-color: rgba(13,33,64,0.13); }
+.tier1-site .pp-cat-icon svg { transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.tier1-site .pp-cat:hover .pp-cat-icon svg { transform: scale(1.08); }
+.tier1-site .pp-cat h3 { font-size: 19px; font-weight: 700; line-height: 1.28; margin-bottom: 8px; color: var(--navy); }
+.tier1-site .pp-cat-lead { font-size: 13.5px; font-weight: 600; color: var(--navy-mid); line-height: 1.45; margin-bottom: 10px; }
+.tier1-site .pp-cat-desc { font-size: 13.5px; line-height: 1.62; color: var(--charcoal); margin-bottom: 18px; }
+.tier1-site .pp-includes-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.13em; color: var(--light-text); margin-bottom: 8px; }
+.tier1-site .pp-includes { list-style: none; display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 20px; }
+.tier1-site .pp-includes li {
+  font-size: 12px; font-weight: 600; color: var(--navy);
+  padding: 5px 11px; border-radius: 7px;
+  background: var(--ice); border: 1px solid rgba(13,33,64,0.07);
+}
+.tier1-site .pp-cat-cta {
+  margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; gap: 7px;
+  font-family: inherit; font-size: 12.5px; font-weight: 700; color: var(--navy);
+  background: none; border: none; padding: 6px 0; cursor: pointer;
+  border-bottom: 1.5px solid var(--cyan);
+  transition: color .28s ease, gap .28s ease;
+}
+.tier1-site .pp-cat-cta:hover { color: var(--navy-mid); gap: 12px; }
+.tier1-site .pp-cat-cta .pp-arrow { transition: transform .28s ease; }
+.tier1-site .pp-cat:hover .pp-cat-cta .pp-arrow { transform: translateX(4px); }
+
+/* ---- the ecosystem between the cards ----------------------------------
+   Spine down the column gutter from the feature card, bar along the row gap,
+   nodes where they meet. Sits under the cards, so only the gaps ever show
+   it. Hovering a card lights the two segments that run to it. */
+.tier1-site .pp-cat-web { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.tier1-site .pp-cat-web svg { position: absolute; inset: 0; overflow: visible; }
+.tier1-site .pp-cat-line {
+  stroke: rgba(93, 141, 205,0.30); stroke-width: 1; stroke-linecap: round;
+  transition: stroke .3s ease, stroke-width .3s ease;
+}
+.tier1-site .pp-cat-line.is-lit { stroke: rgba(93, 141, 205,0.70); stroke-width: 1.4; }
+.tier1-site .pp-cat-node { fill: rgba(93, 141, 205,0.42); }
+.tier1-site .pp-cat-hub  { fill: rgba(93, 141, 205,0.55); animation: pp-hub-pulse 6.5s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+@keyframes pp-hub-pulse { 0%,100% { opacity: .5; transform: scale(.9); } 50% { opacity: 1; transform: scale(1.12); } }
+
+@supports (offset-path: path("M0,0 L1,1")) {
+  .tier1-site .pp-cat-drop {
+    position: absolute; top: 0; left: 0; width: 5px; height: 5px; border-radius: 50%;
+    margin: -2.5px 0 0 -2.5px; opacity: 0;
+    background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(93, 141, 205,0.85) 45%, rgba(93, 141, 205,0) 72%);
+    offset-distance: 0%; offset-rotate: 0deg;
+    animation: pp-drop-run 13s cubic-bezier(.45,0,.55,1) infinite;
+  }
+  .tier1-site .pp-cat-drop--b { animation-duration: 17s; animation-delay: 5s; }
+}
+@keyframes pp-drop-run {
+  0%   { offset-distance: 0%;   opacity: 0; }
+  16%  { opacity: .5; }
+  78%  { opacity: .5; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tier1-site .pp-cat-hub { animation: none; }
+  .tier1-site .pp-cat-drop { display: none; }
+}
+
+/* ============================================================
+   4 — PRODUCT ECOSYSTEM
+   ============================================================ */
+.tier1-site .pp-ecosystem { background: var(--ice); position: relative; overflow: hidden; }
+.tier1-site .pp-ecosystem-stage { max-width: 900px; margin: 0 auto; }
+
+/* ============================================================
+   5 — HOW ITG PRODUCTS WORK TOGETHER
+   ============================================================ */
+.tier1-site .pp-how { background: #fff; }
+.tier1-site .pp-how-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: minmax(0,0.82fr) minmax(0,1.18fr);
+  gap: 56px; align-items: center;
+}
+.tier1-site .pp-how h2 { font-size: 30px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 16px; }
+.tier1-site .pp-how-body { font-size: 15px; line-height: 1.75; color: var(--charcoal); margin-bottom: 22px; max-width: 46ch; }
+.tier1-site .pp-how-points { list-style: none; display: grid; gap: 9px; margin-bottom: 22px; }
+.tier1-site .pp-how-points li {
+  display: grid; grid-template-columns: 16px 1fr; gap: 11px; align-items: start;
+  font-size: 13.5px; line-height: 1.5; color: var(--navy); font-weight: 500;
+}
+.tier1-site .pp-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); margin-top: 7px; }
+
+/* ============================================================
+   6 — PRODUCTS ACROSS INDUSTRIES
+   Platform at the centre, industries as real HTML text around it.
+   ============================================================ */
+.tier1-site .pp-industries { position: relative; overflow: hidden; background: #fff; }
+.tier1-site .pp-ind-stage {
+  position: relative; max-width: 1080px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr auto 1fr; gap: 26px; align-items: center;
+}
+.tier1-site .pp-ind-col { display: grid; gap: 12px; }
+.tier1-site .pp-ind-item {
+  position: relative; padding: 15px 18px; border-radius: 12px;
+  background: rgba(255,255,255,0.82); border: 1px solid rgba(13,33,64,0.09);
+  box-shadow: 0 6px 18px rgba(13,33,64,0.045);
+  font-size: 13.5px; font-weight: 600; line-height: 1.4; color: var(--navy);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease, border-color .3s ease;
+}
+.tier1-site .pp-ind-col--left .pp-ind-item { text-align: right; }
+.tier1-site .pp-ind-item:hover { border-color: rgba(176, 58, 66,0.4); box-shadow: 0 12px 28px rgba(13,33,64,0.09); }
+.tier1-site .pp-ind-col--left .pp-ind-item:hover { transform: translateX(-4px); }
+.tier1-site .pp-ind-col--right .pp-ind-item:hover { transform: translateX(4px); }
+
+.tier1-site .pp-ind-core { position: relative; width: 280px; display: grid; place-items: center; }
+.tier1-site .pp-ind-core img {
+  width: 100%; height: auto; display: block; opacity: 0.85;
+  mask-image: radial-gradient(58% 58% at 50% 50%, #000 34%, transparent 78%);
+  -webkit-mask-image: radial-gradient(58% 58% at 50% 50%, #000 34%, transparent 78%);
+}
+.tier1-site .pp-ind-core-label {
+  position: absolute; inset: 0; display: grid; place-items: center; text-align: center;
+}
+.tier1-site .pp-ind-core-label span {
+  display: block; font-size: 15px; font-weight: 700; color: var(--navy);
+  background: rgba(255,255,255,0.9); border: 1px solid var(--border);
+  padding: 12px 20px; border-radius: 12px; box-shadow: 0 10px 26px rgba(13,33,64,0.1);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+.tier1-site .pp-ind-note {
+  text-align: center; font-size: 13.5px; line-height: 1.6; color: var(--charcoal);
+  max-width: 62ch; margin: 46px auto 0;
+}
+
+/* ============================================================
+   7 — FINAL CTA
+   ============================================================ */
+.tier1-site .pp-cta { position: relative; overflow: hidden; text-align: center;
+  background: linear-gradient(180deg, #FFFFFF 0%, var(--ice) 45%, #E3ECF7 100%); }
+.tier1-site .pp-cta h2 { font-size: 32px; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 26px; color: var(--navy); }
+.tier1-site .pp-cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+/* ============================================================
+   RESPONSIVE — designed per breakpoint, not shrunk
+   ============================================================ */
+/* The workflow animation needs ~700px to render its labels at full size.
+   Below this the two-column split starves it, so the section stacks early —
+   before the rest of the page does. */
+@media (max-width: 1200px) {
+  .tier1-site .pp-how-inner { grid-template-columns: 1fr; gap: 44px; }
+  .tier1-site .pp-how-body, .tier1-site .pp-how .pp-note { max-width: none; }
+}
+
+/* Below the 1280 container the supporting cards lose width, their copy wraps
+   harder and they grow past the feature card — which inverts the hierarchy.
+   Give the text more of the card back so they stay shorter than it. */
+@media (max-width: 1279px) {
+  .tier1-site .pp-cat-grid .pp-cat-visual { width: 38%; }
+  .tier1-site .pp-cat-grid .pp-cat-body { max-width: 78%; }
+  .tier1-site .pp-cat-grid .pp-cat-desc { margin-bottom: 14px; }
+  .tier1-site .pp-cat-grid .pp-includes { margin-bottom: 16px; }
+}
+
+@media (max-width: 1024px) {
+  /* tablet: the ecosystem gives ground, the panel stays fully readable */
+  .tier1-site .pp-hero { padding: 140px 32px 84px; min-height: clamp(640px, 94svh, 840px); }
+  .tier1-site .pp-hero-env-img { object-position: 74% 50%; }
+  .tier1-site .pp-hero-veil {
+    background:
+      linear-gradient(100deg,
+        rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.82) 34%,
+        rgba(247,250,253,0.40) 58%, rgba(255,255,255,0) 76%),
+      linear-gradient(180deg,
+        rgba(255,255,255,0.50) 0%, rgba(255,255,255,0) 20%,
+        rgba(255,255,255,0) 76%, #F7FAFD 100%);
+  }
+  .tier1-site .pp-hero-glass { max-width: 528px; padding: 30px 30px 32px; }
+  .tier1-site .pp-hero h1 { font-size: 42px; }
+  .tier1-site .pp-hero-sub { font-size: 19.5px; max-width: 26ch; }
+  .tier1-site .pp-hero-panel { margin-left: 140px; max-width: 500px; }
+  .tier1-site .pp-hero-panel ul { grid-template-columns: 1fr; gap: 9px; }
+  .tier1-site .pp-philosophy-inner { grid-template-columns: 1fr; gap: 38px; }
+  /* ecosystem drops back and shrinks; it sits behind the cards, not the copy */
+  .tier1-site .pp-philosophy-bg {
+    left: auto; right: -12%; top: auto; bottom: 0; --tf: none;
+    width: 64%; max-width: 500px;
+  }
+  .tier1-site .pp-philosophy-bg.is-in { opacity: 0.30; }
+  .tier1-site .pp-principles { padding-right: 56px; gap: 12px; }
+  .tier1-site .pp-cats { padding-top: 88px; padding-bottom: 84px; }
+  .tier1-site .pp-cats .pp-section-head { margin-bottom: 48px; }
+  .tier1-site .pp-cat-visual, .tier1-site .pp-cat.is-feature .pp-cat-visual { width: 46%; }
+  .tier1-site .pp-cat-body, .tier1-site .pp-cat.is-feature .pp-cat-body { max-width: 62%; }
+  .tier1-site .pp-cat.is-feature { min-height: 360px; padding: 32px 32px; }
+  .tier1-site .pp-cat.is-feature h3 { font-size: 21px; }
+  /* industries: centre column out, two text columns */
+  .tier1-site .pp-ind-stage { grid-template-columns: 1fr 1fr; }
+  .tier1-site .pp-ind-core { grid-column: 1 / -1; order: -1; width: 240px; margin: 0 auto 12px; }
+  .tier1-site .pp-ind-col--left .pp-ind-item { text-align: left; }
+}
+
+@media (max-width: 680px) {
+  /* Mobile is a different composition, not a squeezed one: the environment
+     becomes a band under the nav, the glass panel rides up over its lower
+     edge, benefits follow. Keeps the ecosystem visible without a 900px hero. */
+  .tier1-site .pp-hero { display: block; min-height: 0; padding: 0 0 56px; }
+  /* band runs to the very top so the glass nav sits over the ecosystem,
+     exactly as it sits over the photograph on Solutions */
+  .tier1-site .pp-hero-env { position: relative; inset: auto; height: 296px; animation: none; }
+  .tier1-site .pp-hero-env-img { object-position: 76% 48%; animation-duration: 58s; }
+  .tier1-site .pp-trace { display: none; }
+  .tier1-site .pp-hero-veil { top: 0; height: 296px; bottom: auto;
+    background: linear-gradient(180deg,
+      rgba(255,255,255,0.42) 0%, rgba(255,255,255,0) 30%,
+      rgba(247,250,253,0.20) 66%, #F7FAFD 100%);
+  }
+  .tier1-site .pp-node--3, .tier1-site .pp-node--4 { display: none; }
+
+  .tier1-site .pp-hero-inner { padding: 0 20px; margin-top: -34px; }
+  .tier1-site .pp-hero-glass { max-width: none; padding: 26px 22px 28px; border-radius: 22px; }
+  .tier1-site .pp-hero h1 { font-size: 34px; }
+  .tier1-site .pp-hero-sub { font-size: 17.5px; max-width: none; }
+  .tier1-site .pp-hero-body { font-size: 14.5px; }
+  .tier1-site .pp-hero-ctas { gap: 10px; margin-top: 24px; }
+  .tier1-site .pp-hero-ctas button { width: 100%; }
+  .tier1-site .pp-hero-panel { margin: 14px 0 0; max-width: none; padding: 18px 20px 20px; border-radius: 18px; }
+  .tier1-site .pp-hero-panel ul { grid-template-columns: 1fr; gap: 11px; }
+  .tier1-site .pp-section-head { margin-bottom: 36px; }
+  .tier1-site .pp-section-head h2, .tier1-site .pp-philosophy h2, .tier1-site .pp-how h2 { font-size: 26px; }
+
+  /* philosophy: nothing sits behind text. The ecosystem becomes the last
+     item in the stack, at full width, and the routes drop out entirely —
+     the JS returns no geometry once the lane is gone. */
+  .tier1-site .pp-phil-thread { display: none; }
+  .tier1-site .pp-philosophy-bg {
+    position: static; order: 3; --tf: none;
+    width: 100%; max-width: none; margin-top: 2px;
+    mask-image: radial-gradient(78% 78% at 56% 52%, #000 38%, transparent 86%);
+    -webkit-mask-image: radial-gradient(78% 78% at 56% 52%, #000 38%, transparent 86%);
+  }
+  .tier1-site .pp-philosophy-bg.is-in { opacity: 0.62; }
+  .tier1-site .pp-phil-web { display: none; }
+  .tier1-site .pp-phil-halo { display: none; }
+  .tier1-site .pp-principles { padding-right: 0; gap: 10px; }
+  .tier1-site .pp-principle { grid-template-columns: 38px 1fr; gap: 14px; padding: 16px 16px; }
+  .tier1-site .pp-principle-icon { width: 38px; height: 38px; border-radius: 10px; }
+  .tier1-site .pp-cta h2 { font-size: 26px; }
+  .tier1-site .pp-cta-btns button { width: 100%; }
+
+  /* categories: full-width, visual becomes a top band so text never
+     competes with the render. No gutters left, so no ecosystem. */
+  .tier1-site .pp-cats { padding-top: 68px; padding-bottom: 64px; }
+  .tier1-site .pp-cats .pp-section-head { margin-bottom: 34px; }
+  .tier1-site .pp-cat-grid { grid-template-columns: 1fr; grid-auto-rows: auto; gap: 18px; }
+  .tier1-site .pp-cat-slot--feature { margin-bottom: 18px; }
+  .tier1-site .pp-cat-web { display: none; }
+  .tier1-site .pp-cat, .tier1-site .pp-cat.is-feature { min-height: 0; padding: 0; }
+  .tier1-site .pp-cat.is-feature h3 { font-size: 18px; }
+  .tier1-site .pp-cat.is-feature .pp-cat-lead { font-size: 13.5px; }
+  .tier1-site .pp-cat-glow { display: none; }
+  .tier1-site .pp-cat-visual, .tier1-site .pp-cat.is-feature .pp-cat-visual {
+    position: relative; width: 100%; height: 156px; top: auto; right: auto;
+  }
+  .tier1-site .pp-cat-visual img {
+    mask-composite: add; -webkit-mask-composite: source-over;
+    mask-image: linear-gradient(180deg, #000 58%, transparent 100%);
+    -webkit-mask-image: linear-gradient(180deg, #000 58%, transparent 100%);
+  }
+  .tier1-site .pp-cat-body, .tier1-site .pp-cat.is-feature .pp-cat-body { max-width: none; padding: 0 22px 24px; margin-top: -22px; }
+  .tier1-site .pp-cat-icon { margin-bottom: 12px; }
+  .tier1-site .pp-cat h3 { font-size: 18px; }
+  /* same 44px tap standard as the Solutions page */
+  .tier1-site .pp-cat-cta { min-height: 44px; padding: 12px 0; }
+
+  /* industries: single clean list */
+  .tier1-site .pp-ind-stage { grid-template-columns: 1fr; gap: 10px; }
+  .tier1-site .pp-ind-core { width: 190px; margin-bottom: 6px; }
+  .tier1-site .pp-ind-col--left .pp-ind-item, .tier1-site .pp-ind-item { text-align: left; }
+  .tier1-site .pp-ind-note { margin-top: 30px; }
+}

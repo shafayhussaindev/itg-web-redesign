@@ -1,0 +1,932 @@
+/* ============================================================
+   ITG Technologies — Company page
+   Extends the tokens in index.css and the glass system built for
+   Services and reused on Industries. Palette is the locked 8
+   colours; every surface below is one of them at an alpha, or
+   white/navy at an alpha. No ninth colour.
+
+   Company is the human, institutional chapter: more navy than the
+   other pages, more whitespace, and photography of rooms and people
+   rather than product.
+   ============================================================ */
+
+.tier1-site .co-page {
+  --shadow-soft: 0 12px 40px rgba(13, 33, 64, 0.16);
+  --shadow-lift: 0 26px 64px rgba(13, 33, 64, 0.26);
+  --ease: cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+/* ---------- shared reveal ---------------------------------- */
+.tier1-site .co-page .reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.tier1-site .co-page .reveal.is-in { opacity: 1; transform: none; }
+
+.tier1-site .co-rule {
+  display: block;
+  width: 72px;
+  height: 3px;
+  margin: 14px auto 18px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--cyan), rgba(93, 141, 205, 0.15));
+}
+.tier1-site .co-rule--light { background: linear-gradient(90deg, var(--cyan), rgba(93, 141, 205, 0.1)); }
+
+.tier1-site .co-kicker {
+  display: inline-block;
+  color: #8B2A32;
+  background: rgba(176, 58, 66, 0.1);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+
+.tier1-site .co-btn-glow {
+  position: relative;
+  box-shadow: 0 6px 22px rgba(93, 141, 205, 0.34);
+  transition: box-shadow 0.3s var(--ease), transform 0.3s var(--ease), filter 0.25s ease;
+}
+.tier1-site .co-btn-glow:hover {
+  box-shadow: 0 10px 30px rgba(93, 141, 205, 0.46);
+  transform: translateY(-1px);
+  filter: brightness(0.97);
+}
+.tier1-site .co-btn-glow:active { transform: translateY(0); }
+
+/* ============================================================
+   HERO — headquarters photo, glass panel left, network overlay
+   ============================================================ */
+.tier1-site .co-hero {
+  position: relative;
+  min-height: 800px;
+  padding: 190px 40px 120px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--navy);
+}
+.tier1-site .co-hero-media { position: absolute; inset: 0; z-index: 0; }
+.tier1-site .co-hero-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  /* Building is hard right in the frame; 62% keeps its full height in shot as
+     the viewport narrows without pushing the entrance out of frame. */
+  background-position: 62% center;
+  background-repeat: no-repeat;
+}
+/* Darkens the left park and skyline where the panel sits; the facade on the
+   right keeps its own light, including the cyan accent already in the photo. */
+.tier1-site .co-hero-grad {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(97deg, rgba(6, 16, 34, 0.94) 0%, rgba(8, 20, 42, 0.8) 34%,
+      rgba(13, 33, 64, 0.36) 62%, rgba(13, 33, 64, 0.12) 100%),
+    linear-gradient(180deg, rgba(6, 16, 34, 0.6) 0%, rgba(13, 33, 64, 0) 30%);
+}
+.tier1-site .co-hero-glow {
+  position: absolute;
+  left: -8%;
+  top: 18%;
+  width: 660px;
+  height: 660px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(93, 141, 205, 0.13) 0%, rgba(93, 141, 205, 0) 68%);
+  pointer-events: none;
+}
+.tier1-site .co-hero-net {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.75;
+  pointer-events: none;
+}
+.tier1-site .co-net-link {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: coDraw 1.8s var(--ease) var(--link-delay, 0s) forwards;
+}
+@keyframes coDraw { to { stroke-dashoffset: 0; } }
+.tier1-site .co-net-pulse { opacity: 0.85; }
+
+.tier1-site .co-hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+.tier1-site .co-hero-glass {
+  max-width: 660px;
+  padding: 46px 46px 48px;
+  border-radius: 28px;
+  background: rgba(222, 238, 255, 0.15);
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 18px 52px rgba(6, 18, 38, 0.3);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 42%);
+  opacity: 0;
+  transform: translateY(28px);
+  animation: coRise 0.7s var(--ease) 0.1s forwards;
+}
+@keyframes coRise { to { opacity: 1; transform: none; } }
+.tier1-site .co-hero-glass .eyebrow,
+.tier1-site .co-hero-glass h1,
+.tier1-site .co-hero-glass p {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: coRise 0.55s ease forwards;
+}
+.tier1-site .co-hero-glass .eyebrow { animation-delay: 0.26s; }
+.tier1-site .co-hero-glass h1 { animation-delay: 0.36s; }
+.tier1-site .co-hero-glass p:nth-of-type(1) { animation-delay: 0.46s; }
+.tier1-site .co-hero-glass p:nth-of-type(2) { animation-delay: 0.56s; }
+.tier1-site .co-hero-glass h1 {
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.16;
+  margin-bottom: 20px;
+  color: #fff;
+  text-shadow: 0 2px 20px rgba(6, 18, 38, 0.45);
+}
+.tier1-site .co-hero-glass p {
+  font-size: 15px;
+  line-height: 1.72;
+  color: rgba(255, 255, 255, 0.86);
+  margin: 0 0 14px;
+  text-shadow: 0 1px 12px rgba(6, 18, 38, 0.4);
+}
+.tier1-site .co-hero-glass p:last-child { margin-bottom: 0; }
+/* First paragraph is the definition, the second the qualification. */
+.tier1-site .co-hero-lead { font-size: 16.5px !important; color: rgba(255, 255, 255, 0.95) !important; }
+
+/* ============================================================
+   WHO WE ARE — photo + overlapping glass, pillar rail beneath
+   ============================================================ */
+.tier1-site .co-about { padding: 104px 40px 96px; background: var(--white); }
+.tier1-site .co-about-module {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: center;
+}
+.tier1-site .co-about-media {
+  position: relative;
+  grid-row: 1;
+  grid-column: 1 / 9;
+  /* 16/10, not 4/3. At 4/3 the photograph stood ~200px taller than the panel
+     beside it and the composition read as a tall image with a label stuck on. */
+  aspect-ratio: 16 / 10;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+@supports not (aspect-ratio: 1 / 1) { .tier1-site .co-about-media { height: 520px; } }
+.tier1-site .co-about-img { position: absolute; inset: -8%; will-change: transform; }
+.tier1-site .co-about-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tier1-site .co-about-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(13, 33, 64, 0.34) 0%, rgba(13, 33, 64, 0.05) 38%, rgba(13, 33, 64, 0.5) 100%);
+}
+.tier1-site .co-about-panel {
+  position: relative;
+  z-index: 2;
+  grid-row: 1;
+  grid-column: 6 / 13;
+  padding: 44px 44px 46px;
+  border-radius: 22px;
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.82));
+  backdrop-filter: blur(13px) saturate(1.2);
+  -webkit-backdrop-filter: blur(13px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: var(--shadow-lift), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+.tier1-site .co-about-panel h2 {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: var(--navy);
+  margin-bottom: 16px;
+}
+.tier1-site .co-about-sub {
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--navy-mid);
+  margin-bottom: 12px;
+}
+.tier1-site .co-about-body { font-size: 14.5px; line-height: 1.72; color: var(--charcoal); }
+
+/* Pillar rail — one strip under the statement, not four floating boxes. */
+.tier1-site .co-pillars {
+  max-width: 1280px;
+  margin: 44px auto 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: linear-gradient(120deg, rgba(234, 240, 248, 0.9), rgba(208, 226, 244, 0.5));
+  border: 1px solid rgba(13, 33, 64, 0.08);
+  box-shadow: 0 12px 34px rgba(13, 33, 64, 0.08);
+}
+.tier1-site .co-pillar {
+  padding: 28px 26px 30px;
+  border-right: 1px solid rgba(13, 33, 64, 0.07);
+  transition: background 0.35s var(--ease);
+}
+.tier1-site .co-pillar:last-child { border-right: none; }
+.tier1-site .co-pillar:hover { background: rgba(255, 255, 255, 0.6); }
+.tier1-site .co-pillar-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  background: rgba(176, 58, 66, 0.1);
+  border: 1px solid rgba(176, 58, 66, 0.22);
+  color: var(--teal);
+}
+.tier1-site .co-pillar h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.3;
+  margin-bottom: 7px;
+}
+.tier1-site .co-pillar p { font-size: 13px; line-height: 1.55; color: var(--charcoal); }
+
+/* ============================================================
+   VISION / MISSION / VALUES — navy band, three glass panels
+   ============================================================ */
+.tier1-site .co-vmv {
+  position: relative;
+  overflow: hidden;
+  padding: 104px 40px;
+  background: linear-gradient(165deg, #0D2140 0%, #14294C 48%, #1A3A6B 100%);
+}
+.tier1-site .co-vmv-glow {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  width: 760px;
+  height: 620px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(93, 141, 205, 0.12) 0%, rgba(93, 141, 205, 0) 66%);
+  pointer-events: none;
+}
+.tier1-site .co-vmv .section-head { position: relative; z-index: 2; max-width: 720px; }
+.tier1-site .co-vmv .section-head h2 { color: #fff; }
+.tier1-site .co-vmv .section-head p { color: rgba(255, 255, 255, 0.68); }
+.tier1-site .co-vmv-grid {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+.tier1-site .co-vmv-card {
+  padding: 34px 32px 36px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(11px) saturate(1.15);
+  -webkit-backdrop-filter: blur(11px) saturate(1.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 18px 46px rgba(6, 18, 38, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  transition: transform 0.4s var(--ease), border-color 0.4s var(--ease), background 0.4s var(--ease);
+}
+.tier1-site .co-vmv-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.11);
+  border-color: rgba(255, 255, 255, 0.32);
+}
+.tier1-site .co-vmv-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  margin-bottom: 18px;
+  background: rgba(93, 141, 205, 0.16);
+  border: 1px solid rgba(93, 141, 205, 0.3);
+  color: var(--brand-accent-soft);
+}
+.tier1-site .co-vmv-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.tier1-site .co-vmv-card p { font-size: 14.5px; line-height: 1.7; color: rgba(255, 255, 255, 0.74); }
+.tier1-site .co-vmv-list { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.tier1-site .co-vmv-list li { display: flex; gap: 10px; align-items: flex-start; }
+.tier1-site .co-vmv-list svg { color: var(--brand-accent-soft); flex-shrink: 0; margin-top: 1px; }
+.tier1-site .co-vmv-list span { font-size: 14px; line-height: 1.5; color: rgba(255, 255, 255, 0.82); }
+
+/* ============================================================
+   OUR STORY — animated timeline, no photograph
+   ============================================================ */
+.tier1-site .co-story {
+  padding: 110px 40px;
+  background: linear-gradient(180deg, var(--ice) 0%, #EEF3F9 62%, var(--white) 100%);
+}
+.tier1-site .co-story-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: start;
+}
+.tier1-site .co-story-lede h2 {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--navy);
+}
+.tier1-site .co-story-lede .co-rule { margin: 16px 0 20px; }
+.tier1-site .co-story-lede p { font-size: 15.5px; line-height: 1.75; color: var(--charcoal); }
+
+.tier1-site .co-story-track { position: relative; padding-left: 4px; }
+.tier1-site .co-story-track-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy);
+  padding-left: 34px;
+  margin-bottom: 26px;
+}
+/* The spine sits behind the marks and traces itself in. preserveAspectRatio
+   is none so the 400-unit viewBox stretches to whatever the list needs. */
+/* The height MUST be explicit. An SVG is a replaced element, so `height: auto`
+   resolves to its intrinsic height — 400px, from the 8x400 viewBox at 8px wide
+   — and `bottom` is ignored as over-constrained. Both of those left the rail
+   running hundreds of pixels past the last mark and out through the next
+   section's heading. A percentage height resolves against `.co-story-track`,
+   which is the positioned ancestor, so the rail tracks the list at any length.
+   `preserveAspectRatio="none"` then maps the 400-unit line onto it. */
+.tier1-site .co-story-spine {
+  position: absolute;
+  left: 11px;
+  top: 46px;
+  width: 8px;
+  height: calc(100% - 58px);
+  overflow: visible;
+}
+.tier1-site .co-story-rail {
+  stroke: var(--cyan);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0.55;
+  transition: stroke-dashoffset 1.5s var(--ease);
+}
+.tier1-site .co-story-inner.is-active .co-story-rail { stroke-dashoffset: 0; }
+
+.tier1-site .co-story-marks { list-style: none; display: flex; flex-direction: column; gap: 26px; }
+.tier1-site .co-story-mark {
+  position: relative;
+  padding-left: 34px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  transition-delay: calc(0.45s + var(--i) * 0.22s);
+}
+.tier1-site .co-story-inner.is-active .co-story-mark { opacity: 1; transform: none; }
+.tier1-site .co-story-dot {
+  position: absolute;
+  left: 8px;
+  top: 7px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--cyan);
+  box-shadow: 0 0 0 4px rgba(93, 141, 205, 0.14);
+}
+.tier1-site .co-story-label {
+  font-size: 15.5px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--navy);
+}
+
+/* ============================================================
+   PHOTO MODULE — used by Leadership, Security, People, Responsibility
+   ============================================================ */
+.tier1-site .co-module { padding: 104px 40px; }
+.tier1-site .co-module--light { background: var(--white); }
+.tier1-site .co-module--ice { background: var(--ice); }
+.tier1-site .co-module .section-head { max-width: 720px; }
+
+.tier1-site .co-mod {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: center;
+}
+.tier1-site .co-mod-media {
+  position: relative;
+  grid-row: 1;
+  aspect-ratio: 16 / 10;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+@supports not (aspect-ratio: 1 / 1) { .tier1-site .co-mod-media { height: 500px; } }
+.tier1-site .co-mod-img { position: absolute; inset: -8%; will-change: transform; }
+.tier1-site .co-mod-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s var(--ease);
+}
+.tier1-site .co-mod:hover .co-mod-img img { transform: scale(1.02); }
+
+.tier1-site .co-mod-panel {
+  position: relative;
+  z-index: 2;
+  grid-row: 1;
+  padding: 36px 36px 38px;
+  border-radius: 22px;
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.93), rgba(255, 255, 255, 0.8));
+  backdrop-filter: blur(13px) saturate(1.2);
+  -webkit-backdrop-filter: blur(13px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: var(--shadow-lift), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+.tier1-site .co-mod:hover .co-mod-panel {
+  transform: translateY(-4px);
+  box-shadow: 0 34px 74px rgba(13, 33, 64, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* Panel right: media cols 1-8, panel 6-13. Panel left: mirrored. */
+.tier1-site .co-mod--right .co-mod-media { grid-column: 1 / 9; }
+.tier1-site .co-mod--right .co-mod-panel { grid-column: 6 / 13; }
+.tier1-site .co-mod--left .co-mod-media { grid-column: 5 / 13; }
+.tier1-site .co-mod--left .co-mod-panel { grid-column: 1 / 8; }
+/* Single-column panels carry two items, not four, so the standard 7-column
+   panel left most of its width empty. Narrow it and give the photograph the
+   space back. */
+.tier1-site .co-mod--narrow.co-mod--right .co-mod-panel { grid-column: 8 / 13; }
+.tier1-site .co-mod--narrow.co-mod--left .co-mod-panel { grid-column: 1 / 6; }
+
+.tier1-site .co-mod-scrim { position: absolute; inset: 0; }
+.tier1-site .co-mod--right .co-mod-scrim {
+  background: linear-gradient(90deg, rgba(13, 33, 64, 0.36) 0%, rgba(13, 33, 64, 0.05) 40%, rgba(13, 33, 64, 0.54) 100%);
+}
+.tier1-site .co-mod--left .co-mod-scrim {
+  background: linear-gradient(270deg, rgba(13, 33, 64, 0.36) 0%, rgba(13, 33, 64, 0.05) 40%, rgba(13, 33, 64, 0.54) 100%);
+}
+
+.tier1-site .co-mod-grid { list-style: none; display: grid; gap: 26px 30px; }
+.tier1-site .co-mod-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.tier1-site .co-mod-grid--1 { grid-template-columns: 1fr; gap: 24px; }
+.tier1-site .co-mod-item { display: flex; gap: 13px; align-items: flex-start; }
+.tier1-site .co-mod-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: rgba(176, 58, 66, 0.1);
+  border: 1px solid rgba(176, 58, 66, 0.22);
+  color: var(--teal);
+}
+.tier1-site .co-mod-item-body h3 {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.3;
+  margin-bottom: 7px;
+}
+.tier1-site .co-mod-item-body p { font-size: 13.5px; line-height: 1.62; color: var(--charcoal); }
+.tier1-site .co-mod-list-intro { margin-bottom: 9px; }
+.tier1-site .co-mod-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.tier1-site .co-mod-list li { display: flex; gap: 8px; align-items: flex-start; }
+.tier1-site .co-mod-list svg { color: var(--teal); flex-shrink: 0; margin-top: 1px; }
+.tier1-site .co-mod-list span { font-size: 13.5px; line-height: 1.45; color: var(--charcoal); }
+
+/* Governance mark — corner seal on the Leadership photograph. */
+.tier1-site .co-gov {
+  position: absolute;
+  right: 6%;
+  bottom: 8%;
+  width: 168px;
+  height: 168px;
+  pointer-events: none;
+  z-index: 1;
+}
+.tier1-site .co-gov-ring,
+.tier1-site .co-gov-shield,
+.tier1-site .co-gov-check {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: coDraw 1.4s var(--ease) var(--d, 0s) forwards;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.tier1-site .co-gov-ring { stroke: rgba(255, 255, 255, 0.34); stroke-width: 1; }
+.tier1-site .co-gov-shield { stroke: rgba(168, 198, 234, 0.85); stroke-width: 2; }
+.tier1-site .co-gov-check { stroke: var(--cyan); stroke-width: 3; animation-duration: 0.7s; }
+.tier1-site .co-gov-ticks line {
+  stroke: rgba(168, 198, 234, 0.6);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  opacity: 0;
+  animation: coFadeIn 0.5s var(--ease) var(--d, 0s) forwards;
+}
+@keyframes coFadeIn { to { opacity: 1; } }
+
+/* ============================================================
+   GLOBAL PRESENCE — photo ground, navy wash, animated map
+   ============================================================ */
+.tier1-site .co-global {
+  position: relative;
+  overflow: hidden;
+  padding: 104px 40px;
+  background: var(--navy);
+}
+.tier1-site .co-global-bg { position: absolute; inset: 0; z-index: 0; }
+.tier1-site .co-global-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+/* Heavy, because here the photograph is a ground for the map rather than a
+   subject — it supplies depth and texture, not detail. */
+/* Deep, because the photograph is a ground for the map rather than a subject —
+   but not as deep as it was. Stacking two washes at the original weights
+   multiplied out past 0.95 and the image it was supposed to feature became
+   invisible. These land around 0.72 at centre: the building reads as texture,
+   the map still holds the foreground. */
+.tier1-site .co-global-wash {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 44%, rgba(13, 33, 64, 0.42) 0%, rgba(9, 24, 48, 0.82) 100%),
+    linear-gradient(180deg, rgba(9, 24, 48, 0.82) 0%, rgba(13, 33, 64, 0.52) 42%, rgba(9, 24, 48, 0.9) 100%);
+}
+.tier1-site .co-global .section-head { position: relative; z-index: 2; max-width: 720px; }
+.tier1-site .co-global .section-head h2 { color: #fff; }
+.tier1-site .co-global .section-head p { color: rgba(255, 255, 255, 0.68); }
+
+.tier1-site .co-global-map { position: relative; z-index: 2; max-width: 940px; margin: 0 auto 56px; }
+.tier1-site .co-map { width: 100%; height: auto; display: block; overflow: visible; }
+.tier1-site .co-map-dots circle {
+  fill: rgba(255, 255, 255, 0.38);
+  opacity: 0;
+  /* Two staged effects keyed off the column: the map resolves west to east on
+     entry, then a slow shimmer runs the same axis on a 9s loop. */
+  animation:
+    coMapIn 0.5s ease calc(var(--col) * 0.012s) forwards;
+}
+.tier1-site .co-map.is-active .co-map-dots circle {
+  animation:
+    coMapIn 0.5s ease calc(var(--col) * 0.012s) forwards,
+    coMapSweep 9s ease-in-out calc(1s + var(--col) * 0.045s) infinite;
+}
+@keyframes coMapIn { to { opacity: 1; } }
+@keyframes coMapSweep {
+  0%, 88%, 100% { fill: rgba(255, 255, 255, 0.38); }
+  4% { fill: rgba(93, 141, 205, 0.95); }
+  14% { fill: rgba(255, 255, 255, 0.38); }
+}
+
+.tier1-site .co-global-grid {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  margin: 0 auto;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.tier1-site .co-global-card {
+  padding: 28px 26px 30px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(10px) saturate(1.15);
+  -webkit-backdrop-filter: blur(10px) saturate(1.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 16px 40px rgba(6, 18, 38, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  transition: transform 0.4s var(--ease), border-color 0.4s var(--ease), background 0.4s var(--ease);
+}
+.tier1-site .co-global-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.tier1-site .co-global-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  background: rgba(93, 141, 205, 0.16);
+  border: 1px solid rgba(93, 141, 205, 0.3);
+  color: var(--brand-accent-soft);
+}
+.tier1-site .co-global-card h3 {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+.tier1-site .co-global-card p { font-size: 13.5px; line-height: 1.6; color: rgba(255, 255, 255, 0.7); }
+
+/* ============================================================
+   NEWS — four small glass cards on white
+   ============================================================ */
+.tier1-site .co-news { padding: 104px 40px; background: var(--white); }
+.tier1-site .co-news .section-head { max-width: 660px; }
+.tier1-site .co-news-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+.tier1-site .co-news-card {
+  position: relative;
+  padding: 30px 28px 32px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: linear-gradient(155deg, rgba(234, 240, 248, 0.85), rgba(255, 255, 255, 0.7));
+  border: 1px solid rgba(13, 33, 64, 0.08);
+  box-shadow: 0 10px 30px rgba(13, 33, 64, 0.07);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+.tier1-site .co-news-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 46px rgba(13, 33, 64, 0.13);
+}
+.tier1-site .co-news-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  background: rgba(176, 58, 66, 0.1);
+  border: 1px solid rgba(176, 58, 66, 0.22);
+  color: var(--teal);
+}
+.tier1-site .co-news-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.3;
+  margin-bottom: 9px;
+}
+.tier1-site .co-news-card p { font-size: 13.5px; line-height: 1.6; color: var(--charcoal); }
+/* Cyan hairline draws across the base on hover — the page's one card accent. */
+.tier1-site .co-news-rule {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--cyan), rgba(93, 141, 205, 0.1));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease);
+}
+.tier1-site .co-news-card:hover .co-news-rule { transform: scaleX(1); }
+
+/* ============================================================
+   CLOSING CTA
+   ============================================================ */
+.tier1-site .co-cta { padding: 0; position: relative; }
+.tier1-site .co-cta-bg {
+  position: relative;
+  padding: 130px 40px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+/* Same reasoning as the Industries CTA: the photograph is already dark, so a
+   heavy flat wash erases it. The panel carries the contrast instead. */
+.tier1-site .co-cta-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 78% 68% at 50% 48%, rgba(13, 33, 64, 0.24) 0%, rgba(13, 33, 64, 0.62) 100%),
+    linear-gradient(180deg, rgba(13, 33, 64, 0.7) 0%, rgba(13, 33, 64, 0.36) 40%, rgba(13, 33, 64, 0.82) 100%);
+}
+.tier1-site .co-cta-glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 780px;
+  height: 440px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(93, 141, 205, 0.14) 0%, rgba(93, 141, 205, 0) 68%);
+  pointer-events: none;
+}
+.tier1-site .co-cta-glass {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 48px 48px 50px;
+  border-radius: 26px;
+  text-align: center;
+  background: rgba(13, 33, 64, 0.42);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 46%);
+  backdrop-filter: blur(12px) saturate(1.15);
+  -webkit-backdrop-filter: blur(12px) saturate(1.15);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 24px 62px rgba(6, 18, 38, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+.tier1-site .co-cta-glass h2 {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.24;
+  letter-spacing: -0.01em;
+  margin-bottom: 32px;
+}
+.tier1-site .co-cta-row { justify-content: center; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1180px) {
+  /* Overlap needs width to read as depth. Below this the panels stop
+     overlapping and tuck under their photographs. */
+  .tier1-site .co-about-module,
+  .tier1-site .co-mod { grid-template-columns: 1fr; gap: 0; }
+  .tier1-site .co-about-media,
+  .tier1-site .co-mod-media,
+  .tier1-site .co-mod--right .co-mod-media,
+  .tier1-site .co-mod--left .co-mod-media {
+    grid-column: 1;
+    aspect-ratio: 16 / 8;
+    border-radius: 22px 22px 0 0;
+  }
+  .tier1-site .co-about-panel,
+  .tier1-site .co-mod-panel,
+  .tier1-site .co-mod--right .co-mod-panel,
+  .tier1-site .co-mod--left .co-mod-panel {
+    grid-column: 1;
+    grid-row: 2;
+    margin: -32px 24px 0;
+    border-radius: 22px;
+  }
+  .tier1-site .co-about-scrim,
+  .tier1-site .co-mod--right .co-mod-scrim,
+  .tier1-site .co-mod--left .co-mod-scrim {
+    background: linear-gradient(180deg, rgba(13, 33, 64, 0.3) 0%, rgba(13, 33, 64, 0.1) 46%, rgba(13, 33, 64, 0.5) 100%);
+  }
+  .tier1-site .co-gov { width: 128px; height: 128px; right: 4%; bottom: 10%; }
+  .tier1-site .co-global-grid { grid-template-columns: repeat(2, 1fr); }
+  .tier1-site .co-news-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 1024px) {
+  .tier1-site .co-hero { min-height: 680px; padding: 160px 32px 96px; }
+  .tier1-site .co-hero-glass { max-width: 620px; padding: 36px 34px 38px; }
+  .tier1-site .co-hero-glass h1 { font-size: 33px; }
+  .tier1-site .co-hero-net { opacity: 0.45; }
+  .tier1-site .co-about, .tier1-site .co-module, .tier1-site .co-news, .tier1-site .co-global, .tier1-site .co-vmv { padding: 88px 32px; }
+  .tier1-site .co-story { padding: 88px 32px; }
+  .tier1-site .co-story-inner { grid-template-columns: 1fr; gap: 44px; }
+  .tier1-site .co-vmv-grid { grid-template-columns: 1fr; gap: 20px; }
+  .tier1-site .co-pillars { grid-template-columns: repeat(2, 1fr); }
+  .tier1-site .co-pillar:nth-child(2) { border-right: none; }
+  .tier1-site .co-pillar:nth-child(1), .tier1-site .co-pillar:nth-child(2) { border-bottom: 1px solid rgba(13, 33, 64, 0.07); }
+}
+
+@media (max-width: 680px) {
+  /* Match the site's 20px phone gutter. */
+  .tier1-site .co-hero {
+    min-height: auto;
+    padding: 130px 20px 72px;
+  }
+  .tier1-site .co-hero-img { background-position: 66% center; }
+  .tier1-site .co-hero-grad {
+    background: linear-gradient(180deg, rgba(6, 16, 34, 0.82) 0%, rgba(9, 24, 48, 0.6) 42%, rgba(13, 33, 64, 0.76) 100%);
+  }
+  .tier1-site .co-hero-net { display: none; }
+  .tier1-site .co-hero-glass { max-width: 100%; padding: 28px 24px 30px; border-radius: 22px; }
+  .tier1-site .co-hero-glass h1 { font-size: 26px; line-height: 1.22; }
+  .tier1-site .co-hero-glass p { font-size: 14px; }
+  .tier1-site .co-hero-lead { font-size: 15px !important; }
+
+  .tier1-site .co-about, .tier1-site .co-module, .tier1-site .co-news, .tier1-site .co-global, .tier1-site .co-vmv, .tier1-site .co-story { padding: 64px 20px; }
+
+  .tier1-site .co-about-media,
+  .tier1-site .co-mod-media,
+  .tier1-site .co-mod--right .co-mod-media,
+  .tier1-site .co-mod--left .co-mod-media { aspect-ratio: 4 / 3; }
+  .tier1-site .co-about-panel,
+  .tier1-site .co-mod-panel,
+  .tier1-site .co-mod--right .co-mod-panel,
+  .tier1-site .co-mod--left .co-mod-panel { margin: -24px 0 0; padding: 26px 22px 28px; }
+  .tier1-site .co-about-panel h2 { font-size: 25px; }
+
+  /* One column: a 2-up at phone width gives each item ~140px and every
+     heading wraps to three lines. */
+  .tier1-site .co-mod-grid--2 { grid-template-columns: 1fr; gap: 22px; }
+  .tier1-site .co-pillars { grid-template-columns: 1fr; }
+  .tier1-site .co-pillar { border-right: none; border-bottom: 1px solid rgba(13, 33, 64, 0.07); }
+  .tier1-site .co-pillar:last-child { border-bottom: none; }
+  .tier1-site .co-global-grid, .tier1-site .co-news-grid { grid-template-columns: 1fr; }
+  .tier1-site .co-global-map { margin-bottom: 40px; }
+  .tier1-site .co-gov { width: 96px; height: 96px; }
+
+  .tier1-site .co-story-lede h2 { font-size: 27px; }
+  .tier1-site .co-story-lede p { font-size: 14.5px; }
+
+  .tier1-site .co-cta-bg { padding: 76px 20px; }
+  .tier1-site .co-cta-glass { padding: 32px 24px 34px; border-radius: 20px; }
+  .tier1-site .co-cta-glass h2 { font-size: 24px; margin-bottom: 26px; }
+  .tier1-site .co-cta-row button { width: 100%; justify-content: center; }
+  .tier1-site .co-page .btn-cyan, .tier1-site .co-page .btn-glass { min-height: 44px; }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   Everything above is decoration. Nothing here is the only way a
+   piece of content becomes visible — useReveal also starts elements
+   shown when the preference is set.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .tier1-site .co-page .reveal,
+  .tier1-site .co-page .reveal.is-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .tier1-site .co-hero-glass,
+  .tier1-site .co-hero-glass .eyebrow,
+  .tier1-site .co-hero-glass h1,
+  .tier1-site .co-hero-glass p {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  /* Hold the finished state, drop the travel. */
+  .tier1-site .co-net-link { animation: none; stroke-dashoffset: 0; }
+  .tier1-site .co-net-pulse { display: none; }
+  .tier1-site .co-gov-ring, .tier1-site .co-gov-shield, .tier1-site .co-gov-check { animation: none; stroke-dashoffset: 0; }
+  .tier1-site .co-gov-ticks line { animation: none; opacity: 1; }
+  .tier1-site .co-story-rail { transition: none; stroke-dashoffset: 0; }
+  .tier1-site .co-story-mark { transition: none; opacity: 1; transform: none; }
+  /* The map keeps its dots but loses both the resolve-in and the shimmer. */
+  .tier1-site .co-map-dots circle,
+  .tier1-site .co-map.is-active .co-map-dots circle { animation: none; opacity: 1; }
+  .tier1-site .co-mod-img img,
+  .tier1-site .co-mod-panel,
+  .tier1-site .co-vmv-card,
+  .tier1-site .co-global-card,
+  .tier1-site .co-news-card,
+  .tier1-site .co-news-rule,
+  .tier1-site .co-btn-glow { transition: none; }
+  .tier1-site .co-mod:hover .co-mod-img img,
+  .tier1-site .co-mod:hover .co-mod-panel,
+  .tier1-site .co-vmv-card:hover,
+  .tier1-site .co-global-card:hover,
+  .tier1-site .co-news-card:hover { transform: none; }
+}

@@ -1,0 +1,881 @@
+/* ============================================================
+   ITG Technologies — Services page
+   Extends the tokens and primitives in index.css. Palette is the
+   locked 8 colours; every surface below is one of them at an alpha,
+   or white/navy at an alpha. No ninth colour.
+   ============================================================ */
+
+/* ---------- glass primitives -------------------------------
+   Three weights, so "glass" is a deliberate choice per surface rather
+   than one blur reused everywhere:
+     --glass-light  over photography, content must stay readable
+     --glass-pale   over pale backgrounds, barely-there
+     --glass-navy   over dark sections
+   ----------------------------------------------------------- */
+.tier1-site .svc-page {
+  --glass-light: rgba(255, 255, 255, 0.14);
+  --glass-light-hi: rgba(255, 255, 255, 0.22);
+  --glass-pale: rgba(255, 255, 255, 0.55);
+  --glass-navy: rgba(13, 33, 64, 0.42);
+  --glass-navy-hi: rgba(13, 33, 64, 0.58);
+  --glass-edge: rgba(255, 255, 255, 0.32);
+  --glass-edge-soft: rgba(255, 255, 255, 0.18);
+  --shadow-soft: 0 12px 40px rgba(13, 33, 64, 0.16);
+  --shadow-lift: 0 26px 64px rgba(13, 33, 64, 0.26);
+  --ease: cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+/* ---------- shared scroll reveal ---------------------------
+   One-way. `.is-in` is set by useReveal once the element enters view.
+   ----------------------------------------------------------- */
+.tier1-site .svc-page .reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.tier1-site .svc-page .reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Short cyan rule under section headings. */
+.tier1-site .svc-rule {
+  display: block;
+  width: 72px;
+  height: 3px;
+  margin: 14px auto 18px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--cyan), rgba(93, 141, 205, 0.15));
+}
+.tier1-site .svc-rule--light {
+  background: linear-gradient(90deg, var(--cyan), rgba(93, 141, 205, 0.1));
+}
+
+/* Restrained halo on the primary CTA — light, not neon. */
+.tier1-site .svc-btn-glow {
+  position: relative;
+  box-shadow: 0 6px 22px rgba(9, 24, 48, 0.42);
+  transition: box-shadow 0.3s var(--ease), transform 0.3s var(--ease), filter 0.25s ease;
+}
+.tier1-site .svc-btn-glow:hover {
+  box-shadow: 0 10px 30px rgba(9, 24, 48, 0.54);
+  transform: translateY(-1px);
+}
+.tier1-site .svc-btn-glow:active { transform: translateY(0); }
+
+/* Pull-quote statement band, used three times down the page. */
+.tier1-site .svc-statement {
+  max-width: 760px;
+  margin: 56px auto 0;
+  padding: 24px 32px;
+  border-left: 3px solid var(--navy);
+  border-radius: 0 12px 12px 0;
+  background: linear-gradient(90deg, rgba(208, 226, 244, 0.5), rgba(234, 240, 248, 0.35));
+  text-align: center;
+}
+.tier1-site .svc-statement strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.5;
+}
+.tier1-site .svc-statement span {
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--charcoal);
+  line-height: 1.6;
+}
+.tier1-site .svc-statement--dark {
+  border-left-color: var(--brand-accent-soft);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03));
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.tier1-site .svc-statement--dark strong { color: #fff; }
+
+/* ============================================================
+   HERO — photo, gradient, glass panel, floating chips
+   ============================================================ */
+.tier1-site .svc-hero {
+  position: relative;
+  min-height: 760px;
+  padding: 190px 40px 110px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--navy);
+}
+.tier1-site .svc-hero-media { position: absolute; inset: 0; z-index: 0; }
+.tier1-site .svc-hero-img {
+  position: absolute;
+  inset: 0;
+  background: url('/assets/services/hero-services.jpg') center / cover no-repeat;
+}
+/* Angled so the empty left wall darkens and the office floor on the right
+   stays visible — the panel needs contrast, the photo needs to be seen. */
+.tier1-site .svc-hero-grad {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(96deg, rgba(9, 24, 48, 0.9) 0%, rgba(10, 26, 52, 0.66) 34%,
+      rgba(13, 33, 64, 0.24) 62%, rgba(13, 33, 64, 0.08) 100%),
+    linear-gradient(180deg, rgba(9, 24, 48, 0.42) 0%, rgba(13, 33, 64, 0) 34%);
+}
+.tier1-site .svc-hero-glow {
+  position: absolute;
+  left: -6%;
+  top: 22%;
+  width: 620px;
+  height: 620px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(93, 141, 205, 0.16) 0%, rgba(93, 141, 205, 0) 68%);
+  pointer-events: none;
+}
+.tier1-site .svc-hero-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.85;
+  pointer-events: none;
+}
+.tier1-site .svc-hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 620px) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
+}
+.tier1-site .svc-hero-glass {
+  padding: 44px 44px 46px;
+  border-radius: 28px;
+  background: rgba(222, 238, 255, 0.15);
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 18px 52px rgba(6, 18, 38, 0.28);
+  /* Internal top highlight — light catching the leading edge. */
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 42%);
+  opacity: 0;
+  transform: translateY(28px);
+  animation: svcRise 0.7s var(--ease) 0.1s forwards;
+}
+@keyframes svcRise { to { opacity: 1; transform: none; } }
+.tier1-site .svc-hero-glass .eyebrow,
+.tier1-site .svc-hero-glass h1,
+.tier1-site .svc-hero-glass p,
+.tier1-site .svc-hero-glass .cta-row {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: svcRise 0.55s ease forwards;
+}
+.tier1-site .svc-hero-glass .eyebrow { animation-delay: 0.26s; }
+.tier1-site .svc-hero-glass h1 { animation-delay: 0.36s; }
+.tier1-site .svc-hero-glass p { animation-delay: 0.46s; }
+.tier1-site .svc-hero-glass .cta-row { animation-delay: 0.56s; }
+.tier1-site .svc-hero-glass h1 {
+  font-size: 50px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.13;
+  margin-bottom: 18px;
+  color: #fff;
+  text-shadow: 0 2px 20px rgba(6, 18, 38, 0.4);
+}
+.tier1-site .svc-hero-glass h1 .accent { color: var(--brand-accent-soft); }
+.tier1-site .svc-hero-glass p {
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 30px;
+  text-shadow: 0 1px 12px rgba(6, 18, 38, 0.35);
+}
+
+/* Floating capability chips — small translucent cards, staggered in. */
+.tier1-site .svc-hero-chips {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  list-style: none;
+}
+.tier1-site .svc-chip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 18px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(9px) saturate(1.15);
+  -webkit-backdrop-filter: blur(9px) saturate(1.15);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow: 0 10px 30px rgba(6, 18, 38, 0.2);
+  color: #fff;
+  opacity: 0;
+  transform: translateY(18px);
+  animation: svcRise 0.6s var(--ease) var(--chip-delay, 0.7s) forwards;
+  transition: background 0.32s var(--ease), transform 0.32s var(--ease), border-color 0.32s var(--ease);
+}
+.tier1-site .svc-chip:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.42);
+  transform: translateY(-3px);
+}
+.tier1-site .svc-chip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 11px;
+  background: rgba(93, 141, 205, 0.18);
+  border: 1px solid rgba(93, 141, 205, 0.3);
+  color: var(--brand-accent-soft);
+}
+.tier1-site .svc-chip-label { font-size: 13.5px; font-weight: 600; line-height: 1.35; }
+.tier1-site .svc-hero-pulse { opacity: 0.9; }
+
+/* ============================================================
+   ENTERPRISE DELIVERY — flat ice section + one glass diagram
+   ============================================================ */
+.tier1-site .svc-approach .section-head { max-width: 720px; }
+
+.tier1-site .svc-flow-stage { max-width: 1000px; margin: 0 auto 56px; }
+.tier1-site .svc-flow-glass {
+  padding: 40px 40px 32px;
+  border-radius: 24px;
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.42));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 20px 54px rgba(13, 33, 64, 0.13), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.tier1-site .svc-flow-svg { width: 100%; height: auto; display: block; }
+.tier1-site .svc-flow-disc { fill: #fff; opacity: 0.75; }
+.tier1-site .svc-flow-ring { fill: none; stroke: rgba(13, 33, 64, 0.16); stroke-width: 1.5; }
+.tier1-site .svc-flow-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  fill: var(--navy);
+}
+/* Connectors trace in once the section is on screen. */
+/* The paths carry pathLength="1", so the dash is length-independent. A fixed
+   pixel dash silently clips any path longer than the dash. */
+.tier1-site .svc-flow-link {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.9s var(--ease);
+  transition-delay: var(--link-delay, 0s);
+}
+.tier1-site .svc-flow-svg.is-active .svc-flow-link { stroke-dashoffset: 0; }
+.tier1-site .svc-flow-node {
+  opacity: 0;
+  transition: opacity 0.6s var(--ease);
+  transition-delay: var(--node-delay, 0s);
+}
+.tier1-site .svc-flow-svg.is-active .svc-flow-node { opacity: 1; }
+.tier1-site .svc-flow-pulse { opacity: 0; }
+.tier1-site .svc-flow-svg.is-active .svc-flow-pulse { opacity: 0.9; }
+
+.tier1-site .svc-flow-legend {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 8px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(13, 33, 64, 0.08);
+  list-style: none;
+  text-align: center;
+}
+.tier1-site .svc-flow-legend-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 3px;
+}
+.tier1-site .svc-flow-legend-note { display: block; font-size: 12.5px; color: var(--light-text); }
+
+.tier1-site .svc-approach-panel {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 34px 38px 36px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(13, 33, 64, 0.08);
+  box-shadow: 0 10px 32px rgba(13, 33, 64, 0.07);
+}
+.tier1-site .svc-approach-panel h3 {
+  text-align: center;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 28px;
+}
+.tier1-site .svc-approach-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 40px;
+  list-style: none;
+}
+.tier1-site .svc-approach-grid li { display: flex; gap: 13px; align-items: flex-start; }
+.tier1-site .svc-approach-check { color: var(--teal); flex-shrink: 0; margin-top: 1px; }
+.tier1-site .svc-approach-grid strong {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.45;
+  margin-bottom: 3px;
+}
+.tier1-site .svc-approach-grid span { font-size: 13px; color: var(--light-text); line-height: 1.5; }
+
+/* ============================================================
+   DELIVERY PILLARS — photo with an overlapping glass panel
+   ============================================================ */
+.tier1-site .svc-pillars { padding-bottom: 40px; }
+.tier1-site .svc-pillar-list { display: flex; flex-direction: column; gap: 96px; }
+
+.tier1-site .svc-pillar {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  align-items: center;
+  /* Media spans wide; the panel overlaps it from one side. Columns are named
+     so the two directions differ only in placement, not in structure. */
+  grid-template-columns: repeat(12, 1fr);
+}
+.tier1-site .svc-pillar-media {
+  position: relative;
+  grid-row: 1;
+  height: 560px;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+.tier1-site .svc-pillar-img {
+  position: absolute;
+  inset: -8%;
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+}
+.tier1-site .svc-pillar-panel {
+  position: relative;
+  z-index: 2;
+  grid-row: 1;
+  padding: 40px 40px 42px;
+  border-radius: 22px;
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.78));
+  backdrop-filter: blur(13px) saturate(1.2);
+  -webkit-backdrop-filter: blur(13px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: var(--shadow-lift), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+
+/* Panel right: image occupies cols 1-8, panel overlaps from col 7 to 13. */
+.tier1-site .svc-pillar--right .svc-pillar-media { grid-column: 1 / 9; }
+.tier1-site .svc-pillar--right .svc-pillar-panel { grid-column: 7 / 13; }
+/* Panel left: mirrored. */
+.tier1-site .svc-pillar--left .svc-pillar-media { grid-column: 5 / 13; }
+.tier1-site .svc-pillar--left .svc-pillar-panel { grid-column: 1 / 7; }
+
+/* Scrim darkens the edge the panel overlaps so the glass has something to sit
+   against, and lifts on hover. Direction follows the composition. */
+.tier1-site .svc-pillar-scrim {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.4s var(--ease);
+}
+/* Darkest at the edge the panel overlaps, near-clear across the middle so the
+   photograph keeps its own contrast where it is actually on show. */
+.tier1-site .svc-pillar--right .svc-pillar-scrim {
+  background: linear-gradient(90deg, rgba(13, 33, 64, 0.42) 0%, rgba(13, 33, 64, 0.08) 42%, rgba(13, 33, 64, 0.58) 100%);
+}
+.tier1-site .svc-pillar--left .svc-pillar-scrim {
+  background: linear-gradient(270deg, rgba(13, 33, 64, 0.42) 0%, rgba(13, 33, 64, 0.08) 42%, rgba(13, 33, 64, 0.58) 100%);
+}
+.tier1-site .svc-pillar:hover .svc-pillar-panel {
+  transform: translateY(-4px);
+  box-shadow: 0 34px 74px rgba(13, 33, 64, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.tier1-site .svc-pillar-number {
+  position: absolute;
+  top: 26px;
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 76px;
+  font-weight: 400;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.24);
+  letter-spacing: -0.02em;
+  user-select: none;
+}
+.tier1-site .svc-pillar--right .svc-pillar-number { left: 32px; }
+.tier1-site .svc-pillar--left .svc-pillar-number { right: 32px; }
+
+.tier1-site .svc-pillar-head { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 16px; }
+.tier1-site .svc-pillar-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  border-radius: 13px;
+  background: rgba(176, 58, 66, 0.1);
+  border: 1px solid rgba(176, 58, 66, 0.22);
+  color: var(--teal);
+}
+.tier1-site .svc-pillar-head h3 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--navy);
+  line-height: 1.25;
+  margin-bottom: 5px;
+}
+.tier1-site .svc-pillar-sub { font-size: 14.5px; font-weight: 600; color: var(--navy-mid); line-height: 1.4; }
+.tier1-site .svc-pillar-body { font-size: 14.5px; color: var(--charcoal); line-height: 1.68; margin-bottom: 26px; }
+
+.tier1-site .svc-pillar-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.tier1-site .svc-pillar-col h4 {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy);
+  padding-left: 11px;
+  border-left: 3px solid var(--cyan);
+  margin-bottom: 14px;
+}
+.tier1-site .svc-pillar-enables { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.tier1-site .svc-pillar-enables li { display: flex; gap: 9px; align-items: flex-start; }
+.tier1-site .svc-pillar-enables svg { color: var(--teal); flex-shrink: 0; margin-top: 1px; }
+.tier1-site .svc-pillar-enables span { font-size: 13.5px; color: var(--charcoal); line-height: 1.5; }
+
+.tier1-site .svc-pillar-includes {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 18px;
+  border-radius: 13px;
+  background: rgba(234, 240, 248, 0.72);
+  border: 1px solid rgba(13, 33, 64, 0.07);
+}
+.tier1-site .svc-pillar-includes li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--navy);
+  line-height: 1.45;
+}
+.tier1-site .svc-pillar-includes li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+
+/* ============================================================
+   PLATFORM ALIGNMENT — dark navy, vector ecosystem
+   ============================================================ */
+.tier1-site .svc-align {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(165deg, #0D2140 0%, #14294C 48%, #1A3A6B 100%);
+}
+.tier1-site .svc-align-glow {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  width: 720px;
+  height: 720px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(93, 141, 205, 0.12) 0%, rgba(93, 141, 205, 0) 66%);
+  pointer-events: none;
+}
+.tier1-site .svc-align .section-head { position: relative; z-index: 2; }
+.tier1-site .svc-align .section-head h2 { color: #fff; }
+.tier1-site .svc-align .section-head p { color: rgba(255, 255, 255, 0.66); }
+.tier1-site .svc-align-stage { position: relative; z-index: 2; max-width: 940px; margin: 0 auto; }
+.tier1-site .svc-eco { width: 100%; height: auto; display: block; }
+
+.tier1-site .svc-eco-chip { fill: rgba(255, 255, 255, 0.1); stroke: rgba(255, 255, 255, 0.24); stroke-width: 1; }
+.tier1-site .svc-eco-chip-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px;
+  letter-spacing: 0.16em;
+  fill: var(--brand-accent-soft);
+}
+/* Central navy glass platform. */
+.tier1-site .svc-eco-hub { fill: rgba(13, 33, 64, 0.72); }
+.tier1-site .svc-eco-hub-ring { fill: none; stroke: rgba(93, 141, 205, 0.42); stroke-width: 1.5; }
+.tier1-site .svc-eco-hub-label { font-size: 22px; font-weight: 700; fill: #fff; }
+.tier1-site .svc-eco-node { fill: rgba(255, 255, 255, 0.08); }
+.tier1-site .svc-eco-node-ring { fill: none; stroke: rgba(255, 255, 255, 0.2); stroke-width: 1; }
+.tier1-site .svc-eco-node-label { font-size: 15px; font-weight: 600; fill: rgba(255, 255, 255, 0.9); }
+.tier1-site .svc-eco-dot { fill: var(--brand-accent-soft); }
+.tier1-site .svc-eco-link {
+  fill: none;
+  stroke: url(#svcEcoDown);
+  stroke-width: 1.5;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1s var(--ease);
+  transition-delay: var(--eco-delay, 0s);
+}
+.tier1-site .svc-eco.is-active .svc-eco-link { stroke-dashoffset: 0; }
+.tier1-site .svc-eco-item {
+  opacity: 0;
+  transition: opacity 0.65s var(--ease);
+  transition-delay: var(--eco-delay, 0s);
+}
+.tier1-site .svc-eco.is-active .svc-eco-item { opacity: 1; }
+.tier1-site .svc-eco-pulse { opacity: 0; }
+.tier1-site .svc-eco.is-active .svc-eco-pulse { opacity: 0.95; }
+
+/* Phone fallback for the ecosystem — hidden until the 760px breakpoint. */
+.tier1-site .svc-align-stack {
+  display: none;
+  position: relative;
+  z-index: 2;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  max-width: 340px;
+  margin: 0 auto;
+  list-style: none;
+}
+.tier1-site .svc-align-step {
+  width: 100%;
+  padding: 16px 18px;
+  border-radius: 14px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+/* Connector between consecutive steps. */
+.tier1-site .svc-align-step + .svc-align-step::before {
+  content: '';
+  display: block;
+  width: 1.5px;
+  height: 22px;
+  margin: -19px auto 19px;
+  background: linear-gradient(180deg, rgba(93, 141, 205, 0.7), rgba(93, 141, 205, 0.15));
+}
+.tier1-site .svc-align-step span { font-size: 14px; font-weight: 600; color: rgba(255, 255, 255, 0.9); }
+.tier1-site .svc-align-step--src span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  color: var(--brand-accent-soft);
+}
+.tier1-site .svc-align-step--hub {
+  background: rgba(13, 33, 64, 0.72);
+  border-color: rgba(93, 141, 205, 0.42);
+  padding: 20px 18px;
+}
+.tier1-site .svc-align-step--hub span { font-size: 18px; font-weight: 700; color: #fff; }
+
+/* ============================================================
+   INDUSTRIES — photography + gradient + glass label bar
+   ============================================================ */
+.tier1-site .svc-ind-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+/* Seven industries into three columns leaves one card alone on the last row;
+   centre it rather than letting it hang off the left edge.
+   Must be gated to the 3-column layout: nth-child(3n+1) still matches the 7th
+   card at narrower widths, where `grid-column: 2` would invent a phantom
+   second column and shrink every card in the grid. */
+@media (min-width: 1025px) {
+  .tier1-site .svc-ind-card:last-child:nth-child(3n + 1) { grid-column: 2; }
+}
+
+.tier1-site .svc-ind-card {
+  position: relative;
+  height: 280px;
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(13, 33, 64, 0.14);
+  border: 1px solid transparent;
+  transition: box-shadow 0.38s var(--ease), transform 0.38s var(--ease), border-color 0.38s var(--ease);
+}
+/* Stagger the cards in behind the grid's own reveal. */
+.tier1-site .svc-ind-grid.reveal .svc-ind-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease),
+    box-shadow 0.38s var(--ease), border-color 0.38s var(--ease);
+  transition-delay: var(--card-delay, 0s);
+}
+.tier1-site .svc-ind-grid.reveal.is-in .svc-ind-card { opacity: 1; transform: none; }
+.tier1-site .svc-ind-card:hover,
+.tier1-site .svc-ind-card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 48px rgba(13, 33, 64, 0.26);
+  border-color: rgba(93, 141, 205, 0.45);
+  outline: none;
+}
+.tier1-site .svc-ind-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.55s var(--ease);
+}
+.tier1-site .svc-ind-card:hover img,
+.tier1-site .svc-ind-card:focus-visible img { transform: scale(1.04); }
+.tier1-site .svc-ind-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(13, 33, 64, 0) 34%, rgba(13, 33, 64, 0.5) 66%, rgba(13, 33, 64, 0.88) 100%);
+  transition: background 0.38s var(--ease);
+}
+.tier1-site .svc-ind-card:hover .svc-ind-scrim,
+.tier1-site .svc-ind-card:focus-visible .svc-ind-scrim {
+  background: linear-gradient(180deg, rgba(13, 33, 64, 0.12) 18%, rgba(13, 33, 64, 0.64) 58%, rgba(13, 33, 64, 0.94) 100%);
+}
+/* Glass label bar over the photo's foot. */
+.tier1-site .svc-ind-bar {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 15px 17px;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px) saturate(1.15);
+  -webkit-backdrop-filter: blur(8px) saturate(1.15);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  transition: background 0.38s var(--ease), border-color 0.38s var(--ease);
+}
+.tier1-site .svc-ind-card:hover .svc-ind-bar,
+.tier1-site .svc-ind-card:focus-visible .svc-ind-bar {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.tier1-site .svc-ind-bar h3 { font-size: 14px; font-weight: 700; color: #fff; line-height: 1.35; }
+.tier1-site .svc-ind-arrow {
+  flex-shrink: 0;
+  color: var(--cyan);
+  transition: transform 0.38s var(--ease);
+}
+.tier1-site .svc-ind-card:hover .svc-ind-arrow,
+.tier1-site .svc-ind-card:focus-visible .svc-ind-arrow { transform: translateX(4px); }
+
+/* ============================================================
+   WHY ITG — approved component, hover + cyan accent added
+   ============================================================ */
+.tier1-site .svc-why .why-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s var(--ease), background 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+/* The small cyan accent the brief asks for: a top edge that runs in on hover. */
+.tier1-site .svc-why .why-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyan), rgba(93, 141, 205, 0));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease);
+}
+.tier1-site .svc-why .why-card:hover {
+  transform: translateY(-4px);
+  background: rgba(13, 33, 64, 0.52);
+  box-shadow: 0 20px 44px rgba(6, 18, 38, 0.26);
+}
+.tier1-site .svc-why .why-card:hover::after { transform: scaleX(1); }
+.tier1-site .svc-why .why-icon { color: var(--brand-accent-soft); }
+
+/* ============================================================
+   CTA — image, navy overlay, glass content layer
+   ============================================================ */
+.tier1-site .svc-cta { padding: 0; position: relative; }
+.tier1-site .svc-cta-bg {
+  position: relative;
+  padding: 120px 40px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+.tier1-site .svc-cta-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(13, 33, 64, 0.9) 0%, rgba(13, 33, 64, 0.82) 50%, rgba(13, 33, 64, 0.94) 100%);
+}
+.tier1-site .svc-cta-glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 760px;
+  height: 460px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(93, 141, 205, 0.16) 0%, rgba(93, 141, 205, 0) 68%);
+  pointer-events: none;
+}
+.tier1-site .svc-cta-glass {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 48px 48px 50px;
+  border-radius: 26px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(11px) saturate(1.15);
+  -webkit-backdrop-filter: blur(11px) saturate(1.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 24px 62px rgba(6, 18, 38, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+.tier1-site .svc-cta-glass h2 { color: #fff; font-size: 30px; font-weight: 700; line-height: 1.25; margin-bottom: 14px; }
+.tier1-site .svc-cta-glass p { color: rgba(255, 255, 255, 0.7); font-size: 15px; line-height: 1.6; margin-bottom: 32px; }
+.tier1-site .svc-cta-row { justify-content: center; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1180px) {
+  /* Overlap needs width to read as depth. Below this the panel stops
+     overlapping and sits under the image instead. */
+  .tier1-site .svc-pillar { grid-template-columns: 1fr; gap: 0; }
+  .tier1-site .svc-pillar-media,
+  .tier1-site .svc-pillar--right .svc-pillar-media,
+  .tier1-site .svc-pillar--left .svc-pillar-media { grid-column: 1; height: 360px; border-radius: 22px 22px 0 0; }
+  .tier1-site .svc-pillar-panel,
+  .tier1-site .svc-pillar--right .svc-pillar-panel,
+  .tier1-site .svc-pillar--left .svc-pillar-panel {
+    grid-column: 1;
+    grid-row: 2;
+    margin: -28px 24px 0;
+    border-radius: 22px;
+  }
+  .tier1-site .svc-pillar--right .svc-pillar-scrim,
+  .tier1-site .svc-pillar--left .svc-pillar-scrim {
+    background: linear-gradient(180deg, rgba(13, 33, 64, 0.34) 0%, rgba(13, 33, 64, 0.14) 50%, rgba(13, 33, 64, 0.5) 100%);
+  }
+  .tier1-site .svc-pillar-list { gap: 72px; }
+}
+
+@media (max-width: 1024px) {
+  .tier1-site .svc-hero { min-height: 640px; padding: 160px 32px 90px; }
+  .tier1-site .svc-hero-inner { grid-template-columns: 1fr; gap: 32px; }
+  .tier1-site .svc-hero-glass { max-width: 620px; padding: 36px 34px 38px; }
+  .tier1-site .svc-hero-glass h1 { font-size: 38px; }
+  .tier1-site .svc-hero-chips { max-width: 620px; }
+  .tier1-site .svc-hero-lines { opacity: 0.5; }
+  .tier1-site .svc-ind-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 960px) {
+  .tier1-site .svc-approach-grid { grid-template-columns: 1fr; gap: 20px; }
+  .tier1-site .svc-flow-glass { padding: 28px 24px 24px; }
+}
+
+@media (max-width: 760px) {
+  /* The ecosystem SVG's three-across fan-out is unreadable at phone width;
+     the CSS fallback below stacks it instead. */
+  .tier1-site .svc-align-stage { display: none; }
+  .tier1-site .svc-align-stack { display: flex; }
+}
+
+@media (max-width: 680px) {
+  .tier1-site .svc-hero { min-height: auto; padding: 130px 20px 64px; }
+  .tier1-site .svc-hero-grad {
+    background: linear-gradient(180deg, rgba(9, 24, 48, 0.82) 0%, rgba(10, 26, 52, 0.6) 44%, rgba(13, 33, 64, 0.5) 100%);
+  }
+  .tier1-site .svc-hero-glass { padding: 28px 24px 30px; border-radius: 22px; }
+  .tier1-site .svc-hero-glass h1 { font-size: 29px; line-height: 1.2; }
+  .tier1-site .svc-hero-glass p { font-size: 14px; margin-bottom: 24px; }
+  .tier1-site .svc-hero-glass .cta-row button { width: 100%; justify-content: center; }
+  .tier1-site .svc-hero-chips { grid-template-columns: 1fr; gap: 10px; }
+  .tier1-site .svc-chip { padding: 14px 15px; }
+
+  .tier1-site .svc-pillar-media,
+  .tier1-site .svc-pillar--right .svc-pillar-media,
+  .tier1-site .svc-pillar--left .svc-pillar-media { height: 260px; }
+  .tier1-site .svc-pillar-panel,
+  .tier1-site .svc-pillar--right .svc-pillar-panel,
+  .tier1-site .svc-pillar--left .svc-pillar-panel { margin: -24px 12px 0; padding: 28px 22px 30px; }
+  .tier1-site .svc-pillar-cols { grid-template-columns: 1fr; gap: 24px; }
+  .tier1-site .svc-pillar-head h3 { font-size: 19px; }
+  .tier1-site .svc-pillar-number { font-size: 56px; top: 18px; }
+  .tier1-site .svc-pillar--right .svc-pillar-number { left: 20px; }
+  .tier1-site .svc-pillar--left .svc-pillar-number { right: 20px; }
+  .tier1-site .svc-pillar-list { gap: 56px; }
+
+  .tier1-site .svc-ind-grid { grid-template-columns: 1fr; }
+  .tier1-site .svc-flow-legend { grid-template-columns: 1fr; gap: 12px; }
+  .tier1-site .svc-statement { margin-top: 40px; padding: 20px 22px; }
+  .tier1-site .svc-statement strong { font-size: 15px; }
+
+  .tier1-site .svc-cta-bg { padding: 80px 20px; }
+  .tier1-site .svc-cta-glass { padding: 32px 24px 34px; border-radius: 22px; }
+  .tier1-site .svc-cta-glass h2 { font-size: 25px; }
+  .tier1-site .svc-cta-row button { width: 100%; justify-content: center; }
+
+  /* Touch targets. */
+  .tier1-site .svc-btn-glow, .tier1-site .svc-page .btn-glass, .tier1-site .svc-page .btn-cyan { min-height: 44px; }
+}
+
+/* ============================================================
+   REDUCED MOTION — everything static, nothing hidden
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .tier1-site .svc-page .reveal,
+  .tier1-site .svc-page .reveal.is-in { opacity: 1; transform: none; transition: none; }
+  .tier1-site .svc-hero-glass,
+  .tier1-site .svc-hero-glass .eyebrow,
+  .tier1-site .svc-hero-glass h1,
+  .tier1-site .svc-hero-glass p,
+  .tier1-site .svc-hero-glass .cta-row,
+  .tier1-site .svc-chip { animation: none; opacity: 1; transform: none; }
+  .tier1-site .svc-flow-link,
+  .tier1-site .svc-eco-link { stroke-dashoffset: 0; transition: none; }
+  .tier1-site .svc-flow-node,
+  .tier1-site .svc-eco-item { opacity: 1; transition: none; }
+  /* Travelling pulses are pure decoration — remove them entirely rather than
+     leaving a static dot mid-path. */
+  .tier1-site .svc-flow-pulse,
+  .tier1-site .svc-eco-pulse,
+  .tier1-site .svc-hero-pulse { display: none; }
+  .tier1-site .svc-ind-grid.reveal .svc-ind-card { opacity: 1; transform: none; transition: none; }
+  .tier1-site .svc-pillar-img { transform: none !important; }
+  .tier1-site .svc-page * { scroll-behavior: auto; }
+}
