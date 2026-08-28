@@ -12,7 +12,10 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
-import logo from "@/assets/logo-white.png";
+// Same file as the colour mark with its ink turned white, so the two share an
+// identical outline and box — swapping them reads as a recolour, not a resize.
+import logoOnDark from "@/assets/logo-trimmed-white.png";
+import logoOnLight from "@/assets/logo-trimmed.png";
 import { CommandPalette } from "@/components/CommandPalette";
 
 type MenuItem = {
@@ -756,6 +759,9 @@ export function Header() {
   // a page without one (the light Products hero) gets dark type from the start.
   const isDarkHero = darkHeroDepth > 0 && scrollY < darkHeroDepth - 96;
   const navItemClass = cn(NAV_ITEM_BASE, isDarkHero ? NAV_ITEM_ON_DARK : NAV_ITEM_ON_LIGHT);
+  // Transparent while the dark hero is behind the bar; once past it the bar
+  // takes a white background so navy links stay readable over page content.
+  const showSolidBar = isScrolled && !isDarkHero;
 
   // Layout effect, not a plain effect: the hero has to be measured before the
   // first paint or the nav renders dark and then fades to white over the hero.
@@ -816,12 +822,29 @@ export function Header() {
     <>
       <CommandPalette open={commandPaletteOpen} onOpenChange={setCommandPaletteOpen} />
       <header
-        className={`fixed top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300 ${isScrolled ? "py-2 lg:py-3" : "py-3 lg:py-4"
-          }`}
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          isScrolled ? "py-2 lg:py-3" : "py-3 lg:py-4",
+          showSolidBar
+            ? "bg-white border-b border-[hsl(var(--foreground))]/10 shadow-[0_2px_12px_rgba(13,33,64,0.10)]"
+            : "bg-transparent",
+        )}
       >
         <div className="section-container grid grid-cols-[1fr_auto_1fr] items-center">
-          <a href="/" className="flex items-center justify-start">
-            <img src={logo} alt="ITG Innovators" className="h-12 lg:h-16 w-auto object-contain drop-shadow-[0_2px_10px_rgba(3,12,28,0.45)]" />
+          {/* Both marks are the same artwork at the same box, so stacking them and
+              crossing the opacity turns the swap into a recolour rather than a cut. */}
+          <a href="/" className="relative flex items-center justify-start">
+            <img src={logoOnLight} alt="ITG Innovators" className="h-12 lg:h-16 w-auto object-contain" />
+            <img
+              src={logoOnDark}
+              alt=""
+              aria-hidden="true"
+              className={cn(
+                "absolute left-0 top-0 h-12 lg:h-16 w-auto object-contain",
+                "drop-shadow-[0_2px_10px_rgba(3,12,28,0.45)] transition-opacity duration-300 ease-out",
+                isDarkHero ? "opacity-100" : "opacity-0",
+              )}
+            />
           </a>
 
           <NavigationMenu className="hidden lg:flex justify-center">
