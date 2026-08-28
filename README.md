@@ -1,73 +1,61 @@
-# Welcome to your Lovable project
+# ITG Technologies — Corporate Website
 
-## Project info
+Marketing site for ITG Technologies: AI-powered enterprise software, automation,
+sustainability intelligence and digital experience platforms.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Stack
 
-## How can I edit this code?
+- **React 18** + **TypeScript**, built with **Vite**
+- **Tailwind CSS** with shadcn/ui components
+- **React Router** for routing
+- **GSAP** for timeline animation, **Lenis** for smooth scrolling
 
-There are several ways of editing your application.
+## Running locally
 
-**Use Lovable**
+Requires Node.js 18+.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The dev server runs on http://localhost:8080.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Start the dev server with HMR |
+| `npm run build` | Production build to `dist/` |
+| `npm run preview` | Serve the production build locally |
+| `npm run lint` | ESLint over the project |
+| `npm run test` | Run the Vitest suite once |
 
-**Use GitHub Codespaces**
+## Layout
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```
+src/
+  components/
+    layout/        Header (shared nav), Footer, NavSearch
+    sections/      Home page sections
+    ui/            shadcn primitives
+  pages/           Route entry points
+  tier1/           Solutions, Products, Services, Industries, Company
+                   — their own components, data and stylesheets
+  hooks/           useLenis, scroll and counter animations
+  assets/          Logos and brand imagery
+public/            Static files served as-is (icons, video, photography)
+```
 
-## What technologies are used for this project?
+The home page is built from `src/components/sections`; the tier-1 pages live
+under `src/tier1` with their own scoped stylesheets, and share the site header
+through `src/tier1/Tier1Route.tsx`.
 
-This project is built with:
+## Brand
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Palette tokens are defined once in `src/index.css` and mirrored for the tier-1
+scope in `src/tier1/styles/index.css`:
 
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- **Navy** `#0D2140` — all filled actions (`--btn-navy`)
+- **Accent blue** `#3D6FB4`, lightened to `#A8C6EA` on dark surfaces — headings,
+  rules and diagram marks
+- **Clay red** `#B03A42` — icon tiles, checkmarks and bullets
+- Brand red `#E5001E` is reserved for the logo and never used in UI
