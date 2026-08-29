@@ -1,4 +1,3 @@
-import Footer from '../Footer.jsx';
 import IndustriesHero from './IndustriesHero.jsx';
 import IndustriesIntro from './IndustriesIntro.jsx';
 import IndustryFeatures from './IndustryFeatures.jsx';
@@ -21,8 +20,7 @@ import '../../styles/industries.css';
  * navy ecosystem exists partly to break it before the CTA. Do not add another
  * glass-on-photo section between the hero and the features.
  *
- * Footer is the site's global component, reused unchanged; the header comes
- * from Tier1Route.
+ * The site's shared header and footer both come from Tier1Route.
  */
 export default function IndustriesPage() {
   return (
@@ -34,7 +32,6 @@ export default function IndustriesPage() {
         <IndustryEcosystem />
         <IndustriesCta />
       </main>
-      <Footer />
     </>
   );
 }

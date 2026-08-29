@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import Footer from '../Footer.jsx';
 import ProductEcosystem from './ProductEcosystem.jsx';
 import HowItWorks from './HowItWorks.jsx';
 import {
@@ -452,7 +451,6 @@ export default function ProductsPage() {
         </section>
 
       </main>
-      <Footer />
     </div>
   );
 }

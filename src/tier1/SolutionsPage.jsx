@@ -4,7 +4,6 @@ import SolutionCategories from './components/SolutionCategories.jsx';
 import Industries from './components/Industries.jsx';
 import WhyITG from './components/WhyITG.jsx';
 import CtaBand from './components/CtaBand.jsx';
-import Footer from './components/Footer.jsx';
 
 export default function SolutionsPage() {
   return (
@@ -17,7 +16,6 @@ export default function SolutionsPage() {
         <WhyITG />
         <CtaBand />
       </main>
-      <Footer />
     </>
   );
 }

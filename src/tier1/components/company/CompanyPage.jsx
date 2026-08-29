@@ -1,4 +1,3 @@
-import Footer from '../Footer.jsx';
 import CompanyHero from './CompanyHero.jsx';
 import WhoWeAre from './WhoWeAre.jsx';
 import VisionMissionValues from './VisionMissionValues.jsx';
@@ -71,7 +70,6 @@ export default function CompanyPage() {
         <News />
         <CompanyCta />
       </main>
-      <Footer />
     </>
   );
 }

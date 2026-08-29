@@ -1,4 +1,3 @@
-import Footer from '../Footer.jsx';
 import WhyITG from '../WhyITG.jsx';
 import ServicesHero from './ServicesHero.jsx';
 import DeliveryApproach from './DeliveryApproach.jsx';
@@ -42,7 +41,6 @@ export default function ServicesPage() {
         </div>
         <ServicesCta />
       </main>
-      <Footer />
     </>
   );
 }

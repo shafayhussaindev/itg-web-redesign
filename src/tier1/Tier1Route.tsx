@@ -1,5 +1,6 @@
 import { useEffect, type ReactNode } from "react";
 import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import { useLenis } from "@/hooks/useLenis";
 import "./styles/index.css";
 
@@ -18,12 +19,14 @@ export default function Tier1Route({ title, children }: Tier1RouteProps) {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [title]);
 
-  // Tier-1 pages share the main site header. It sits outside .tier1-site so the
-  // tier-1 stylesheet's bare `nav` rule cannot reach into it.
+  // Tier-1 pages share the main site header and footer. Both sit outside
+  // .tier1-site so the tier-1 stylesheet's bare `nav` and `footer` element
+  // rules cannot reach into them.
   return (
     <>
       <Header />
       <div className="tier1-site">{children}</div>
+      <Footer />
     </>
   );
 }

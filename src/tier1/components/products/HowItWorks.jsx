@@ -32,6 +32,7 @@ const COLORS = {
   glassBorder: 'rgba(255,255,255,0.9)',
   shadow: 'rgba(13,33,64,0.10)',
   glow: 'rgba(176, 58, 66,0.32)',
+  litFill: 'rgba(176, 58, 66, 0.10)',
   particle: '#B03A42',
 };
 
@@ -49,6 +50,34 @@ const NODES = [
 
 const NODE_Y = 148;
 const PATH_ID = 'itg-how-path';
+
+/* Relay lighting: a node lights the moment the dot arrives, HOLDS until the
+   dot reaches the next node, then lets go over a long fade. Each node's hold
+   is therefore the gap to the next node's fraction (the last wraps into the
+   following cycle), which is why the keyframes are generated per node instead
+   of shared: the wrap gap is far shorter than the others. */
+const RAMP = 0.03;   /* how quickly a node lights on arrival (3% ≈ 0.19s) */
+const FADE = 0.24;   /* how slowly the previous node turns off (24% ≈ 1.5s) */
+
+const NODE_KEYFRAMES = NODES.map((n, i) => {
+  const last = i === NODES.length - 1;
+  const next = NODES[(i + 1) % NODES.length].fraction + (last ? 1 : 0);
+  const hold = next - n.fraction;
+  const on = (RAMP * 100).toFixed(1);
+  const holdEnd = (Math.max(hold, RAMP + 0.01) * 100).toFixed(1);
+  const fadeEnd = (Math.min(hold + FADE, 0.99) * 100).toFixed(1);
+  return `
+  @keyframes itg-how-glass-${i} {
+    0%   { filter:drop-shadow(0 0 0px rgba(176,58,66,0)); stroke:${COLORS.glassBorder}; fill:${COLORS.glassFill}; }
+    ${on}%, ${holdEnd}% { filter:drop-shadow(0 0 16px ${COLORS.glow}); stroke:${COLORS.teal}; fill:${COLORS.litFill}; }
+    ${fadeEnd}%, 100% { filter:drop-shadow(0 0 0px rgba(176,58,66,0)); stroke:${COLORS.glassBorder}; fill:${COLORS.glassFill}; }
+  }
+  @keyframes itg-how-icon-${i} {
+    0%   { color:${COLORS.navy}; transform:scale(1); }
+    ${on}%, ${holdEnd}% { color:${COLORS.teal}; transform:scale(1.12); }
+    ${fadeEnd}%, 100% { color:${COLORS.navy}; transform:scale(1); }
+  }`;
+}).join('\n');
 
 /* vertical geometry for < 720px */
 const V = { width: 360, x: 62, firstY: 62, gap: 116 };
@@ -101,23 +130,13 @@ const STYLE = `
   .itg-how-sub { fill:${COLORS.charcoal}; font-family:'Sora',sans-serif; font-size:11.5px; font-weight:400; }
   .itg-how-node-glass { fill:${COLORS.glassFill}; stroke:${COLORS.glassBorder}; stroke-width:1;
     transform-box:fill-box; transform-origin:center;
-    animation-name:itg-how-pulse-glass; animation-timing-function:ease-out; animation-iteration-count:infinite; }
+    animation-timing-function:ease-out; animation-iteration-count:infinite; }
   .itg-how-icon { color:${COLORS.navy}; transform-box:fill-box; transform-origin:center;
-    animation-name:itg-how-pulse-icon; animation-timing-function:ease-out; animation-iteration-count:infinite; }
-  @keyframes itg-how-pulse-glass {
-    0%   { filter:drop-shadow(0 0 0px ${COLORS.glow}); stroke:${COLORS.teal}; }
-    22%  { filter:drop-shadow(0 0 14px ${COLORS.glow}); stroke:${COLORS.teal}; }
-    55%  { filter:drop-shadow(0 0 0px rgba(176, 58, 66,0)); stroke:${COLORS.glassBorder}; }
-    100% { filter:drop-shadow(0 0 0px rgba(176, 58, 66,0)); stroke:${COLORS.glassBorder}; }
-  }
-  @keyframes itg-how-pulse-icon {
-    0%   { color:${COLORS.teal}; transform:scale(1.08); }
-    22%  { color:${COLORS.teal}; transform:scale(1.08); }
-    55%  { color:${COLORS.navy}; transform:scale(1); }
-    100% { color:${COLORS.navy}; transform:scale(1); }
-  }
+    animation-timing-function:ease-in-out; animation-iteration-count:infinite; }
+  ${NODE_KEYFRAMES}
   @media (prefers-reduced-motion: reduce) {
-    .itg-how-node-glass, .itg-how-icon { animation:none; }
+    /* !important because the per-node animation-name is set inline. */
+    .itg-how-node-glass, .itg-how-icon { animation:none !important; }
     .itg-how-particle { display:none; }
   }
 `;
@@ -158,8 +177,9 @@ export default function HowItWorks() {
             return (
               <g key={n.id}>
                 <circle cx={V.x} cy={y} r="32" className="itg-how-node-glass" filter="url(#itg-how-soft-shadow)"
-                  style={{ animationDuration: `${DURATION}s`, animationDelay: delay }} />
-                <g className="itg-how-icon" style={{ animationDuration: `${DURATION}s`, animationDelay: delay }}
+                  style={{ animationName: `itg-how-glass-${i}`, animationDuration: `${DURATION}s`, animationDelay: delay }} />
+                <g className="itg-how-icon"
+                  style={{ animationName: `itg-how-icon-${i}`, animationDuration: `${DURATION}s`, animationDelay: delay }}
                   transform={`translate(${V.x - 11}, ${y - 11})`}>
                   <Icon type={n.icon} size={22} />
                 </g>
@@ -188,14 +208,15 @@ export default function HowItWorks() {
           <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.04;0.92;0.98;1" dur={`${DURATION}s`} repeatCount="indefinite" />
         </circle>
 
-        {NODES.map((n) => {
+        {NODES.map((n, i) => {
           const delay = `${-(n.fraction * DURATION).toFixed(3)}s`;
           return (
             <g key={n.id}>
               <text x={n.x} y={NODE_Y - 68} className="itg-how-step" textAnchor="middle">{n.step}</text>
               <circle cx={n.x} cy={NODE_Y} r="46" className="itg-how-node-glass" filter="url(#itg-how-soft-shadow)"
-                style={{ animationDuration: `${DURATION}s`, animationDelay: delay }} />
-              <g className="itg-how-icon" style={{ animationDuration: `${DURATION}s`, animationDelay: delay }}
+                style={{ animationName: `itg-how-glass-${i}`, animationDuration: `${DURATION}s`, animationDelay: delay }} />
+              <g className="itg-how-icon"
+                style={{ animationName: `itg-how-icon-${i}`, animationDuration: `${DURATION}s`, animationDelay: delay }}
                 transform={`translate(${n.x - 12}, ${NODE_Y - 12})`}>
                 <Icon type={n.icon} />
               </g>
