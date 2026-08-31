@@ -116,7 +116,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="mt-10 lg:mt-12 pt-6 lg:pt-8 border-t border-white/20 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs lg:text-sm text-white/75">
-            © {new Date().getFullYear()} ITG Technologies .Co . All rights reserved.
+            © {new Date().getFullYear()} ITG Technologies Co. All rights reserved.
           </p>
           <div className="flex items-center gap-4 lg:gap-6">
             <a
