@@ -8,7 +8,7 @@
   .tier1-site{
     --navy:#0D2140; --navy-mid:#1A3A6B; --sky:#D0E2F4; --ice:#EAF0F8;
     --white:#FFFFFF; --charcoal:#4A5568; --light-text:#718096;
-    --brand-accent:#3D6FB4; --brand-accent-soft:#A8C6EA; --cyan:var(--brand-accent); --clay:#B03A42; --clay-deep:#8B2A32; --teal:var(--clay); --border:rgba(13,33,64,0.1);
+    --brand-accent:#3D6FB4; --brand-accent-soft:#A8C6EA; --cyan:var(--brand-accent); --teal:#0D9488; --teal-deep:#0F766E; --border:rgba(13,33,64,0.1);
   }
   /* Scrolling is smoothed by Lenis (see Tier1Route); CSS smooth scroll on
      top of it makes anchor jumps fight the inertia. */
@@ -106,7 +106,7 @@
   }
 
   .tier1-site .section-head{text-align:center;max-width:640px;margin:0 auto 56px;}
-  .tier1-site .section-head .kicker{display:inline-block;color:#8B2A32;background:rgba(176, 58, 66,0.1);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:14px;}
+  .tier1-site .section-head .kicker{display:inline-block;color:#0F766E;background:rgba(13, 148, 136,0.1);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:14px;}
   .tier1-site .section-head h2{font-size:30px;font-weight:700;letter-spacing:-0.01em;margin-bottom:12px;}
   .tier1-site .section-head h2 span{color:var(--cyan);}
   .tier1-site .section-head p{font-size:15px;color:var(--charcoal);line-height:1.6;}

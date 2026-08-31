@@ -287,7 +287,7 @@
 .tier1-site .pp-tick {
   width: 20px; height: 20px; border-radius: 6px; margin-top: 1px;
   display: grid; place-items: center; color: var(--teal);
-  background: rgba(176, 58, 66,0.10); border: 1px solid rgba(176, 58, 66,0.22);
+  background: rgba(13, 148, 136,0.10); border: 1px solid rgba(13, 148, 136,0.22);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -618,7 +618,7 @@
   transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease, border-color .3s ease;
 }
 .tier1-site .pp-ind-col--left .pp-ind-item { text-align: right; }
-.tier1-site .pp-ind-item:hover { border-color: rgba(176, 58, 66,0.4); box-shadow: 0 12px 28px rgba(13,33,64,0.09); }
+.tier1-site .pp-ind-item:hover { border-color: rgba(13, 148, 136,0.4); box-shadow: 0 12px 28px rgba(13,33,64,0.09); }
 .tier1-site .pp-ind-col--left .pp-ind-item:hover { transform: translateX(-4px); }
 .tier1-site .pp-ind-col--right .pp-ind-item:hover { transform: translateX(4px); }
 

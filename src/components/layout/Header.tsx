@@ -835,13 +835,13 @@ export function Header() {
           {/* Both marks are the same artwork at the same box, so stacking them and
               crossing the opacity turns the swap into a recolour rather than a cut. */}
           <a href="/" className="relative flex items-center justify-start">
-            <img src={logoOnLight} alt="ITG Innovators" className="h-12 lg:h-16 w-auto object-contain" />
+            <img src={logoOnLight} alt="ITG Innovators" className="h-11 lg:h-14 w-auto object-contain" />
             <img
               src={logoOnDark}
               alt=""
               aria-hidden="true"
               className={cn(
-                "absolute left-0 top-0 h-12 lg:h-16 w-auto object-contain",
+                "absolute left-0 top-0 h-11 lg:h-14 w-auto object-contain",
                 "drop-shadow-[0_2px_10px_rgba(3,12,28,0.45)] transition-opacity duration-300 ease-out",
                 isDarkHero ? "opacity-100" : "opacity-0",
               )}

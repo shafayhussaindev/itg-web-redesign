@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 /**
  * HowItWorks — supplied component, retuned only where integration required.
  *
- * Kept from the supplied version: one particle on a single connector via
- * native <animateMotion>, node activation synced with the negative
- * animation-delay trick (no per-frame JS, no drift), reduced-motion handling.
+ * Kept from the supplied version: one particle on a single connector and
+ * reduced-motion handling. The particle is CSS-driven (originally SMIL), so
+ * the dot and the circle lighting share one animation clock and cannot drift.
  *
  * Changed for integration (invited by the supplied file's own header):
  *   - ITG tokens from the approved Solutions page replace the #0B2545/#3E6FB0
@@ -26,14 +26,14 @@ import React, { useEffect, useState } from 'react';
 const COLORS = {
   navy: '#0D2140',
   charcoal: '#4A5568',
-  teal: '#B03A42',
+  teal: '#0D9488',
   line: '#C4D3E4',
   glassFill: 'rgba(255,255,255,0.72)',
   glassBorder: 'rgba(255,255,255,0.9)',
   shadow: 'rgba(13,33,64,0.10)',
-  glow: 'rgba(176, 58, 66,0.32)',
-  litFill: 'rgba(176, 58, 66, 0.10)',
-  particle: '#B03A42',
+  glow: 'rgba(13, 148, 136,0.32)',
+  litFill: 'rgba(13, 148, 136, 0.10)',
+  particle: '#0D9488',
 };
 
 const DURATION = 6.2;
@@ -51,31 +51,43 @@ const NODES = [
 const NODE_Y = 148;
 const PATH_ID = 'itg-how-path';
 
-/* Relay lighting: a node lights the moment the dot arrives, HOLDS until the
-   dot reaches the next node, then lets go over a long fade. Each node's hold
-   is therefore the gap to the next node's fraction (the last wraps into the
-   following cycle), which is why the keyframes are generated per node instead
-   of shared: the wrap gap is far shorter than the others. */
-const RAMP = 0.03;   /* how quickly a node lights on arrival (3% ≈ 0.19s) */
-const FADE = 0.24;   /* how slowly the previous node turns off (24% ≈ 1.5s) */
+/* Touch lighting: a circle is lit only while the travelling dot is inside
+   it. The dot moves linearly from the first node's centre to the last, so a
+   node's lit window is its centre fraction ± the circle radius as a fraction
+   of the journey (desktop: 46/540 units; the vertical layout's 32/348 lands
+   within half a percent, close enough to share). Windows are absolute cycle
+   positions, so every node runs at delay 0 on the same clock as the dot.
+   Generated per node because the ends are special: the dot STARTS inside the
+   first circle and evaporates inside the last (its own opacity ramps 0→4%
+   and fades 92→98%), so neither has a normal rim crossing. */
+const TOUCH_R = 0.085;   /* circle radius as a fraction of the dot's journey */
+const RAMP = 0.017;      /* light-up as the rim is crossed (≈ 0.1s)          */
+const FADE = 0.05;       /* turn-off once the dot has left (≈ 0.3s)          */
 
 const NODE_KEYFRAMES = NODES.map((n, i) => {
+  const c = i / (NODES.length - 1);
+  const first = i === 0;
   const last = i === NODES.length - 1;
-  const next = NODES[(i + 1) % NODES.length].fraction + (last ? 1 : 0);
-  const hold = next - n.fraction;
-  const on = (RAMP * 100).toFixed(1);
-  const holdEnd = (Math.max(hold, RAMP + 0.01) * 100).toFixed(1);
-  const fadeEnd = (Math.min(hold + FADE, 0.99) * 100).toFixed(1);
+  const rampStart = ((c - TOUCH_R) * 100).toFixed(1);
+  const litFrom = (Math.max(c - TOUCH_R + RAMP, RAMP) * 100).toFixed(1);
+  const litTo = last ? '96.0' : ((c + TOUCH_R) * 100).toFixed(1);
+  const off = last ? '100' : ((c + TOUCH_R + FADE) * 100).toFixed(1);
+  const lit = `filter:drop-shadow(0 0 16px ${COLORS.glow}); stroke:${COLORS.teal}; fill:${COLORS.litFill};`;
+  const dark = `filter:drop-shadow(0 0 0px rgba(13, 148, 136,0)); stroke:${COLORS.glassBorder}; fill:${COLORS.glassFill};`;
+  const litIcon = `color:${COLORS.teal}; transform:scale(1.12);`;
+  const darkIcon = `color:${COLORS.navy}; transform:scale(1);`;
+  const head = first ? `0%` : `0%, ${rampStart}%`;
+  const tail = last ? `${off}%` : `${off}%, 100%`;
   return `
   @keyframes itg-how-glass-${i} {
-    0%   { filter:drop-shadow(0 0 0px rgba(176,58,66,0)); stroke:${COLORS.glassBorder}; fill:${COLORS.glassFill}; }
-    ${on}%, ${holdEnd}% { filter:drop-shadow(0 0 16px ${COLORS.glow}); stroke:${COLORS.teal}; fill:${COLORS.litFill}; }
-    ${fadeEnd}%, 100% { filter:drop-shadow(0 0 0px rgba(176,58,66,0)); stroke:${COLORS.glassBorder}; fill:${COLORS.glassFill}; }
+    ${head} { ${dark} }
+    ${litFrom}%, ${litTo}% { ${lit} }
+    ${tail} { ${dark} }
   }
   @keyframes itg-how-icon-${i} {
-    0%   { color:${COLORS.navy}; transform:scale(1); }
-    ${on}%, ${holdEnd}% { color:${COLORS.teal}; transform:scale(1.12); }
-    ${fadeEnd}%, 100% { color:${COLORS.navy}; transform:scale(1); }
+    ${head} { ${darkIcon} }
+    ${litFrom}%, ${litTo}% { ${litIcon} }
+    ${tail} { ${darkIcon} }
   }`;
 }).join('\n');
 
@@ -123,7 +135,26 @@ const STYLE = `
   .itg-how-wrap { width:100%; max-width:760px; margin:0 auto; box-sizing:border-box; }
   .itg-how-svg { width:100%; height:auto; display:block; overflow:visible; }
   .itg-how-line { stroke:${COLORS.line}; stroke-width:1.25; fill:none; }
-  .itg-how-particle { fill:${COLORS.particle}; }
+  /* The dot rides the SAME CSS clock as the circle keyframes. It was a SMIL
+     motion before, and that timeline starts independently of CSS animations,
+     so the lighting could trail the dot by a constant lag. One clock, no lag.
+     Opacity stops reproduce the old fade: in by 4%, out 92→98%. */
+  .itg-how-particle { fill:${COLORS.particle};
+    animation-timing-function:linear; animation-iteration-count:infinite; }
+  @keyframes itg-how-dot-h {
+    0%   { transform:translateX(0); opacity:0; }
+    4%   { opacity:1; }
+    92%  { opacity:1; }
+    98%  { opacity:0; }
+    100% { transform:translateX(${NODES[NODES.length - 1].x - NODES[0].x}px); opacity:0; }
+  }
+  @keyframes itg-how-dot-v {
+    0%   { transform:translateY(0); opacity:0; }
+    4%   { opacity:1; }
+    92%  { opacity:1; }
+    98%  { opacity:0; }
+    100% { transform:translateY(${(NODES.length - 1) * V.gap}px); opacity:0; }
+  }
   .itg-how-step { fill:${COLORS.teal}; font-family:'Sora',sans-serif; font-size:11px;
     font-weight:700; letter-spacing:1.6px; }
   .itg-how-label { fill:${COLORS.navy}; font-family:'Sora',sans-serif; font-size:15px; font-weight:700; }
@@ -164,24 +195,24 @@ export default function HowItWorks() {
         <svg className="itg-how-svg" viewBox={`0 0 ${V.width} ${V_HEIGHT}`} xmlns="http://www.w3.org/2000/svg" role="img" aria-label={ARIA}>
           {defs}
           <path id={V_PATH_ID} d={`M${V.x},${V.firstY} L${V.x},${lastY}`} className="itg-how-line" />
-          <circle r="3" className="itg-how-particle" opacity="0">
-            <animateMotion dur={`${DURATION}s`} repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
-              <mpath href={`#${V_PATH_ID}`} />
-            </animateMotion>
-            <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.04;0.92;0.98;1" dur={`${DURATION}s`} repeatCount="indefinite" />
-          </circle>
+          <circle r="3" cx={V.x} cy={V.firstY} className="itg-how-particle" opacity="0"
+            style={{ animationName: 'itg-how-dot-v', animationDuration: `${DURATION}s` }} />
 
           {NODES.map((n, i) => {
             const y = V.firstY + i * V.gap;
-            const delay = `${-(n.fraction * DURATION).toFixed(3)}s`;
             return (
               <g key={n.id}>
                 <circle cx={V.x} cy={y} r="32" className="itg-how-node-glass" filter="url(#itg-how-soft-shadow)"
-                  style={{ animationName: `itg-how-glass-${i}`, animationDuration: `${DURATION}s`, animationDelay: delay }} />
-                <g className="itg-how-icon"
-                  style={{ animationName: `itg-how-icon-${i}`, animationDuration: `${DURATION}s`, animationDelay: delay }}
-                  transform={`translate(${V.x - 11}, ${y - 11})`}>
-                  <Icon type={n.icon} size={22} />
+                  style={{ animationName: `itg-how-glass-${i}`, animationDuration: `${DURATION}s` }} />
+                {/* The translate lives on its own wrapper: the lighting
+                    animation sets `transform`, and a CSS transform replaces
+                    the transform ATTRIBUTE outright — with both on one group
+                    every icon collapsed to the SVG origin. */}
+                <g transform={`translate(${V.x - 11}, ${y - 11})`}>
+                  <g className="itg-how-icon"
+                    style={{ animationName: `itg-how-icon-${i}`, animationDuration: `${DURATION}s` }}>
+                    <Icon type={n.icon} size={22} />
+                  </g>
                 </g>
                 <text x={V.x + 56} y={y - 12} className="itg-how-step">{n.step}</text>
                 <text x={V.x + 56} y={y + 6} className="itg-how-label">{n.label}</text>
@@ -201,24 +232,20 @@ export default function HowItWorks() {
       <svg className="itg-how-svg" viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label={ARIA}>
         {defs}
         <path id={PATH_ID} d={`M${NODES[0].x},${NODE_Y} L${NODES[NODES.length - 1].x},${NODE_Y}`} className="itg-how-line" />
-        <circle r="3" className="itg-how-particle" opacity="0">
-          <animateMotion dur={`${DURATION}s`} repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
-            <mpath href={`#${PATH_ID}`} />
-          </animateMotion>
-          <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.04;0.92;0.98;1" dur={`${DURATION}s`} repeatCount="indefinite" />
-        </circle>
+        <circle r="3" cx={NODES[0].x} cy={NODE_Y} className="itg-how-particle" opacity="0"
+          style={{ animationName: 'itg-how-dot-h', animationDuration: `${DURATION}s` }} />
 
         {NODES.map((n, i) => {
-          const delay = `${-(n.fraction * DURATION).toFixed(3)}s`;
           return (
             <g key={n.id}>
               <text x={n.x} y={NODE_Y - 68} className="itg-how-step" textAnchor="middle">{n.step}</text>
               <circle cx={n.x} cy={NODE_Y} r="46" className="itg-how-node-glass" filter="url(#itg-how-soft-shadow)"
-                style={{ animationName: `itg-how-glass-${i}`, animationDuration: `${DURATION}s`, animationDelay: delay }} />
-              <g className="itg-how-icon"
-                style={{ animationName: `itg-how-icon-${i}`, animationDuration: `${DURATION}s`, animationDelay: delay }}
-                transform={`translate(${n.x - 12}, ${NODE_Y - 12})`}>
-                <Icon type={n.icon} />
+                style={{ animationName: `itg-how-glass-${i}`, animationDuration: `${DURATION}s` }} />
+              <g transform={`translate(${n.x - 12}, ${NODE_Y - 12})`}>
+                <g className="itg-how-icon"
+                  style={{ animationName: `itg-how-icon-${i}`, animationDuration: `${DURATION}s` }}>
+                  <Icon type={n.icon} />
+                </g>
               </g>
               <text x={n.x} y={NODE_Y + 76} className="itg-how-label" textAnchor="middle">{n.label}</text>
               <text x={n.x} y={NODE_Y + 96} className="itg-how-sub" textAnchor="middle">

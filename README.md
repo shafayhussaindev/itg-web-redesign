@@ -57,5 +57,5 @@ scope in `src/tier1/styles/index.css`:
 - **Navy** `#0D2140` — all filled actions (`--btn-navy`)
 - **Accent blue** `#3D6FB4`, lightened to `#A8C6EA` on dark surfaces — headings,
   rules and diagram marks
-- **Clay red** `#B03A42` — icon tiles, checkmarks and bullets
+- **Teal** `#0D9488` (deep `#0F766E`, `#8FE3D9` on dark surfaces) — icon tiles, checkmarks and bullets
 - Brand red `#E5001E` is reserved for the logo and never used in UI

@@ -39,7 +39,7 @@ export default function Navbar() {
           ))}
         </div>
         <div className="navright">
-          <span className="navicon" aria-hidden="true">&#8B2A32;</span>
+          <span className="navicon" aria-hidden="true">&#0F766E;</span>
           <span className="navicon" aria-hidden="true">&#9728;</span>
           <Link className="navcta" to="/company">{nav.cta}</Link>
         </div>

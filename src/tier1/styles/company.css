@@ -36,8 +36,8 @@
 
 .tier1-site .co-kicker {
   display: inline-block;
-  color: #8B2A32;
-  background: rgba(176, 58, 66, 0.1);
+  color: #0F766E;
+  background: rgba(13, 148, 136, 0.1);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -260,8 +260,8 @@
   height: 40px;
   border-radius: 12px;
   margin-bottom: 14px;
-  background: rgba(176, 58, 66, 0.1);
-  border: 1px solid rgba(176, 58, 66, 0.22);
+  background: rgba(13, 148, 136, 0.1);
+  border: 1px solid rgba(13, 148, 136, 0.22);
   color: var(--teal);
 }
 .tier1-site .co-pillar h4 {
@@ -388,13 +388,19 @@
    running hundreds of pixels past the last mark and out through the next
    section's heading. A percentage height resolves against `.co-story-track`,
    which is the positioned ancestor, so the rail tracks the list at any length.
-   `preserveAspectRatio="none"` then maps the 400-unit line onto it. */
+   `preserveAspectRatio="none"` then maps the 400-unit line onto it.
+
+   Geometry pins the rail to the dots on both axes. Horizontal: the dots
+   centre 17.5px from the track's left edge (list padding + dot offset), so
+   the 8px-wide spine sits at 13.5px, putting its x=4 centreline through them. Vertical: the first dot's
+   centre lands at title + list offset = 82px, and the track's height ends at
+   the last dot's centre, so the rail spans exactly first dot -> last dot. */
 .tier1-site .co-story-spine {
   position: absolute;
-  left: 11px;
-  top: 46px;
+  left: 13.5px;
+  top: 82px;
   width: 8px;
-  height: calc(100% - 58px);
+  height: calc(100% - 82px);
   overflow: visible;
 }
 .tier1-site .co-story-rail {
@@ -520,8 +526,8 @@
   height: 40px;
   flex-shrink: 0;
   border-radius: 12px;
-  background: rgba(176, 58, 66, 0.1);
-  border: 1px solid rgba(176, 58, 66, 0.22);
+  background: rgba(13, 148, 136, 0.1);
+  border: 1px solid rgba(13, 148, 136, 0.22);
   color: var(--teal);
 }
 .tier1-site .co-mod-item-body h3 {
@@ -707,8 +713,8 @@
   height: 40px;
   border-radius: 12px;
   margin-bottom: 16px;
-  background: rgba(176, 58, 66, 0.1);
-  border: 1px solid rgba(176, 58, 66, 0.22);
+  background: rgba(13, 148, 136, 0.1);
+  border: 1px solid rgba(13, 148, 136, 0.22);
   color: var(--teal);
 }
 .tier1-site .co-news-card h3 {

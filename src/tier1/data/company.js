@@ -19,7 +19,7 @@ export const companyHero = {
     'ITG is a global technology company focused on designing and delivering enterprise platforms that support scale, governance, and long-term impact.',
     'We work with organizations operating in complex, regulated, and multi-entity environments, helping them navigate transformation through structured systems, disciplined engineering, and responsible innovation.',
   ],
-  image: '/assets/company/itg-building.jpg',
+  image: '/assets/company/closed_grey_roller_blind.jpg',
 };
 
 /* ---------------------------------------------------------------

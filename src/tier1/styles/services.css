@@ -435,8 +435,8 @@
   height: 46px;
   flex-shrink: 0;
   border-radius: 13px;
-  background: rgba(176, 58, 66, 0.1);
-  border: 1px solid rgba(176, 58, 66, 0.22);
+  background: rgba(13, 148, 136, 0.1);
+  border: 1px solid rgba(13, 148, 136, 0.22);
   color: var(--teal);
 }
 .tier1-site .svc-pillar-head h3 {

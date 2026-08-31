@@ -6,7 +6,7 @@
 
 /* ITG Technologies Brand System — v2.0 (Locked)
    Light-first · 8-color palette (hard cap)
-   Navy owns all actions · Clay red (#B03A42) is visual-only
+   Navy owns all actions · Teal (#0D9488) is visual-only
    Brand Red (#E5001E) is logo-only — never in UI.
 */
 
@@ -26,12 +26,11 @@
     --brand-accent:      #3D6FB4;  /* accent on light surfaces and as a solid mark */
     --brand-accent-soft: #A8C6EA;  /* the same accent, lightened for dark surfaces */
     --cyan:        var(--brand-accent);
-    /* Supporting accent for icon tiles, ticks and diagram marks. Muted on
-       purpose: it must never be mistaken for the logo's bright brand red.
-       --teal is kept as an alias because the tier-1 stylesheets name it. */
-    --clay:       #B03A42;   /* supporting accent — non-interactive only */
-    --clay-deep:  #8B2A32;   /* small label text, where contrast matters */
-    --teal:       var(--clay);
+    /* Supporting accent for icon tiles, ticks and diagram marks. A deep
+       teal rather than the original #00B8A9, which only managed ~2.2:1
+       against white; these hold up as small text and thin strokes. */
+    --teal:       #0D9488;   /* supporting accent — non-interactive only */
+    --teal-deep:  #0F766E;   /* small label text, where contrast matters */
     --brand-red:  #E5001E;   /* logo only — never in UI */
 
     /* ── Primary action face ─────────────────────────────────────

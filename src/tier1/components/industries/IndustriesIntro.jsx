@@ -51,8 +51,8 @@ function IntroLattice() {
           <stop offset="100%" stopColor="#0D2140" stopOpacity="0.34" />
         </linearGradient>
         <linearGradient id="indIntroOut" gradientUnits="userSpaceOnUse" x1="720" y1="0" x2="1320" y2="0">
-          <stop offset="0%" stopColor="#B03A42" stopOpacity="0.4" />
-          <stop offset="100%" stopColor="#B03A42" stopOpacity="0" />
+          <stop offset="0%" stopColor="#0D9488" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#0D9488" stopOpacity="0" />
         </linearGradient>
       </defs>
 
@@ -74,7 +74,7 @@ function IntroLattice() {
         <circle cx="120" cy="310" r="4" />
         <circle cx="120" cy="500" r="4" />
       </g>
-      <g fill="#B03A42" opacity="0.42">
+      <g fill="#0D9488" opacity="0.42">
         <circle cx="1320" cy="130" r="4" />
         <circle cx="1320" cy="310" r="4" />
         <circle cx="1320" cy="490" r="4" />
