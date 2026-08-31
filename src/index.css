@@ -360,6 +360,133 @@
   }
   .btn-modern-ghost:active { transform: translateY(0); }
 
+  /* ── Contact roll ───────────────────────────────────────────
+     The pill itself is static; only its CONTENT rolls. The shell keeps the
+     btn-modern face and clips a small 3D core inside it: two "Contact us"
+     faces form a prism (depth = half the 46px inner height), so hover turns
+     the core -90° on X — the label rolls down out of view while its twin
+     rolls in from the top, inside the fixed capsule. */
+  .contact-cube {
+    position: relative;
+    overflow: hidden;
+    perspective: 600px;
+    padding: 0;
+    align-items: stretch;
+  }
+  /* Pin the shell: no hover lift, no background shift — it must not move. */
+  .contact-cube,
+  .contact-cube:hover,
+  .contact-cube:active {
+    transform: none;
+    background: var(--btn-navy);
+    border-color: var(--btn-navy-rim);
+    box-shadow: var(--btn-navy-shadow);
+  }
+  .contact-cube-core {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .contact-cube:hover .contact-cube-core,
+  .contact-cube:focus-within .contact-cube-core {
+    transform: rotateX(-90deg);
+  }
+  .contact-cube-front {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 30px;
+    color: inherit;
+    transform: translateZ(23px);
+    backface-visibility: hidden;
+  }
+  .contact-cube-top {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotateX(90deg) translateZ(23px);
+    backface-visibility: hidden;
+  }
+
+  /* ── Contact fold ───────────────────────────────────────────
+     A letter unfolding under the pill: three paper panels, each hinged on
+     its TOP edge (transform-origin 50% 0, rotateX(-90deg) when folded) and
+     nested inside the one above, so every panel physically hangs off its
+     parent's bottom edge and only unfolds once the parent has. Delays run
+     outer→inner on open and inner→outer on close, like real paper. */
+  .contact-fold {
+    position: absolute;
+    top: calc(100% - 10px);    /* hinge tucked 6px behind the pill's bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 186px;
+    padding-top: 4px;
+    perspective: 900px;
+    visibility: hidden;
+    transition: visibility 0s 0.6s;
+    z-index: 0;                /* the paper lives BEHIND the pill */
+  }
+  .contact-cube { z-index: 1; }
+  .contact-wrap:hover .contact-fold,
+  .contact-wrap:focus-within .contact-fold {
+    visibility: visible;
+    transition-delay: 0s;
+  }
+  .contact-fold-sec {
+    transform-origin: 50% 0;
+    transform: rotateX(-90deg);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;  /* folded-back paper is never seen */
+    will-change: transform;
+    transition: transform 0.3s cubic-bezier(0.5, 0.05, 0.7, 0.3);
+  }
+  /* closing: innermost folds first, each starting as its child is half-way */
+  .contact-fold > .contact-fold-sec { transition-delay: 0.2s; }
+  .contact-fold-sec .contact-fold-sec { transition-delay: 0.1s; }
+  .contact-fold-sec .contact-fold-sec .contact-fold-sec { transition-delay: 0s; }
+  /* opening: outermost unfolds first; the next joins before it settles so
+     the motion reads as one continuous unroll rather than three steps */
+  .contact-wrap:hover .contact-fold-sec,
+  .contact-wrap:focus-within .contact-fold-sec {
+    transform: rotateX(0deg);
+    transition: transform 0.45s cubic-bezier(0.23, 0.9, 0.35, 1);
+  }
+  .contact-wrap:hover .contact-fold > .contact-fold-sec,
+  .contact-wrap:focus-within .contact-fold > .contact-fold-sec { transition-delay: 0s; }
+  .contact-wrap:hover .contact-fold-sec .contact-fold-sec,
+  .contact-wrap:focus-within .contact-fold-sec .contact-fold-sec { transition-delay: 0.15s; }
+  .contact-wrap:hover .contact-fold-sec .contact-fold-sec .contact-fold-sec,
+  .contact-wrap:focus-within .contact-fold-sec .contact-fold-sec .contact-fold-sec { transition-delay: 0.3s; }
+  .contact-fold-face {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--navy);
+    /* white paper with a crease shadow along the top of each panel */
+    background:
+      linear-gradient(180deg, rgba(13, 33, 64, 0.08) 0%, rgba(13, 33, 64, 0) 34%),
+      #ffffff;
+    border: 1px solid rgba(13, 33, 64, 0.12);
+    box-shadow: 0 14px 28px -16px rgba(13, 33, 64, 0.4);
+    backface-visibility: hidden;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .contact-fold-face:hover { color: var(--navy-mid); background-color: #F4F8FC; }
+  .contact-fold > .contact-fold-sec > .contact-fold-face { border-radius: 12px 12px 0 0; }
+  .contact-fold-sec .contact-fold-sec .contact-fold-sec > .contact-fold-face {
+    border-radius: 0 0 12px 12px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-cube-core { transition: none; }
+    .contact-fold, .contact-fold-sec { transition: none; }
+  }
+
   /* Navy — secondary primary actions */
   .btn-navy {
     @apply inline-flex items-center justify-center gap-2 font-semibold text-[13px] text-white;

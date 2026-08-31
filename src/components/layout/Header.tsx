@@ -18,6 +18,7 @@ import logoOnDark from "@/assets/logo-trimmed-white.png";
 import logoOnLight from "@/assets/logo-trimmed.png";
 import { CommandPalette } from "@/components/CommandPalette";
 import { NavSearch } from "@/components/layout/NavSearch";
+import { ContactRoll } from "@/components/layout/ContactRoll";
 
 type MenuItem = {
   title: string;
@@ -935,9 +936,7 @@ export function Header() {
             </button>
             */}
 
-            <a href="#contact" className="btn-modern hidden md:inline-flex h-12">
-              Contact us
-            </a>
+            <ContactRoll />
 
             <button
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
