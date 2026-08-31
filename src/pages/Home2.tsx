@@ -289,6 +289,8 @@ const Home2 = () => {
                             <img
                                 src={technologyEcosystem}
                                 alt="ITG Technology Ecosystem"
+                                loading="lazy"
+                                decoding="async"
                                 className="w-full h-auto"
                             />
                         </div>

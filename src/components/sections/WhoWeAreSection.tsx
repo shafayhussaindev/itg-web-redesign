@@ -5,12 +5,16 @@ export function WhoWeAreSection() {
 
   return (
     <section id="company" className="section-padding relative overflow-hidden">
-      {/* <video
+      {/* Disabled by design. If re-enabled, keep preload="none" + the poster:
+          this section is below the fold and must not fetch video up front.
+      <video
         className="absolute inset-0 w-full h-full object-cover"
         autoPlay
         muted
         loop
         playsInline
+        preload="none"
+        poster="/whoWeAre-poster.jpg"
       >
         <source src="/whoWeAre-bg.mp4" type="video/mp4" />
       </video> */}

@@ -29,7 +29,7 @@ export function HowWeWorkSection() {
 
   return (
     <section className="section-padding bg-surface-subtle relative overflow-hidden">
-      <div className="absolute inset-0 hidden dark:block bg-[url('/bg-last-section.png')] bg-cover bg-center bg-no-repeat opacity-25 pointer-events-none" />
+      <div className="absolute inset-0 hidden dark:block bg-[url('/bg-last-section.webp')] bg-cover bg-center bg-no-repeat opacity-25 pointer-events-none" />
       <div className="absolute inset-0 hidden dark:block bg-background/70 pointer-events-none" />
       <div className="section-container">
         {/* Header */}

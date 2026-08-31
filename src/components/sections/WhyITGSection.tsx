@@ -25,7 +25,7 @@ export function WhyITGSection() {
 
   return (
     <section className="section-padding bg-surface-subtle relative overflow-hidden">
-      <div className="absolute inset-0 bg-[url('/Background_Why_ITG.png')] bg-cover bg-center bg-no-repeat opacity-20 pointer-events-none" />
+      <div className="absolute inset-0 bg-[url('/Background_Why_ITG.webp')] bg-cover bg-center bg-no-repeat opacity-20 pointer-events-none" />
       <div className="absolute inset-0 bg-background/80 pointer-events-none " />
       <div ref={sectionRef} className="section-container">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-start">

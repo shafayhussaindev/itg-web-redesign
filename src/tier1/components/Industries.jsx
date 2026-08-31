@@ -43,7 +43,7 @@ export default function Industries() {
             onFocus={() => setOpenId(ind.id)}
             onBlur={() => setOpenId((cur) => (cur === ind.id ? null : cur))}
           >
-            <img src={ind.image} alt={ind.title} />
+            <img src={ind.image} alt={ind.title} loading="lazy" decoding="async" />
             <div className="ind-scrim" />
             <div className="ind-body">
               <div className="ind-title">{ind.title}</div>

@@ -75,11 +75,12 @@ export function HeroSection() {
         muted
         loop
         playsInline
-        preload="auto"
-        poster="/background-image.png"
+        preload="metadata"
+        poster="/hero-poster.jpg"
         aria-hidden="true"
       >
-        {/* Optimized H.264: audio stripped, CRF 28, +faststart for progressive playback (~8MB). */}
+        {/* Optimized H.264: audio stripped, CRF 31 @1600w, +faststart (~3.7MB).
+            The poster paints the LCP instantly while the video streams in. */}
         <source src="/hero.mp4" type="video/mp4" />
       </video>
 
