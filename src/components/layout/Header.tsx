@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
-import { ChevronDown, ChevronRight, Menu, Moon, Sun, X, Search, ArrowRight } from "lucide-react";
+import { ChevronDown, ChevronRight, Menu, Moon, Sun, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -16,9 +16,6 @@ import { cn } from "@/lib/utils";
 // identical outline and box — swapping them reads as a recolour, not a resize.
 import logoOnDark from "@/assets/logo-trimmed-white.png";
 import logoOnLight from "@/assets/logo-trimmed.png";
-import { CommandPalette } from "@/components/CommandPalette";
-import { NavSearch } from "@/components/layout/NavSearch";
-import { ContactRoll } from "@/components/layout/ContactRoll";
 
 type MenuItem = {
   title: string;
@@ -561,11 +558,7 @@ function MegaMenu({
   categoriesAreLinks = false,
 }: MegaMenuProps) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [anchorTop, setAnchorTop] = useState(0);
-  const [offset, setOffset] = useState(0);
 
-  const listRef = useRef<HTMLDivElement>(null);
-  const panelRef = useRef<HTMLDivElement>(null);
   const switchTimer = useRef<number>();
   const pointerInPanel = useRef(false);
   const lastPointerX = useRef<number | null>(null);
@@ -573,28 +566,13 @@ function MegaMenu({
 
   const active = items[activeIndex];
 
-  // Keep the flyout inside the dropdown: line it up with its row, then pull it
-  // back up by however much it would otherwise hang past the bottom of the list.
-  useLayoutEffect(() => {
-    if (!listRef.current || !panelRef.current) return;
-    const listHeight = listRef.current.offsetHeight;
-    const panelHeight = panelRef.current.offsetHeight;
-    setOffset(Math.max(0, Math.min(anchorTop, listHeight - panelHeight)));
-  }, [activeIndex, anchorTop]);
-
   useEffect(() => () => window.clearTimeout(switchTimer.current), []);
 
   const openFor = useCallback(
-    (index: number, element: HTMLElement, immediate: boolean) => {
+    (index: number, immediate: boolean) => {
       window.clearTimeout(switchTimer.current);
       if (pointerInPanel.current) return;
-      const top = listRef.current
-        ? element.getBoundingClientRect().top - listRef.current.getBoundingClientRect().top
-        : 0;
-      const apply = () => {
-        setAnchorTop(top);
-        setActiveIndex(index);
-      };
+      const apply = () => setActiveIndex(index);
       // Keyboard focus lands instantly. A pointer waits out a brush-past, and
       // waits considerably longer when it is travelling towards the flyout —
       // that run crosses the second category column on the wider menus.
@@ -653,8 +631,8 @@ function MegaMenu({
             <a
               href={item.href}
               className={rowClass(index)}
-              onMouseEnter={(event) => openFor(index, event.currentTarget, false)}
-              onFocus={(event) => openFor(index, event.currentTarget, true)}
+              onMouseEnter={() => openFor(index, false)}
+              onFocus={() => openFor(index, true)}
             >
               {body}
             </a>
@@ -663,8 +641,8 @@ function MegaMenu({
           <button
             type="button"
             className={rowClass(index)}
-            onMouseEnter={(event) => openFor(index, event.currentTarget, false)}
-            onFocus={(event) => openFor(index, event.currentTarget, true)}
+            onMouseEnter={() => openFor(index, false)}
+            onFocus={() => openFor(index, true)}
           >
             {body}
           </button>
@@ -677,7 +655,7 @@ function MegaMenu({
 
   return (
     <div className="flex w-max" onMouseMove={trackPointerDirection} onMouseLeave={releaseHoverGuards}>
-      <div ref={listRef} className={cn("shrink-0 border-r border-border p-4 flex gap-3", categoryWidth)}>
+      <div className={cn("shrink-0 border-r border-border p-4 flex gap-3", categoryWidth)}>
         <ul className="flex-1 space-y-1">{items.slice(0, splitAt).map((item, index) => renderRow(item, index))}</ul>
         {twoColumnCategories && (
           <ul className="flex-1 space-y-1">
@@ -697,11 +675,9 @@ function MegaMenu({
           pointerInPanel.current = false;
         }}
       >
-        <div
-          ref={panelRef}
-          className={cn(panelWidth, "p-4 transition-transform duration-200 ease-out")}
-          style={{ transform: `translateY(${offset}px)` }}
-        >
+        {/* Pinned to the top of the dropdown: the tier-3 list always starts
+            level with the first category, whichever row is hovered. */}
+        <div className={cn(panelWidth, "p-4")}>
           {active && (
             <>
               <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
@@ -749,7 +725,6 @@ export function Header() {
   const [darkHeroDepth, setDarkHeroDepth] = useState(0);
   const isScrolled = scrollY > 20;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [openMobileSections, setOpenMobileSections] = useState<Record<string, boolean>>({});
   const [openMobileProducts, setOpenMobileProducts] = useState<Record<string, boolean>>({});
   const [openMobileSolutions, setOpenMobileSolutions] = useState<Record<string, boolean>>({});
@@ -822,7 +797,6 @@ export function Header() {
 
   return (
     <>
-      <CommandPalette open={commandPaletteOpen} onOpenChange={setCommandPaletteOpen} />
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
@@ -923,7 +897,6 @@ export function Header() {
           </NavigationMenu>
 
           <div className="flex items-center justify-end gap-2 lg:gap-3">
-            <NavSearch onOpen={() => setCommandPaletteOpen(true)} onDark={isDarkHero} />
 
             {/* Theme toggle hidden — brand system v2.0 is light-only.
                 Kept commented so the dark-mode feature can be re-enabled later.
@@ -936,7 +909,9 @@ export function Header() {
             </button>
             */}
 
-            <ContactRoll />
+            <a href="/contact" className="btn-modern hidden md:inline-flex h-12">
+              Contact us
+            </a>
 
             <button
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}

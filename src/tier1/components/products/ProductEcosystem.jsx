@@ -22,6 +22,11 @@ const COLORS = {
   navyMid: '#1A3A6B',
   charcoal: '#4A5568',
   accent: '#3D6FB4',
+  /* Teal accent for the hover glow — the site's cyan was retired, and this is
+     the colour that replaced it across icons, ticks and diagram marks. */
+  glow: '#0D9488',
+  glowAccent: 'rgba(13,148,136,0.45)',
+  glowAccentSoft: 'rgba(13,148,136,0.22)',
   sky: '#D0E2F4',
   line: '#C4D3E4',
   glassFill: 'rgba(255,255,255,0.74)',
@@ -36,7 +41,7 @@ const NODES = [
     label: 'Enterprise Business\nPlatforms',
     x: 400, y: 140,
     lineStart: { x: 400, y: 314 }, lineEnd: { x: 400, y: 194 },
-    labelAnchor: { x: 400, y: 66, align: 'middle' },
+    labelAnchor: { x: 400, y: 54, align: 'middle' },
     icon: 'layers',
   },
   {
@@ -44,7 +49,7 @@ const NODES = [
     label: 'Sustainability and\nCompliance',
     x: 647, y: 320,
     lineStart: { x: 481.8, y: 373.4 }, lineEnd: { x: 595.6, y: 336.7 },
-    labelAnchor: { x: 706, y: 300, align: 'start' },
+    labelAnchor: { x: 712, y: 313, align: 'start' },
     icon: 'leaf',
   },
   {
@@ -52,23 +57,23 @@ const NODES = [
     label: 'Asset Operations and\nAutomation',
     x: 553, y: 610,
     lineStart: { x: 450.6, y: 469.5 }, lineEnd: { x: 521.2, y: 566.4 },
-    labelAnchor: { x: 610, y: 668, align: 'start' },
-    icon: 'gear',
+    labelAnchor: { x: 553, y: 690, align: 'middle' },
+    icon: 'cog',
   },
   {
     id: 'ai',
     label: 'AI and\nIntelligence',
     x: 247, y: 610,
     lineStart: { x: 349.4, y: 469.5 }, lineEnd: { x: 278.8, y: 566.4 },
-    labelAnchor: { x: 190, y: 668, align: 'end' },
-    icon: 'spark',
+    labelAnchor: { x: 247, y: 690, align: 'middle' },
+    icon: 'chip',
   },
   {
     id: 'de',
     label: 'Digital\nExperience',
     x: 153, y: 320,
     lineStart: { x: 318.2, y: 373.4 }, lineEnd: { x: 204.4, y: 336.7 },
-    labelAnchor: { x: 94, y: 300, align: 'end' },
+    labelAnchor: { x: 88, y: 313, align: 'end' },
     icon: 'screen',
   },
 ];
@@ -92,10 +97,23 @@ function Icon({ type, size = 22 }) {
       return (<svg {...common}><path d="M12 3 3 8l9 5 9-5-9-5Z" /><path d="M3 12l9 5 9-5" /><path d="M3 16l9 5 9-5" /></svg>);
     case 'leaf':
       return (<svg {...common}><path d="M20 4c-9 0-14 5-14 12 0 2.2 1.8 4 4 4 7 0 12-5 12-14V4Z" /><path d="M6 20c2-4 4-7 8-10" /></svg>);
-    case 'gear':
-      return (<svg {...common}><circle cx="12" cy="12" r="3.2" /><path d="M12 3.5v2.4M12 18.1v2.4M20.5 12h-2.4M5.9 12H3.5M17.6 6.4l-1.7 1.7M8.1 15.9l-1.7 1.7M17.6 17.6l-1.7-1.7M8.1 8.1 6.4 6.4" /></svg>);
-    case 'spark':
-      return (<svg {...common}><path d="M12 3v4M12 17v4M3 12h4M17 12h4" /><circle cx="12" cy="12" r="3" /><path d="M6.5 6.5l2 2M15.5 15.5l2 2M17.5 6.5l-2 2M8.5 15.5l-2 2" strokeWidth="1.1" /></svg>);
+    case 'cog':
+      /* Asset operations: a real cog — teeth, not spokes. */
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="3.1" />
+          <path d="M19.4 14.2a1.5 1.5 0 0 0 .3 1.65l.05.05a1.8 1.8 0 1 1-2.55 2.55l-.05-.05a1.5 1.5 0 0 0-1.65-.3 1.5 1.5 0 0 0-.9 1.37v.14a1.8 1.8 0 1 1-3.6 0v-.07a1.5 1.5 0 0 0-.98-1.37 1.5 1.5 0 0 0-1.65.3l-.05.05a1.8 1.8 0 1 1-2.55-2.55l.05-.05a1.5 1.5 0 0 0 .3-1.65 1.5 1.5 0 0 0-1.37-.9h-.14a1.8 1.8 0 1 1 0-3.6h.07a1.5 1.5 0 0 0 1.37-.98 1.5 1.5 0 0 0-.3-1.65l-.05-.05a1.8 1.8 0 1 1 2.55-2.55l.05.05a1.5 1.5 0 0 0 1.65.3h.07a1.5 1.5 0 0 0 .9-1.37v-.14a1.8 1.8 0 1 1 3.6 0v.07a1.5 1.5 0 0 0 .9 1.37 1.5 1.5 0 0 0 1.65-.3l.05-.05a1.8 1.8 0 1 1 2.55 2.55l-.05.05a1.5 1.5 0 0 0-.3 1.65v.07a1.5 1.5 0 0 0 1.37.9h.14a1.8 1.8 0 1 1 0 3.6h-.07a1.5 1.5 0 0 0-1.37.9Z" />
+        </svg>
+      );
+    case 'chip':
+      /* AI: a processor die with pins — reads as intelligence, not as a star. */
+      return (
+        <svg {...common}>
+          <rect x="8" y="8" width="8" height="8" rx="1.6" />
+          <rect x="4.5" y="4.5" width="15" height="15" rx="2.4" />
+          <path d="M9.5 4.5V2M14.5 4.5V2M9.5 22v-2.5M14.5 22v-2.5M4.5 9.5H2M4.5 14.5H2M22 9.5h-2.5M22 14.5h-2.5" />
+        </svg>
+      );
     case 'screen':
       return (<svg {...common}><rect x="3.5" y="5" width="17" height="12" rx="1.5" /><path d="M9 20.5h6M12 17v3.5" /></svg>);
     default:
@@ -226,8 +244,18 @@ const STYLE = `
   .itg-eco-node-group:hover .itg-eco-icon,
   .itg-eco-node-group:focus-visible .itg-eco-icon { opacity:1; }
   .itg-eco-node-group:focus-visible { outline:2px solid ${COLORS.accent}; outline-offset:3px; border-radius:8px; }
-  .itg-eco-node-label { fill:${COLORS.navy}; font-family:'Sora',sans-serif;
-    font-size:13px; font-weight:600; }
+  .itg-eco-node-label { fill:${COLORS.navyMid}; font-family:'Sora',sans-serif;
+    font-size:13px; font-weight:600;
+    transform-box:fill-box; transform-origin:center;
+    transition:transform .3s cubic-bezier(.2,.8,.2,1), fill .3s ease, filter .3s ease; }
+  /* Hovering the circle lifts its label: a touch larger, full navy, and lit
+     from behind by the accent. */
+  .itg-eco-node-group:hover .itg-eco-node-label,
+  .itg-eco-node-group:focus-visible .itg-eco-node-label {
+    transform:scale(1.09);
+    fill:${COLORS.navy};
+    filter:drop-shadow(0 0 9px ${COLORS.glowAccent}) drop-shadow(0 0 18px ${COLORS.glowAccentSoft});
+  }
 
   @media (prefers-reduced-motion: reduce) {
     .itg-eco-core-breathe, .itg-eco-orbit, .itg-eco-float, .itg-eco-act,
@@ -252,6 +280,11 @@ export default function ProductEcosystem() {
       <radialGradient id="itg-eco-node-glow" cx="50%" cy="50%" r="50%">
         <stop offset="0%" stopColor={COLORS.sky} stopOpacity="0.55" />
         <stop offset="100%" stopColor={COLORS.sky} stopOpacity="0" />
+      </radialGradient>
+      <radialGradient id="itg-eco-node-hoverglow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stopColor={COLORS.glow} stopOpacity="0.34" />
+        <stop offset="55%" stopColor={COLORS.glow} stopOpacity="0.13" />
+        <stop offset="100%" stopColor={COLORS.glow} stopOpacity="0" />
       </radialGradient>
       <radialGradient id="itg-eco-node-lift" cx="50%" cy="50%" r="50%">
         <stop offset="0%" stopColor={COLORS.accent} stopOpacity="0.30" />
@@ -422,12 +455,12 @@ export default function ProductEcosystem() {
                 <g className="itg-eco-float">
                   <circle cx={n.x} cy={n.y} r="76" fill="url(#itg-eco-node-glow)" opacity="0.5" />
                   <circle className="itg-eco-node-lift" cx={n.x} cy={n.y} r="82" fill="url(#itg-eco-node-lift)" />
-                  <circle className="itg-eco-node-hoverglow" cx={n.x} cy={n.y} r="82" fill="url(#itg-eco-node-lift)" />
+                  <circle className="itg-eco-node-hoverglow" cx={n.x} cy={n.y} r="88" fill="url(#itg-eco-node-hoverglow)" />
                   <g className="itg-eco-act">
                     <circle cx={n.x} cy={n.y} r="54" className="itg-eco-node-glass" filter="url(#itg-eco-soft-shadow)" />
                     <circle cx={n.x} cy={n.y} r="55.5" className="itg-eco-node-rim" />
                   </g>
-                  <g className="itg-eco-icon" transform={`translate(${n.x - 11}, ${n.y - 22})`}>
+                  <g className="itg-eco-icon" transform={`translate(${n.x - 11}, ${n.y - 11})`}>
                     <Icon type={n.icon} />
                   </g>
                 </g>

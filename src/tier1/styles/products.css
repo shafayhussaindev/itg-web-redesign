@@ -240,6 +240,17 @@
 .tier1-site .pp-hero-body { font-size: 14.5px; line-height: 1.64; color: var(--charcoal); margin-bottom: 9px; max-width: 60ch; }
 .tier1-site .pp-hero-body:last-of-type { margin-bottom: 0; }
 .tier1-site .pp-hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 24px; }
+/* Side by side, as on the Solutions hero. These two labels are long enough
+   that the default 26/28px button gutters overran the panel by ~20px and
+   wrap dropped the second onto its own line; trimming the horizontal padding
+   here (this hero only) keeps them on one row. They still wrap on narrow
+   screens, where the panel is genuinely too tight for both. */
+.tier1-site .pp-hero-ctas .btn-cyan,
+.tier1-site .pp-hero-ctas .btn-outline-navy {
+  padding-left: 18px;
+  padding-right: 18px;
+  white-space: nowrap;
+}
 
 /* subtle lift on hover — no colour change, the palette does the talking */
 .tier1-site .pp-hero-ctas .btn-cyan {

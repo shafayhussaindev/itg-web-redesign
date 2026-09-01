@@ -21,8 +21,8 @@ const footerLinks = {
     { label: 'Events', href: '#' },
   ],
   legal: [
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
+    { label: 'Privacy Policy', href: '/privacy' },
+    { label: 'Terms and Conditions', href: '/terms' },
     { label: 'Cookie Policy', href: '#' },
   ],
 };
@@ -115,9 +115,22 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-10 lg:mt-12 pt-6 lg:pt-8 border-t border-white/20 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs lg:text-sm text-white/75">
-            © {new Date().getFullYear()} ITG Technologies Co. All rights reserved.
-          </p>
+          <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-5">
+            <p className="text-xs lg:text-sm text-white/75">
+              © {new Date().getFullYear()} ITG Technologies Co. All rights reserved.
+            </p>
+            {/* The policies sit here as well as in the Legal column: this is
+                where visitors look for them. */}
+            <nav className="flex items-center gap-3 sm:gap-4" aria-label="Legal">
+              <a href="/terms" className="text-xs lg:text-sm text-white/75 hover:text-white transition-colors duration-200">
+                Terms and Conditions
+              </a>
+              <span aria-hidden="true" className="text-white/30">·</span>
+              <a href="/privacy" className="text-xs lg:text-sm text-white/75 hover:text-white transition-colors duration-200">
+                Privacy Policy
+              </a>
+            </nav>
+          </div>
           <div className="flex items-center gap-4 lg:gap-6">
             <a
               target="_blank"

@@ -125,9 +125,9 @@
   margin: 0 auto;
 }
 .tier1-site .co-hero-glass {
-  max-width: 660px;
-  padding: 46px 46px 48px;
-  border-radius: 28px;
+  max-width: 540px;
+  padding: 38px 38px 40px;
+  border-radius: 26px;
   background: rgba(222, 238, 255, 0.15);
   backdrop-filter: blur(12px) saturate(1.2);
   -webkit-backdrop-filter: blur(12px) saturate(1.2);
@@ -151,19 +151,19 @@
 .tier1-site .co-hero-glass p:nth-of-type(1) { animation-delay: 0.46s; }
 .tier1-site .co-hero-glass p:nth-of-type(2) { animation-delay: 0.56s; }
 .tier1-site .co-hero-glass h1 {
-  font-size: 42px;
+  font-size: 37px;
   font-weight: 700;
   letter-spacing: -0.02em;
-  line-height: 1.16;
-  margin-bottom: 20px;
+  line-height: 1.18;
+  margin-bottom: 16px;
   color: #fff;
   text-shadow: 0 2px 20px rgba(6, 18, 38, 0.45);
 }
 .tier1-site .co-hero-glass p {
-  font-size: 15px;
-  line-height: 1.72;
+  font-size: 14.5px;
+  line-height: 1.68;
   color: rgba(255, 255, 255, 0.86);
-  margin: 0 0 14px;
+  margin: 0 0 12px;
   text-shadow: 0 1px 12px rgba(6, 18, 38, 0.4);
 }
 .tier1-site .co-hero-glass p:last-child { margin-bottom: 0; }
@@ -832,8 +832,8 @@
 
 @media (max-width: 1024px) {
   .tier1-site .co-hero { min-height: 680px; padding: 160px 32px 96px; }
-  .tier1-site .co-hero-glass { max-width: 620px; padding: 36px 34px 38px; }
-  .tier1-site .co-hero-glass h1 { font-size: 33px; }
+  .tier1-site .co-hero-glass { max-width: 500px; padding: 32px 30px 34px; }
+  .tier1-site .co-hero-glass h1 { font-size: 30px; }
   .tier1-site .co-hero-net { opacity: 0.45; }
   .tier1-site .co-about, .tier1-site .co-module, .tier1-site .co-news, .tier1-site .co-global, .tier1-site .co-vmv { padding: 88px 32px; }
   .tier1-site .co-story { padding: 88px 32px; }
