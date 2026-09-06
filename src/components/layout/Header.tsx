@@ -806,6 +806,7 @@ export function Header() {
   return (
     <>
       <header
+        data-chrome={isDarkHero ? "dark" : "light"}
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           isScrolled ? "py-2 lg:py-3" : "py-3 lg:py-4",
@@ -917,14 +918,14 @@ export function Header() {
             </button>
             */}
 
-            <a href="/contact" className="btn-modern hidden md:inline-flex h-11 rounded-[10px] px-6 text-[14.5px]">
+            <a href="/contact" className="btn-nav-cta hidden md:inline-flex">
               Contact us
             </a>
 
             <button
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
               className={cn(
-                "lg:hidden p-2 rounded-lg transition-all duration-200 focus-enterprise",
+                "tap-target lg:hidden p-2 rounded-lg transition-all duration-200 focus-enterprise",
                 isDarkHero
                   ? "text-white/90 hover:text-white [filter:drop-shadow(0_1px_6px_rgba(3,12,28,0.55))]"
                   : "text-muted-foreground hover:text-foreground hover:bg-accent",

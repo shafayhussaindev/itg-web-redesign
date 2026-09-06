@@ -130,13 +130,13 @@ export function HeroSection() {
               </p> */}
 
               <div ref={ctaRef} className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
-                <a href="/solutions" className="btn-modern group w-full sm:w-auto h-12">
+                <a href="/solutions" className="btn-modern group w-full sm:w-auto">
                   Explore Solutions
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
                   href="#contact"
-                  className="btn-modern-ghost w-full sm:w-auto h-12"
+                  className="btn-modern-ghost w-full sm:w-auto"
                 >
                   Talk to an Expert
                 </a>

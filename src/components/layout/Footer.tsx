@@ -135,7 +135,7 @@ export function Footer() {
             <a
               target="_blank"
               href="https://www.linkedin.com/company/itgtechnologiescompany/posts/?feedView=all"
-              className="text-white/75 hover:text-white transition-colors duration-200"
+              className="tap-target inline-flex items-center justify-center text-white/75 hover:text-white transition-colors duration-200"
               aria-label="LinkedIn"
             >
               <svg className="w-4 h-4 lg:w-5 lg:h-5" fill="currentColor" viewBox="0 0 24 24">

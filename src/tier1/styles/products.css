@@ -70,8 +70,8 @@
      composition inside one viewport rather than the hero being allowed to
      grow. Nothing here is decorative slack. */
   padding: 126px 40px 76px;
-  min-height: 700px;                          /* fallback for no svh */
-  min-height: clamp(660px, 100svh, 880px);
+  min-height: 100vh;                          /* fallback for no svh */
+  min-height: 100svh;
   background: linear-gradient(180deg, #FFFFFF 0%, #F7FAFD 100%);
 }
 
@@ -541,7 +541,7 @@
 }
 .tier1-site .pp-cat-cta {
   margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; gap: 7px;
-  font-family: inherit; font-size: 12.5px; font-weight: 700; color: var(--navy);
+  font-family: inherit; font-size: 14px; font-weight: 600; color: var(--navy);
   background: none; border: none; padding: 6px 0; cursor: pointer;
   border-bottom: 1.5px solid var(--cyan);
   transition: color .28s ease, gap .28s ease;
@@ -684,7 +684,7 @@
 
 @media (max-width: 1024px) {
   /* tablet: the ecosystem gives ground, the panel stays fully readable */
-  .tier1-site .pp-hero { padding: 140px 32px 84px; min-height: clamp(640px, 94svh, 840px); }
+  .tier1-site .pp-hero { padding: 140px 32px 84px; min-height: 100vh; min-height: 100svh; }
   .tier1-site .pp-hero-env-img { object-position: 74% 50%; }
   .tier1-site .pp-hero-veil {
     background:

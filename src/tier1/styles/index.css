@@ -7,8 +7,9 @@
 .tier1-site *,.tier1-site *::before,.tier1-site *::after{box-sizing:border-box;margin:0;padding:0;}
   .tier1-site{
     --navy:#0D2140; --navy-mid:#1A3A6B; --sky:#D0E2F4; --ice:#EAF0F8;
-    --white:#FFFFFF; --charcoal:#4A5568; --light-text:#718096;
+    --white:#FFFFFF; --charcoal:#4A5568; --light-text:#5C6B80;
     --brand-accent:#3D6FB4; --brand-accent-soft:#A8C6EA; --cyan:var(--brand-accent); --teal:#0D9488; --teal-deep:#0F766E; --border:rgba(13,33,64,0.1);
+    --error:#B91C1C; --success:#047857; --warning:#B45309;
   }
   /* Scrolling is smoothed by Lenis (see Tier1Route); CSS smooth scroll on
      top of it makes anchor jumps fight the inertia. */
@@ -39,16 +40,17 @@
   .tier1-site .navlinks a.active::after{content:'';position:absolute;left:0;right:0;bottom:-8px;height:2px;border-radius:2px;background:var(--brand-accent-soft);}
   .tier1-site .navright{display:flex;align-items:center;gap:18px;}
   .tier1-site .navicon{color:rgba(255,255,255,0.55);font-size:15px;}
-  .tier1-site .navcta{background:var(--cyan);color:var(--navy);padding:10px 20px;border-radius:8px;font-size:13px;font-weight:700;
-    border:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;line-height:1.2;white-space:nowrap;
-    transition:filter .25s ease,box-shadow .25s ease;}
-  /* Hover/active shade via brightness rather than a new colour — the palette is closed at 8. */
-  .tier1-site .navcta:hover{filter:brightness(0.94);box-shadow:0 6px 18px rgba(6,18,38,0.28);}
-  .tier1-site .navcta:active{filter:brightness(0.88);box-shadow:0 2px 8px rgba(6,18,38,0.24);}
+  .tier1-site .navcta{background:var(--btn-navy);color:#fff;min-height:44px;padding:0 24px;border-radius:10px;font-size:14.5px;font-weight:600;
+    border:1px solid var(--btn-navy-rim);box-shadow:var(--btn-navy-shadow);cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center;line-height:1.2;white-space:nowrap;
+    transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s ease,background .3s ease;}
+  .tier1-site .navcta:hover{transform:translateY(-2px);background:var(--btn-navy-hover);
+    border-color:var(--btn-navy-rim-hover);box-shadow:var(--btn-navy-shadow-hover);}
+  .tier1-site .navcta:active{transform:translateY(0);}
   .tier1-site .navcta:focus-visible{outline:2px solid var(--white);outline-offset:3px;}
 
   /* HERO */
-  .tier1-site .hero{position:relative;padding:180px 40px 120px;background:url('/assets/hero-bg.jpg') center/cover;overflow:hidden;min-height:720px;display:flex;align-items:center;}
+  .tier1-site .hero{position:relative;padding:180px 40px 120px;background:url('/assets/hero-bg.jpg') center/cover;overflow:hidden;min-height:100vh;min-height:100svh;display:flex;align-items:center;}
   .tier1-site .hero-overlay{position:absolute;inset:0;background:linear-gradient(95deg,rgba(9,24,48,0.5) 0%,rgba(10,26,52,0.28) 34%,rgba(13,33,64,0.05) 58%,rgba(13,33,64,0) 78%);z-index:0;}
   .tier1-site .hero-glass{max-width:620px;padding:42px 42px 44px;border-radius:28px;
     background:rgba(222,238,255,0.17);
@@ -72,18 +74,27 @@
   .tier1-site .hero h1 .accent{color:var(--brand-accent-soft);}
   .tier1-site .hero p{font-size:15.5px;color:rgba(255,255,255,0.9);line-height:1.7;margin:0 0 30px;text-shadow:0 1px 12px rgba(6,18,38,0.35);}
   .tier1-site .cta-row{display:flex;gap:14px;justify-content:flex-start;flex-wrap:wrap;}
-  /* Navy face shared with the header CTA; the tier-1 geometry (8px radius,
-     roomier padding) is what keeps these looking like page buttons. */
-  .tier1-site .btn-cyan{background:var(--btn-navy);color:#fff;font-weight:700;font-size:13px;padding:14px 26px;border-radius:8px;
+  /* Navy face shared with the header CTA. Geometry is §04's primary row:
+     48px tall, 10px radius, 30px gutters, Sora 600 at 14px. */
+  .tier1-site .btn-cyan{background:var(--btn-navy);color:#fff;font-weight:600;font-size:14px;min-height:48px;padding:0 30px;border-radius:10px;
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
     border:1px solid var(--btn-navy-rim);box-shadow:var(--btn-navy-shadow);cursor:pointer;
     transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s ease,background .3s ease;}
   .tier1-site .btn-cyan:hover{transform:translateY(-2px);background:var(--btn-navy-hover);
     border-color:var(--btn-navy-rim-hover);box-shadow:var(--btn-navy-shadow-hover);}
   .tier1-site .btn-cyan:active{transform:translateY(0);}
-  .tier1-site .btn-glass{font-weight:600;font-size:13px;padding:13px 24px;border-radius:8px;color:#fff;cursor:pointer;}
-  .tier1-site .btn-outline-navy{font-weight:600;font-size:13px;padding:14px 28px;border-radius:10px;color:var(--navy);background:transparent;border:1.5px solid rgba(13,33,64,0.35);cursor:pointer;transition:background .28s ease,border-color .28s ease,color .28s ease;}
-  .tier1-site .btn-outline-navy:hover{background:rgba(13,33,64,0.05);border-color:var(--navy);}
-  .tier1-site .btn-ghost-white{font-weight:600;font-size:13px;padding:13px 10px;color:#fff;background:transparent;border:none;cursor:pointer;text-decoration:underline;text-underline-offset:3px;}
+  .tier1-site .btn-glass{font-weight:600;font-size:14px;min-height:48px;padding:0 28px;border-radius:10px;color:#fff;cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    transition:transform .3s cubic-bezier(.22,1,.36,1),background .3s ease;}
+  .tier1-site .btn-glass:hover{transform:translateY(-2px);}
+  .tier1-site .btn-glass:active{transform:translateY(0);}
+  .tier1-site .btn-outline-navy{font-weight:600;font-size:14px;min-height:48px;padding:0 28px;border-radius:10px;color:var(--navy);background:transparent;
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    border:1.5px solid var(--navy);cursor:pointer;
+    transition:background .28s ease,color .28s ease,transform .3s cubic-bezier(.22,1,.36,1);}
+  .tier1-site .btn-outline-navy:hover{background:var(--navy);color:#fff;transform:translateY(-2px);}
+  .tier1-site .btn-outline-navy:active{transform:translateY(0);}
+  .tier1-site .btn-ghost-white{font-weight:600;font-size:14px;min-height:44px;padding:0 10px;display:inline-flex;align-items:center;gap:6px;color:#fff;background:transparent;border:none;cursor:pointer;text-decoration:underline;text-underline-offset:3px;}
 
   .tier1-site section{padding:96px 40px;}
   .tier1-site .ice-bg{background:var(--ice);}
@@ -132,7 +143,7 @@
   .tier1-site .cat-card:has(.cat-btn:hover) .cat-reveal,.tier1-site .cat-card.is-open .cat-reveal{max-height:150px;opacity:1;margin-bottom:14px;}
   .tier1-site .cat-reveal .sub{font-size:12px;font-weight:600;color:var(--brand-accent-soft);margin-bottom:6px;line-height:1.35;}
   .tier1-site .cat-reveal p{font-size:12px;color:rgba(255,255,255,0.78);line-height:1.55;}
-  .tier1-site .cat-btn{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.16);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(255,255,255,0.4);color:#fff;font-size:12.5px;font-weight:700;padding:11px 20px;border-radius:26px;cursor:pointer;transition:background .25s ease,border-color .25s ease;}
+  .tier1-site .cat-btn{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.16);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(255,255,255,0.4);color:#fff;font-size:14px;font-weight:600;min-height:44px;padding:0 20px;border-radius:10px;cursor:pointer;transition:background .25s ease,border-color .25s ease;}
   .tier1-site .cat-btn:hover,.tier1-site .cat-card.is-open .cat-btn{background:rgba(255,255,255,0.28);border-color:rgba(255,255,255,0.6);}
 
   /* INDUSTRIES */
@@ -192,14 +203,14 @@
     .tier1-site section{padding:80px 32px;}
   }
   @media(max-width:1024px){
-    .tier1-site .hero{min-height:620px;padding:150px 32px 100px;background-position:72% center;}
+    .tier1-site .hero{min-height:100vh;min-height:100svh;padding:150px 32px 100px;background-position:72% center;}
     .tier1-site .hero-glass{max-width:520px;padding:36px 34px 38px;}
     .tier1-site .hero h1{font-size:36px;}
     .tier1-site .hero p{font-size:14.5px;}
     .tier1-site .navlinks{display:none;}
   }
   @media(max-width:680px){
-    .tier1-site .hero{min-height:auto;padding:130px 20px 70px;background-position:66% center;}
+    .tier1-site .hero{min-height:100vh;min-height:100svh;padding:130px 20px 70px;background-position:66% center;}
     .tier1-site .hero-overlay{background:linear-gradient(180deg,rgba(9,24,48,0.55) 0%,rgba(10,26,52,0.35) 45%,rgba(13,33,64,0.15) 100%);}
     .tier1-site .hero-glass{max-width:100%;padding:28px 24px 30px;border-radius:22px;}
     .tier1-site .hero h1{font-size:29px;line-height:1.2;}
@@ -226,7 +237,7 @@
 
     /* Touch targets: these sat at 38px. */
     .tier1-site .btn-cyan,.tier1-site .btn-glass,.tier1-site .cat-btn,.tier1-site .btn-outline-navy,.tier1-site .btn-ghost-white,.tier1-site .navcta{min-height:44px;}
-    .tier1-site .cat-btn{padding:12px 20px;}
+    .tier1-site .cat-btn{padding:0 20px;}
 
     .tier1-site .cta-bg{padding:72px 20px;}
     .tier1-site .cta-content h2{font-size:26px;}

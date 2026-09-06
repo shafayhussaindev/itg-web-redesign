@@ -19,7 +19,7 @@
     --ice:        #EAF0F8;   /* section backgrounds */
     --white:      #FFFFFF;   /* page background */
     --charcoal:   #4A5568;   /* body text */
-    --light-text: #718096;   /* captions, muted labels */
+    --light-text: #5C6B80;   /* captions, muted labels — 5.43:1 on white, 4.73:1 on Ice */
     /* Accent blue. Actions are navy (see --btn-navy); this is the accent that
        marks headings, rules and diagram lines. --cyan is kept as an alias
        because a hundred-odd declarations still reference it by that name. */
@@ -32,6 +32,16 @@
     --teal:       #0D9488;   /* supporting accent — non-interactive only */
     --teal-deep:  #0F766E;   /* small label text, where contrast matters */
     --brand-red:  #E5001E;   /* logo only — never in UI */
+
+    /* ── Status ────────────────────────────────────────────────
+       Functional only, never decorative. Each clears 4.5:1 on white.
+       Distinct from --brand-red so the logo mark stays unique. */
+    --error:        #B91C1C;   /* 6.47:1 */
+    --error-tint:   #FEF2F2;
+    --success:      #047857;   /* 5.48:1 */
+    --success-tint: #F0FDF4;
+    --warning:      #B45309;   /* 5.02:1 */
+    --warning-tint: #FFFBEB;
 
     /* ── Primary action face ─────────────────────────────────────
        Filled CTAs are navy, not cyan: the flat cyan fill fought with
@@ -76,13 +86,14 @@
     --accent: 210 62% 89%;                 /* sky (hover tint) */
     --accent-foreground: 217 66% 15%;      /* navy */
 
-    /* Brand forbids red in UI; destructive maps to navy to stay in-palette */
-    --destructive: 217 66% 15%;
+    /* Brand Red is logo-only; destructive uses the status red instead, which
+       is darker and desaturated enough never to be mistaken for the mark. */
+    --destructive: 0 74% 42%;              /* --error #B91C1C */
     --destructive-foreground: 0 0% 100%;
 
     --border: 215 30% 91%;                 /* navy @ ~10% on white */
     --input: 215 30% 91%;
-    --ring: 191 83% 53%;                   /* cyan (focus) */
+    --ring: 215 49% 47%;                   /* --brand-accent #3D6FB4 (focus) */
 
     --radius: 0.5rem;                      /* navy/outline buttons 6–8px; cards use 12px */
 
@@ -201,6 +212,53 @@
     font-family: 'Sora', system-ui, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+
+  /* ── Focus ────────────────────────────────────────────────────
+     Every focusable element carries the accent ring. :focus-visible,
+     not :focus, so it appears for keyboard and assistive navigation
+     without flashing on every mouse click. */
+  :focus-visible {
+    outline: 2px solid var(--brand-accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  a:focus-visible,
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:not([tabindex="-1"]):focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(61, 111, 180, 0.22), 0 0 0 1px var(--brand-accent);
+  }
+  /* On navy and over hero video the blue ring disappears, so it inverts.
+     The header is a sibling of the hero rather than a child, so it carries
+     its own marker (see Header.tsx) instead of being matched by descent. */
+  [data-chrome="dark"] a:focus-visible,
+  [data-chrome="dark"] button:focus-visible,
+  [data-dark-hero] a:focus-visible,
+  [data-dark-hero] button:focus-visible,
+  .bg-primary a:focus-visible,
+  .bg-primary button:focus-visible,
+  footer a:focus-visible,
+  footer button:focus-visible {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.9);
+  }
+
+  /* ── Reduced motion ───────────────────────────────────────────
+     An accessibility requirement, not optional polish. Entrance
+     animation resolves instantly and smooth scrolling is dropped;
+     the Lenis instance bails out separately in useLenis. */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
   
   /* Typography Scale — Sora, headings in navy (via --foreground) */
   h1 {
@@ -247,9 +305,9 @@
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  /* Generous whitespace — ~100px section padding */
+  /* Generous whitespace — 64 / 96 / 128px, on the 4px scale */
   .section-padding {
-    @apply py-16 md:py-24 lg:py-[100px];
+    @apply py-16 md:py-24 lg:py-32;
   }
 
   /* Section Header Spacing */
@@ -307,10 +365,11 @@
      it is on a dozen components — but the fill is navy now, matching the
      header's Contact us button. */
   .btn-cyan {
-    @apply inline-flex items-center justify-center gap-2 font-bold text-[13px] text-white;
+    @apply inline-flex items-center justify-center gap-2 font-semibold text-[14px] text-white;
     background: var(--btn-navy);
-    padding: 12px 24px;
-    border-radius: 28px;
+    min-height: 48px;
+    padding: 0 30px;
+    border-radius: 10px;
     border: 1px solid var(--btn-navy-rim);
     box-shadow: var(--btn-navy-shadow);
     transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, background 0.3s ease;
@@ -346,8 +405,9 @@
 
   .btn-modern {
     @apply inline-flex items-center justify-center gap-2 font-semibold text-[14px] text-white whitespace-nowrap;
-    padding: 12px 30px;
-    border-radius: 999px;
+    min-height: 48px;
+    padding: 0 30px;
+    border-radius: 10px;
     background: var(--btn-navy);
     border: 1px solid var(--btn-navy-rim);
     box-shadow: var(--btn-navy-shadow);
@@ -361,11 +421,34 @@
   }
   .btn-modern:active { transform: translateY(0); }
 
-  /* Companion outline pill for the secondary action beside .btn-modern */
+  /* Nav CTA — the primary face at the header's tighter geometry (§04). Its own
+     class rather than utility overrides on .btn-modern, whose min-height would
+     otherwise win over an h-11. */
+  .btn-nav-cta {
+    @apply inline-flex items-center justify-center gap-2 font-semibold text-[14.5px] text-white whitespace-nowrap;
+    min-height: 44px;
+    padding: 0 24px;
+    border-radius: 10px;
+    background: var(--btn-navy);
+    border: 1px solid var(--btn-navy-rim);
+    box-shadow: var(--btn-navy-shadow);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, background 0.3s ease;
+  }
+  .btn-nav-cta:hover {
+    transform: translateY(-2px);
+    background: var(--btn-navy-hover);
+    border-color: var(--btn-navy-rim-hover);
+    box-shadow: var(--btn-navy-shadow-hover);
+  }
+  .btn-nav-cta:active { transform: translateY(0); }
+
+  /* Translucent companion to .btn-modern — the secondary action on navy and
+     over hero video, where an outline in navy would disappear. */
   .btn-modern-ghost {
     @apply inline-flex items-center justify-center gap-2 font-semibold text-[14px] text-white whitespace-nowrap;
-    padding: 12px 30px;
-    border-radius: 999px;
+    min-height: 48px;
+    padding: 0 28px;
+    border-radius: 10px;
     background: rgba(255, 255, 255, 0.10);
     border: 1px solid rgba(255, 255, 255, 0.45);
     box-shadow: 0 8px 24px -12px rgba(6, 16, 34, 0.6);
@@ -378,46 +461,72 @@
   }
   .btn-modern-ghost:active { transform: translateY(0); }
 
-  /* Navy — secondary primary actions */
+  /* Navy — an alias of the primary face, kept so older markup keeps working */
   .btn-navy {
-    @apply inline-flex items-center justify-center gap-2 font-semibold text-[13px] text-white;
-    background: var(--navy);
-    padding: 12px 22px;
-    border-radius: 6px;
-    border: none;
-    transition: background 0.2s ease;
+    @apply inline-flex items-center justify-center gap-2 font-semibold text-[14px] text-white;
+    background: var(--btn-navy);
+    min-height: 48px;
+    padding: 0 30px;
+    border-radius: 10px;
+    border: 1px solid var(--btn-navy-rim);
+    box-shadow: var(--btn-navy-shadow);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, background 0.3s ease;
   }
-  .btn-navy:hover { background: var(--navy-mid); }
+  .btn-navy:hover {
+    transform: translateY(-2px);
+    background: var(--btn-navy-hover);
+    border-color: var(--btn-navy-rim-hover);
+    box-shadow: var(--btn-navy-shadow-hover);
+  }
+  .btn-navy:active { transform: translateY(0); }
 
-  /* Outline — tertiary */
+  /* Outline — the secondary action beside a primary, on light surfaces */
   .btn-outline-brand {
-    @apply inline-flex items-center justify-center gap-2 font-semibold text-[13px] text-[#0D2140];
+    @apply inline-flex items-center justify-center gap-2 font-semibold text-[14px] text-[#0D2140];
     background: transparent;
-    padding: 11px 22px;
-    border-radius: 6px;
+    min-height: 48px;
+    padding: 0 28px;
+    border-radius: 10px;
     border: 1.5px solid var(--navy);
-    transition: all 0.2s ease;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .btn-outline-brand:hover { background: var(--ice); }
+  .btn-outline-brand:hover {
+    background: var(--navy);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+  .btn-outline-brand:active { transform: translateY(0); }
 
   /* Ghost — in-text / low-priority links */
   .btn-ghost {
-    @apply inline-flex items-center gap-2 font-semibold text-[13px] transition-all duration-200;
-    color: var(--navy-mid);
+    @apply inline-flex items-center gap-2 font-semibold text-[14px] transition-all duration-200;
+    color: var(--brand-accent);
     text-decoration: underline;
     text-underline-offset: 3px;
   }
+  .btn-ghost:hover { color: var(--navy); }
 
-  /* Legacy alias — kept so existing markup keeps working, now navy */
+  /* Legacy aliases — folded onto the two approved faces so they can't drift */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-md transition-colors duration-200;
+    @apply inline-flex items-center justify-center gap-2 font-semibold text-[14px] text-white transition-colors duration-200;
+    background: var(--btn-navy);
+    min-height: 48px;
+    padding: 0 30px;
+    border-radius: 10px;
+    border: 1px solid var(--btn-navy-rim);
+    box-shadow: var(--btn-navy-shadow);
   }
-  .btn-primary:hover { background: var(--navy-mid); }
+  .btn-primary:hover { background: var(--btn-navy-hover); }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 bg-secondary text-secondary-foreground font-semibold rounded-md border border-border transition-colors duration-200;
+    @apply inline-flex items-center justify-center gap-2 font-semibold text-[14px] text-[#0D2140] transition-colors duration-200;
+    background: transparent;
+    min-height: 48px;
+    padding: 0 28px;
+    border-radius: 10px;
+    border: 1.5px solid var(--navy);
   }
-  .btn-secondary:hover { @apply bg-accent; }
+  .btn-secondary:hover { background: var(--navy); color: #fff; }
 
   /* Link Styles */
   .link-enterprise {
@@ -489,8 +598,27 @@
     }
   }
   
-  /* Focus States */
+  /* Focus States — kept for components that already opt in; the base layer
+     now gives every focusable element the same ring by default. */
   .focus-enterprise {
-    @apply focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background;
+    @apply focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/30 focus-visible:ring-offset-0;
+  }
+
+  /* ── Minimum touch target ─────────────────────────────────────
+     44 x 44 including padding. Applied to controls that are visually
+     smaller than that, so they grow their hit area, not their look. */
+  .tap-target {
+    position: relative;
+  }
+  .tap-target::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    min-width: 44px;
+    min-height: 44px;
+    transform: translate(-50%, -50%);
   }
 }

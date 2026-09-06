@@ -14,7 +14,7 @@ export function FinalCTASection() {
           <p className="text-base lg:text-lg text-muted-foreground mb-8 lg:mb-10">
             Partner with ITG to modernize systems, deploy scalable platforms, and unlock intelligent enterprise performance.
           </p>
-          <a href="/company" className="btn-cyan group h-12 text-[13px]">
+          <a href="/company" className="btn-cyan group">
             Speak with an ITG Solution Architect
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
