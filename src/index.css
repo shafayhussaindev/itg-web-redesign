@@ -326,6 +326,24 @@
   /* Modern pills for actions that sit on top of the hero video, where the flat
      cyan fill fought with the footage. Deep navy reads well over both the bright
      and the dark hero cuts; the light rim keeps the edge defined either way. */
+  /* Frosted panel behind the home hero copy. Same recipe as .hero-glass on the
+     tier-1 pages, so the home page and Solutions read as one system. */
+  .hero-glass-panel {
+    padding: 42px 42px 44px;
+    border-radius: 28px;
+    background: rgba(222, 238, 255, 0.17);
+    backdrop-filter: blur(11px) saturate(1.2);
+    -webkit-backdrop-filter: blur(11px) saturate(1.2);
+    border: 1px solid rgba(255, 255, 255, 0.30);
+    box-shadow: 0 18px 48px rgba(6, 18, 38, 0.20);
+  }
+  @media (max-width: 1024px) {
+    .hero-glass-panel { padding: 36px 34px 38px; }
+  }
+  @media (max-width: 640px) {
+    .hero-glass-panel { padding: 28px 24px 30px; border-radius: 22px; }
+  }
+
   .btn-modern {
     @apply inline-flex items-center justify-center gap-2 font-semibold text-[14px] text-white whitespace-nowrap;
     padding: 12px 30px;

@@ -6,33 +6,45 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 
 export function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const subheadlineRef = useRef<HTMLParagraphElement>(null);
   const supportingRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Initial states for text content
+      // The glass panel arrives as one piece; its contents settle inside it.
+      gsap.set(panelRef.current, { opacity: 0, y: 26 });
       gsap.set([headlineRef.current, subheadlineRef.current, supportingRef.current, ctaRef.current], {
         opacity: 0,
-        x: -40,
+        y: 16,
       });
 
       // Staggered entrance animation
-      const tl = gsap.timeline({ delay: 0.3 });
+      const tl = gsap.timeline({ delay: 0.25 });
 
-      tl.to(headlineRef.current, {
+      tl.to(panelRef.current, {
         opacity: 1,
-        x: 0,
-        duration: 0.8,
+        y: 0,
+        duration: 0.7,
         ease: 'power3.out',
       })
+        .to(
+          headlineRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: 'power3.out',
+          },
+          '-=0.42'
+        )
         .to(
           subheadlineRef.current,
           {
             opacity: 1,
-            x: 0,
-            duration: 0.8,
+            y: 0,
+            duration: 0.7,
             ease: 'power3.out',
           },
           '-=0.5'
@@ -41,8 +53,8 @@ export function HeroSection() {
           supportingRef.current,
           {
             opacity: 1,
-            x: 0,
-            duration: 0.8,
+            y: 0,
+            duration: 0.7,
             ease: 'power3.out',
           },
           '-=0.5'
@@ -51,8 +63,8 @@ export function HeroSection() {
           ctaRef.current,
           {
             opacity: 1,
-            x: 0,
-            duration: 0.8,
+            y: 0,
+            duration: 0.7,
             ease: 'power3.out',
           },
           '-=0.5'
@@ -91,10 +103,10 @@ export function HeroSection() {
       <Spotlight className="bottom-10 right-8 opacity-70" size={520} color="hsl(var(--brand-secondary) / 0.22)" />
 
       {/* Content Container - Left Side */}
-      <div className="relative z-10 py-24 md:py-32 lg:py-40">
+      <div className="relative z-10 w-full py-20 md:py-24 lg:py-28">
         <div className="section-container">
           <div className="flex justify-start">
-            <div className="max-w-2xl">
+            <div ref={panelRef} className="hero-glass-panel max-w-[680px]">
               {/* Text Content - Left Aligned */}
               <h1
                 ref={headlineRef}
@@ -105,7 +117,7 @@ export function HeroSection() {
 
               <p
                 ref={subheadlineRef}
-                className="text-base md:text-lg lg:text-xl text-white/90 mb-6 lg:mb-8 text-left lg:w-[83%]"
+                className="text-base md:text-lg lg:text-xl text-white/90 mb-6 lg:mb-8 text-left"
               >
                 ITG engineers AI-powered enterprise software, automation, sustainability intelligence and digital experience platforms for organizations that need speed, control, resilience and measurable transformation.
               </p>

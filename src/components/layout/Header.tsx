@@ -511,18 +511,23 @@ const primaryLinks = [
 // No chip at rest — the hover glow is a radial gradient on a pseudo-element that
 // fades in, so it reads as light spilling behind the label rather than a pill.
 const NAV_ITEM_BASE =
-  "relative isolate bg-transparent shadow-none text-[17px] font-medium px-4 py-2 h-10 origin-center will-change-transform hover:scale-[1.07] data-[state=open]:scale-[1.07] transition-transform duration-300 ease-out " +
-  "before:absolute before:inset-x-0 before:inset-y-[-25%] before:-z-10 before:opacity-0 before:transition-opacity before:duration-300 before:ease-out hover:before:opacity-100 data-[state=open]:before:opacity-100";
+  "relative bg-transparent shadow-none rounded-none text-[15px] font-medium tracking-[0.005em] px-3.5 py-2 h-10 " +
+  "transition-colors duration-200 ease-out " +
+  // Hairline indicator, drawn from the centre out on hover and held open while
+  // the mega-menu is showing.
+  "after:absolute after:left-3.5 after:right-3.5 after:bottom-[5px] after:h-[2px] after:rounded-full " +
+  "after:origin-center after:scale-x-0 after:transition-transform after:duration-300 after:ease-out " +
+  "hover:after:scale-x-100 data-[state=open]:after:scale-x-100";
 
-// Over the dark hero video: a light chip that glows on hover.
+// Over the dark hero video.
 const NAV_ITEM_ON_DARK =
-  "!text-white [text-shadow:0_1px_10px_rgba(3,12,28,0.55)] hover:!text-white hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:!text-white " +
-  "before:bg-[radial-gradient(58%_58%_at_50%_50%,rgba(255,255,255,0.30)_0%,rgba(255,255,255,0.12)_45%,rgba(255,255,255,0)_78%)]";
+  "!text-white/85 [text-shadow:0_1px_10px_rgba(3,12,28,0.55)] hover:!text-white hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:!text-white " +
+  "after:bg-white/85";
 
 // Over light page content, once the hero has scrolled past.
 const NAV_ITEM_ON_LIGHT =
-  "text-[hsl(var(--foreground))] hover:text-[hsl(var(--foreground))] hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-[hsl(var(--foreground))] " +
-  "before:bg-[radial-gradient(58%_58%_at_50%_50%,rgba(13,33,64,0.16)_0%,rgba(13,33,64,0.07)_45%,rgba(13,33,64,0)_78%)]";
+  "text-[hsl(var(--foreground))]/80 hover:text-[hsl(var(--foreground))] hover:bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-[hsl(var(--foreground))] " +
+  "after:bg-[color:var(--brand-accent)]";
 
 
 type MegaMenuProps = {
@@ -731,14 +736,17 @@ export function Header() {
   const [openMobileServices, setOpenMobileServices] = useState<Record<string, boolean>>({});
   const [openMobileIndustries, setOpenMobileIndustries] = useState<Record<string, boolean>>({});
 
-  // The header has no background of its own, so its type stays white for as long
-  // as a dark hero is still behind it. Pages mark that hero with data-dark-hero;
-  // a page without one (the light Products hero) gets dark type from the start.
-  const isDarkHero = darkHeroDepth > 0 && scrollY < darkHeroDepth - 96;
+  // The bar is transparent only at rest at the very top. The first scroll brings
+  // the white background in — over the hero as much as anywhere else — and
+  // coming back to the top takes it away again.
+  const showSolidBar = isScrolled;
+  // White mark and white type belong to that transparent state, and only over a
+  // hero dark enough to carry them. Pages mark such a hero with data-dark-hero;
+  // one without it (the light Products hero, the policy pages) gets navy type
+  // from the start. darkHeroDepth is measured below; here only its presence
+  // matters, since at rest at the top the hero is necessarily behind the bar.
+  const isDarkHero = !isScrolled && darkHeroDepth > 0;
   const navItemClass = cn(NAV_ITEM_BASE, isDarkHero ? NAV_ITEM_ON_DARK : NAV_ITEM_ON_LIGHT);
-  // Transparent while the dark hero is behind the bar; once past it the bar
-  // takes a white background so navy links stay readable over page content.
-  const showSolidBar = isScrolled && !isDarkHero;
 
   // Layout effect, not a plain effect: the hero has to be measured before the
   // first paint or the nav renders dark and then fades to white over the hero.
@@ -824,7 +832,7 @@ export function Header() {
           </a>
 
           <NavigationMenu className="hidden lg:flex justify-center">
-            <NavigationMenuList className="justify-center">
+            <NavigationMenuList className="justify-center gap-1">
               <NavigationMenuItem>
                 <NavigationMenuTrigger
                   className={cn(navItemClass, "cursor-pointer")}
@@ -909,13 +917,18 @@ export function Header() {
             </button>
             */}
 
-            <a href="/contact" className="btn-modern hidden md:inline-flex h-12">
+            <a href="/contact" className="btn-modern hidden md:inline-flex h-11 rounded-[10px] px-6 text-[14.5px]">
               Contact us
             </a>
 
             <button
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-              className="lg:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent transition-all duration-200 focus-enterprise"
+              className={cn(
+                "lg:hidden p-2 rounded-lg transition-all duration-200 focus-enterprise",
+                isDarkHero
+                  ? "text-white/90 hover:text-white [filter:drop-shadow(0_1px_6px_rgba(3,12,28,0.55))]"
+                  : "text-muted-foreground hover:text-foreground hover:bg-accent",
+              )}
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
