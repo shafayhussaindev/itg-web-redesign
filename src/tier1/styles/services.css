@@ -149,7 +149,7 @@
   max-width: 1240px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 620px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 648px) minmax(0, 1fr);
   gap: 48px;
   align-items: center;
 }

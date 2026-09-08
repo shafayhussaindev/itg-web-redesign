@@ -403,6 +403,30 @@
     .hero-glass-panel { padding: 28px 24px 30px; border-radius: 22px; }
   }
 
+  /* Scrolled header — frosted white rather than a solid fill, so page content
+     reads through the bar. White-dominant on purpose: the hero's blue-tinted
+     recipe is built for photography, whereas this sits over white and Ice
+     sections and has to keep navy links legible over whatever passes beneath.
+     At 0.72 the links hold 5.70:1 even over a navy band — the worst case on
+     the site — against the 4.5:1 they need. The saturate() is what makes it
+     read as glass rather than a flat wash. */
+  .nav-glass {
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(16px) saturate(1.6);
+    -webkit-backdrop-filter: blur(16px) saturate(1.6);
+    border-bottom: 1px solid rgba(13, 33, 64, 0.08);
+    box-shadow: 0 2px 12px rgba(13, 33, 64, 0.08);
+  }
+  /* Without backdrop-filter the bar is just a 72% white wash and the links sit
+     on raw page content. Those browsers get the old solid bar instead. */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .nav-glass {
+      background: #FFFFFF;
+      border-bottom-color: rgba(13, 33, 64, 0.10);
+      box-shadow: 0 2px 12px rgba(13, 33, 64, 0.10);
+    }
+  }
+
   .btn-modern {
     @apply inline-flex items-center justify-center gap-2 font-semibold text-[14px] text-white whitespace-nowrap;
     min-height: 48px;

@@ -191,7 +191,7 @@
    blur does the readability work. ~44% of the 1280 content width, which
    leaves the render most of the frame. */
 .tier1-site .pp-hero-glass {
-  max-width: 566px; padding: 32px 36px 34px; border-radius: 28px;
+  max-width: 648px; padding: 32px 36px 34px; border-radius: 28px;
   background: linear-gradient(152deg, rgba(255,255,255,0.56) 0%, rgba(208,226,244,0.34) 100%);
   backdrop-filter: blur(13px) saturate(1.35); -webkit-backdrop-filter: blur(13px) saturate(1.35);
   border: 1px solid rgba(255,255,255,0.60);
@@ -240,15 +240,11 @@
 .tier1-site .pp-hero-body { font-size: 14.5px; line-height: 1.64; color: var(--charcoal); margin-bottom: 9px; max-width: 60ch; }
 .tier1-site .pp-hero-body:last-of-type { margin-bottom: 0; }
 .tier1-site .pp-hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 24px; }
-/* Side by side, as on the Solutions hero. These two labels are long enough
-   that the default 26/28px button gutters overran the panel by ~20px and
-   wrap dropped the second onto its own line; trimming the horizontal padding
-   here (this hero only) keeps them on one row. They still wrap on narrow
-   screens, where the panel is genuinely too tight for both. */
+/* Side by side, as on the Solutions hero. The panel above is sized to hold
+   both at the standard button gutters; nowrap keeps a label from folding
+   inside its own button before the row itself wraps. */
 .tier1-site .pp-hero-ctas .btn-cyan,
 .tier1-site .pp-hero-ctas .btn-outline-navy {
-  padding-left: 18px;
-  padding-right: 18px;
   white-space: nowrap;
 }
 
@@ -695,7 +691,7 @@
         rgba(255,255,255,0.50) 0%, rgba(255,255,255,0) 20%,
         rgba(255,255,255,0) 76%, #F7FAFD 100%);
   }
-  .tier1-site .pp-hero-glass { max-width: 528px; padding: 30px 30px 32px; }
+  .tier1-site .pp-hero-glass { max-width: 628px; padding: 30px 30px 32px; }
   .tier1-site .pp-hero h1 { font-size: 42px; }
   .tier1-site .pp-hero-sub { font-size: 19.5px; max-width: 26ch; }
   .tier1-site .pp-hero-panel { margin-left: 140px; max-width: 500px; }

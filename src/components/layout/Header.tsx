@@ -810,9 +810,7 @@ export function Header() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           isScrolled ? "py-2 lg:py-3" : "py-3 lg:py-4",
-          showSolidBar
-            ? "bg-white border-b border-[hsl(var(--foreground))]/10 shadow-[0_2px_12px_rgba(13,33,64,0.10)]"
-            : "bg-transparent",
+          showSolidBar ? "nav-glass" : "bg-transparent",
         )}
       >
         <div className="section-container grid grid-cols-[1fr_auto_1fr] items-center">
