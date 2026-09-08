@@ -96,8 +96,16 @@ export function HeroSection() {
         <source src="/hero.mp4" type="video/mp4" />
       </video>
 
-      {/* Legibility scrim - darker on the left where the copy sits */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-black/15" />
+      {/* Legibility scrim. With the frosted panel gone this is the only thing
+          holding the copy against the footage, so it is sized from contrast,
+          not by eye: white body text needs 4.5:1, and on a blown-out frame
+          that requires the scrim to stay at or above ~0.65 across the whole
+          copy column. It holds 0.88 -> 0.68 to 55%, then falls away so the
+          right-hand side of the video stays at full strength. */}
+      <div
+        className="absolute inset-0"
+        style={{ background: 'linear-gradient(96deg, rgba(6,16,34,0.88) 0%, rgba(9,24,48,0.78) 30%, rgba(9,24,48,0.68) 55%, rgba(13,33,64,0.22) 76%, rgba(13,33,64,0) 92%)' }}
+      />
 
       <Spotlight className="-top-24 -left-24 opacity-80" size={620} />
       <Spotlight className="bottom-10 right-8 opacity-70" size={520} color="hsl(var(--brand-secondary) / 0.22)" />

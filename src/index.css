@@ -387,20 +387,18 @@
      and the dark hero cuts; the light rim keeps the edge defined either way. */
   /* Frosted panel behind the home hero copy. Same recipe as .hero-glass on the
      tier-1 pages, so the home page and Solutions read as one system. */
+  /* Hero copy sits directly on the photograph. No panel, no blur, no border:
+     the scrim below carries legibility, and the type carries the composition.
+     The class is kept so the hero markup and its entrance animation are
+     unchanged. */
   .hero-glass-panel {
-    padding: 42px 42px 44px;
-    border-radius: 28px;
-    background: rgba(222, 238, 255, 0.17);
-    backdrop-filter: blur(11px) saturate(1.2);
-    -webkit-backdrop-filter: blur(11px) saturate(1.2);
-    border: 1px solid rgba(255, 255, 255, 0.30);
-    box-shadow: 0 18px 48px rgba(6, 18, 38, 0.20);
+    padding: 0;
   }
-  @media (max-width: 1024px) {
-    .hero-glass-panel { padding: 36px 34px 38px; }
-  }
-  @media (max-width: 640px) {
-    .hero-glass-panel { padding: 28px 24px 30px; border-radius: 22px; }
+  /* Belt-and-braces over unpredictable video frames. Subtle enough not to
+     read as a glow at 60px, enough to hold an edge against a bright cut. */
+  .hero-glass-panel h1,
+  .hero-glass-panel p {
+    text-shadow: 0 1px 14px rgba(6, 16, 34, 0.55);
   }
 
   /* Scrolled header — frosted white rather than a solid fill, so page content

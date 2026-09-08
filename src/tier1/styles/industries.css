@@ -111,16 +111,9 @@
   margin: 0 auto;
 }
 .tier1-site .ind-hero-glass {
+  /* Panel removed: copy sits on the photograph, held by .ind-hero-grad. */
   max-width: 640px;
-  padding: 44px 44px 46px;
-  border-radius: 28px;
-  background: rgba(222, 238, 255, 0.15);
-  backdrop-filter: blur(12px) saturate(1.2);
-  -webkit-backdrop-filter: blur(12px) saturate(1.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 18px 52px rgba(6, 18, 38, 0.28);
-  /* Internal top highlight — light catching the leading edge. */
-  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 42%);
+  padding: 0;
   opacity: 0;
   transform: translateY(28px);
   animation: indRise 0.7s var(--ease) 0.1s forwards;
@@ -588,7 +581,7 @@
 
 @media (max-width: 1024px) {
   .tier1-site .ind-hero { min-height: 100vh; min-height: 100svh; padding: 160px 32px 96px; }
-  .tier1-site .ind-hero-glass { max-width: 600px; padding: 36px 34px 38px; }
+  .tier1-site .ind-hero-glass { max-width: 600px; padding: 0; }
   .tier1-site .ind-hero-glass h1 { font-size: 36px; }
   .tier1-site .ind-hero-lines { opacity: 0.45; }
   .tier1-site .ind-intro { padding: 88px 32px; }
@@ -619,7 +612,7 @@
       linear-gradient(180deg, rgba(9, 24, 48, 0.72) 0%, rgba(10, 26, 52, 0.5) 42%, rgba(13, 33, 64, 0.66) 100%);
   }
   .tier1-site .ind-hero-lines { display: none; }
-  .tier1-site .ind-hero-glass { max-width: 100%; padding: 28px 24px 30px; border-radius: 22px; }
+  .tier1-site .ind-hero-glass { max-width: 100%; padding: 0; }
   .tier1-site .ind-hero-glass h1 { font-size: 28px; line-height: 1.2; }
   .tier1-site .ind-hero-glass p { font-size: 14px; margin-bottom: 24px; }
   .tier1-site .ind-hero-glass .cta-row { gap: 10px; }

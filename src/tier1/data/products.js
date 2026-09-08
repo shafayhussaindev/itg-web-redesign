@@ -16,8 +16,11 @@ export const productsHero = {
   // It must be a verbatim substring of `subtitle` — it adds no words.
   subtitleAccent: 'Scale and Control',
   body: [
-    'Core digital platforms engineered to run complex operations with governance, security, and long-term reliability.',
-    'Each platform is designed as a core system, not a standalone tool - enabling integration, governance, and long-term operational reliability.',
+    'Core digital platforms engineered to run complex operations',
+     ' with governance, security, and long-term reliability.',
+    'Each platform is designed as a core system, not a ',
+    'standalone tool - enabling integration, governance,',
+    ' and long-term operational reliability.',
   ],
   primaryCta: 'Request a Product Demo',
   secondaryCta: 'Explore Platforms by Category',
