@@ -213,6 +213,30 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
+  /* ── Material Symbols ─────────────────────────────────────────
+     One rule for every icon on the site. Size arrives as --msym from
+     the icon component; --msym-lg carries a responsive bump where the
+     original Tailwind classes had one (w-4 lg:w-5 and the like). */
+  .msym {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: var(--msym, 24px);
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    direction: ltr;
+    flex-shrink: 0;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
+  }
+  @media (min-width: 1024px) {
+    .msym { font-size: var(--msym-lg, var(--msym, 24px)); }
+  }
+
   /* ── Focus ────────────────────────────────────────────────────
      Every focusable element carries the accent ring. :focus-visible,
      not :focus, so it appears for keyboard and assistive navigation
@@ -463,6 +487,51 @@
     box-shadow: var(--btn-navy-shadow-hover);
   }
   .btn-nav-cta:active { transform: translateY(0); }
+
+  /* ── Nav CTA: rolling label + tilting arrow ────────────────────
+     The label is two stacked copies of the same words. On hover the
+     top one tips away from the reader and the bottom one tips in,
+     both pivoting on the shared edge between them, so it reads as
+     one solid face turning rather than two labels sliding. */
+  .btn-roll {
+    display: grid;
+    overflow: hidden;
+    perspective: 340px;
+    /* clips the faces as they pass the horizontal */
+  }
+  .btn-roll > span {
+    grid-area: 1 / 1;
+    display: block;
+    backface-visibility: hidden;
+    transition: transform 0.44s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  /* the face you see at rest, hinged on its lower edge */
+  .btn-roll__out { transform-origin: center bottom; }
+  /* the face waiting below, hinged on its upper edge and already tipped away */
+  .btn-roll__in  { transform-origin: center top; transform: rotateX(90deg); }
+  .btn-nav-cta:hover .btn-roll__out,
+  .btn-nav-cta:focus-visible .btn-roll__out { transform: rotateX(-90deg); }
+  .btn-nav-cta:hover .btn-roll__in,
+  .btn-nav-cta:focus-visible .btn-roll__in { transform: rotateX(0deg); }
+
+  /* Arrow sits at 45 degrees — an outbound mark — and levels out on hover.
+     Named .cta-arrow, not .btn-arrow: the tier-1 pages already use the latter
+     for the → glyph on their outline buttons, and an unscoped transform here
+     would tilt every one of them. */
+  .btn-nav-cta .cta-arrow {
+    flex-shrink: 0;
+    transform: rotate(-45deg);
+    transition: transform 0.44s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .btn-nav-cta:hover .cta-arrow,
+  .btn-nav-cta:focus-visible .cta-arrow { transform: rotate(0deg); }
+
+  /* Under reduced motion the roll would flick rather than turn, so the
+     second face is dropped and only the arrow changes, instantly. */
+  @media (prefers-reduced-motion: reduce) {
+    .btn-roll__in { display: none; }
+    .btn-roll__out { transform: none !important; }
+  }
 
   /* Translucent companion to .btn-modern — the secondary action on navy and
      over hero video, where an outline in navy would disappear. */

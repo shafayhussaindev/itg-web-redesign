@@ -1,5 +1,6 @@
-import { industriesCta } from '../../data/industries.js';
+import { industriesCta } from '@/content/industries.js';
 import { useReveal } from '../../hooks/useReveal.js';
+import CtaLabel from '../CtaLabel.jsx';
 
 /**
  * Closing CTA: architectural photograph -> navy overlay -> glass panel.
@@ -21,7 +22,7 @@ export default function IndustriesCta() {
           <h2>{industriesCta.title}</h2>
           <p>{industriesCta.body}</p>
           <div className="cta-row ind-cta-row">
-            <button className="btn-cyan ind-btn-glow">{industriesCta.primary}</button>
+            <button className="btn-cyan ind-btn-glow"><CtaLabel>{industriesCta.primary}</CtaLabel></button>
           </div>
         </div>
       </div>

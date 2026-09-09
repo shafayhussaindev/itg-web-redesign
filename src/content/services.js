@@ -1,4 +1,13 @@
-// All Services page copy. Transcribed verbatim from the live Services page —
+/* ============================================================================
+ * SERVICES PAGE
+ * =============
+ * shown at  yoursite.com/services
+ *
+ * Everything on this page that you might want to reword, re-order or re-image
+ * is in this file. Change the text between the quote marks and save — the site
+ * picks it up on its own. See content/README.md if anything here is unclear.
+ * ========================================================================= */
+
 // edits go here, never into component markup (same rule as content.js).
 //
 // TWO STRINGS ARE RECONSTRUCTED, NOT VERBATIM. Both were clipped mid
@@ -69,7 +78,7 @@ export const deliveryPillars = [
     icon: 'code',
     title: 'Design and Engineering',
     sub: 'Building Secure and Scalable Digital Platforms',
-    body: 'This pillar focuses on designing and engineering enterprise-grade digital platforms aligned with business workflows and system architecture.',
+    body: 'Enterprise-grade digital platforms, designed and engineered around business workflows and system architecture.',
     enables: [
       'Enterprise web and application platforms',
       'User-centric design systems and interfaces',
@@ -91,7 +100,7 @@ export const deliveryPillars = [
     icon: 'chart',
     title: 'Data and Intelligence Enablement',
     sub: 'Turning Data into Decision-Ready Insight',
-    body: 'This pillar enables organizations to structure, analyze, and use data effectively across enterprise operations.',
+    body: 'Data structured, analyzed and put to work across enterprise operations.',
     enables: [
       'Executive and operational visibility',
       'Analytics and reporting frameworks',
@@ -111,7 +120,7 @@ export const deliveryPillars = [
     icon: 'bolt',
     title: 'Automation and Integration',
     sub: 'Improving Efficiency Without Losing Control',
-    body: 'This pillar focuses on automating workflows and integrating systems while maintaining governance and audit readiness.',
+    body: 'Automated workflows and integrated systems, with governance and audit readiness maintained throughout.',
     enables: [
       'Streamlined enterprise processes',
       'Reduced manual effort and risk',
@@ -132,7 +141,7 @@ export const deliveryPillars = [
     icon: 'cube',
     title: 'Platform Implementation and Enablement',
     sub: 'Delivering Enterprise Platforms with Confidence',
-    body: 'This pillar ensures enterprise platforms are implemented and enabled with structure, governance, and long-term usability.',
+    body: 'Enterprise platforms implemented and enabled with structure, governance and long-term usability.',
     enables: [
       'ERP and CRM platform deployment',
       'Data migration and integration',
@@ -148,7 +157,7 @@ export const deliveryPillars = [
     icon: 'cloud',
     title: 'Cloud and Infrastructure Modernization',
     sub: 'Modernizing Enterprise Infrastructure Securely',
-    body: 'This pillar supports cloud architecture, migration, and modernization across hybrid and multi-cloud environments.',
+    body: 'Cloud architecture, migration and modernization across hybrid and multi-cloud environments.',
     enables: [
       // NEEDS CONFIRMATION — clipped in the source screenshot.
       'Secure cloud architecture',

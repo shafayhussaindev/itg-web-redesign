@@ -1,13 +1,16 @@
-import { serviceIndustries } from '../../data/services.js';
+import { serviceIndustries } from '@/content/services.js';
 import { useReveal } from '../../hooks/useReveal.js';
-import Icon from './icons.jsx';
 
 /**
- * Photography + gradient + glass label bar. Deliberately simpler than the
- * Solutions industry cards: those reveal a paragraph on hover, but the
- * Services copy carries titles only, so a reveal here would have nothing to
- * show. Hover does what the brief asks instead — image zoom, glass opacity
- * shift, border highlight, arrow travel.
+ * Industry cards on the same .cat-* pattern as Solution Categories and the
+ * Industries grid — one tall-photograph card style shared across all three
+ * rather than three near-identical sets of rules.
+ *
+ * These items carry a title and an image and nothing else, so there is no
+ * description to reveal and therefore no reveal button: a control that opens
+ * an empty panel is worse than no control. If per-industry copy is written
+ * later, adding a .cat-reveal block here brings these in line with the other
+ * two grids exactly.
  */
 export default function ServiceIndustries() {
   const [headRef, headIn] = useReveal();
@@ -21,19 +24,12 @@ export default function ServiceIndustries() {
         <p>{serviceIndustries.intro}</p>
       </div>
 
-      <div ref={gridRef} className={`svc-ind-grid reveal${gridIn ? ' is-in' : ''}`}>
-        {serviceIndustries.items.map((item, i) => (
-          <article
-            key={item.id}
-            className="svc-ind-card"
-            style={{ '--card-delay': `${i * 0.07}s` }}
-            tabIndex={0}
-          >
-            <img src={item.image} alt="" loading="lazy" decoding="async" />
-            <div className="svc-ind-scrim" />
-            <div className="svc-ind-bar">
-              <h3>{item.title}</h3>
-              <Icon name="arrow" className="svc-ind-arrow" size={18} />
+      <div ref={gridRef} className={`cat-grid reveal reveal--late${gridIn ? ' is-in' : ''}`}>
+        {serviceIndustries.items.map((item) => (
+          <article key={item.id} className="cat-card cat-card--static">
+            <div className="cat-card-bg" style={{ backgroundImage: `url('${item.image}')` }} />
+            <div className="cat-body">
+              <h3 className="cat-title">{item.title}</h3>
             </div>
           </article>
         ))}

@@ -1,4 +1,4 @@
-import { industryFeatures } from '../../data/industries.js';
+import { industryFeatures } from '@/content/industries.js';
 import { useReveal } from '../../hooks/useReveal.js';
 
 /**
@@ -53,6 +53,10 @@ const HUB_CX = W / 2;
 const HUB_CY = 322;
 const HUB_W = 250;
 const HUB_H = 126;
+
+/* One cycle for every pulse: travel, then a pause before the next run.
+   Shared by all eight so they cannot drift apart. */
+const PULSE_DUR = '4.6s';
 
 /**
  * Connector from a chip's inner edge to the hub's near edge. Both control
@@ -115,17 +119,45 @@ function EcosystemDiagram({ active }) {
         ))
       )}
 
-      {/* One slow pulse per side, on the outermost branch each way. */}
-      {sides.map((side, s) => (
-        <circle key={`p${side.key}`} r="3" fill="#A8C6EA" className="ind-eco-pulse">
-          <animateMotion
-            dur="8s"
-            begin={`${s * 4}s`}
-            repeatCount="indefinite"
-            path={branch(side.edgeX, ROWS[0] + CHIP_H / 2, side.hubX)}
-          />
-        </circle>
-      ))}
+      {/* One pulse per branch, all eight on a single clock: identical begin
+          and identical dur, so they leave their chips together and reach the
+          hub together.
+
+          The branches are not the same length — 111 user units on the middle
+          rows against 298 on the outer ones — so equal duration means the
+          outer dots cover more ground in the same time. Departure and arrival
+          are what line up; velocity cannot also, short of redrawing the
+          layout so every branch measures the same.
+
+          The radius does the appearing and vanishing, not the opacity: CSS
+          already owns .ind-eco-pulse opacity for the scroll-reveal gate and
+          would override a SMIL opacity animation outright. Nothing sets r, so
+          it is safe to drive here, and it shares the SMIL clock with the
+          motion — which a CSS animation would not. */}
+      {sides.map((side) =>
+        side.items.map((item, i) => (
+          <circle key={`p${side.key}${item.id}`} r="0" fill="#A8C6EA" className="ind-eco-pulse">
+            <animateMotion
+              dur={PULSE_DUR}
+              begin="0s"
+              repeatCount="indefinite"
+              calcMode="linear"
+              keyPoints="0;1;1"
+              keyTimes="0;0.52;1"
+              path={branch(side.edgeX, ROWS[i] + CHIP_H / 2, side.hubX)}
+            />
+            <animate
+              attributeName="r"
+              dur={PULSE_DUR}
+              begin="0s"
+              repeatCount="indefinite"
+              calcMode="linear"
+              values="0;3;3;0;0"
+              keyTimes="0;0.05;0.46;0.52;1"
+            />
+          </circle>
+        ))
+      )}
 
       {/* Industry nodes */}
       {sides.map((side) =>

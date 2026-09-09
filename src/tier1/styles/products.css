@@ -64,12 +64,12 @@
    ============================================================ */
 .tier1-site .pp-hero {
   position: relative; overflow: hidden; isolation: isolate;
-  display: flex; align-items: center;
+  display: flex; align-items: flex-start;
   /* The Products hero carries ~3× the Solutions hero's copy and none of it
      may be cut, so the type and gutters are tuned to land the whole
      composition inside one viewport rather than the hero being allowed to
      grow. Nothing here is decorative slack. */
-  padding: 126px 40px 76px;
+  padding: 244px 32px 76px;
   min-height: 100vh;                          /* fallback for no svh */
   min-height: 100svh;
   background: linear-gradient(180deg, #FFFFFF 0%, #F7FAFD 100%);
@@ -184,7 +184,7 @@
 @keyframes pp-env-parallax { to { transform: translate3d(0, 38px, 0); } }
 
 /* ---- content ------------------------------------------------------ */
-.tier1-site .pp-hero-inner { position: relative; z-index: 2; max-width: 1280px; width: 100%; margin: 0 auto; }
+.tier1-site .pp-hero-inner { position: relative; z-index: 2; max-width: 1216px; width: 100%; margin: 0 auto; }
 
 /* Architectural frosted glass, not a white card: the fill is blue-grey and
    roughly half-transparent, so the ecosystem stays legible through it and the
@@ -248,8 +248,26 @@
   transition: transform .28s cubic-bezier(.2,.75,.25,1), box-shadow .28s ease, filter .25s ease;
 }
 .tier1-site .pp-hero-ctas .btn-cyan:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(13,33,64,0.28); }
-.tier1-site .pp-hero-ctas .btn-outline-navy { background: rgba(255,255,255,0.55); transition: transform .28s cubic-bezier(.2,.75,.25,1), background .28s ease, border-color .28s ease; }
-.tier1-site .pp-hero-ctas .btn-outline-navy:hover { transform: translateY(-2px); background: rgba(255,255,255,0.85); border-color: var(--navy); }
+/* Glass "ghost" treatment, matching the home hero's "Talk to an Expert"
+   button: a soft hairline border and light translucent fill under a drop
+   shadow, with a gentle lift on hover — not the hard 1.5px navy outline that
+   flips to a solid navy fill. The home button is white because it sits on dark
+   video; this hero is light, so the same treatment is navy-toned to stay
+   legible. Border, fill and shadow are all set here, replacing the shared
+   .btn-outline-navy rule. */
+.tier1-site .pp-hero-ctas .btn-outline-navy {
+  color: var(--navy);
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(13, 33, 64, 0.22);
+  box-shadow: 0 8px 24px -12px rgba(6, 16, 34, 0.35);
+  transition: transform .3s cubic-bezier(.22,1,.36,1), background .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+.tier1-site .pp-hero-ctas .btn-outline-navy:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(13, 33, 64, 0.35);
+  box-shadow: 0 16px 34px -14px rgba(6, 16, 34, 0.45);
+}
 
 /* ---- benefits: a second glass layer, not a second card ----------------
    It laps 20px up over the main panel's lower-right corner. That 20px lands
@@ -364,10 +382,6 @@
   display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
   color: var(--light-text); margin: 26px 0 10px;
 }
-.tier1-site .pp-kicker::before {
-  content: ''; display: inline-block; width: 16px; height: 2px; border-radius: 1px;
-  background: var(--cyan); vertical-align: middle; margin-right: 10px; margin-top: -2px;
-}
 .tier1-site .pp-note {
   padding: 14px 18px; border-radius: 12px; background: rgba(255,255,255,0.8);
   border: 1px solid var(--border); border-left: 2px solid var(--cyan);
@@ -401,8 +415,8 @@
   transition: background .32s ease, border-color .32s ease;
 }
 .tier1-site .pp-principle:hover .pp-principle-icon { background: rgba(13,33,64,0.09); border-color: rgba(13,33,64,0.12); }
-.tier1-site .pp-principle-icon svg { transition: transform .32s cubic-bezier(.2,.8,.2,1); }
-.tier1-site .pp-principle:hover .pp-principle-icon svg { transform: scale(1.09) translateY(-0.5px); }
+.tier1-site .pp-principle-icon svg, .tier1-site .pp-principle-icon .msym { transition: transform .32s cubic-bezier(.2,.8,.2,1); }
+.tier1-site .pp-principle:hover .pp-principle-icon svg, .tier1-site .pp-principle:hover .pp-principle-icon .msym { transform: scale(1.09) translateY(-0.5px); }
 .tier1-site .pp-principle p { font-size: 14px; font-weight: 500; line-height: 1.45; color: var(--navy); }
 
 /* ---- routes and core --------------------------------------------------- */
@@ -520,8 +534,8 @@
   transition: transform .3s ease, background .3s ease, border-color .3s ease;
 }
 .tier1-site .pp-cat:hover .pp-cat-icon { transform: translateY(-2px); background: rgba(13,33,64,0.09); border-color: rgba(13,33,64,0.13); }
-.tier1-site .pp-cat-icon svg { transition: transform .3s cubic-bezier(.2,.8,.2,1); }
-.tier1-site .pp-cat:hover .pp-cat-icon svg { transform: scale(1.08); }
+.tier1-site .pp-cat-icon svg, .tier1-site .pp-cat-icon .msym { transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.tier1-site .pp-cat:hover .pp-cat-icon svg, .tier1-site .pp-cat:hover .pp-cat-icon .msym { transform: scale(1.08); }
 .tier1-site .pp-cat h3 { font-size: 19px; font-weight: 700; line-height: 1.28; margin-bottom: 8px; color: var(--navy); }
 .tier1-site .pp-cat-lead { font-size: 13.5px; font-weight: 600; color: var(--navy-mid); line-height: 1.45; margin-bottom: 10px; }
 .tier1-site .pp-cat-desc { font-size: 13.5px; line-height: 1.62; color: var(--charcoal); margin-bottom: 18px; }
@@ -675,9 +689,9 @@
   .tier1-site .pp-cat-grid .pp-includes { margin-bottom: 16px; }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1023.98px) {
   /* tablet: the ecosystem gives ground, the panel stays fully readable */
-  .tier1-site .pp-hero { padding: 140px 32px 84px; min-height: 100vh; min-height: 100svh; }
+  .tier1-site .pp-hero { padding: 180px 24px 84px; min-height: 100vh; min-height: 100svh; }
   .tier1-site .pp-hero-env-img { object-position: 74% 50%; }
   .tier1-site .pp-hero-veil {
     background:

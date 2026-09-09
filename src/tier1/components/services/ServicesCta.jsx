@@ -1,5 +1,6 @@
-import { servicesCta } from '../../data/services.js';
+import { servicesCta } from '@/content/services.js';
 import { useReveal } from '../../hooks/useReveal.js';
+import CtaLabel from '../CtaLabel.jsx';
 
 /**
  * Closing statement: image -> navy overlay -> glass content layer -> CTA.
@@ -19,8 +20,8 @@ export default function ServicesCta() {
           <h2>{servicesCta.title}</h2>
           <p>{servicesCta.body}</p>
           <div className="cta-row svc-cta-row">
-            <button className="btn-cyan svc-btn-glow">{servicesCta.primary}</button>
-            <button className="btn-glass glass">{servicesCta.secondary}</button>
+            <button className="btn-cyan svc-btn-glow"><CtaLabel>{servicesCta.primary}</CtaLabel></button>
+            <button className="btn-glass glass"><CtaLabel>{servicesCta.secondary}</CtaLabel></button>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { platformAlignment } from '../../data/services.js';
+import { platformAlignment } from '@/content/services.js';
 import { useReveal } from '../../hooks/useReveal.js';
 
 /**

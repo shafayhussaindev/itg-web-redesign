@@ -1,4 +1,5 @@
-import { industriesHero } from '../../data/industries.js';
+import { industriesHero } from '@/content/industries.js';
+import CtaLabel from '../CtaLabel.jsx';
 
 /**
  * Full-bleed photograph, angled gradient, glass panel left.
@@ -24,7 +25,6 @@ export default function IndustriesHero() {
 
       <div className="ind-hero-inner">
         <div className="ind-hero-glass">
-          <span className="eyebrow">{industriesHero.eyebrow}</span>
           <h1>
             {industriesHero.titleLine1}
             <br />
@@ -32,8 +32,8 @@ export default function IndustriesHero() {
           </h1>
           <p>{industriesHero.body}</p>
           <div className="cta-row">
-            <button className="btn-cyan ind-btn-glow">{industriesHero.primaryCta}</button>
-            <button className="btn-glass glass">{industriesHero.secondaryCta}</button>
+            <button className="btn-cyan ind-btn-glow"><CtaLabel>{industriesHero.primaryCta}</CtaLabel></button>
+            <button className="btn-glass glass"><CtaLabel>{industriesHero.secondaryCta}</CtaLabel></button>
           </div>
         </div>
       </div>

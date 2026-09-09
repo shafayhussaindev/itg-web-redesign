@@ -1,5 +1,16 @@
-// All page copy lives here so content edits never touch component markup.
+/* ============================================================================
+ * SOLUTIONS PAGE
+ * ==============
+ * shown at  yoursite.com/solutions
+ *
+ * Everything on this page that you might want to reword, re-order or re-image
+ * is in this file. Change the text between the quote marks and save — the site
+ * picks it up on its own. See content/README.md if anything here is unclear.
+ * ========================================================================= */
 
+/* NOT LIVE — the menu bar and footer you see on the site come from site.js.
+   These two feed an older pair of components that are no longer mounted on any
+   page. Editing them changes nothing; edit site.js instead. */
 export const nav = {
   links: ['Solutions', 'Products', 'Services', 'Industries', 'Company'],
   cta: 'Contact us',
@@ -128,6 +139,7 @@ export const ctaBand = {
   background: '/assets/cta-skyline.jpg',
 };
 
+/* NOT LIVE — see the note above `nav`. Edit site.js instead. */
 export const footer = {
   tagline: 'Engineering intelligent digital platforms for modern enterprises.',
   columns: [

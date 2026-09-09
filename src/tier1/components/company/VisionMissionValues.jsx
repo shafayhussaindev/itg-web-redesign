@@ -1,4 +1,4 @@
-import { visionMissionValues as vmv } from '../../data/company.js';
+import { visionMissionValues as vmv } from '@/content/company.js';
 import { useReveal } from '../../hooks/useReveal.js';
 import Icon from './icons.jsx';
 

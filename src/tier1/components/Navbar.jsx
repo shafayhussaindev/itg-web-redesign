@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { nav } from '../data/content.js';
+import { nav } from '@/content/solutions.js';
 
 const routes = {
   Solutions: '/solutions',

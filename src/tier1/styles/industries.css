@@ -49,9 +49,9 @@
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
-  padding: 150px 40px 85px;
+  padding: 244px 32px 85px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   overflow: hidden;
   background: var(--navy);
 }
@@ -107,7 +107,7 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 1240px;
+  max-width: 1216px;
   margin: 0 auto;
 }
 .tier1-site .ind-hero-glass {
@@ -261,23 +261,20 @@
   position: relative;
   z-index: 2;
   grid-row: 1;
-  padding: 38px 38px 40px;
+  /* Identical to the Services pillar panel — same padding, same glass stops —
+     so the two pages present one panel format rather than two near-misses.
+     (This was previously 0.88/0.74 to let more photograph read through.) */
+  padding: 40px 40px 42px;
   border-radius: 22px;
-  /* A little more transparent than the Services pillar panel (0.9/0.78):
-     Industries is the photographic page, so more of the photograph reads
-     through the glass. Charcoal body text still clears 6.5:1 at the lower
-     stop over a mid-tone photograph. */
-  background: linear-gradient(155deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.74));
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.78));
   backdrop-filter: blur(13px) saturate(1.2);
   -webkit-backdrop-filter: blur(13px) saturate(1.2);
   border: 1px solid rgba(255, 255, 255, 0.85);
   box-shadow: var(--shadow-lift), inset 0 1px 0 rgba(255, 255, 255, 0.95);
   transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
 }
-.tier1-site .ind-feature:hover .ind-feature-panel {
-  transform: translateY(-4px);
-  box-shadow: 0 34px 74px rgba(13, 33, 64, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
+/* Lift and shadow now come from the shared tilt block, which composes them
+   with the rotation. A bare translateY() here would replace it. */
 
 /* Panel right: image occupies cols 1-9, panel overlaps from col 7 to 13, so
    6 of 12 columns of photograph stay clear of the glass. */
@@ -353,8 +350,6 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--navy);
-  padding-left: 11px;
-  border-left: 3px solid var(--cyan);
   margin-bottom: 16px;
 }
 /* Two columns: four entries become a compact 2x2 block rather than a long
@@ -366,7 +361,7 @@
   gap: 12px 22px;
 }
 .tier1-site .ind-feature-focus li { display: flex; gap: 9px; align-items: flex-start; }
-.tier1-site .ind-feature-focus svg { color: var(--teal); flex-shrink: 0; margin-top: 2px; }
+.tier1-site .ind-feature-focus svg, .tier1-site .ind-feature-focus .msym { color: var(--teal); flex-shrink: 0; margin-top: 2px; }
 .tier1-site .ind-feature-focus span { font-size: 13.5px; color: var(--charcoal); line-height: 1.45; }
 
 /* ============================================================
@@ -579,8 +574,8 @@
   .tier1-site .ind-feature-list { gap: 80px; }
 }
 
-@media (max-width: 1024px) {
-  .tier1-site .ind-hero { min-height: 100vh; min-height: 100svh; padding: 160px 32px 96px; }
+@media (max-width: 1023.98px) {
+  .tier1-site .ind-hero { min-height: 100vh; min-height: 100svh; padding: 180px 24px 90px; }
   .tier1-site .ind-hero-glass { max-width: 600px; padding: 0; }
   .tier1-site .ind-hero-glass h1 { font-size: 36px; }
   .tier1-site .ind-hero-lines { opacity: 0.45; }
@@ -603,7 +598,7 @@
   .tier1-site .ind-hero {
     min-height: 100vh;
     min-height: 100svh;
-    padding: 130px 20px 72px;
+    padding: 140px 16px 64px;
     background-position: center;
   }
   .tier1-site .ind-hero-img { background-position: 62% center; }

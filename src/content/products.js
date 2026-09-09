@@ -1,4 +1,13 @@
-// Products page copy.
+/* ============================================================================
+ * PRODUCTS PAGE
+ * =============
+ * shown at  yoursite.com/products
+ *
+ * Everything on this page that you might want to reword, re-order or re-image
+ * is in this file. Change the text between the quote marks and save — the site
+ * picks it up on its own. See content/README.md if anything here is unclear.
+ * ========================================================================= */
+
 // Every string below is taken VERBATIM from the live Products page
 // (itg-technologies.vercel.app/products). Do not reword — edit here only
 // if the approved copy itself changes.

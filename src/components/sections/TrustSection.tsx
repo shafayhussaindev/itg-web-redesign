@@ -1,5 +1,8 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useCounterAnimation } from '@/hooks/useCounterAnimation';
+// @ts-expect-error - plain JS content file, no types alongside it
+import { trust } from "@/content/home.js";
+
 
 export function TrustSection() {
   const sectionRef = useScrollAnimation();
@@ -15,13 +18,13 @@ export function TrustSection() {
       <div ref={sectionRef} className="section-container">
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-foreground">
-            Enterprise Technology Built for Trust, Resilience and Scale
+            {trust.title}
           </h2>
           {/* <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-foreground">
             TRUST AND CREDIBILITY
           </h2> */}
           <p className="mt-6 text-muted-foreground text-md sm:text-base lg:text-lg">
-            In a market shaped by AI acceleration, regulatory pressure and operational volatility, ITG delivers platforms that help organizations govern data, automate workflows, secure operations and scale confidently across complex business environments.
+            {trust.body}
           </p>
           {/* <p className="mt-3 text-lg sm:text-xl lg:text-2xl font-medium text-muted-foreground">
             Enterprise-Ready Platforms Built for the Long Term

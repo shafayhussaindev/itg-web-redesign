@@ -1,4 +1,4 @@
-import { industryFeatures, focusHeading } from '../../data/industries.js';
+import { industryFeatures, focusHeading } from '@/content/industries.js';
 import { useReveal, useParallax } from '../../hooks/useReveal.js';
 import Icon from './icons.jsx';
 

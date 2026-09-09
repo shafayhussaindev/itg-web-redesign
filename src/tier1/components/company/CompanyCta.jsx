@@ -1,5 +1,6 @@
-import { companyCta } from '../../data/company.js';
+import { companyCta } from '@/content/company.js';
 import { useReveal } from '../../hooks/useReveal.js';
+import CtaLabel from '../CtaLabel.jsx';
 
 /**
  * Closing CTA: partnership photograph -> navy vignette -> navy glass panel.
@@ -23,8 +24,8 @@ export default function CompanyCta() {
         <div ref={ref} className={`co-cta-glass reveal${shown ? ' is-in' : ''}`}>
           <h2>{companyCta.title}</h2>
           <div className="cta-row co-cta-row">
-            <button className="btn-cyan co-btn-glow">{companyCta.primary}</button>
-            <button className="btn-glass glass">{companyCta.secondary}</button>
+            <button className="btn-cyan co-btn-glow"><CtaLabel>{companyCta.primary}</CtaLabel></button>
+            <button className="btn-glass glass"><CtaLabel>{companyCta.secondary}</CtaLabel></button>
           </div>
         </div>
       </div>

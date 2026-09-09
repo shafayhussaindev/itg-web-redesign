@@ -1,30 +1,12 @@
-import { whyItg } from '../data/content.js';
+import { whyItg } from '@/content/solutions.js';
 import { useReveal } from '../hooks/useReveal.js';
 
-const icons = {
-  building: (
-    <path d="M3 21V9l9-6 9 6v12M9 21v-6h6v6" />
-  ),
-  grid: (
-    <>
-      <rect x="3" y="3" width="7" height="7" rx="1" />
-      <rect x="14" y="3" width="7" height="7" rx="1" />
-      <rect x="3" y="14" width="7" height="7" rx="1" />
-      <rect x="14" y="14" width="7" height="7" rx="1" />
-    </>
-  ),
-  shield: (
-    <>
-      <path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-4z" />
-      <path d="m9 12 2 2 4-4" />
-    </>
-  ),
-  lock: (
-    <>
-      <rect x="5" y="11" width="14" height="10" rx="2" />
-      <path d="M8 11V7a4 4 0 0 1 8 0v4" />
-    </>
-  ),
+/* Material Symbols glyph per card icon key from content.js. */
+const GLYPHS = {
+  building: 'apartment',
+  grid: 'grid_view',
+  shield: 'verified_user',
+  lock: 'lock',
 };
 
 export default function WhyITG() {
@@ -39,16 +21,13 @@ export default function WhyITG() {
       <div ref={gridRef} className={`why-grid reveal reveal--late${gridIn ? ' is-in' : ''}`}>
         {whyItg.map((card) => (
           <div key={card.id} className="why-card glass-dark">
-            <svg
-              className="why-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
+            <span
+              className="why-icon msym"
               aria-hidden="true"
+              style={{ '--msym': '30px', fontVariationSettings: "'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 30" }}
             >
-              {icons[card.icon]}
-            </svg>
+              {GLYPHS[card.icon] ?? 'circle'}
+            </span>
             <h4>{card.title}</h4>
             <p>{card.body}</p>
           </div>

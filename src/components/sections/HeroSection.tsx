@@ -2,7 +2,10 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { Button } from '@/components/ui/button';
 import { Spotlight } from '@/components/ui/spotlight';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowRight, ChevronDown } from "@/components/icons/material";
+import "@/index.css"
+// @ts-expect-error - plain JS content file, no types alongside it
+import { hero } from "@/content/home.js";
 
 export function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -78,7 +81,7 @@ export function HeroSection() {
     <section
       ref={containerRef}
       data-dark-hero
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-screen flex items-start overflow-hidden"
     >
       {/* Background video */}
       <video
@@ -88,12 +91,12 @@ export function HeroSection() {
         loop
         playsInline
         preload="metadata"
-        poster="/hero-poster.jpg"
+        poster={hero.videoPoster}
         aria-hidden="true"
       >
         {/* Optimized H.264: audio stripped, CRF 31 @1600w, +faststart (~3.7MB).
             The poster paints the LCP instantly while the video streams in. */}
-        <source src="/hero.mp4" type="video/mp4" />
+        <source src={hero.video} type="video/mp4" />
       </video>
 
       {/* Legibility scrim. With the frosted panel gone this is the only thing
@@ -111,7 +114,7 @@ export function HeroSection() {
       <Spotlight className="bottom-10 right-8 opacity-70" size={520} color="hsl(var(--brand-secondary) / 0.22)" />
 
       {/* Content Container - Left Side */}
-      <div className="relative z-10 w-full py-20 md:py-24 lg:py-28">
+      <div className="relative z-10 w-full pt-[140px] md:pt-[180px] lg:pt-[244px] pb-20 md:pb-24 lg:pb-28">
         <div className="section-container">
           <div className="flex justify-start">
             <div ref={panelRef} className="hero-glass-panel max-w-[680px]">
@@ -120,14 +123,19 @@ export function HeroSection() {
                 ref={headlineRef}
                 className="mb-6 lg:mb-8 text-left text-white"
               >
-                Building Intelligent Enterprise Platforms for a Regulated, AI-Driven World
+                {hero.headlineLine1} <br />
+                {/* Accent line, matching the tier-1 heroes: they mark their
+                    second line with .accent, which resolves to the same
+                    --brand-accent-soft. The soft stop, not --brand-accent —
+                    the darker blue disappears against hero footage. */}
+                <span className="text-[color:var(--brand-accent-soft)]">{hero.headlineAccent}</span>
               </h1>
 
               <p
                 ref={subheadlineRef}
                 className="text-base md:text-lg lg:text-xl text-white/90 mb-6 lg:mb-8 text-left"
               >
-                ITG engineers AI-powered enterprise software, automation, sustainability intelligence and digital experience platforms for organizations that need speed, control, resilience and measurable transformation.
+                {hero.body}
               </p>
 
               {/* <p
@@ -138,15 +146,15 @@ export function HeroSection() {
               </p> */}
 
               <div ref={ctaRef} className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
-                <a href="/solutions" className="btn-modern group w-full sm:w-auto">
-                  Explore Solutions
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <a href={hero.primaryCta.href} className="btn-modern group w-full sm:w-auto">
+                  {hero.primaryCta.label}
+                  <ArrowRight className="w-4 h-4 origin-left transition-transform group-hover:translate-x-1 group-hover:scale-105" />
                 </a>
                 <a
-                  href="#contact"
+                  href={hero.secondaryCta.href}
                   className="btn-modern-ghost w-full sm:w-auto"
                 >
-                  Talk to an Expert
+                  {hero.secondaryCta.label}
                 </a>
               </div>
             </div>
@@ -156,7 +164,7 @@ export function HeroSection() {
 
       {/* Scroll Indicator - positioned at bottom of section */}
       <div className="absolute bottom-6 lg:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/80 z-10">
-        <span className="text-xs font-medium tracking-widest uppercase">Scroll</span>
+        <span className="text-xs font-medium tracking-widest uppercase">{hero.scrollHint}</span>
         <ChevronDown className="w-5 h-5 animate-bounce" />
       </div>
 

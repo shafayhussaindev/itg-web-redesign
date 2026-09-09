@@ -4,27 +4,34 @@ import HowItWorks from './HowItWorks.jsx';
 import {
   productsHero, philosophy, categoriesHeading, productCategories,
   ecosystem, howItWorks, industries, productsCta,
-} from '../../data/products.js';
+} from '@/content/products.js';
 import '../../styles/products.css';
+import CtaLabel from '../CtaLabel.jsx';
 
 /* ---------- small inline icon set (stroke, matches Solutions weight) ---------- */
+/* Material Symbols, keyed by the icon names the products data already uses. */
+const PP_GLYPHS = {
+  check: 'check',
+  plug: 'power',
+  shield: 'verified_user',
+  flow: 'account_tree',
+  layers: 'layers',
+  leaf: 'eco',
+  gear: 'settings',
+  spark: 'auto_awesome',
+  screen: 'devices',
+};
+
 function Ico({ name, size = 20 }) {
-  const p = {
-    width: size, height: size, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor',
-    strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true,
-  };
-  switch (name) {
-    case 'check':  return <svg {...p}><path d="M20 6 9 17l-5-5" /></svg>;
-    case 'plug':   return <svg {...p}><path d="M9 2v6M15 2v6M6 8h12v3a6 6 0 0 1-12 0V8ZM12 17v5" /></svg>;
-    case 'shield': return <svg {...p}><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z" /><path d="M9 12l2 2 4-4" /></svg>;
-    case 'flow':   return <svg {...p}><rect x="3" y="3" width="7" height="6" rx="1.5" /><rect x="14" y="15" width="7" height="6" rx="1.5" /><path d="M6.5 9v5a4 4 0 0 0 4 4H14" /></svg>;
-    case 'layers': return <svg {...p}><path d="M12 3 3 8l9 5 9-5-9-5Z" /><path d="M3 12l9 5 9-5" /><path d="M3 16l9 5 9-5" /></svg>;
-    case 'leaf':   return <svg {...p}><path d="M20 4c-9 0-14 5-14 12 0 2.2 1.8 4 4 4 7 0 12-5 12-14V4Z" /><path d="M6 20c2-4 4-7 8-10" /></svg>;
-    case 'gear':   return <svg {...p}><circle cx="12" cy="12" r="3.2" /><path d="M12 3.5v2.4M12 18.1v2.4M20.5 12h-2.4M5.9 12H3.5M17.6 6.4l-1.7 1.7M8.1 15.9l-1.7 1.7M17.6 17.6l-1.7-1.7M8.1 8.1 6.4 6.4" /></svg>;
-    case 'spark':  return <svg {...p}><path d="M12 3v4M12 17v4M3 12h4M17 12h4" /><circle cx="12" cy="12" r="3" /></svg>;
-    case 'screen': return <svg {...p}><rect x="3.5" y="5" width="17" height="12" rx="1.5" /><path d="M9 20.5h6M12 17v3.5" /></svg>;
-    default: return null;
-  }
+  return (
+    <span
+      className="msym"
+      aria-hidden="true"
+      style={{ '--msym': `${size}px`, fontVariationSettings: `'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' ${size}` }}
+    >
+      {PP_GLYPHS[name] ?? 'circle'}
+    </span>
+  );
 }
 
 /* Renders `text` with `accent` visually emphasised. It never adds, removes or
@@ -314,7 +321,6 @@ export default function ProductsPage() {
 
           <div className="pp-hero-inner">
             <div className="pp-hero-glass">
-              <span className="pp-hero-eyebrow">{productsHero.eyebrow}</span>
               <h1>{productsHero.title}</h1>
               <p className="pp-hero-sub">
                 <Accented text={productsHero.subtitle} accent={productsHero.subtitleAccent} />
@@ -324,7 +330,7 @@ export default function ProductsPage() {
               ))}
 
               <div className="pp-hero-ctas">
-                <button className="btn-cyan">{productsHero.primaryCta}</button>
+                <button className="btn-cyan"><CtaLabel>{productsHero.primaryCta}</CtaLabel></button>
                 <button className="btn-outline-navy">
                   {productsHero.secondaryCta}<span className="btn-arrow">→</span>
                 </button>
@@ -442,7 +448,7 @@ export default function ProductsPage() {
           <div className="pp-reveal">
             <h2>{productsCta.heading}</h2>
             <div className="pp-cta-btns">
-              <button className="btn-cyan">{productsCta.primary}</button>
+              <button className="btn-cyan"><CtaLabel>{productsCta.primary}</CtaLabel></button>
               <button className="btn-outline-navy">
                 {productsCta.secondary}<span className="btn-arrow">→</span>
               </button>

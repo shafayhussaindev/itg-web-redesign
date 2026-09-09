@@ -3,6 +3,7 @@ import IndustriesIntro from './IndustriesIntro.jsx';
 import IndustryFeatures from './IndustryFeatures.jsx';
 import IndustryEcosystem from './IndustryEcosystem.jsx';
 import IndustriesCta from './IndustriesCta.jsx';
+import IndustriesGrid from '../Industries.jsx';
 import '../../styles/industries.css';
 
 /**
@@ -14,6 +15,8 @@ import '../../styles/industries.css';
  *   intro       ice-blue, flat, one pale glass panel over line geometry
  *   features    white, eight photographs with overlapping glass panels
  *   ecosystem   dark navy, vector only — the page's one dark beat
+ *   grid        white, six photo cards that reveal on hover (moved here from
+ *               the Solutions page, where it read as off-topic)
  *   cta         full-bleed photo + navy + glass
  *
  * The features block is deliberately long and uniform in construction; the
@@ -30,6 +33,7 @@ export default function IndustriesPage() {
         <IndustriesIntro />
         <IndustryFeatures />
         <IndustryEcosystem />
+        <IndustriesGrid />
         <IndustriesCta />
       </main>
     </>

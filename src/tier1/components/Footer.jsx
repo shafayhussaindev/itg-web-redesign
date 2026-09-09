@@ -1,4 +1,4 @@
-import { footer } from '../data/content.js';
+import { footer } from '@/content/solutions.js';
 
 export default function Footer() {
   return (

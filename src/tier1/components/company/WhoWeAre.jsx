@@ -1,4 +1,4 @@
-import { whoWeAre } from '../../data/company.js';
+import { whoWeAre } from '@/content/company.js';
 import { useReveal, useParallax } from '../../hooks/useReveal.js';
 import Icon from './icons.jsx';
 

@@ -1,5 +1,6 @@
-import { servicesHero } from '../../data/services.js';
+import { servicesHero } from '@/content/services.js';
 import Icon from './icons.jsx';
+import CtaLabel from '../CtaLabel.jsx';
 
 /**
  * Full-bleed photograph, gradient, glass panel, floating capability chips.
@@ -22,7 +23,6 @@ export default function ServicesHero() {
 
       <div className="svc-hero-inner">
         <div className="svc-hero-glass">
-          <span className="eyebrow">{servicesHero.eyebrow}</span>
           <h1>
             {servicesHero.titleLine1}
             <br />
@@ -30,8 +30,8 @@ export default function ServicesHero() {
           </h1>
           <p>{servicesHero.body}</p>
           <div className="cta-row">
-            <button className="btn-cyan svc-btn-glow">{servicesHero.primaryCta}</button>
-            <button className="btn-glass glass">{servicesHero.secondaryCta}</button>
+            <button className="btn-cyan svc-btn-glow"><CtaLabel>{servicesHero.primaryCta}</CtaLabel></button>
+            <button className="btn-glass glass"><CtaLabel>{servicesHero.secondaryCta}</CtaLabel></button>
           </div>
         </div>
 

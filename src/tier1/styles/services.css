@@ -102,9 +102,9 @@
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
-  padding: 150px 40px 85px;
+  padding: 244px 32px 85px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   overflow: hidden;
   background: var(--navy);
 }
@@ -146,7 +146,7 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 1240px;
+  max-width: 1216px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: minmax(0, 648px) minmax(0, 1fr);
@@ -400,10 +400,8 @@
 .tier1-site .svc-pillar--left .svc-pillar-scrim {
   background: linear-gradient(270deg, rgba(13, 33, 64, 0.42) 0%, rgba(13, 33, 64, 0.08) 42%, rgba(13, 33, 64, 0.58) 100%);
 }
-.tier1-site .svc-pillar:hover .svc-pillar-panel {
-  transform: translateY(-4px);
-  box-shadow: 0 34px 74px rgba(13, 33, 64, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
+/* Lift and shadow now come from the shared tilt block, which composes them
+   with the rotation. A bare translateY() here would replace it. */
 
 .tier1-site .svc-pillar-number {
   position: absolute;
@@ -451,24 +449,21 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--navy);
-  padding-left: 11px;
-  border-left: 3px solid var(--cyan);
   margin-bottom: 14px;
 }
 .tier1-site .svc-pillar-enables { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 .tier1-site .svc-pillar-enables li { display: flex; gap: 9px; align-items: flex-start; }
-.tier1-site .svc-pillar-enables svg { color: var(--teal); flex-shrink: 0; margin-top: 1px; }
+.tier1-site .svc-pillar-enables svg, .tier1-site .svc-pillar-enables .msym { color: var(--teal); flex-shrink: 0; margin-top: 1px; }
 .tier1-site .svc-pillar-enables span { font-size: 13.5px; color: var(--charcoal); line-height: 1.5; }
 
+/* A plain list, matching the "What This Enables" column beside it. It used
+   to sit in its own tinted, bordered box, which put a second surface inside
+   the glass panel — a box within a box. */
 .tier1-site .svc-pillar-includes {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 16px 18px;
-  border-radius: 13px;
-  background: rgba(234, 240, 248, 0.72);
-  border: 1px solid rgba(13, 33, 64, 0.07);
 }
 .tier1-site .svc-pillar-includes li {
   position: relative;
@@ -694,7 +689,7 @@
 .tier1-site .svc-why .why-card {
   position: relative;
   overflow: hidden;
-  transition: transform 0.35s var(--ease), background 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease), background 0.35s var(--ease);
 }
 /* The small cyan accent the brief asks for: a top edge that runs in on hover. */
 .tier1-site .svc-why .why-card::after {
@@ -710,9 +705,9 @@
   transition: transform 0.45s var(--ease);
 }
 .tier1-site .svc-why .why-card:hover {
-  transform: translateY(-4px);
+  /* Lift comes from the shared tilt block, which composes it with the
+     rotation. A bare translateY() here would replace it. */
   background: rgba(13, 33, 64, 0.52);
-  box-shadow: 0 20px 44px rgba(6, 18, 38, 0.26);
 }
 .tier1-site .svc-why .why-card:hover::after { transform: scaleX(1); }
 .tier1-site .svc-why .why-icon { color: var(--brand-accent-soft); }
@@ -787,8 +782,8 @@
   .tier1-site .svc-pillar-list { gap: 72px; }
 }
 
-@media (max-width: 1024px) {
-  .tier1-site .svc-hero { min-height: 100vh; min-height: 100svh; padding: 160px 32px 90px; }
+@media (max-width: 1023.98px) {
+  .tier1-site .svc-hero { min-height: 100vh; min-height: 100svh; padding: 180px 24px 90px; }
   .tier1-site .svc-hero-inner { grid-template-columns: 1fr; gap: 32px; }
   .tier1-site .svc-hero-glass { max-width: 620px; padding: 0; }
   .tier1-site .svc-hero-glass h1 { font-size: 38px; }
@@ -810,7 +805,7 @@
 }
 
 @media (max-width: 680px) {
-  .tier1-site .svc-hero { min-height: 100vh; min-height: 100svh; padding: 130px 20px 64px; }
+  .tier1-site .svc-hero { min-height: 100vh; min-height: 100svh; padding: 140px 16px 64px; }
   .tier1-site .svc-hero-grad {
     background: linear-gradient(180deg, rgba(9, 24, 48, 0.82) 0%, rgba(10, 26, 52, 0.6) 44%, rgba(13, 33, 64, 0.5) 100%);
   }

@@ -1,4 +1,4 @@
-import { news } from '../../data/company.js';
+import { news } from '@/content/company.js';
 import { useReveal } from '../../hooks/useReveal.js';
 import Icon from './icons.jsx';
 

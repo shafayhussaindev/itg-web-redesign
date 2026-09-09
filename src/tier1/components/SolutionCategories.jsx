@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { solutionCategories } from '../data/content.js';
+import { solutionCategories } from '@/content/solutions.js';
 import { useReveal } from '../hooks/useReveal.js';
 
 /**
@@ -49,7 +49,7 @@ export default function SolutionCategories() {
                   setOpenId((cur) => (cur === cat.id ? null : cat.id));
                 }}
               >
-                View Full Details →
+                View Full Details <span className="btn-arrow" aria-hidden="true">→</span>
               </button>
             </div>
           </article>

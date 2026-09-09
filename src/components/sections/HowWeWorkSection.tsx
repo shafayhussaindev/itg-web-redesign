@@ -1,5 +1,8 @@
 import { useStaggerAnimation } from '@/hooks/useScrollAnimation';
-import { ArrowUpRight, DraftingCompass, Hammer, Layers } from 'lucide-react';
+// @ts-expect-error - plain JS content file, no types alongside it
+import { howWeWork } from "@/content/home.js";
+
+import { ArrowUpRight, DraftingCompass, Hammer, Layers } from "@/components/icons/material";
 
 const steps = [
   {
@@ -34,9 +37,9 @@ export function HowWeWorkSection() {
       <div className="section-container">
         {/* Header */}
         <div className="section-header">
-          <h2 className="section-title">A Disciplined Approach to Enterprise Transformation</h2>
+          <h2 className="section-title">{howWeWork.title}</h2>
           <p className="text-lg lg:text-xl text-muted-foreground mt-2">
-            Structured execution designed for scale, governance and long-term impact.
+            {howWeWork.intro}
           </p>
         </div>
 

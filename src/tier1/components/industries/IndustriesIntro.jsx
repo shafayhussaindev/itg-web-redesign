@@ -1,4 +1,4 @@
-import { industriesIntro } from '../../data/industries.js';
+import { industriesIntro } from '@/content/industries.js';
 import { useReveal } from '../../hooks/useReveal.js';
 
 /**

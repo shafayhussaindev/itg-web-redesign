@@ -1,4 +1,4 @@
-import { globalPresence } from '../../data/company.js';
+import { globalPresence } from '@/content/company.js';
 import { useReveal } from '../../hooks/useReveal.js';
 import Icon from './icons.jsx';
 import WorldMap from './WorldMap.jsx';

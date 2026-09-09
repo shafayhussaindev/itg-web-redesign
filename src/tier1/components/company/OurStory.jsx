@@ -1,4 +1,4 @@
-import { ourStory } from '../../data/company.js';
+import { ourStory } from '@/content/company.js';
 import { useReveal } from '../../hooks/useReveal.js';
 
 /**

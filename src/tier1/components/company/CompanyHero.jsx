@@ -1,4 +1,4 @@
-import { companyHero } from '../../data/company.js';
+import { companyHero } from '@/content/company.js';
 
 /**
  * Full-bleed headquarters photograph, angled gradient, glass panel left,
@@ -26,7 +26,6 @@ export default function CompanyHero() {
 
       <div className="co-hero-inner">
         <div className="co-hero-glass">
-          <span className="eyebrow">{companyHero.eyebrow}</span>
           <h1>{companyHero.title}</h1>
           {companyHero.body.map((para, i) => (
             <p key={para} className={i === 0 ? 'co-hero-lead' : undefined}>

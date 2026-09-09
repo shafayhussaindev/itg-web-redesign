@@ -24,6 +24,24 @@
 }
 .tier1-site .co-page .reveal.is-in { opacity: 1; transform: none; }
 
+/* These three tilt as well as reveal, and the rules just above outrank the
+   shared tilt block. So on them the entrance moves through --reveal-y, inside
+   the transform the tilt block composes — a bare `transform` here would flatten
+   the rotation the moment the card finished appearing. */
+.tier1-site .co-page .co-vmv-card.reveal,
+.tier1-site .co-page .co-global-card.reveal,
+.tier1-site .co-page .co-news-card.reveal {
+  --reveal-y: 26px;
+  transform:
+    perspective(1100px)
+    rotateX(var(--tilt-x))
+    rotateY(var(--tilt-y))
+    translateY(calc(var(--lift) + var(--reveal-y)));
+}
+.tier1-site .co-page .co-vmv-card.reveal.is-in,
+.tier1-site .co-page .co-global-card.reveal.is-in,
+.tier1-site .co-page .co-news-card.reveal.is-in { --reveal-y: 0px; }
+
 .tier1-site .co-rule {
   display: block;
   width: 72px;
@@ -66,9 +84,9 @@
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
-  padding: 150px 40px 85px;
+  padding: 244px 32px 85px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   overflow: hidden;
   background: var(--navy);
 }
@@ -122,7 +140,7 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 1240px;
+  max-width: 1216px;
   margin: 0 auto;
 }
 .tier1-site .co-hero-glass {
@@ -303,17 +321,19 @@
   align-items: stretch;
 }
 .tier1-site .co-vmv-card {
+  position: relative;
   padding: 34px 32px 36px;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(11px) saturate(1.15);
   -webkit-backdrop-filter: blur(11px) saturate(1.15);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 18px 46px rgba(6, 18, 38, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.16);
-  transition: transform 0.4s var(--ease), border-color 0.4s var(--ease), background 0.4s var(--ease);
+  transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease),
+              border-color 0.4s var(--ease), background 0.4s var(--ease);
 }
 .tier1-site .co-vmv-card:hover {
-  transform: translateY(-4px);
+  /* Lift comes from the shared tilt block, which composes it with the
+     rotation. A bare translateY() here would replace it. */
   background: rgba(255, 255, 255, 0.11);
   border-color: rgba(255, 255, 255, 0.32);
 }
@@ -339,7 +359,7 @@
 .tier1-site .co-vmv-card p { font-size: 14.5px; line-height: 1.7; color: rgba(255, 255, 255, 0.74); }
 .tier1-site .co-vmv-list { list-style: none; display: flex; flex-direction: column; gap: 11px; }
 .tier1-site .co-vmv-list li { display: flex; gap: 10px; align-items: flex-start; }
-.tier1-site .co-vmv-list svg { color: var(--brand-accent-soft); flex-shrink: 0; margin-top: 1px; }
+.tier1-site .co-vmv-list svg, .tier1-site .co-vmv-list .msym { color: var(--brand-accent-soft); flex-shrink: 0; margin-top: 1px; }
 .tier1-site .co-vmv-list span { font-size: 14px; line-height: 1.5; color: rgba(255, 255, 255, 0.82); }
 
 /* ============================================================
@@ -486,10 +506,8 @@
   box-shadow: var(--shadow-lift), inset 0 1px 0 rgba(255, 255, 255, 0.95);
   transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
 }
-.tier1-site .co-mod:hover .co-mod-panel {
-  transform: translateY(-4px);
-  box-shadow: 0 34px 74px rgba(13, 33, 64, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
+/* Lift and shadow come from the shared tilt block, which composes them with
+   the rotation. A bare translateY() here would replace it. */
 
 /* Panel right: media cols 1-8, panel 6-13. Panel left: mirrored. */
 .tier1-site .co-mod--right .co-mod-media { grid-column: 1 / 9; }
@@ -537,7 +555,7 @@
 .tier1-site .co-mod-list-intro { margin-bottom: 9px; }
 .tier1-site .co-mod-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
 .tier1-site .co-mod-list li { display: flex; gap: 8px; align-items: flex-start; }
-.tier1-site .co-mod-list svg { color: var(--teal); flex-shrink: 0; margin-top: 1px; }
+.tier1-site .co-mod-list svg, .tier1-site .co-mod-list .msym { color: var(--teal); flex-shrink: 0; margin-top: 1px; }
 .tier1-site .co-mod-list span { font-size: 13.5px; line-height: 1.45; color: var(--charcoal); }
 
 /* Governance mark — corner seal on the Leadership photograph. */
@@ -639,17 +657,19 @@
   gap: 20px;
 }
 .tier1-site .co-global-card {
+  position: relative;
   padding: 28px 26px 30px;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.07);
   backdrop-filter: blur(10px) saturate(1.15);
   -webkit-backdrop-filter: blur(10px) saturate(1.15);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 16px 40px rgba(6, 18, 38, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.14);
-  transition: transform 0.4s var(--ease), border-color 0.4s var(--ease), background 0.4s var(--ease);
+  transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease),
+              border-color 0.4s var(--ease), background 0.4s var(--ease);
 }
 .tier1-site .co-global-card:hover {
-  transform: translateY(-4px);
+  /* Lift comes from the shared tilt block, which composes it with the
+     rotation. A bare translateY() here would replace it. */
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.3);
 }
@@ -697,10 +717,8 @@
   box-shadow: 0 10px 30px rgba(13, 33, 64, 0.07);
   transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
 }
-.tier1-site .co-news-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 46px rgba(13, 33, 64, 0.13);
-}
+/* Lift and shadow come from the shared tilt block, which composes them with
+   the rotation. A bare translateY() here would replace it. */
 .tier1-site .co-news-icon {
   display: inline-flex;
   align-items: center;
@@ -826,8 +844,8 @@
   .tier1-site .co-news-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-@media (max-width: 1024px) {
-  .tier1-site .co-hero { min-height: 100vh; min-height: 100svh; padding: 160px 32px 96px; }
+@media (max-width: 1023.98px) {
+  .tier1-site .co-hero { min-height: 100vh; min-height: 100svh; padding: 180px 24px 90px; }
   .tier1-site .co-hero-glass { max-width: 500px; padding: 0; }
   .tier1-site .co-hero-glass h1 { font-size: 30px; }
   .tier1-site .co-hero-net { opacity: 0.45; }
@@ -845,7 +863,7 @@
   .tier1-site .co-hero {
     min-height: 100vh;
     min-height: 100svh;
-    padding: 130px 20px 72px;
+    padding: 140px 16px 64px;
   }
   .tier1-site .co-hero-img { background-position: 66% center; }
   .tier1-site .co-hero-grad {
@@ -902,6 +920,11 @@
     transform: none;
     transition: none;
   }
+  /* The three tilting cards reveal through --reveal-y, so `transform: none`
+     above does not reach them. Zero the offset instead. */
+  .tier1-site .co-page .co-vmv-card.reveal,
+  .tier1-site .co-page .co-global-card.reveal,
+  .tier1-site .co-page .co-news-card.reveal { --reveal-y: 0px; }
   .tier1-site .co-hero-glass,
   .tier1-site .co-hero-glass .eyebrow,
   .tier1-site .co-hero-glass h1,

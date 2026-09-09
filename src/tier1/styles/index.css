@@ -50,7 +50,7 @@
   .tier1-site .navcta:focus-visible{outline:2px solid var(--white);outline-offset:3px;}
 
   /* HERO */
-  .tier1-site .hero{position:relative;padding:180px 40px 120px;background:url('/assets/hero-bg.jpg') center/cover;overflow:hidden;min-height:100vh;min-height:100svh;display:flex;align-items:center;}
+  .tier1-site .hero{position:relative;padding: 244px 32px 120px;background:url('/assets/hero-bg.jpg') center/cover;overflow:hidden;min-height:100vh;min-height:100svh;display:flex;align-items:flex-start;}
   .tier1-site .hero-overlay{position:absolute;inset:0;background:linear-gradient(95deg,rgba(9,24,48,0.88) 0%,rgba(10,26,52,0.66) 34%,rgba(13,33,64,0.22) 62%,rgba(13,33,64,0) 84%);z-index:0;}
   /* Panel removed: the copy sits on the photograph, held by the scrim. */
   .tier1-site .hero-glass{max-width:620px;padding:0;
@@ -66,7 +66,8 @@
   @media (prefers-reduced-motion: reduce){
     .tier1-site .hero-glass,.tier1-site .hero-glass .eyebrow,.tier1-site .hero-glass h1,.tier1-site .hero-glass p,.tier1-site .hero-glass .cta-row{animation:none;opacity:1;transform:none;}
   }
-  .tier1-site .hero-inner{max-width:1240px;width:100%;margin:0 auto;text-align:left;position:relative;z-index:2;}
+  /* 1216, not 1240: puts the copy on the same line as the header logo. */
+  .tier1-site .hero-inner{max-width:1216px;width:100%;margin:0 auto;text-align:left;position:relative;z-index:2;}
   .tier1-site .eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(93, 141, 205,0.2);color:#DCE9F8;font-size:10.5px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;padding:7px 15px;border-radius:20px;margin-bottom:20px;border:1px solid rgba(93, 141, 205,0.38);}
   .tier1-site .hero h1{font-size:50px;font-weight:700;letter-spacing:-0.02em;line-height:1.14;margin-bottom:18px;color:#fff;text-shadow:0 2px 20px rgba(6,18,38,0.4);}
   .tier1-site .hero h1 .accent{color:var(--brand-accent-soft);}
@@ -143,6 +144,11 @@
   .tier1-site .cat-reveal p{font-size:12px;color:rgba(255,255,255,0.78);line-height:1.55;}
   .tier1-site .cat-btn{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.16);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(255,255,255,0.4);color:#fff;font-size:14px;font-weight:600;min-height:44px;padding:0 20px;border-radius:10px;cursor:pointer;transition:background .25s ease,border-color .25s ease;}
   .tier1-site .cat-btn:hover,.tier1-site .cat-card.is-open .cat-btn{background:rgba(255,255,255,0.28);border-color:rgba(255,255,255,0.6);}
+  /* Cards whose data carries a title only: no reveal, no button, so the
+     title sits directly on the foot padding instead of leaving room for a
+     control that is not there. Used by the Services industry grid. */
+  .tier1-site .cat-card--static .cat-title{margin-bottom:0;}
+  .tier1-site .cat-card--static{cursor:default;}
 
   /* INDUSTRIES */
   .tier1-site .ind-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
@@ -159,8 +165,17 @@
   .tier1-site .ind-detail p{font-size:12px;color:rgba(255,255,255,0.78);line-height:1.55;margin-bottom:8px;}
   .tier1-site .ind-explore{font-size:12.5px;font-weight:700;color:var(--brand-accent-soft);display:inline-flex;align-items:center;gap:6px;}
   .tier1-site .ind-center{text-align:center;margin-top:48px;}
-  .tier1-site .btn-outline-navy .btn-arrow{display:inline-block;margin-left:6px;transition:transform .3s ease;}
-  .tier1-site .btn-outline-navy:hover .btn-arrow{transform:translateX(4px);}
+  /* Arrows on every button, not just the outline one: they advance a little
+     and grow 5% on hover. transform-origin is left so the growth reads as the
+     arrow moving toward you rather than drifting off centre. The navbar's
+     Contact us arrow is deliberately excluded — it uses .cta-arrow and has its
+     own tilt-to-horizontal behaviour. */
+  .tier1-site .btn-arrow{display:inline-block;margin-left:6px;transform-origin:left center;
+    transition:transform .3s cubic-bezier(.2,.8,.2,1);}
+  .tier1-site button:hover .btn-arrow,
+  .tier1-site a:hover .btn-arrow,
+  .tier1-site button:focus-visible .btn-arrow,
+  .tier1-site a:focus-visible .btn-arrow{transform:translateX(4px) scale(1.05);}
 
   /* WHY ITG */
   .tier1-site .why-band{background:linear-gradient(120deg,#3D5A85,#2C4568 60%,#1A3A6B);position:relative;overflow:hidden;}
@@ -200,15 +215,15 @@
     .tier1-site .foot-brand{grid-column:1 / -1;}
     .tier1-site section{padding:80px 32px;}
   }
-  @media(max-width:1024px){
-    .tier1-site .hero{min-height:100vh;min-height:100svh;padding:150px 32px 100px;background-position:72% center;}
+  @media(max-width:1023.98px){
+    .tier1-site .hero{min-height:100vh;min-height:100svh;padding: 180px 24px 100px;background-position:72% center;}
     .tier1-site .hero-glass{max-width:520px;padding:0;}
     .tier1-site .hero h1{font-size:36px;}
     .tier1-site .hero p{font-size:14.5px;}
     .tier1-site .navlinks{display:none;}
   }
   @media(max-width:680px){
-    .tier1-site .hero{min-height:100vh;min-height:100svh;padding:130px 20px 70px;background-position:66% center;}
+    .tier1-site .hero{min-height:100vh;min-height:100svh;padding: 140px 16px 70px;background-position:66% center;}
     .tier1-site .hero-overlay{background:linear-gradient(180deg,rgba(9,24,48,0.55) 0%,rgba(10,26,52,0.35) 45%,rgba(13,33,64,0.15) 100%);}
     .tier1-site .hero-glass{max-width:100%;padding:0;}
     .tier1-site .hero h1{font-size:29px;line-height:1.2;}
@@ -243,3 +258,133 @@
     .tier1-site .foot-grid{gap:24px;}
     .tier1-site .foot-bottom{flex-wrap:wrap;gap:12px;justify-content:center;text-align:center;}
   }
+
+/* ── Cursor-following tilt ────────────────────────────────────────────────
+   Applied to every card marked for it. The controller in hooks/useTiltSurfaces
+   sets the custom properties; all drawing happens here.
+
+   Composing tilt and hover lift into one transform matters: a bare
+   translateY() elsewhere would replace the rotation rather than add to it.
+
+   .is-tilting shortens the transition so the surface tracks the pointer, then
+   comes off on leave so the slower resting transition eases it back flat. */
+.tier1-site .svc-pillar-panel,
+.tier1-site .ind-feature-panel,
+.tier1-site .co-about-panel,
+.tier1-site .co-mod-panel,
+.tier1-site .co-news-card,
+.tier1-site .co-vmv-card,
+.tier1-site .co-global-card,
+.tier1-site .why-card {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --mx: 50%;
+  --my: 50%;
+  --sx: 0px;
+  --sy: 0px;
+  --lift: 0px;
+  /* Set by the entrance animation on surfaces that also reveal, so the
+     slide-up composes with the rotation instead of replacing it. */
+  --reveal-y: 0px;
+  /* Overridden per surface below — a light-surface shadow is invisible on the
+     navy cards, and a white highlight at full strength blows them out. */
+  --tilt-shadow: rgba(13, 33, 64, 0.22);
+  --tilt-shadow-lit: rgba(13, 33, 64, 0.3);
+  --tilt-inset: inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  --tilt-glare: 0.5;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transform:
+    perspective(1100px)
+    rotateX(var(--tilt-x))
+    rotateY(var(--tilt-y))
+    translateY(calc(var(--lift) + var(--reveal-y)));
+  box-shadow: var(--sx) calc(var(--sy) + 22px) 56px var(--tilt-shadow), var(--tilt-inset);
+  transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease);
+}
+.tier1-site .svc-pillar-panel.is-tilting,
+.tier1-site .ind-feature-panel.is-tilting,
+.tier1-site .co-about-panel.is-tilting,
+.tier1-site .co-mod-panel.is-tilting,
+.tier1-site .co-news-card.is-tilting,
+.tier1-site .co-vmv-card.is-tilting,
+.tier1-site .co-global-card.is-tilting,
+.tier1-site .why-card.is-tilting {
+  --lift: -4px;
+  transition: transform 0.12s linear, box-shadow 0.18s ease;
+  box-shadow: var(--sx) calc(var(--sy) + 30px) 72px var(--tilt-shadow-lit), var(--tilt-inset);
+}
+
+/* Cards that sit on navy: darker cast, gentler highlight, hairline inset. */
+.tier1-site .co-vmv-card,
+.tier1-site .co-global-card,
+.tier1-site .why-card {
+  --tilt-shadow: rgba(3, 10, 24, 0.42);
+  --tilt-shadow-lit: rgba(3, 10, 24, 0.58);
+  --tilt-inset: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  --tilt-glare: 0.16;
+}
+
+/* Specular highlight tracking the pointer. Above the surface fill, below its
+   content, and never intercepting the pointer. On ::before, not ::after:
+   .why-card already draws its accent edge on ::after. */
+.tier1-site .svc-pillar-panel::before,
+.tier1-site .ind-feature-panel::before,
+.tier1-site .co-about-panel::before,
+.tier1-site .co-mod-panel::before,
+.tier1-site .co-news-card::before,
+.tier1-site .co-vmv-card::before,
+.tier1-site .co-global-card::before,
+.tier1-site .why-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.32s ease;
+  background: radial-gradient(
+    340px circle at var(--mx) var(--my),
+    rgba(255, 255, 255, var(--tilt-glare)) 0%,
+    rgba(255, 255, 255, calc(var(--tilt-glare) * 0.28)) 38%,
+    rgba(255, 255, 255, 0) 68%
+  );
+}
+.tier1-site .svc-pillar-panel.is-tilting::before,
+.tier1-site .ind-feature-panel.is-tilting::before,
+.tier1-site .co-about-panel.is-tilting::before,
+.tier1-site .co-mod-panel.is-tilting::before,
+.tier1-site .co-news-card.is-tilting::before,
+.tier1-site .co-vmv-card.is-tilting::before,
+.tier1-site .co-global-card.is-tilting::before,
+.tier1-site .why-card.is-tilting::before { opacity: 1; }
+
+/* Content has to clear the highlight layer. */
+.tier1-site .svc-pillar-panel > *,
+.tier1-site .ind-feature-panel > *,
+.tier1-site .co-about-panel > *,
+.tier1-site .co-mod-panel > *,
+.tier1-site .co-news-card > *,
+.tier1-site .co-vmv-card > *,
+.tier1-site .co-global-card > *,
+.tier1-site .why-card > * { position: relative; z-index: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tier1-site .svc-pillar-panel,
+  .tier1-site .ind-feature-panel,
+  .tier1-site .co-about-panel,
+  .tier1-site .co-mod-panel,
+  .tier1-site .co-news-card,
+  .tier1-site .co-vmv-card,
+  .tier1-site .co-global-card,
+  .tier1-site .why-card { transform: none; transition: none; }
+  .tier1-site .svc-pillar-panel::before,
+  .tier1-site .ind-feature-panel::before,
+  .tier1-site .co-about-panel::before,
+  .tier1-site .co-mod-panel::before,
+  .tier1-site .co-news-card::before,
+  .tier1-site .co-vmv-card::before,
+  .tier1-site .co-global-card::before,
+  .tier1-site .why-card::before { display: none; }
+}

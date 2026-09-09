@@ -1,10 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
-import { industries } from '../data/content.js';
+import { industries } from '@/content/solutions.js';
 import { useReveal } from '../hooks/useReveal.js';
 
 /**
- * Desktop: hover reveals the description + Explore link.
- * Touch/keyboard: tap or focus toggles .is-open for the same reveal.
+ * Industry cards, built on the same .cat-* pattern as Solution Categories:
+ * a tall photograph, the title at the foot, and a glass button that reveals
+ * the description. Sharing those classes rather than duplicating them means
+ * the two grids cannot drift apart.
+ *
+ * Desktop reveals on button hover (CSS :has); touch toggles .is-open, since
+ * hover is unavailable there.
  */
 export default function Industries() {
   const [openId, setOpenId] = useState(null);
@@ -28,29 +33,29 @@ export default function Industries() {
       </div>
 
       <div
-        className={`ind-grid reveal reveal--late${gridIn ? ' is-in' : ''}`}
+        className={`cat-grid reveal reveal--late${gridIn ? ' is-in' : ''}`}
         ref={(node) => {
           gridRef.current = node;
           gridRevealRef.current = node;
         }}
       >
         {industries.map((ind) => (
-          <article
-            key={ind.id}
-            className={`ind-card${openId === ind.id ? ' is-open' : ''}`}
-            tabIndex={0}
-            onClick={() => setOpenId((cur) => (cur === ind.id ? null : ind.id))}
-            onFocus={() => setOpenId(ind.id)}
-            onBlur={() => setOpenId((cur) => (cur === ind.id ? null : cur))}
-          >
-            <img src={ind.image} alt={ind.title} loading="lazy" decoding="async" />
-            <div className="ind-scrim" />
-            <div className="ind-body">
-              <div className="ind-title">{ind.title}</div>
-              <div className="ind-detail">
+          <article key={ind.id} className={`cat-card${openId === ind.id ? ' is-open' : ''}`}>
+            <div className="cat-card-bg" style={{ backgroundImage: `url('${ind.image}')` }} />
+            <div className="cat-body">
+              <h3 className="cat-title">{ind.title}</h3>
+              <div className="cat-reveal">
                 <p>{ind.body}</p>
-                <span className="ind-explore">Explore →</span>
               </div>
+              <button
+                className="cat-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setOpenId((cur) => (cur === ind.id ? null : ind.id));
+                }}
+              >
+                View Full Details <span className="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
           </article>
         ))}

@@ -1,5 +1,8 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight } from "@/components/icons/material";
+// @ts-expect-error - plain JS content file, no types alongside it
+import { insights } from "@/content/home.js";
+
 
 export function InsightsSection() {
   const sectionRef = useScrollAnimation();
@@ -12,39 +15,22 @@ export function InsightsSection() {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Content */}
           <div>
-            <h2 className="section-title">Perspectives, Research and Real-World Outcomes</h2>
+            <h2 className="section-title">{insights.title}</h2>
             <p className="text-lg lg:text-xl text-muted-foreground mt-2">
-              Insights at ITG provide executive perspectives, research depth and proof of outcomes - designed to inform decision-makers, not market trends.
+              {insights.intro}
             </p>
             <p className="text-muted-foreground text-base lg:text-lg mb-6 lg:mb-8">
-              Thought leadership and evidence-based guidance for enterprise leaders navigating transformation.
+              {insights.body}
             </p>
-            <a href="#" className="btn-ghost group">
-              Explore Insights
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <a href={insights.cta.href} className="btn-ghost group">
+              {insights.cta.label}
+              <ArrowRight className="w-4 h-4 origin-left transition-transform group-hover:translate-x-1 group-hover:scale-105" />
             </a>
           </div>
 
           {/* Insight Cards Preview */}
           <div className="space-y-3 lg:space-y-4">
-            {[
-              {
-                category: 'Thought Leadership',
-                title: 'Executive Perspectives on Enterprise AI Adoption',
-              },
-              {
-                category: 'Case Studies',
-                title: 'Operational Transformation with Enterprise Platforms',
-              },
-              {
-                category: 'Research and Publications',
-                title: 'Data Governance and Compliance in Multi-Entity Organizations',
-              },
-              {
-                category: 'News and Media',
-                title: 'ITG Platform Initiatives and Industry Updates',
-              },
-            ].map((insight) => (
+            {insights.cards.map((insight) => (
               <div
                 key={insight.title}
                 className="group p-4 lg:p-5 rounded-xl bg-card border border-border hover:border-[hsl(var(--brand-secondary))]/60 hover:shadow-card-hover transition-all duration-300 cursor-pointer"

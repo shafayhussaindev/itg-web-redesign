@@ -7,7 +7,7 @@ import GovernanceMark from './GovernanceMark.jsx';
 import GlobalPresence from './GlobalPresence.jsx';
 import News from './News.jsx';
 import CompanyCta from './CompanyCta.jsx';
-import { leadership, security, people, responsibility } from '../../data/company.js';
+import { leadership, security, people, responsibility } from '@/content/company.js';
 import '../../styles/company.css';
 
 /**

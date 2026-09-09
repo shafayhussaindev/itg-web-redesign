@@ -1,70 +1,8 @@
 import { useStaggerAnimation } from "@/hooks/useScrollAnimation";
-import {
-  ArrowRight,
-  Building2,
-  Factory,
-  ShoppingBag,
-  Truck,
-  Building,
-  Heart,
-  Briefcase,
-  Leaf,
-  Landmark,
-  GraduationCap,
-  Plane,
-} from "lucide-react";
+import { ArrowRight, MSym } from "@/components/icons/material";
+// @ts-expect-error - plain JS content file, no types alongside it
+import { industries } from "@/content/home.js";
 
-const industries = [
-  {
-    name: "Enterprise & Corporate",
-    icon: Building2,
-    description:
-      "Enterprise and corporate platforms built for governance, compliance and multi-entity control.",
-  },
-  {
-    name: "Manufacturing & Industrial",
-    icon: Factory,
-    description:
-      "Manufacturing and industrial operations strengthened through connected systems and data intelligence.",
-  },
-  {
-    name: "Retail & Consumer Goods",
-    icon: ShoppingBag,
-    description:
-      "Retail and consumer goods operations unified across inventory, commerce and performance analytics.",
-  },
-  {
-    name: "Logistics Supply Chain and Operations",
-    icon: Truck,
-    description:
-      "Logistics, supply chain and operations aligned with real-time visibility and control.",
-  },
-  {
-    name: "Real Estate Construction and Facilities",
-    icon: Building,
-    description:
-      "Real estate, construction and facilities managed through integrated, audit-ready platforms.",
-  },
-  {
-    name: "Healthcare & Life Sciences",
-    icon: Heart,
-    description:
-      "Healthcare and life sciences platforms designed for compliance, data integrity and operational resilience.",
-  },
-  {
-    name: "Professional Services",
-    icon: Briefcase,
-    description:
-      "Professional services enabled by systems that improve utilization, governance and delivery control.",
-  },
-  {
-    name: "Energy Sustainability and ESG",
-    icon: Leaf,
-    description:
-      "Energy, sustainability and ESG platforms that support traceability, reporting and regulatory readiness.",
-  },
-
-];
 
 export function IndustriesSection() {
   const gridRef = useStaggerAnimation();
@@ -74,19 +12,18 @@ export function IndustriesSection() {
       <div className="section-container">
         {/* Header */}
         <div className="section-header">
-          <h2 className="section-title">Industry-Focused Expertise with Measurable Impact</h2>
+          <h2 className="section-title">{industries.title}</h2>
           <p className="text-lg lg:text-xl text-muted-foreground mt-2">
-            We work across industries where scale, regulation and operational complexity demand robust digital platforms.
+            {industries.intro}
           </p>
           <p className="section-description">
-            Industry-aligned delivery that strengthens governance, visibility and long-term performance.
+            {industries.note}
           </p>
         </div>
 
         {/* Industries Grid */}
         <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {industries.map((industry) => {
-            const IconComponent = industry.icon;
+          {industries.cards.map((industry) => {
             return (
               <div
                 key={industry.name}
@@ -332,7 +269,7 @@ export function IndustriesSection() {
                 <div className="relative z-10 flex flex-col h-full hover:scale-[1.04] transition-transform duration-200">
                   {/* Icon - no background */}
                   <div className="mb-6">
-                  <IconComponent className="w-12 h-12 text-primary transition-colors duration-500" strokeWidth={1.5} />
+                  <MSym name={industry.icon} className="w-12 h-12 text-primary transition-colors duration-500" />
                   </div>
 
                   {/* Title */}
@@ -347,11 +284,11 @@ export function IndustriesSection() {
 
                   {/* Learn More Link */}
                   <a
-                    href="/industries"
+                    href={industries.cardLinkHref}
                     className="inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-all duration-500 group-hover:gap-2.5 mt-6"
                   >
-                    Explore Industry
-                    <ArrowRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-0.5" />
+                    {industries.cardLinkLabel}
+                    <ArrowRight className="w-4 h-4 origin-left transition-transform duration-500 group-hover:translate-x-0.5 group-hover:scale-105" />
                   </a>
                 </div>
               </div>
@@ -361,9 +298,9 @@ export function IndustriesSection() {
 
         {/* CTA Link */}
         <div className="text-center mt-10 lg:mt-14">
-          <a href="/industries" className="btn-ghost group">
-            Explore Industries
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          <a href={industries.cta.href} className="btn-ghost group">
+            {industries.cta.label}
+            <ArrowRight className="w-4 h-4 origin-left transition-transform group-hover:translate-x-1 group-hover:scale-105" />
           </a>
         </div>
       </div>

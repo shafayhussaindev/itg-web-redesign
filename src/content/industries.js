@@ -1,3 +1,13 @@
+/* ============================================================================
+ * INDUSTRIES PAGE
+ * ===============
+ * shown at  yoursite.com/industries
+ *
+ * Everything on this page that you might want to reword, re-order or re-image
+ * is in this file. Change the text between the quote marks and save — the site
+ * picks it up on its own. See content/README.md if anything here is unclear.
+ * ========================================================================= */
+
 /**
  * ITG Technologies — Industries page copy.
  *

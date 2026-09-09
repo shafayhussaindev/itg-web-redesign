@@ -1,4 +1,4 @@
-import { deliveryPillars } from '../../data/services.js';
+import { deliveryPillars } from '@/content/services.js';
 import { useReveal, useParallax } from '../../hooks/useReveal.js';
 import Icon from './icons.jsx';
 
@@ -61,8 +61,11 @@ function Pillar({ pillar }) {
             <Icon name={pillar.icon} size={22} />
           </span>
           <div>
+            {/* pillar.sub is intentionally not rendered: on all five cards it
+                restated the title as a gerund phrase and carried no
+                information of its own. The field is left in the data so the
+                line can be put back by restoring this one element. */}
             <h3>{pillar.title}</h3>
-            <p className="svc-pillar-sub">{pillar.sub}</p>
           </div>
         </header>
 
