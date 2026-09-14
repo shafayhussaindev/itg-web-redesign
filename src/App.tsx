@@ -12,6 +12,8 @@ import Services from "./pages/Services";
 import Industries from "./pages/Industries";
 import Company from "./pages/Company";
 import AIIntelligence from "./pages/AIIntelligence";
+import SolutionDetail from "./pages/SolutionDetail";
+import { solutionPages } from "./pages/solutionPages";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
@@ -34,6 +36,9 @@ const App = () => (
             <Route path="/industries" element={<Industries />} />
             <Route path="/company" element={<Company />} />
             <Route path="/ai-intelligence" element={<AIIntelligence />} />
+            {solutionPages.filter(page => page.id !== 'ai-intelligence').map(page => (
+              <Route key={page.id} path={`/${page.id}`} element={<SolutionDetail key={page.id} page={page} />} />
+            ))}
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

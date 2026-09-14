@@ -1,6 +1,6 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { ArrowRight } from "@/components/icons/material";
-// @ts-expect-error - plain JS content file, no types alongside it
+/ @ts-expect-error - plain JS content file, no types alongside it /
 import { insights } from "@/content/home.js";
 
 

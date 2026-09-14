@@ -2,7 +2,7 @@ import { useEffect, type ReactNode } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { useLenis } from "@/hooks/useLenis";
-// @ts-expect-error - plain JS hook, no types alongside it
+/ @ts-expect-error - plain JS hook, no types alongside it/
 import { useTiltSurfaces } from "./hooks/useTiltSurfaces.js";
 import "./styles/index.css";
 

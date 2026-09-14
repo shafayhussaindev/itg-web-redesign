@@ -1,5 +1,5 @@
 import { useStaggerAnimation } from '@/hooks/useScrollAnimation';
-// @ts-expect-error - plain JS content file, no types alongside it
+/ @ts-expect-error - plain JS content file, no types alongside it/
 import { howWeWork } from "@/content/home.js";
 
 import { ArrowUpRight, DraftingCompass, Hammer, Layers } from "@/components/icons/material";
@@ -58,11 +58,6 @@ export function HowWeWorkSection() {
                 <h3 className="text-lg lg:text-xl font-semibold mb-2">{step.title}</h3>
                 <p className="text-sm lg:text-base text-muted-foreground">{step.description}</p>
               </div>
-
-              {/* Connector line (hidden on last item) */}
-              {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 -right-3 w-6 border-t-2 border-dashed border-border" />
-              )}
             </div>
           ))}
         </div>

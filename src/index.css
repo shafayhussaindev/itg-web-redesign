@@ -592,8 +592,6 @@
   .btn-ghost {
     @apply inline-flex items-center gap-2 font-semibold text-[14px] transition-all duration-200;
     color: var(--brand-accent);
-    text-decoration: underline;
-    text-underline-offset: 3px;
   }
   .btn-ghost:hover { color: var(--navy); }
 

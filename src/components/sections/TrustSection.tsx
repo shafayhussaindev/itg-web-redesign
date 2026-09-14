@@ -1,6 +1,6 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useCounterAnimation } from '@/hooks/useCounterAnimation';
-// @ts-expect-error - plain JS content file, no types alongside it
+/ @ts-expect-error - plain JS content file, no types alongside it/
 import { trust } from "@/content/home.js";
 
 

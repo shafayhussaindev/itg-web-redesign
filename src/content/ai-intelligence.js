@@ -202,3 +202,31 @@ export const finalCta = {
   primaryCta: { label: 'Talk to an AI Expert', href: '#contact' },
   secondaryCta: { label: 'Request a Readiness Discussion', href: '#contact' },
 };
+
+/* Tier-2 presentation. The detailed capability copy above remains the source
+ * for this page. These fields control the new hero and supporting sections. */
+export const solutionPage = {
+  id: 'ai-intelligence', name: 'AI & Intelligence', shortName: 'AI & Intelligence', icon: 'neurology',
+  image: '/assets/cat-ai.jpg',
+  headline: 'Turn data into decisions.', accent: 'Intelligence into advantage.',
+  description: 'Embed intelligence across your enterprise systems, data and operations. Move from isolated experiments to AI that supports the way your business works.',
+  tags: ['Enterprise intelligence', 'Responsible AI', 'Connected data'],
+  overview: { eyebrow: 'Intelligence with purpose', title: 'Put your data to work.', body: hero.body, note: hero.note },
+  outcomes: [
+    { icon: 'bar_chart', title: 'Better-informed decisions', body: 'Connect trusted data with the people and processes that need it.' },
+    { icon: 'bolt', title: 'More effective operations', body: 'Apply AI to practical workflows, from document processing to predictive insights.' },
+    { icon: 'shield', title: 'Confidence to scale', body: 'Build governance and human oversight into your approach to enterprise AI.' },
+  ],
+  capabilitiesIntro: cover.intro,
+  capabilities: [
+    ...capabilities,
+    { id: 'dpp-ai', icon: dpp.icon, title: dpp.title, subtitle: 'Intelligence for connected product information.', description: dpp.body, focus: ['Extract and organize product documentation', 'Connect product records with enterprise data', 'Support review and validation of product information'], outcome: ['More accessible product evidence', 'Less manual effort in preparing product information'] },
+  ],
+  applications: [
+    { icon: 'account_balance', title: 'Finance & shared services', body: 'Extract information from documents and bring operational and financial data into useful decision views.' },
+    { icon: 'factory', title: 'Manufacturing & operations', body: 'Connect production data to performance insights, exception detection and maintenance planning.' },
+    { icon: 'groups', title: 'Enterprise leadership', body: 'Build a shared view of business performance with governed data and role-based analytics.' },
+  ],
+  feature: { eyebrow: 'Enterprise AI, by design', title: 'Intelligence that fits your enterprise.', body: 'AI creates value when it connects to real processes. We bring data foundations, applied intelligence and enterprise integration together, with governance throughout the journey.', points: ['Business priorities before technology choices', 'Trusted data and connected systems', 'Human oversight and responsible adoption'], image: '/assets/services/pillar-data.jpg', imageAlt: 'Enterprise data and analytics technology' },
+  cta: { title: 'Make intelligence part of how you work.', body: finalCta.body, label: 'Talk to an AI Expert' },
+};

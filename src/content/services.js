@@ -183,23 +183,15 @@ export const platformAlignment = {
 };
 
 export const serviceIndustries = {
-  title: 'Industries We Deliver For',
-  intro: 'ITG delivers platforms across industries including:',
+  title: 'Services We Deliver',
+  intro: 'Digital solutions that transform ideas into measurable business outcomes.',
   statement: 'Delivery is always aligned with industry context and regulation.',
   items: [
-    { id: 'enterprise', title: 'Enterprise and Corporate', image: '/assets/services/ind-enterprise.jpg' },
-    { id: 'manufacturing', title: 'Manufacturing and Industrial', image: '/assets/services/ind-manufacturing.jpg' },
-    { id: 'retail', title: 'Retail and Consumer Goods', image: '/assets/services/ind-retail.jpg' },
-    {
-      id: 'logistics',
-      title: 'Logistics, Supply Chain and Operations',
-      image: '/assets/services/ind-logistics.jpg',
-    },
-    { id: 'healthcare', title: 'Healthcare and Life Sciences', image: '/assets/services/ind-healthcare.jpg' },
-    // PLACEHOLDER IMAGE — no Government and Public Sector photograph was
-    // supplied, so this reuses the hero interior. Swap in a real image.
-    { id: 'government', title: 'Government and Public Sector', image: '/assets/services/ind-government.jpg' },
-    { id: 'energy', title: 'Energy, Sustainability and ESG', image: '/assets/services/ind-sustainability.jpg' },
+    { id: 'ai', title: 'AI & Intelligence', image: '/assets/services/ind-enterprise.jpg' },
+    { id: 'data', title: 'Data Analytics and Intelligence', image: '/assets/services/ind-manufacturing.jpg' },
+    { id: 'automation', title: 'Automation and Process Services', image: '/assets/services/ind-retail.jpg' },
+    { id: 'enterprise', title: 'Enterprise Platforms and Implementation', image: '/assets/services/ind-logistics.jpg'},
+    { id: 'cloud', title: 'Cloud and Infrastructure Services', image: '/assets/services/ind-sustainability.jpg' },
   ],
 };
 

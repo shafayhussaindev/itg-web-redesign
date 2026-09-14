@@ -18,11 +18,30 @@ You do not need to open anything else.
 | yoursite.com/industries                        | `industries.js`       |
 | yoursite.com/company                           | `company.js`          |
 | yoursite.com/ai-intelligence                   | `ai-intelligence.js`  |
+| yoursite.com/enterprise-systems                | `enterprise-systems.js` |
+| yoursite.com/automation-cloud                  | `automation-cloud.js` |
+| yoursite.com/digital-experience                | `digital-experience.js` |
+| yoursite.com/sustainability-compliance         | `sustainability-compliance.js` |
+| Shared tier-2 labels, delivery steps and email | `solution-detail.js` |
 
 Inside each file the blocks appear **in the same order as the page**, top to
 bottom, with a comment saying which part of the page each one is.
 
 ---
+
+## Tier-2 solution pages
+
+Each of the five solution pages has a `solutionPage` block in its content file.
+Edit the hero, outcomes, capability descriptions, applications and closing copy
+there. AI & Intelligence also reuses its existing `capabilities` and `dpp` blocks.
+
+To enable email enquiries across all five pages, set `contactEmail` in
+`solution-detail.js`. Leave it empty to show the Company-page link instead.
+No form submission or email service is required: the configured link opens the
+visitor's email application with the solution name in the subject.
+
+Capability `id` values match the menu links in `site.js`. If you change an ID,
+update its menu link too. Those links open the capability and scroll to it.
 
 ## The four rules
 

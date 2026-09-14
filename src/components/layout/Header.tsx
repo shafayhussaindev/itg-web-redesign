@@ -253,7 +253,7 @@ function MegaMenu({
   );
 }
 
-export function Header() {
+export function Header({ contactHref = navCta.href }: { contactHref?: string } = {}) {
   const { theme, toggleTheme } = useTheme();
   const [scrollY, setScrollY] = useState(0);
   const [darkHeroDepth, setDarkHeroDepth] = useState(0);
@@ -445,7 +445,7 @@ export function Header() {
             </button>
             */}
 
-            <a href={navCta.href} className="btn-nav-cta hidden md:inline-flex">
+            <a href={contactHref} className="btn-nav-cta hidden md:inline-flex">
               {/* Two copies of the label: the second is the face that rolls in,
                   and is hidden from assistive tech so it is not read twice. */}
               <span className="btn-roll">
@@ -505,6 +505,13 @@ export function Header() {
                           </CollapsibleTrigger>
                           <CollapsibleContent className="pl-2">
                             <div className="mt-1 ml-4 flex flex-col gap-1">
+                              <a
+                                href={category.href}
+                                onClick={closeMobileMenu}
+                                className="text-sm font-semibold text-primary py-3 px-2 rounded-lg hover:bg-accent"
+                              >
+                                {category.overviewLabel}
+                              </a>
                               {category.children?.map((child) => (
                                 <a
                                   key={child.title}
@@ -665,7 +672,7 @@ export function Header() {
               ))}
 
               <Button variant="default" className="mt-3 w-full" onClick={closeMobileMenu} asChild>
-                <a href={navCta.href}>{navCta.label}</a>
+                <a href={contactHref} onClick={closeMobileMenu}>{navCta.label}</a>
               </Button>
             </nav>
           </div>

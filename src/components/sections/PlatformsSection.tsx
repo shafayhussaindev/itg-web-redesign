@@ -1,6 +1,6 @@
 import { useStaggerAnimation } from '@/hooks/useScrollAnimation';
 import { ArrowRight, MSym } from "@/components/icons/material";
-// @ts-expect-error - plain JS content file, no types alongside it
+/ @ts-expect-error - plain JS content file, no types alongside it /
 import { platforms } from "@/content/home.js";
 
 

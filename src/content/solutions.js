@@ -66,6 +66,12 @@ export const solutionCategories = [
 
 export const industries = [
   {
+    id: 'enterprise',
+    title: 'Enterprise & Corporate',
+    body: 'Digital intelligence and compliance solutions for regulated healthcare environments.',
+    image: 'src/assets/industries/enterprise-corporate.png',
+  },
+  {
     id: 'manufacturing',
     title: 'Manufacturing & Industrial Enterprises',
     body: 'Automation, compliance, traceability and operational intelligence for complex industrial environments.',
@@ -83,24 +89,13 @@ export const industries = [
     body: 'Visibility, automation and traceability across complex logistics and operational networks.',
     image: '/assets/industry-logistics.jpg',
   },
+  
   {
-    id: 'healthcare',
-    title: 'Healthcare & Life Sciences',
-    body: 'Digital intelligence and compliance solutions for regulated healthcare environments.',
-    image: '/assets/industry-healthcare.jpg',
-  },
-  {
-    id: 'real-estate',
-    title: 'Real Estate & Asset-Intensive Businesses',
+    id: 'energy',
+    title: 'Energy, Sustainability & ESG',
     body: 'Operational visibility, asset intelligence and efficiency across complex physical environments.',
-    image: '/assets/industry-realestate.jpg',
-  },
-  {
-    id: 'sustainability',
-    title: 'Sustainability-Driven Organizations',
-    body: 'Technology-enabled sustainability, compliance, reporting and supply-chain transparency.',
-    image: '/assets/industry-sustainability.jpg',
-  },
+    image: '/assets/industries/ind-sustainability.jpg',
+  }
 ];
 
 export const whyItg = [

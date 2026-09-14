@@ -1,5 +1,5 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-// @ts-expect-error - plain JS content file, no types alongside it
+/ @ts-expect-error - plain JS content file, no types alongside it /
 import { whoWeAre } from "@/content/home.js";
 
 
