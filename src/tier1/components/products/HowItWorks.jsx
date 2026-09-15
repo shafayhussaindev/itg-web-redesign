@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useAnimationActivity } from '@/hooks/useAnimationActivity';
 
 /**
  * HowItWorks — supplied component, retuned only where integration required.
@@ -176,6 +177,7 @@ const ARIA =
   'How ITG products work together: Integration, then Unified Data, then Governance, then Scale.';
 
 export default function HowItWorks() {
+  const { ref } = useAnimationActivity();
   const narrow = useIsNarrow();
 
   const defs = (
@@ -190,7 +192,7 @@ export default function HowItWorks() {
   if (narrow) {
     const lastY = V.firstY + (NODES.length - 1) * V.gap;
     return (
-      <div className="itg-how-wrap">
+      <div ref={ref} className="itg-how-wrap">
         <style>{STYLE}</style>
         <svg className="itg-how-svg" viewBox={`0 0 ${V.width} ${V_HEIGHT}`} xmlns="http://www.w3.org/2000/svg" role="img" aria-label={ARIA}>
           {defs}
@@ -227,7 +229,7 @@ export default function HowItWorks() {
 
   /* ---------------- horizontal (desktop) ---------------- */
   return (
-    <div className="itg-how-wrap">
+    <div ref={ref} className="itg-how-wrap">
       <style>{STYLE}</style>
       <svg className="itg-how-svg" viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label={ARIA}>
         {defs}

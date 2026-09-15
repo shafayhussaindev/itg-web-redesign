@@ -30,7 +30,7 @@ export function useCounterAnimation({
 
     const counter = { value: 0 };
 
-    ScrollTrigger.create({
+    const trigger = ScrollTrigger.create({
       trigger: elementRef.current,
       start: 'top 80%',
       once: true,
@@ -52,11 +52,8 @@ export function useCounterAnimation({
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => {
-        if (trigger.vars.trigger === elementRef.current) {
-          trigger.kill();
-        }
-      });
+      trigger.kill();
+      gsap.killTweensOf(counter);
     };
   }, [end, duration, suffix, prefix, decimals]);
 

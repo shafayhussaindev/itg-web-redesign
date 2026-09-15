@@ -40,7 +40,7 @@ export default function IndustryFeatures() {
  */
 function Feature({ item }) {
   const [ref, shown] = useReveal({ threshold: 0.1 });
-  const [imgRef, offset] = useParallax(0.05);
+  const imgRef = useParallax(0.05, true);
 
   // The hook returns pixels, which is what opens a gap: the travel is fixed
   // while the bleed hiding it (`inset: -8%` plus the scale) is a percentage of
@@ -48,7 +48,6 @@ function Feature({ item }) {
   // a percentage of the image's own height — clamped to ±6%, against ~13.8% of
   // available bleed — keeps the counter-scroll proportional and makes an
   // uncovered edge geometrically impossible at any viewport.
-  const shift = Math.max(-6, Math.min(6, offset / 6));
 
   return (
     <article
@@ -61,7 +60,7 @@ function Feature({ item }) {
         <div
           ref={imgRef}
           className="ind-feature-img"
-          style={{ transform: `translate3d(0, ${shift}%, 0) scale(1.1)` }}
+          style={{ transform: 'translate3d(0, var(--parallax-offset, 0%), 0) scale(1.1)' }}
         >
           <img src={item.image} alt="" loading="lazy" decoding="async" />
         </div>

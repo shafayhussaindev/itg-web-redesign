@@ -1,3 +1,5 @@
+import { productPages } from './product-detail.js';
+
 /* ============================================================================
  * SITE-WIDE CONTENT
  * =================
@@ -370,55 +372,17 @@ const industriesItems = [
   },
 ];
 
-const productsItems = [
-  {
-    title: "Enterprise Business Platforms",
-    description: "Core platforms for finance, operations, and business management.",
-    href: "#enterprise-business-platforms",
-    children: [
-      { title: "Integra ERP", description: "Unified enterprise resource planning", href: "#integra-erp" },
-      { title: "Integra CRM", description: "Customer engagement & relationship management", href: "#integra-crm" },
-      { title: "Cyclo ERP", description: "Manufacturing & spinning mills ERP", href: "#cyclo-erp" },
-    ],
-  },
-  {
-    title: "Sustainability & Compliance Platforms",
-    description: "Platforms for ESG, traceability and regulatory reporting.",
-    href: "#sustainability-compliance-platforms",
-    children: [
-      { title: "EcoMagnet", description: "Sustainability, ESG & CSRD intelligence", href: "#ecomagnet" },
-      {
-        title: "Digital Product Passport Platform",
-        description: "EU DPP & traceability infrastructure",
-        href: "#dpp-platform",
-      },
-    ],
-  },
-  {
-    title: "Asset, Operations & Automation Platforms",
-    description: "Systems for asset management and operational automation.",
-    href: "#asset-operations-platforms",
-    children: [
-      { title: "Astaric", description: "Asset lifecycle & RFID management", href: "#astaric" },
-      { title: "DocuMax", description: "Document management & compliance platform", href: "#documax" },
-    ],
-  },
-  {
-    title: "AI & Intelligence Platforms",
-    description: "AI platforms for insights, decisions and automation.",
-    href: "#ai-intelligence-platforms",
-    children: [
-      { title: "Aullect", description: "AI-powered logistics & operations intelligence", href: "#aullect" },
-      { title: "Zeito", description: "AI meeting & engagement intelligence", href: "#zeito" },
-    ],
-  },
-  {
-    title: "Digital Experience Platforms",
-    description: "Platforms that deliver seamless, user-centric digital experiences.",
-    href: "#digital-experience-platforms",
-    children: [{ title: "Style Lab", description: "Catalog & digital branding system", href: "#style-lab" }],
-  },
-];
+const productsItems = productPages.map(page => ({
+  title: page.title,
+  description: page.body,
+  href: page.href,
+  overviewLabel: `View ${page.title} Overview`,
+  children: page.platforms.map(platform => ({
+    title: platform.name,
+    description: platform.description,
+    href: `${page.href}#${platform.id}`,
+  })),
+}));
 
 const servicesItems = [
   {

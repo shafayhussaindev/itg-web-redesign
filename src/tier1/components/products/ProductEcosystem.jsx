@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useAnimationActivity } from '@/hooks/useAnimationActivity';
 
 /**
  * ProductEcosystem — ITG Platform Core and its five connected capabilities.
@@ -267,6 +268,7 @@ const STYLE = `
 `;
 
 export default function ProductEcosystem() {
+  const { ref } = useAnimationActivity();
   const [hovered, setHovered] = useState(null);
   const narrow = useIsNarrow();
 
@@ -316,7 +318,7 @@ export default function ProductEcosystem() {
     const spineTop = V.coreY + 46;
     const spineBottom = V_NODES[V_NODES.length - 1].vy;
     return (
-      <div className="itg-eco-wrap">
+      <div ref={ref} className="itg-eco-wrap">
         <style>{STYLE}</style>
         <svg
           className="itg-eco-svg"
@@ -375,7 +377,7 @@ export default function ProductEcosystem() {
 
   /* ---------------- radial (desktop) ---------------- */
   return (
-    <div className="itg-eco-wrap">
+    <div ref={ref} className="itg-eco-wrap">
       <style>{STYLE}</style>
       <svg
         className="itg-eco-svg"

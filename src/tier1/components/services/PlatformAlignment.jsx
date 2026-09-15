@@ -1,5 +1,6 @@
 import { platformAlignment } from '@/content/services.js';
 import { useReveal } from '../../hooks/useReveal.js';
+import { useAnimationActivity } from '@/hooks/useAnimationActivity';
 
 /**
  * Navy section — the dark beat in the page rhythm, between the white pillars
@@ -53,6 +54,7 @@ export default function PlatformAlignment() {
 }
 
 function EcosystemDiagram({ active }) {
+  const { ref } = useAnimationActivity();
   const { hub, nodes } = platformAlignment;
   // Fan-out x positions for the three lower nodes, evenly spread under the hub.
   const leafX = [150, 470, 790];
@@ -70,6 +72,7 @@ function EcosystemDiagram({ active }) {
 
   return (
     <svg
+      ref={ref}
       className={`svc-eco${active ? ' is-active' : ''}`}
       viewBox="0 0 940 540"
       role="img"

@@ -1,4 +1,5 @@
 import { servicesHero } from '@/content/services.js';
+import { useAnimationActivity } from '@/hooks/useAnimationActivity';
 import Icon from './icons.jsx';
 import CtaLabel from '../CtaLabel.jsx';
 
@@ -11,8 +12,9 @@ import CtaLabel from '../CtaLabel.jsx';
  * where it actually has content.
  */
 export default function ServicesHero() {
+  const { ref } = useAnimationActivity();
   return (
-    <section className="svc-hero" data-dark-hero>
+    <section ref={ref} className="svc-hero" data-dark-hero>
       <div className="svc-hero-media" aria-hidden="true">
         <div className="svc-hero-img" />
         <div className="svc-hero-grad" />

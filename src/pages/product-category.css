@@ -1,0 +1,36 @@
+/* Product categories reuse the tier-2 foundation, with open product summaries. */
+.product-category .pc-hero-label { color: rgba(255,255,255,.65); font: 10px 'JetBrains Mono', monospace; text-align: right; }
+.product-category .pc-lead { font-size: 22px; font-weight: 500; color: var(--navy); }
+.product-category .pc-platforms { display: grid; gap: 24px; }
+.product-category .pc-platform { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); border: 1px solid rgba(13,33,64,.12); border-radius: 16px; overflow: hidden; background: white; box-shadow: var(--shadow-card); }
+.product-category .pc-platform:target { outline: 2px solid var(--brand-accent); outline-offset: 4px; }
+.product-category .pc-platform-identity { padding: 40px; background: linear-gradient(140deg, #f3f7fc, #e4edf7); border-right: 1px solid rgba(13,33,64,.08); }
+.product-category .pc-platform-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+.product-category .pc-platform-top .sd-icon { background: white; width: 56px; height: 56px; }
+.product-category .pc-platform h3 { font-size: clamp(25px, 2.5vw, 34px); line-height: 1.2; letter-spacing: -.025em; margin-bottom: 16px; }
+.product-category .pc-platform-identity p { font-size: 14px; color: var(--charcoal); max-width: 300px; }
+.product-category .pc-platform-body { padding: 40px 48px; }
+.product-category .pc-platform-body > p { color: var(--charcoal); font-size: 15px; }
+.product-category .pc-platform-body h4 { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; font-weight: 600; margin: 24px 0 16px; }
+.product-category .pc-platform-body ul { display: grid; gap: 12px; margin-bottom: 24px; }
+.product-category .pc-platform-body li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.6; color: var(--charcoal); }
+.product-category .pc-platform-body li .msym { color: var(--teal-deep); flex-shrink: 0; margin-top: 2px; }
+.product-category .pc-discuss-link { text-decoration: none; }
+.product-category .pc-discuss-label { display: inline-block; transform-origin: left center; transition: transform .22s ease; }
+.product-category .pc-discuss-link > .msym { transition: transform .22s ease; }
+.product-category .pc-discuss-link:is(:hover, :focus-visible) .pc-discuss-label { transform: scale(1.04); }
+.product-category .pc-discuss-link:is(:hover, :focus-visible) > .msym { transform: translateX(8px); }
+@media (prefers-reduced-motion: reduce) {
+  .product-category .pc-discuss-link .pc-discuss-label,
+  .product-category .pc-discuss-link > .msym { transform: none; }
+}
+@media (max-width: 1023px) {
+  .product-category .pc-hero-label { display: none; }
+  .product-category .pc-platform-identity, .product-category .pc-platform-body { padding: 32px; }
+}
+@media (max-width: 767px) {
+  .product-category .pc-platform { grid-template-columns: minmax(0, 1fr); }
+  .product-category .pc-platform-identity { border-right: 0; border-bottom: 1px solid rgba(13,33,64,.08); }
+  .product-category .pc-platform-identity, .product-category .pc-platform-body { padding: 24px; }
+  .product-category .pc-platform-top { margin-bottom: 24px; }
+}

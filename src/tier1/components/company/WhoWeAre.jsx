@@ -13,9 +13,8 @@ import Icon from './icons.jsx';
  */
 export default function WhoWeAre() {
   const [ref, shown] = useReveal({ threshold: 0.1 });
-  const [imgRef, offset] = useParallax(0.05);
+  const imgRef = useParallax(0.05, true);
   const [stripRef, stripIn] = useReveal({ threshold: 0.2 });
-  const shift = Math.max(-6, Math.min(6, offset / 6));
 
   return (
     <section className="co-about" id="about">
@@ -24,7 +23,7 @@ export default function WhoWeAre() {
           <div
             ref={imgRef}
             className="co-about-img"
-            style={{ transform: `translate3d(0, ${shift}%, 0) scale(1.1)` }}
+            style={{ transform: 'translate3d(0, var(--parallax-offset, 0%), 0) scale(1.1)' }}
           >
             <img src={whoWeAre.image} alt="" loading="lazy" decoding="async" />
           </div>

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { registerParallax } from '@/lib/parallax';
 
 const REDUCED = '(prefers-reduced-motion: reduce)';
 
@@ -48,44 +49,33 @@ export function useReveal({ threshold = 0.18, rootMargin = '0px 0px -8% 0px' } =
 }
 
 /**
- * Scroll offset in pixels for parallax layers, throttled to one write per
- * animation frame. Returns 0 permanently under prefers-reduced-motion.
+ * Updates a CSS variable without re-rendering the surrounding content.
+ * All visible layers share one animation frame and scroll listener.
  *
  * `strength` is the fraction of the element's travel applied as counter-scroll
  * — 0.12 moves the image about 12% slower than the page, which is the range
  * the brief calls for (noticeable as depth, not as animation).
  */
-export function useParallax(strength = 0.12) {
+export function useParallax(strength = 0.12, percent = false) {
   const ref = useRef(null);
-  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
     const node = ref.current;
     if (!node || typeof window === 'undefined') return;
-    if (window.matchMedia(REDUCED).matches) return;
-
-    let frame = 0;
-    const update = () => {
-      frame = 0;
-      const rect = node.getBoundingClientRect();
-      // Distance of the element's centre from the viewport centre, so the
-      // offset is 0 when the section is centred and symmetrical either side.
-      const fromCentre = rect.top + rect.height / 2 - window.innerHeight / 2;
-      setOffset(-fromCentre * strength);
+    const media = window.matchMedia(REDUCED);
+    let cleanup;
+    const sync = () => {
+      cleanup?.();
+      cleanup = undefined;
+      if (!media.matches) cleanup = registerParallax(node, strength, percent);
     };
-    const onScroll = () => {
-      if (!frame) frame = window.requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
+    sync();
+    media.addEventListener('change', sync);
     return () => {
-      if (frame) window.cancelAnimationFrame(frame);
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
+      cleanup?.();
+      media.removeEventListener('change', sync);
     };
-  }, [strength]);
+  }, [strength, percent]);
 
-  return [ref, offset];
+  return ref;
 }

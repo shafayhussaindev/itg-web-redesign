@@ -73,6 +73,11 @@
 .solution-detail .sd-capability-result { border-left: 1px solid rgba(13,33,64,.12); padding-left: 24px; }
 .solution-detail .sd-text-link { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; font-size: 13px; font-weight: 600; color: var(--navy); text-decoration: underline; text-underline-offset: 5px; }
 .solution-detail .sd-text-link:hover { color: var(--brand-accent); }
+.solution-detail .sd-discuss-link { text-decoration: none; }
+.solution-detail .sd-discuss-label { display: inline-block; transform-origin: left center; transition: transform .22s ease; }
+.solution-detail .sd-discuss-link > .msym { transition: transform .22s ease; }
+.solution-detail .sd-discuss-link:is(:hover, :focus-visible) .sd-discuss-label { transform: scale(1.04); }
+.solution-detail .sd-discuss-link:is(:hover, :focus-visible) > .msym { transform: translateX(8px); }
 .solution-detail .sd-applications { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
 .solution-detail .sd-application { padding: 32px; border-radius: 12px; background: white; border: 1px solid rgba(13,33,64,.12); box-shadow: var(--shadow-card); }
 .solution-detail .sd-application > .msym { color: var(--brand-accent); }
@@ -156,5 +161,7 @@
   .solution-detail .sd-steps { grid-template-columns: 1fr; gap: 32px; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .solution-detail .sd-discuss-link .sd-discuss-label,
+  .solution-detail .sd-discuss-link > .msym { transform: none; }
   .solution-detail *, .solution-detail *::before, .solution-detail *::after { animation: none !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }

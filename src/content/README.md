@@ -43,6 +43,23 @@ visitor's email application with the solution name in the subject.
 Capability `id` values match the menu links in `site.js`. If you change an ID,
 update its menu link too. Those links open the capability and scroll to it.
 
+## Tier-2 product category pages
+
+The five product category pages use `product-detail.js`. Edit the category
+headlines, overview paragraphs, product summaries, integration section and
+closing CTA there. Category names, descriptions and images come from `products.js`.
+
+Routes are `/enterprise-business-platforms`, `/sustainability-compliance-platforms`,
+`/asset-operations-platforms`, `/ai-intelligence-platforms` and
+`/digital-experience-platforms`. Products appear as visible sections within these
+pages; there are no tier-3 product routes. The Products menu and category buttons
+use the same content, so links stay in sync. Keep product `id` values stable to
+preserve direct links such as `/enterprise-business-platforms#integra-erp`.
+
+Set `productDetail.contactEmail` in `product-detail.js` to enable demo enquiry
+emails. Until configured, the closing button says “Meet the ITG Team” and links
+to Company.
+
 ## The four rules
 
 **1. Only change what is between the quote marks.**

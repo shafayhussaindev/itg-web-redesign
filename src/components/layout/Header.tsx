@@ -255,9 +255,8 @@ function MegaMenu({
 
 export function Header({ contactHref = navCta.href }: { contactHref?: string } = {}) {
   const { theme, toggleTheme } = useTheme();
-  const [scrollY, setScrollY] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(() => window.scrollY > 20);
   const [darkHeroDepth, setDarkHeroDepth] = useState(0);
-  const isScrolled = scrollY > 20;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMobileSections, setOpenMobileSections] = useState<Record<string, boolean>>({});
   const [openMobileProducts, setOpenMobileProducts] = useState<Record<string, boolean>>({});
@@ -297,8 +296,9 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      setIsScrolled(window.scrollY > 20);
     };
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -387,7 +387,7 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
                   Products
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <MegaMenu items={productsItems} categoryWidth="w-[280px]" panelWidth="w-[420px]" />
+                  <MegaMenu items={productsItems} categoryWidth="w-[280px]" panelWidth="w-[420px]" categoriesAreLinks />
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
@@ -561,6 +561,13 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
                           </CollapsibleTrigger>
                           <CollapsibleContent className="pl-2">
                             <div className="mt-1 ml-4 flex flex-col gap-1">
+                              <a
+                                href={category.href}
+                                onClick={closeMobileMenu}
+                                className="text-sm font-semibold text-primary py-3 px-2 rounded-lg hover:bg-accent"
+                              >
+                                {category.overviewLabel}
+                              </a>
                               {category.children?.map((child) => (
                                 <a
                                   key={child.title}

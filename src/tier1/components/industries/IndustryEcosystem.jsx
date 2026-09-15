@@ -1,5 +1,6 @@
 import { industryFeatures } from '@/content/industries.js';
 import { useReveal } from '../../hooks/useReveal.js';
+import { useAnimationActivity } from '@/hooks/useAnimationActivity';
 
 /**
  * Ecosystem band — the dark beat between the last photographic feature and
@@ -70,6 +71,7 @@ function branch(fromX, fromY, toX) {
 }
 
 function EcosystemDiagram({ active }) {
+  const { ref } = useAnimationActivity();
   const left = industryFeatures.slice(0, 4);
   const right = industryFeatures.slice(4);
 
@@ -91,7 +93,7 @@ function EcosystemDiagram({ active }) {
   ];
 
   return (
-    <svg className={`ind-eco${active ? ' is-active' : ''}`} viewBox={`0 0 ${W} 644`}>
+    <svg ref={ref} className={`ind-eco${active ? ' is-active' : ''}`} viewBox={`0 0 ${W} 644`}>
       <defs>
         {/* userSpaceOnUse: the middle branches are near-horizontal, and a
             proportional gradient collapses on a zero-height bounding box. */}

@@ -1,4 +1,5 @@
 import { industriesHero } from '@/content/industries.js';
+import { useAnimationActivity } from '@/hooks/useAnimationActivity';
 import CtaLabel from '../CtaLabel.jsx';
 
 /**
@@ -11,8 +12,9 @@ import CtaLabel from '../CtaLabel.jsx';
  * gradient angle and the overlay differ, because the photograph does.
  */
 export default function IndustriesHero() {
+  const { ref } = useAnimationActivity();
   return (
-    <section className="ind-hero" data-dark-hero>
+    <section ref={ref} className="ind-hero" data-dark-hero>
       <div className="ind-hero-media" aria-hidden="true">
         <div
           className="ind-hero-img"

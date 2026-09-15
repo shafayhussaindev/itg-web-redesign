@@ -30,8 +30,7 @@ export default function PhotoModule({
 }) {
   const [headRef, headIn] = useReveal();
   const [ref, shown] = useReveal({ threshold: 0.1 });
-  const [imgRef, offset] = useParallax(0.05);
-  const shift = Math.max(-6, Math.min(6, offset / 6));
+  const imgRef = useParallax(0.05, true);
 
   return (
     <section className={`co-module co-module--${tone}`} id={id}>
@@ -52,7 +51,7 @@ export default function PhotoModule({
           <div
             ref={imgRef}
             className="co-mod-img"
-            style={{ transform: `translate3d(0, ${shift}%, 0) scale(1.1)` }}
+            style={{ transform: 'translate3d(0, var(--parallax-offset, 0%), 0) scale(1.1)' }}
           >
             <img src={data.image} alt="" loading="lazy" decoding="async" />
           </div>

@@ -7,6 +7,7 @@ import {
 } from '@/content/products.js';
 import '../../styles/products.css';
 import CtaLabel from '../CtaLabel.jsx';
+import { productCategoryPaths } from '@/content/product-detail.js';
 
 /* ---------- small inline icon set (stroke, matches Solutions weight) ---------- */
 /* Material Symbols, keyed by the icon names the products data already uses. */
@@ -158,9 +159,9 @@ function CatCard({ cat, onEnter, onLeave }) {
         <ul className="pp-includes">
           {cat.includes.map((inc) => <li key={inc}>{inc}</li>)}
         </ul>
-        <button className="pp-cat-cta">
+        <a className="pp-cat-cta" href={productCategoryPaths[cat.id]}>
           {cat.cta}<span className="pp-arrow" aria-hidden="true">→</span>
-        </button>
+        </a>
       </div>
     </article>
   );

@@ -33,7 +33,7 @@ export default function DeliveryPillars() {
  */
 function Pillar({ pillar }) {
   const [ref, shown] = useReveal({ threshold: 0.12 });
-  const [imgRef, offset] = useParallax(0.055);
+  const imgRef = useParallax(0.055);
 
   return (
     <article
@@ -46,7 +46,7 @@ function Pillar({ pillar }) {
           className="svc-pillar-img"
           style={{
             backgroundImage: `url('${pillar.image}')`,
-            transform: `translate3d(0, ${offset}px, 0) scale(1.12)`,
+            transform: 'translate3d(0, var(--parallax-offset, 0px), 0) scale(1.12)',
           }}
         />
         <div className="svc-pillar-scrim" />

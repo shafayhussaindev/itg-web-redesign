@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useAnimationActivity } from '@/hooks/useAnimationActivity';
 import gsap from 'gsap';
 import { Button } from '@/components/ui/button';
 import { Spotlight } from '@/components/ui/spotlight';
@@ -8,7 +9,7 @@ import "@/index.css"
 import { hero } from "@/content/home.js";
 
 export function HeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const { ref: containerRef } = useAnimationActivity<HTMLDivElement>();
   const panelRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const subheadlineRef = useRef<HTMLParagraphElement>(null);
@@ -75,7 +76,7 @@ export function HeroSection() {
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [containerRef]);
 
   return (
     <section

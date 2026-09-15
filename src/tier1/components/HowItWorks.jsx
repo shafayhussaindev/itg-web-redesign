@@ -1,5 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { useReveal } from '../hooks/useReveal.js';
+import { useAnimationActivity } from '@/hooks/useAnimationActivity';
 
 const HowItWorksLottie = lazy(() => import('./HowItWorksLottie.jsx'));
 
@@ -13,15 +14,16 @@ const HowItWorksLottie = lazy(() => import('./HowItWorksLottie.jsx'));
  */
 export default function HowItWorks() {
   const [tabletRef, tabletIn] = useReveal({ threshold: 0.12 });
+  const { ref, active, hasEntered } = useAnimationActivity();
 
   return (
-    <section>
+    <section ref={ref}>
       <div ref={tabletRef} className={`tablet-wrap reveal${tabletIn ? ' is-in' : ''}`}>
         <div className="tablet-frame">
           <div className="tablet-screen">
             <div className="lottie-stage">
               <Suspense fallback={null}>
-                <HowItWorksLottie />
+                {hasEntered && <HowItWorksLottie active={active} />}
               </Suspense>
             </div>
           </div>

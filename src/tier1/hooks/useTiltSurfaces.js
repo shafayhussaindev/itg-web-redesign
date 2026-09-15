@@ -52,7 +52,11 @@ export function useTiltSurfaces({ max = 5.5, shadow = 26, selector = TILT_SELECT
     const apply = () => {
       frame = 0;
       if (!pending || !active) return;
-      const { px, py } = pending;
+      // Measure once per frame, before writing any of the tilt properties.
+      const r = active.getBoundingClientRect();
+      if (!r.width || !r.height) return;
+      const px = Math.min(Math.max((pending.x - r.left) / r.width, 0), 1);
+      const py = Math.min(Math.max((pending.y - r.top) / r.height, 0), 1);
       active.style.setProperty('--tilt-x', `${(0.5 - py) * 2 * max}deg`);
       active.style.setProperty('--tilt-y', `${(px - 0.5) * 2 * max}deg`);
       active.style.setProperty('--mx', `${(px * 100).toFixed(2)}%`);
@@ -71,12 +75,7 @@ export function useTiltSurfaces({ max = 5.5, shadow = 26, selector = TILT_SELECT
       }
       if (!active) return;
 
-      const r = active.getBoundingClientRect();
-      if (!r.width || !r.height) return;
-      pending = {
-        px: Math.min(Math.max((e.clientX - r.left) / r.width, 0), 1),
-        py: Math.min(Math.max((e.clientY - r.top) / r.height, 0), 1),
-      };
+      pending = { x: e.clientX, y: e.clientY };
       if (!frame) frame = requestAnimationFrame(apply);
     };
 
@@ -89,15 +88,18 @@ export function useTiltSurfaces({ max = 5.5, shadow = 26, selector = TILT_SELECT
       }
     };
 
+    const onBlur = () => { reset(active); active = null; pending = null; };
+
     document.addEventListener('pointermove', onMove, { passive: true });
     document.addEventListener('pointerout', onOut, { passive: true });
-    window.addEventListener('blur', () => { reset(active); active = null; });
+    window.addEventListener('blur', onBlur);
 
     return () => {
       if (frame) cancelAnimationFrame(frame);
       reset(active);
       document.removeEventListener('pointermove', onMove);
       document.removeEventListener('pointerout', onOut);
+      window.removeEventListener('blur', onBlur);
     };
   }, [max, shadow, selector]);
 }

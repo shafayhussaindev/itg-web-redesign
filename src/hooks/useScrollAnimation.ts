@@ -37,7 +37,10 @@ export function useScrollAnimation() {
 
     observer.observe(element);
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      gsap.killTweensOf(element);
+    };
   }, []);
 
   return elementRef;
@@ -82,7 +85,10 @@ export function useStaggerAnimation() {
 
     observer.observe(container);
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      gsap.killTweensOf(children);
+    };
   }, []);
 
   return containerRef;

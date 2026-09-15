@@ -1,4 +1,5 @@
 import { companyHero } from '@/content/company.js';
+import { useAnimationActivity } from '@/hooks/useAnimationActivity';
 
 /**
  * Full-bleed headquarters photograph, angled gradient, glass panel left,
@@ -12,8 +13,9 @@ import { companyHero } from '@/content/company.js';
  * work and a heavier graphic would fight it.
  */
 export default function CompanyHero() {
+  const { ref } = useAnimationActivity();
   return (
-    <section className="co-hero" data-dark-hero>
+    <section ref={ref} className="co-hero" data-dark-hero>
       <div className="co-hero-media" aria-hidden="true">
         <div
           className="co-hero-img"
