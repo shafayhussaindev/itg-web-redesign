@@ -71,7 +71,7 @@
 .solution-detail .sd-capability-columns li { display: flex; gap: 8px; font-size: 12px; line-height: 1.65; }
 .solution-detail .sd-capability-columns li .msym { flex-shrink: 0; margin-top: 2px; color: var(--teal-deep); }
 .solution-detail .sd-capability-result { border-left: 1px solid rgba(13,33,64,.12); padding-left: 24px; }
-.solution-detail .sd-text-link { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; font-size: 13px; font-weight: 600; color: var(--navy); text-decoration: underline; text-underline-offset: 5px; }
+.solution-detail .sd-text-link { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; font-size: 13px; font-weight: 600; color: var(--navy); text-decoration: none; }
 .solution-detail .sd-text-link:hover { color: var(--brand-accent); }
 .solution-detail .sd-discuss-link { text-decoration: none; }
 .solution-detail .sd-discuss-label { display: inline-block; transform-origin: left center; transition: transform .22s ease; }
