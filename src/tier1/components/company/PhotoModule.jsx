@@ -1,10 +1,8 @@
-import { useParallax } from '../../hooks/useInView.js';
-import { useGlassOverlap } from '../../hooks/useGlassOverlap.js';
 import Icon from './icons.jsx';
 
 /**
  * The Company page's editorial workhorse: a centred section head, then a large
- * photograph with a glass panel overlapping it from one side, the section's
+ * photograph with a solid panel overlapping it from one side, the section's
  * items laid out inside the panel.
  *
  * Construction follows the approved Services delivery pillar and the Industries
@@ -18,8 +16,8 @@ import Icon from './icons.jsx';
  * `figure` is an optional render slot for a section's animation — Leadership
  * passes its governance graphic through it.
  *
- * The parallax offset is mapped to a percentage of the image's own height
- * rather than the hook's raw pixels; see the note in `IndustryFeatures.jsx`.
+ * The photograph is static: no parallax drift, no hover zoom, no panel lift
+ * (all removed on request).
  */
 export default function PhotoModule({
   id,
@@ -29,8 +27,6 @@ export default function PhotoModule({
   tone = 'light',
   figure = null,
 }) {
-  const imgRef = useParallax(0.05, true);
-  const [mediaRef, panelRef] = useGlassOverlap();
 
   return (
     <section className={`co-module co-module--${tone}`} id={id}>
@@ -38,28 +34,16 @@ export default function PhotoModule({
        
         className={`co-mod co-mod--${side}${columns === 1 ? ' co-mod--narrow' : ''}`}
       >
-        <div ref={mediaRef} className="co-mod-media parallax-frame">
-          <div ref={imgRef} className="co-mod-img parallax-layer">
+        <div className="co-mod-media">
+          <div className="co-mod-img">
             <img src={data.image} alt="" loading="lazy" decoding="async" />
-          </div>
-
-          {/* Cached blurred copy of the photograph for the glass panel — see
-              .glass-frost in tier1/styles/index.css. Sits under the scrim, like the
-              sharp photo, and drifts with it. */}
-          <div className="glass-frost" aria-hidden="true">
-            <div className="glass-frost-layer parallax-layer">
-              <img src={data.image} alt="" loading="lazy" decoding="async" />
-            </div>
           </div>
 
           <div className="co-mod-scrim" />
           {figure}
         </div>
 
-        <div
-          ref={panelRef}
-          className="co-mod-panel glass-overlap glass-card"
-        >
+        <div className="co-mod-panel">
           {/* The module's title and intro sit INSIDE the panel, the same way
               the Services delivery pillar carries its own heading. They used to
               be a centred section head above the photograph; moving them here

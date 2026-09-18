@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { registerParallax } from '@/lib/parallax';
 import { observeInView } from '../lib/scrollfx.js';
 
 const REDUCED = '(prefers-reduced-motion: reduce)';
@@ -40,39 +39,3 @@ export function useInView({ threshold = 0.18, rootMargin = '0px 0px -8% 0px' } =
   return [ref, inView];
 }
 
-/**
- * Fallback driver for `.parallax-layer` (see tier1/styles/index.css).
- *
- * Browsers with scroll-driven animations run the parallax entirely in CSS on
- * the compositor, so this hook does nothing there. Elsewhere it updates a CSS
- * variable without re-rendering the surrounding content; all visible layers
- * share one animation frame and scroll listener.
- *
- * `strength` is the fraction of the element's travel applied as counter-scroll
- * — 0.12 moves the image about 12% slower than the page, which is the range
- * the brief calls for (noticeable as depth, not as animation).
- */
-export function useParallax(strength = 0.12, percent = false) {
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node || typeof window === 'undefined') return;
-    if (window.CSS?.supports?.('animation-timeline: view()')) return;
-    const media = window.matchMedia(REDUCED);
-    let cleanup;
-    const sync = () => {
-      cleanup?.();
-      cleanup = undefined;
-      if (!media.matches) cleanup = registerParallax(node, strength, percent);
-    };
-    sync();
-    media.addEventListener('change', sync);
-    return () => {
-      cleanup?.();
-      media.removeEventListener('change', sync);
-    };
-  }, [strength, percent]);
-
-  return ref;
-}

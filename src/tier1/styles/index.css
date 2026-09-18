@@ -17,42 +17,34 @@
        see: 7px here reads as roughly blur(42px). */
     --frost-blur: 7px;
 
-    /* ── THE GLASS CARD ──────────────────────────────────────────────────
-       One surface, consumed by `.glass-card` below. Every light translucent
-       panel that laps onto imagery uses it: the Services delivery pillars, the
-       Industries features and intro panel, and the Company Who-We-Are and
-       photo modules. Change these four values and all nineteen cards change.
+    /* ── THE PHOTO-MODULE CARD ───────────────────────────────────────────
+       One surface, shared by the panels that lap onto photographs (the
+       Services delivery pillars, the Industries features, the Company
+       Who-We-Are and photo modules) and the Industries intro panel.
 
-       A white translucent fill over a blurred photograph — nothing else. Where
-       the card laps onto its photograph the photograph shows through, softened;
-       where it sits over flat page background it simply reads as white.
+       Opaque white, fully solid. No translucency and no blur: the photograph
+       stops at the edge of the card and nothing shows through it.
 
-       Two blur tokens, ONE look. The four photo modules do not use
-       backdrop-filter (it re-blurs every frame and made scrolling choppy);
-       they show a cached blurred copy of their own photograph, drawn at 1/6
-       size and scaled back up (see .glass-frost below), so --glass-frost-blur
-       is the radius in that small space and is six times smaller than the
-       blur it reads as. --glass-blur is the same blur expressed as a live
-       backdrop-filter, used only by the Industries intro panel, which has no
-       photograph to copy. Keep them in step: 2.4px x 6 ~= 14px.
+       This card was frosted glass twice over — a live backdrop-filter, then a
+       cached blurred copy of the photograph clipped to the panel — and then
+       briefly 92% white. All three were removed on request in favour of a
+       solid card. Don't reintroduce a blur, a translucent fill, or a filter.
 
-       Deliberately NOT used by the CTA and hero panels — those are dark navy
-       glass carrying white text, which is a different surface, not a variant. */
-    --glass-surface: rgba(255, 255, 255, 0.80);
-    --glass-blur: blur(14px);
-    --glass-frost-blur: 2.4px;
-    --glass-border: 1px solid rgba(255, 255, 255, 0.45);
-    --glass-shadow: 0 20px 50px rgba(10, 35, 65, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.40);
+       Not used by the CTA and hero panels — those are dark navy glass
+       carrying white text, a different surface. */
+    --card-bg: #FFFFFF;
+    --card-border: 1px solid rgba(13, 33, 64, 0.06);
+    --card-shadow: 0 20px 50px rgba(10, 35, 65, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.40);
 
   }
   /* Scrolling is smoothed by Lenis (see Tier1Route); CSS smooth scroll on
      top of it makes anchor jumps fight the inertia. */
   .tier1-site{scroll-behavior:auto;}
   /* overflow-x: clip, not hidden. `hidden` quietly turns this wrapper into a
-     scroll container (overflow-y computes to auto), and scroll-driven
-     animations bind to the nearest scroll container — one that never scrolls,
-     so the parallax below would freeze. `hidden` stays as the fallback for
-     browsers without `clip`. */
+     scroll container (overflow-y computes to auto), which breaks anything
+     that binds to the nearest scroll container (scroll-driven animations,
+     sticky positioning). `hidden` stays as the fallback for browsers without
+     `clip`. */
   .tier1-site{font-family:'Sora',sans-serif;background:#fff;color:var(--navy);-webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-x:clip;}
   .tier1-site .wrap{max-width:1280px;margin:0 auto;padding:0 40px;}
   .tier1-site a{text-decoration:none;color:inherit;}
@@ -240,11 +232,8 @@
    These cards once carried a cursor-following tilt-and-glow hover effect, and
    later a scroll-in entrance. Both were removed on request, so this block is
    now only the resting shadow. There is deliberately no transform and no
-   transition here: the cards are static. */
-.tier1-site .svc-pillar-panel,
-.tier1-site .ind-feature-panel,
-.tier1-site .co-about-panel,
-.tier1-site .co-mod-panel,
+   transition here: the cards are static. (The photo-module panels have their
+   own block below and are not in this list.) */
 .tier1-site .co-news-card,
 .tier1-site .co-vmv-card,
 .tier1-site .co-global-card,
@@ -266,145 +255,28 @@
 }
 
 
-/* ── The reusable glass card ──────────────────────────────────────────────
-   THE one glass surface. Add `glass-card` to any light translucent panel that
-   laps onto imagery and it inherits the whole treatment: white translucent
-   fill, live backdrop blur, hairline white border, soft drop shadow and the
-   inset top highlight.
+/* ── The photo-module card ────────────────────────────────────────────────
+   The content panel that laps onto a photograph in the Services delivery
+   pillars, the Industries features and the Company Who-We-Are and photo
+   modules, plus the Industries intro panel: solid white, hairline border,
+   soft drop shadow with an inset top highlight.
 
-   Two ways the blur gets painted, one look:
-     - a panel that also carries `.glass-overlap` (the four photo modules)
-       paints its fill on ::after and shows, through it, a cached blurred copy
-       of the photograph that lives inside the media box (`.glass-frost`,
-       clipped to the panel by hooks/useGlassOverlap). Nothing is blurred per
-       frame — the copy is rasterised once and then only moved;
-     - any other panel (the Industries intro, which sits on a pattern rather
-       than a photograph) paints background + a live backdrop-filter.
-   Both resolve to the same --glass-surface and matched blur tokens, so they
-   cannot drift. */
-.tier1-site .glass-card {
-  --glass-bg: var(--glass-surface);
-  position: relative;
-  border: var(--glass-border);
-  box-shadow: var(--glass-shadow);
-}
-.tier1-site .glass-card:not(.glass-overlap) {
-  background: var(--glass-surface);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+   The fill is opaque, so nothing shows through the overlap. These were
+   frosted glass twice over (a live backdrop-filter, then a cached blurred
+   copy of the photo clipped to the panel) and then 92% white; the
+   backdrop-filter made scrolling choppy, and solid cards were asked for
+   after. Do not put a blur or a translucent fill back on these panels. */
+.tier1-site .svc-pillar-panel,
+.tier1-site .ind-feature-panel,
+.tier1-site .co-about-panel,
+.tier1-site .co-mod-panel,
+.tier1-site .ind-intro-panel {
+  background: var(--card-bg);
+  border: var(--card-border);
+  box-shadow: var(--card-shadow);
 }
 
 
-/* ── The overlap panel's fill ─────────────────────────────────────────────
-   The panel declares its fill as --glass-bg (via .glass-card) instead of
-   background: it is painted on ::after, out to the border box, so the 1px
-   translucent border sits on the fill rather than beside it. The panel is a
-   stacking context (position: relative + z-index), so z-index -1 puts the
-   fill under the content but above anything behind the panel. */
-.tier1-site .glass-overlap::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  margin: -1px;
-  border-radius: inherit;
-  background: var(--glass-bg);
-  pointer-events: none;
-}
-
-/* ── The cached frost behind an overlap panel ─────────────────────────────
-   Markup, inside the module's .parallax-frame media box, between the sharp
-   photograph and the scrim:
-
-     .glass-frost                       (pinned to the media box, clipped to
-       .glass-frost-layer.parallax-layer  the panel's rectangle by --glass-clip)
-         img                            (the same photograph again)
-
-   This is what a backdrop-filter on the panel would show — the photograph,
-   blurred, under the scrim, under the white fill — without the per-frame
-   cost. backdrop-filter has to re-read and re-blur its backdrop on every
-   frame it is on screen, and the parallax guarantees that backdrop moves; on
-   these pages that measured at about two thirds of the GPU draw time and
-   made scrolling visibly choppy. A `filter: blur()` on a static image is
-   rasterised once and cached; the parallax then only moves it.
-
-   The wrapper does NOT move: it stays pinned to the media box and clips to
-   the panel, so the frosted area sits exactly where the panel is. The layer
-   inside DOES move — it carries .parallax-layer, so it inherits the identical
-   drift as the sharp photograph beneath and the two can never separate.
-
-   The copy is drawn at 1/6 size and scaled back up. Blur cost scales with the
-   number of pixels blurred, so this is ~36x cheaper, and the upscale supplies
-   the rest of the softness; --glass-frost-blur is the radius in the small
-   space. The downscale lives on the <img>, not on the layer: the layer's
-   transform belongs to the parallax and must stay untouched.
-
-   The frost sits UNDER the scrim, exactly as the real photograph does, so the
-   glass darkens toward the panel edge the way a backdrop blur of photo plus
-   scrim would. Until the hook has measured, inset(50%) shows nothing rather
-   than a misaligned pane. */
-.tier1-site .glass-frost {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  clip-path: var(--glass-clip, inset(50%));
-}
-.tier1-site .glass-frost-layer { position: absolute; inset: -8%; }
-.tier1-site .glass-frost-layer img {
-  width: calc(100% / 6);
-  height: calc(100% / 6);
-  object-fit: cover;
-  display: block;
-  transform: scale(6);
-  transform-origin: 0 0;
-  filter: blur(var(--glass-frost-blur));
-}
-
-
-/* ── Photo parallax ───────────────────────────────────────────────────────
-   The photograph inside a clipped media frame drifts against the scroll.
-   Markup: .parallax-frame (the clipping box) > .parallax-layer (the bled
-   image wrapper, inset -8% so the drift never uncovers an edge).
-
-   Where the browser supports scroll-driven animations, the drift is a CSS
-   animation on the frame's view timeline: it runs on the compositor in step
-   with the scroll itself, with no JavaScript and no main-thread work per
-   frame. The travel is ±6% of the layer's own height, which is what the
-   JavaScript version produced (strength 0.05, clamped at ±6%).
-
-   Elsewhere lib/parallax.ts sets --parallax-offset from a single shared
-   scroll handler, and the transform below reads it. */
-.tier1-site .parallax-frame { view-timeline: --parallax-frame block; }
-.tier1-site .parallax-layer {
-  transform: translate3d(0, var(--parallax-offset, 0%), 0) scale(1.1);
-  will-change: transform;
-}
-@supports (animation-timeline: view()) {
-  .tier1-site .parallax-layer {
-    animation: parallax-drift linear both;
-    animation-timeline: --parallax-frame;
-  }
-}
-/* Lighter on smaller screens: ~2/3 of the travel on tablets, ~40% on phones,
-   where the frame is short and a large drift reads as wobble. */
-@keyframes parallax-drift {
-  from { transform: translate3d(0, -6%, 0) scale(1.1); }
-  to   { transform: translate3d(0, 6%, 0) scale(1.1); }
-}
-@keyframes parallax-drift-md {
-  from { transform: translate3d(0, -4%, 0) scale(1.1); }
-  to   { transform: translate3d(0, 4%, 0) scale(1.1); }
-}
-@keyframes parallax-drift-sm {
-  from { transform: translate3d(0, -2.5%, 0) scale(1.1); }
-  to   { transform: translate3d(0, 2.5%, 0) scale(1.1); }
-}
-@media (max-width: 1023.98px) { .tier1-site .parallax-layer { animation-name: parallax-drift-md; } }
-@media (max-width: 680px) { .tier1-site .parallax-layer { animation-name: parallax-drift-sm; } }
-@media (prefers-reduced-motion: reduce) {
-  .tier1-site .parallax-layer { animation: none; transform: scale(1.1); will-change: auto; }
-}
 
 /* ── Off-screen render skipping ───────────────────────────────────────────
    Every tier-1 page is a tall stack of photographic, glass and vector

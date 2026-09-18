@@ -299,8 +299,8 @@
   overflow: hidden;
   box-shadow: var(--shadow-soft);
 }
-/* Drift and will-change come from .parallax-layer (tier1/styles/index.css). */
-.tier1-site .svc-pillar-img { position: absolute; inset: -8%; }
+/* Static: no parallax, no hover motion (both removed on request). */
+.tier1-site .svc-pillar-img { position: absolute; inset: 0; }
 .tier1-site .svc-pillar-img img {
   width: 100%;
   height: 100%;
@@ -314,8 +314,8 @@
   grid-row: 1;
   padding: 40px 40px 42px;
   border-radius: 22px;
-  /* Fill, blur, border and shadow come from .glass-card / .glass-overlap
-     (tier1/styles/index.css). */
+  /* Surface (fill, border, shadow) comes from the shared photo-module
+     card block in tier1/styles/index.css. */
 }
 
 /* Panel right: image occupies cols 1-8, panel overlaps from col 7 to 13. */
@@ -709,6 +709,5 @@
   .tier1-site .svc-flow-pulse,
   .tier1-site .svc-eco-pulse,
   .tier1-site .svc-hero-pulse { display: none; }
-  .tier1-site .svc-pillar-img { transform: none !important; }
   .tier1-site .svc-page * { scroll-behavior: auto; }
 }

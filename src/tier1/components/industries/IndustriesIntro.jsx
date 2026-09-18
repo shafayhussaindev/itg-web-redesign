@@ -18,7 +18,7 @@ export default function IndustriesIntro() {
   return (
     <section className="ind-intro">
       <IntroLattice />
-      <div className="ind-intro-glass glass-card">
+      <div className="ind-intro-panel">
         <span className="ind-intro-rule" aria-hidden="true" />
         {industriesIntro.map((para, i) => (
           <p key={para} className={i === 0 ? 'ind-intro-lead' : 'ind-intro-body'}>

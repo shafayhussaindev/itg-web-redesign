@@ -2,14 +2,10 @@
  * scrollfx — pooled viewport observation for the tier-1 pages.
  *
  * This file used to be the whole scroll pipeline: section reveals, a glass-card
- * settle, and parallax. The reveals and the card settle were removed on
- * request, so what remains is:
+ * settle, and parallax. All three were removed on request, so what remains is:
  *
  *   User scrolls
  *      |
- *      +-- Parallax       -> transform only   (pure CSS scroll-driven
- *      |                                       animation, on the compositor;
- *      |                                       nothing in this file)
  *      +-- Activity gates -> one-shot in-view  (this file, via useInView)
  *
  * Nothing here runs per scrolled frame. The gate fires once per element, from
