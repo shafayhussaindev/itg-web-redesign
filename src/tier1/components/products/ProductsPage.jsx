@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useAnimationActivity } from '@/hooks/useAnimationActivity';
 import ProductEcosystem from './ProductEcosystem.jsx';
 import HowItWorks from './HowItWorks.jsx';
 import {
@@ -90,7 +91,7 @@ function PrincipleStack({ principles }) {
           split because a single element cannot carry two transition lists —
           sharing one made the hover lift inherit the entry's delay. */}
       {principles.map((pr, i) => (
-        <div className="pp-principle-slot pp-reveal" key={pr.text} style={{ '--d': `${120 + i * 90}ms` }}>
+        <div className="pp-principle-slot" key={pr.text}>
           <div
             className={`pp-principle${active === i ? ' is-active' : ''}`}
             onMouseEnter={() => setActive(i)}
@@ -102,11 +103,7 @@ function PrincipleStack({ principles }) {
         </div>
       ))}
 
-      {/* The wrapper is always mounted, empty or not: useReveal collects its
-          targets once on mount, so an element that appears later — geo only
-          exists after the first measure — would never be observed and would
-          sit at opacity 0 forever. */}
-      <div className="pp-phil-web pp-reveal" style={{ '--d': '620ms' }} aria-hidden="true">
+      <div className="pp-phil-web" aria-hidden="true">
         {geo && (
           <>
             <svg viewBox={`0 0 ${geo.w} ${geo.h}`} width={geo.w} height={geo.h}>
@@ -217,20 +214,19 @@ function CategoryDeck({ cats }) {
 
   return (
     <div className="pp-cat-deck" ref={deck}>
-      <div className="pp-cat-slot pp-cat-slot--feature pp-reveal">
+      <div className="pp-cat-slot pp-cat-slot--feature">
         <CatCard cat={feature} />
       </div>
 
       <div className="pp-cat-grid">
         {rest.map((cat, i) => (
-          <div className="pp-cat-slot pp-reveal" key={cat.id} style={{ '--d': `${100 + i * 80}ms` }}>
+          <div className="pp-cat-slot" key={cat.id}>
             <CatCard cat={cat} onEnter={() => setActive(i)} onLeave={() => setActive(-1)} />
           </div>
         ))}
       </div>
 
-      {/* wrapper always mounted so useReveal can observe it — see pp-phil-web */}
-      <div className="pp-cat-web pp-reveal" style={{ '--d': '520ms' }} aria-hidden="true">
+      <div className="pp-cat-web" aria-hidden="true">
         {geo && (
           <>
             <svg viewBox={`0 0 ${geo.w} ${geo.h}`} width={geo.w} height={geo.h}>
@@ -259,35 +255,14 @@ function CategoryDeck({ cats }) {
   );
 }
 
-/* Opacity + small translate on entry. One observer, no scroll listener. */
-function useReveal() {
-  const ref = useRef(null);
-  useEffect(() => {
-    const root = ref.current;
-    if (!root) return;
-    const targets = root.querySelectorAll('.pp-reveal');
-    if (!targets.length) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      targets.forEach((t) => t.classList.add('is-in'));
-      return;
-    }
-    const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => {
-        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
-      }),
-      { rootMargin: '0px 0px -8% 0px', threshold: 0.08 }
-    );
-    targets.forEach((t) => io.observe(t));
-    return () => io.disconnect();
-  }, []);
-  return ref;
-}
-
 export default function ProductsPage() {
-  const ref = useReveal();
+  // The philosophy thread, route pulses and hub halos loop forever. Pause them
+  // while their section is off-screen, as the page's other animations do.
+  const { ref: philosophyRef } = useAnimationActivity();
+  const { ref: categoriesRef } = useAnimationActivity();
 
   return (
-    <div ref={ref}>
+    <div>
       <main>
 
         {/* ---------- 1 · HERO ----------
@@ -354,7 +329,7 @@ export default function ProductsPage() {
         </section>
 
         {/* ---------- 2 · PLATFORM-FIRST PHILOSOPHY ---------- */}
-        <section className="pp-philosophy">
+        <section ref={philosophyRef} className="pp-philosophy">
           {/* philosophy → architecture → capabilities, drawn as one faint thread
               behind the copy. Meant to be found, not noticed. */}
           <svg className="pp-phil-thread" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
@@ -362,16 +337,16 @@ export default function ProductsPage() {
           </svg>
 
           <div className="pp-philosophy-inner">
-            <div className="pp-philosophy-bg pp-reveal" style={{ '--d': '260ms' }} aria-hidden="true">
+            <div className="pp-philosophy-bg" aria-hidden="true">
               <img src="/assets/products/philosophy-core.webp" alt="" loading="lazy" width="1180" height="629" />
               <span className="pp-phil-halo" />
             </div>
 
             <div className="pp-phil-copy">
-              <h2 className="pp-reveal">{philosophy.heading}</h2>
-              <p className="pp-lede pp-reveal" style={{ '--d': '110ms' }}>{philosophy.body}</p>
-              <span className="pp-kicker pp-reveal" style={{ '--d': '220ms' }}>{philosophy.kicker}</span>
-              <p className="pp-note pp-reveal" style={{ '--d': '300ms' }}>{philosophy.note}</p>
+              <h2>{philosophy.heading}</h2>
+              <p className="pp-lede">{philosophy.body}</p>
+              <span className="pp-kicker">{philosophy.kicker}</span>
+              <p className="pp-note">{philosophy.note}</p>
             </div>
 
             <PrincipleStack principles={philosophy.principles} />
@@ -379,8 +354,8 @@ export default function ProductsPage() {
         </section>
 
         {/* ---------- 3 · PRODUCT CATEGORIES ---------- */}
-        <section className="pp-cats">
-          <div className="pp-section-head pp-reveal">
+        <section ref={categoriesRef} className="pp-cats">
+          <div className="pp-section-head">
             <h2>{categoriesHeading}</h2>
           </div>
           <CategoryDeck cats={productCategories} />
@@ -388,10 +363,10 @@ export default function ProductsPage() {
 
         {/* ---------- 4 · PRODUCT ECOSYSTEM ---------- */}
         <section className="pp-ecosystem pp-grid-field">
-          <div className="pp-section-head pp-reveal">
+          <div className="pp-section-head">
             <h2>{ecosystem.heading}</h2>
           </div>
-          <div className="pp-ecosystem-stage pp-reveal">
+          <div className="pp-ecosystem-stage">
             <ProductEcosystem />
           </div>
         </section>
@@ -399,7 +374,7 @@ export default function ProductsPage() {
         {/* ---------- 5 · HOW ITG PRODUCTS WORK TOGETHER ---------- */}
         <section className="pp-how">
           <div className="pp-how-inner">
-            <div className="pp-reveal">
+            <div>
               <h2>{howItWorks.heading}</h2>
               <p className="pp-how-body">{howItWorks.body}</p>
               <ul className="pp-how-points">
@@ -409,7 +384,7 @@ export default function ProductsPage() {
               </ul>
               <p className="pp-note">{howItWorks.note}</p>
             </div>
-            <div className="pp-reveal">
+            <div>
               <HowItWorks />
             </div>
           </div>
@@ -417,36 +392,36 @@ export default function ProductsPage() {
 
         {/* ---------- 6 · PRODUCTS ACROSS INDUSTRIES ---------- */}
         <section className="pp-industries">
-          <div className="pp-section-head pp-reveal">
+          <div className="pp-section-head">
             <h2>{industries.heading}</h2>
             <p>{industries.intro}</p>
           </div>
 
           <div className="pp-ind-stage">
-            <div className="pp-ind-col pp-ind-col--left pp-reveal">
+            <div className="pp-ind-col pp-ind-col--left">
               {industries.items.slice(0, 4).map((it) => (
                 <div className="pp-ind-item" key={it}>{it}</div>
               ))}
             </div>
 
-            <div className="pp-ind-core pp-reveal">
+            <div className="pp-ind-core">
               <img src="/assets/products/industries-anchor.webp" alt="" aria-hidden="true" loading="lazy" width="1200" height="643" />
               <span className="pp-ind-core-label"><span>ITG Platform</span></span>
             </div>
 
-            <div className="pp-ind-col pp-ind-col--right pp-reveal">
+            <div className="pp-ind-col pp-ind-col--right">
               {industries.items.slice(4).map((it) => (
                 <div className="pp-ind-item" key={it}>{it}</div>
               ))}
             </div>
           </div>
 
-          <p className="pp-ind-note pp-reveal">{industries.note}</p>
+          <p className="pp-ind-note">{industries.note}</p>
         </section>
 
         {/* ---------- 7 · FINAL CTA ---------- */}
         <section className="pp-cta pp-grid-field">
-          <div className="pp-reveal">
+          <div>
             <h2>{productsCta.heading}</h2>
             <div className="pp-cta-btns">
               <button className="btn-cyan"><CtaLabel>{productsCta.primary}</CtaLabel></button>

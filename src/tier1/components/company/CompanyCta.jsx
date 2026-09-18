@@ -1,5 +1,5 @@
 import { companyCta } from '@/content/company.js';
-import { useReveal } from '../../hooks/useReveal.js';
+import { useFrostClip } from '../../hooks/useFrostClip.js';
 import CtaLabel from '../CtaLabel.jsx';
 
 /**
@@ -14,14 +14,16 @@ import CtaLabel from '../CtaLabel.jsx';
  * other pages' CTAs.
  */
 export default function CompanyCta() {
-  const [ref, shown] = useReveal({ threshold: 0.25 });
+  const [bgRef, panelRef] = useFrostClip();
 
   return (
     <section className="co-cta">
-      <div className="co-cta-bg" style={{ backgroundImage: `url('${companyCta.background}')` }}>
+      <div ref={bgRef} className="co-cta-bg" style={{ backgroundImage: `url('${companyCta.background}')` }}>
+        {/* Cached frosted backdrop — see the note in IndustriesCta. */}
+        <div className="co-cta-frost" aria-hidden="true" />
         <div className="co-cta-overlay" />
         <div className="co-cta-glow" aria-hidden="true" />
-        <div ref={ref} className={`co-cta-glass reveal${shown ? ' is-in' : ''}`}>
+        <div ref={panelRef} className="co-cta-glass">
           <h2>{companyCta.title}</h2>
           <div className="cta-row co-cta-row">
             <button className="btn-cyan co-btn-glow"><CtaLabel>{companyCta.primary}</CtaLabel></button>

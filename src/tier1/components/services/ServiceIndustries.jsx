@@ -1,5 +1,4 @@
 import { serviceIndustries } from '@/content/services.js';
-import { useReveal } from '../../hooks/useReveal.js';
 
 /**
  * Industry cards on the same .cat-* pattern as Solution Categories and the
@@ -13,18 +12,16 @@ import { useReveal } from '../../hooks/useReveal.js';
  * two grids exactly.
  */
 export default function ServiceIndustries() {
-  const [headRef, headIn] = useReveal();
-  const [gridRef, gridIn] = useReveal({ threshold: 0.08 });
 
   return (
     <section className="svc-ind" id="industries">
-      <div ref={headRef} className={`section-head reveal${headIn ? ' is-in' : ''}`}>
+      <div className="section-head">
         <h2>{serviceIndustries.title}</h2>
         <span className="svc-rule" aria-hidden="true" />
         <p>{serviceIndustries.intro}</p>
       </div>
 
-      <div ref={gridRef} className={`cat-grid reveal reveal--late${gridIn ? ' is-in' : ''}`}>
+      <div className="cat-grid">
         {serviceIndustries.items.map((item) => (
           <article key={item.id} className="cat-card cat-card--static">
             <div className="cat-card-bg" style={{ backgroundImage: `url('${item.image}')` }} />

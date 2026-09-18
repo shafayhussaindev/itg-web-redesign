@@ -8,14 +8,6 @@
  * picks it up on its own. See content/README.md if anything here is unclear.
  * ========================================================================= */
 
-/* NOT LIVE — the menu bar and footer you see on the site come from site.js.
-   These two feed an older pair of components that are no longer mounted on any
-   page. Editing them changes nothing; edit site.js instead. */
-export const nav = {
-  links: ['Solutions', 'Products', 'Services', 'Industries', 'Company'],
-  cta: 'Contact us',
-};
-
 export const hero = {
   eyebrow: 'Solutions',
   titleLine1: 'Business Outcomes',
@@ -134,17 +126,3 @@ export const ctaBand = {
   background: '/assets/cta-skyline.jpg',
 };
 
-/* NOT LIVE — see the note above `nav`. Edit site.js instead. */
-export const footer = {
-  tagline: 'Engineering intelligent digital platforms for modern enterprises.',
-  columns: [
-    {
-      heading: 'Solutions',
-      links: ['Intelligence & AI', 'Business Platforms', 'Automation & Cloud', 'Digital Experience', 'Growth & Commerce'],
-    },
-    { heading: 'Company', links: ['About Us', 'Careers', 'Contact'] },
-    { heading: 'Resources', links: ['Case Studies', 'Research', 'Blog', 'Events'] },
-    { heading: 'Legal', links: ['Privacy Policy', 'Terms of Service', 'Cookie Policy'] },
-  ],
-  copyright: '© 2026 ITG Technologies. All rights reserved.',
-};

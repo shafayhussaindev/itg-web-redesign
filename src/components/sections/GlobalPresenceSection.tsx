@@ -1,17 +1,15 @@
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { Globe } from "@/components/icons/material";
 // @ts-expect-error - plain JS content file, no types alongside it
 import { globalPresence } from "@/content/home.js";
 
 
 export function GlobalPresenceSection() {
-  const sectionRef = useScrollAnimation();
 
   return (
     <section className="section-padding bg-card border-y border-border relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('/global-presence-bg.jpeg')] bg-cover bg-center bg-no-repeat opacity-15 pointer-events-none" />
       <div className="absolute inset-0 bg-background/60 pointer-events-none" />
-      <div ref={sectionRef} className="section-container">
+      <div className="section-container relative z-10">
         <div className="text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 rounded-xl lg:rounded-2xl bg-primary/10 mb-4 lg:mb-6">
             <Globe className="w-6 h-6 lg:w-8 lg:h-8 text-primary" />

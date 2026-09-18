@@ -1,11 +1,9 @@
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useCounterAnimation } from '@/hooks/useCounterAnimation';
 / @ts-expect-error - plain JS content file, no types alongside it/
 import { trust } from "@/content/home.js";
 
 
 export function TrustSection() {
-  const sectionRef = useScrollAnimation();
   const counters = [
     { end: 20, suffix: '+', label: 'Enterprise Clients' },
     { end: 7, label: 'Countries' },
@@ -15,7 +13,7 @@ export function TrustSection() {
 
   return (
     <section className="relative py-12 md:py-16 lg:py-20 bg-card border-y border-border">
-      <div ref={sectionRef} className="section-container">
+      <div className="section-container">
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-foreground">
             {trust.title}

@@ -1,4 +1,5 @@
-import { useReveal, useParallax } from '../../hooks/useReveal.js';
+import { useParallax } from '../../hooks/useInView.js';
+import { useGlassOverlap } from '../../hooks/useGlassOverlap.js';
 import Icon from './icons.jsx';
 
 /**
@@ -28,38 +29,50 @@ export default function PhotoModule({
   tone = 'light',
   figure = null,
 }) {
-  const [headRef, headIn] = useReveal();
-  const [ref, shown] = useReveal({ threshold: 0.1 });
   const imgRef = useParallax(0.05, true);
+  const [mediaRef, panelRef] = useGlassOverlap();
 
   return (
     <section className={`co-module co-module--${tone}`} id={id}>
-      <div ref={headRef} className={`section-head reveal${headIn ? ' is-in' : ''}`}>
-        <h2>{data.title}</h2>
-        <span
-          className={`co-rule${tone === 'dark' ? ' co-rule--light' : ''}`}
-          aria-hidden="true"
-        />
-        {data.intro && <p>{data.intro}</p>}
-      </div>
-
       <article
-        ref={ref}
-        className={`co-mod co-mod--${side}${columns === 1 ? ' co-mod--narrow' : ''} reveal${shown ? ' is-in' : ''}`}
+       
+        className={`co-mod co-mod--${side}${columns === 1 ? ' co-mod--narrow' : ''}`}
       >
-        <div className="co-mod-media">
-          <div
-            ref={imgRef}
-            className="co-mod-img"
-            style={{ transform: 'translate3d(0, var(--parallax-offset, 0%), 0) scale(1.1)' }}
-          >
+        <div ref={mediaRef} className="co-mod-media parallax-frame">
+          <div ref={imgRef} className="co-mod-img parallax-layer">
             <img src={data.image} alt="" loading="lazy" decoding="async" />
           </div>
+
+          {/* Cached blurred copy of the photograph for the glass panel — see
+              .glass-frost in tier1/styles/index.css. Sits under the scrim, like the
+              sharp photo, and drifts with it. */}
+          <div className="glass-frost" aria-hidden="true">
+            <div className="glass-frost-layer parallax-layer">
+              <img src={data.image} alt="" loading="lazy" decoding="async" />
+            </div>
+          </div>
+
           <div className="co-mod-scrim" />
           {figure}
         </div>
 
-        <div className="co-mod-panel">
+        <div
+          ref={panelRef}
+          className="co-mod-panel glass-overlap glass-card"
+        >
+          {/* The module's title and intro sit INSIDE the panel, the same way
+              the Services delivery pillar carries its own heading. They used to
+              be a centred section head above the photograph; moving them here
+              is what makes this card read as the same component as the Services
+              and Industries ones. */}
+          <header className="co-mod-head">
+            <span className="co-mod-head-icon">
+              <Icon name={data.icon} size={22} />
+            </span>
+            <h2>{data.title}</h2>
+          </header>
+          {data.intro && <p className="co-mod-intro">{data.intro}</p>}
+
           <ul className={`co-mod-grid co-mod-grid--${columns}`}>
             {data.items.map((item) => (
               <li key={item.id} className="co-mod-item">

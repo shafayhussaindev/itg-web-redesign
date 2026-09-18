@@ -1,14 +1,12 @@
 import { ctaBand } from '@/content/solutions.js';
-import { useReveal } from '../hooks/useReveal.js';
 import CtaLabel from './CtaLabel.jsx';
 
 export default function CtaBand() {
-  const [contentRef, contentIn] = useReveal({ threshold: 0.2 });
 
   return (
     <section className="cta-section">
       <div className="cta-bg" style={{ backgroundImage: `url('${ctaBand.background}')` }}>
-        <div ref={contentRef} className={`cta-content reveal${contentIn ? ' is-in' : ''}`}>
+        <div className="cta-content">
           <h2>{ctaBand.title}</h2>
           <p>{ctaBand.body}</p>
           <div className="cta-btns">

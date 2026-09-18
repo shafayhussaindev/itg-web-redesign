@@ -1,11 +1,9 @@
-import { useStaggerAnimation } from '@/hooks/useScrollAnimation';
 import { ArrowRight, MSym } from "@/components/icons/material";
 / @ts-expect-error - plain JS content file, no types alongside it /
 import { platforms } from "@/content/home.js";
 
 
 export function PlatformsSection() {
-  const cardsRef = useStaggerAnimation();
 
   return (
     <section id="platforms" className="section-padding">
@@ -25,7 +23,7 @@ export function PlatformsSection() {
             </a>
           </div>
 
-          <div ref={cardsRef} className="grid sm:grid-cols-2 gap-4 lg:gap-6">
+          <div className="grid sm:grid-cols-2 gap-4 lg:gap-6">
             {platforms.cards.map((platform) => {
               return (
                 <div

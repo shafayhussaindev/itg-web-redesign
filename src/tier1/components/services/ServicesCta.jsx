@@ -1,5 +1,4 @@
 import { servicesCta } from '@/content/services.js';
-import { useReveal } from '../../hooks/useReveal.js';
 import CtaLabel from '../CtaLabel.jsx';
 
 /**
@@ -9,14 +8,13 @@ import CtaLabel from '../CtaLabel.jsx';
  * legible around it.
  */
 export default function ServicesCta() {
-  const [ref, shown] = useReveal({ threshold: 0.25 });
 
   return (
     <section className="svc-cta">
       <div className="svc-cta-bg" style={{ backgroundImage: `url('${servicesCta.background}')` }}>
         <div className="svc-cta-overlay" />
         <div className="svc-cta-glow" aria-hidden="true" />
-        <div ref={ref} className={`svc-cta-glass reveal${shown ? ' is-in' : ''}`}>
+        <div className="svc-cta-glass">
           <h2>{servicesCta.title}</h2>
           <p>{servicesCta.body}</p>
           <div className="cta-row svc-cta-row">

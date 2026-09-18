@@ -1,17 +1,15 @@
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { ArrowRight } from "@/components/icons/material";
 / @ts-expect-error - plain JS content file, no types alongside it /
 import { insights } from "@/content/home.js";
 
 
 export function InsightsSection() {
-  const sectionRef = useScrollAnimation();
 
   return (
     <section id="insights" className="section-padding relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('/insights-light-bg.jpeg')] dark:bg-[url('/insights-dark-bg.jpeg')] bg-cover bg-center bg-no-repeat" />
       <div className="absolute " />
-      <div ref={sectionRef} className="section-container">
+      <div className="section-container relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Content */}
           <div>
@@ -33,7 +31,7 @@ export function InsightsSection() {
             {insights.cards.map((insight) => (
               <div
                 key={insight.title}
-                className="group p-4 lg:p-5 rounded-xl bg-card border border-border hover:border-[hsl(var(--brand-secondary))]/60 hover:shadow-card-hover transition-all duration-300 cursor-pointer"
+                className="group p-4 lg:p-5 rounded-xl bg-card border border-border hover:border-[hsl(var(--brand-secondary))]/60 hover:shadow-card-hover transition-[border-color,box-shadow] duration-300 cursor-pointer"
               >
                 <div className="flex items-center gap-2 lg:gap-3 mb-2">
                   <span className="text-xs font-medium text-primary bg-[hsl(var(--brand-secondary))]/20 px-2 py-0.5 lg:py-1 rounded">

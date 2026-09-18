@@ -1,5 +1,4 @@
 import { news } from '@/content/company.js';
-import { useReveal } from '../../hooks/useReveal.js';
 import Icon from './icons.jsx';
 
 /**
@@ -12,11 +11,10 @@ import Icon from './icons.jsx';
  * so it belongs to the page without pretending to be an editorial module.
  */
 export default function News() {
-  const [headRef, headIn] = useReveal();
 
   return (
     <section className="co-news" id="news">
-      <div ref={headRef} className={`section-head reveal${headIn ? ' is-in' : ''}`}>
+      <div className="section-head">
         <h2>{news.title}</h2>
         <span className="co-rule" aria-hidden="true" />
         <p>{news.intro}</p>
@@ -32,12 +30,11 @@ export default function News() {
 }
 
 function Card({ item, index }) {
-  const [ref, shown] = useReveal({ threshold: 0.2 });
 
   return (
     <li
-      ref={ref}
-      className={`co-news-card reveal${shown ? ' is-in' : ''}`}
+     
+      className="co-news-card"
       style={{ transitionDelay: `${index * 0.08}s` }}
     >
       <span className="co-news-icon">

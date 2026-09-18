@@ -1,5 +1,4 @@
 import { whyItg } from '@/content/solutions.js';
-import { useReveal } from '../hooks/useReveal.js';
 
 /* Material Symbols glyph per card icon key from content.js. */
 const GLYPHS = {
@@ -10,15 +9,13 @@ const GLYPHS = {
 };
 
 export default function WhyITG() {
-  const [headRef, headIn] = useReveal();
-  const [gridRef, gridIn] = useReveal({ threshold: 0.08 });
 
   return (
     <section className="why-band">
-      <div ref={headRef} className={`section-head reveal${headIn ? ' is-in' : ''}`}>
+      <div className="section-head">
         <h2>Why ITG</h2>
       </div>
-      <div ref={gridRef} className={`why-grid reveal reveal--late${gridIn ? ' is-in' : ''}`}>
+      <div className="why-grid">
         {whyItg.map((card) => (
           <div key={card.id} className="why-card glass-dark">
             <span

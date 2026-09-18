@@ -1,5 +1,6 @@
 import { whoWeAre } from '@/content/company.js';
-import { useReveal, useParallax } from '../../hooks/useReveal.js';
+import { useParallax } from '../../hooks/useInView.js';
+import { useGlassOverlap } from '../../hooks/useGlassOverlap.js';
 import Icon from './icons.jsx';
 
 /**
@@ -12,25 +13,33 @@ import Icon from './icons.jsx';
  * they read as one supporting rail under the statement they belong to.
  */
 export default function WhoWeAre() {
-  const [ref, shown] = useReveal({ threshold: 0.1 });
   const imgRef = useParallax(0.05, true);
-  const [stripRef, stripIn] = useReveal({ threshold: 0.2 });
+  const [mediaRef, panelRef] = useGlassOverlap();
 
   return (
     <section className="co-about" id="about">
-      <div ref={ref} className={`co-about-module reveal${shown ? ' is-in' : ''}`}>
-        <div className="co-about-media">
-          <div
-            ref={imgRef}
-            className="co-about-img"
-            style={{ transform: 'translate3d(0, var(--parallax-offset, 0%), 0) scale(1.1)' }}
-          >
+      <div className="co-about-module">
+        <div ref={mediaRef} className="co-about-media parallax-frame">
+          <div ref={imgRef} className="co-about-img parallax-layer">
             <img src={whoWeAre.image} alt="" loading="lazy" decoding="async" />
           </div>
+
+          {/* Cached blurred copy of the photograph for the glass panel — see
+              .glass-frost in tier1/styles/index.css. Sits under the scrim, like the
+              sharp photo, and drifts with it. */}
+          <div className="glass-frost" aria-hidden="true">
+            <div className="glass-frost-layer parallax-layer">
+              <img src={whoWeAre.image} alt="" loading="lazy" decoding="async" />
+            </div>
+          </div>
+
           <div className="co-about-scrim" />
         </div>
 
-        <div className="co-about-panel">
+        <div
+          ref={panelRef}
+          className="co-about-panel glass-overlap glass-card"
+        >
           <span className="co-kicker">{whoWeAre.eyebrow}</span>
           <h2>{whoWeAre.title}</h2>
           <h3 className="co-about-sub">{whoWeAre.subtitle}</h3>
@@ -38,7 +47,7 @@ export default function WhoWeAre() {
         </div>
       </div>
 
-      <ul ref={stripRef} className={`co-pillars reveal${stripIn ? ' is-in' : ''}`}>
+      <ul className="co-pillars">
         {whoWeAre.pillars.map((p, i) => (
           <li key={p.id} className="co-pillar" style={{ '--i': i }}>
             <span className="co-pillar-icon">

@@ -1,15 +1,13 @@
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { ArrowRight } from "@/components/icons/material";
 // @ts-expect-error - plain JS content file, no types alongside it
 import { finalCta } from "@/content/home.js";
 
 
 export function FinalCTASection() {
-  const sectionRef = useScrollAnimation();
 
   return (
     <section id="contact" className="section-padding relative overflow-hidden wave-gradient">
-      <div ref={sectionRef} className="section-container relative z-10">
+      <div className="section-container relative z-10">
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="section-title text-[hsl(var(--foreground))]">
             {finalCta.title}

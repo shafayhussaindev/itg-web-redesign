@@ -1,13 +1,11 @@
 import { deliveryPillars } from '@/content/services.js';
-import { useReveal, useParallax } from '../../hooks/useReveal.js';
+import { useGlassOverlap } from '../../hooks/useGlassOverlap.js';
 import Icon from './icons.jsx';
 
 export default function DeliveryPillars() {
-  const [headRef, headIn] = useReveal();
-
   return (
     <section className="svc-pillars" id="pillars">
-      <div ref={headRef} className={`section-head reveal${headIn ? ' is-in' : ''}`}>
+      <div className="section-head">
         <h2>Delivery Pillars</h2>
         <span className="svc-rule" aria-hidden="true" />
       </div>
@@ -27,35 +25,55 @@ export default function DeliveryPillars() {
  * page. The panel overlaps rather than sitting beside the image, and the image
  * stays visible behind it — the composition the brief asks for in section 4.
  *
- * The image carries a slow counter-scroll so it moves fractionally slower than
- * the page. Both the reveal and the parallax no-op under
- * prefers-reduced-motion (see useReveal.js).
+ * Construction is identical to the Industries feature and the Company photo
+ * modules, so the three pages present one module rather than three near-misses:
+ *
+ *   .parallax-frame (the clipping media box)
+ *     .parallax-layer  -> the sharp photograph, drifting against the scroll
+ *     .glass-frost     -> a blurred COPY of it, clipped to the panel's
+ *       .parallax-layer   rectangle (--glass-clip) and drifting in lockstep
+ *     scrim, number
+ *   .glass-card.glass-overlap -> the panel: white translucent fill
+ *
+ * The drift is a CSS scroll-driven animation, so it runs on the compositor
+ * rather than on a scroll handler. The glass is NOT a backdrop-filter — that
+ * re-blurs its backdrop on every frame and made scrolling choppy. The blurred
+ * copy is rasterised once and only moved; see .glass-frost in
+ * tier1/styles/index.css.
  */
 function Pillar({ pillar }) {
-  const [ref, shown] = useReveal({ threshold: 0.12 });
-  const imgRef = useParallax(0.055);
+  const [mediaRef, panelRef] = useGlassOverlap();
 
   return (
     <article
-      ref={ref}
-      className={`svc-pillar svc-pillar--${pillar.side} reveal${shown ? ' is-in' : ''}`}
+     
+      className={`svc-pillar svc-pillar--${pillar.side}`}
     >
-      <div className="svc-pillar-media">
-        <div
-          ref={imgRef}
-          className="svc-pillar-img"
-          style={{
-            backgroundImage: `url('${pillar.image}')`,
-            transform: 'translate3d(0, var(--parallax-offset, 0px), 0) scale(1.12)',
-          }}
-        />
+      <div ref={mediaRef} className="svc-pillar-media parallax-frame">
+        <div className="svc-pillar-img parallax-layer">
+          <img src={pillar.image} alt="" loading="lazy" decoding="async" />
+        </div>
+
+
+        {/* Cached blurred copy of the photograph for the glass panel — see
+            .glass-frost in tier1/styles/index.css. Sits under the scrim, like the
+            sharp photo, and drifts with it. */}
+        <div className="glass-frost" aria-hidden="true">
+          <div className="glass-frost-layer parallax-layer">
+            <img src={pillar.image} alt="" loading="lazy" decoding="async" />
+          </div>
+        </div>
+
         <div className="svc-pillar-scrim" />
         <span className="svc-pillar-number" aria-hidden="true">
           {pillar.number}
         </span>
       </div>
 
-      <div className="svc-pillar-panel">
+      <div
+        ref={panelRef}
+        className="svc-pillar-panel glass-overlap glass-card"
+      >
         <header className="svc-pillar-head">
           <span className="svc-pillar-icon">
             <Icon name={pillar.icon} size={22} />

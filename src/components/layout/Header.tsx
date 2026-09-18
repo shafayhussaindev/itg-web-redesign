@@ -135,7 +135,7 @@ function MegaMenu({
 
   const rowClass = (index: number) =>
     cn(
-      "w-full text-left flex items-center justify-between select-none rounded-md leading-none outline-none transition-all duration-200",
+      "w-full text-left flex items-center justify-between select-none rounded-md leading-none outline-none transition-[color,background-color,box-shadow] duration-200",
       twoColumnCategories ? "p-2.5" : "p-3",
       activeIndex === index
         ? "bg-accent text-accent-foreground shadow-sm"
@@ -151,7 +151,7 @@ function MegaMenu({
         </div>
         <ChevronRight
           className={cn(
-            "h-4 w-4 shrink-0 ml-2 transition-all duration-200",
+            "h-4 w-4 shrink-0 ml-2 transition-[color,transform] duration-200",
             activeIndex === index ? "text-primary translate-x-0.5" : "text-muted-foreground",
           )}
         />
@@ -337,7 +337,9 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
       <header
         data-chrome={isDarkHero ? "dark" : "light"}
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          // Named properties, not transition-all: `all` also eased the glass bar's
+          // backdrop-filter in from blur(0) on every scroll past the top.
+          "fixed top-0 left-0 right-0 z-50 transition-[padding,background-color,border-color,box-shadow] duration-300",
           isScrolled ? "py-2 lg:py-3" : "py-3 lg:py-4",
           showSolidBar ? "nav-glass" : "bg-transparent",
         )}
@@ -458,7 +460,7 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
             <button
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
               className={cn(
-                "tap-target lg:hidden p-2 rounded-lg transition-all duration-200 focus-enterprise",
+                "tap-target lg:hidden p-2 rounded-lg transition-colors duration-200 focus-enterprise",
                 isDarkHero
                   ? "text-white/90 hover:text-white [filter:drop-shadow(0_1px_6px_rgba(3,12,28,0.55))]"
                   : "text-muted-foreground hover:text-foreground hover:bg-accent",

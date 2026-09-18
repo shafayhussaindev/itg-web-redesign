@@ -38,17 +38,6 @@
 .tier1-site .pp-hero-ctas button:focus-visible,
 .tier1-site .pp-cta-btns button:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; border-radius: 4px; }
 
-/* Scroll-entry: opacity + small translate only. */
-/* --d staggers siblings that enter together (heading → copy → cards → routes) */
-.tier1-site .pp-reveal {
-  opacity: 0; transform: translateY(18px);
-  transition: opacity .7s ease, transform .7s cubic-bezier(.2,.75,.25,1);
-  transition-delay: var(--d, 0ms);
-}
-.tier1-site .pp-reveal.is-in { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) {
-  .tier1-site .pp-reveal { opacity: 1; transform: none; transition: none; }
-}
 
 /* ============================================================
    1 — HERO
@@ -83,17 +72,17 @@
    shown in (2448×1130 against a ~1.7 hero), so `cover` stays keyed to height
    at every desktop width. The whole architecture reads, the crop never
    zooms in on wide screens, and the pale field extends past both edges. */
+/* Motionless on request. The drift (pp-env-drift) is removed; scale(1.03) is
+   kept because the animation held the image at that scale, and the surrounding
+   .pp-hero-env bleeds -52px — at scale(1) the crop would shift. `will-change`
+   goes with it: with nothing animating, it was pinning a 2448px image into its
+   own compositor layer for no reason. */
 .tier1-site .pp-hero-env-img {
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover; object-position: 72% 50%;
-  will-change: transform;
-  animation: pp-env-drift 46s ease-in-out infinite;
+  transform: scale(1.03);
 }
 /* extremely slow — the ecosystem breathes, it does not move */
-@keyframes pp-env-drift {
-  0%, 100% { transform: scale(1.03) translate3d(0, 0, 0); }
-  50%      { transform: scale(1.05) translate3d(-12px, -8px, 0); }
-}
 
 /* Atmosphere: a blue wash on the ecosystem's centre of mass, a deeper navy
    pool under its right shoulder, and a vignette that closes the frame.
@@ -104,56 +93,39 @@
     radial-gradient(44% 50% at 68% 45%, rgba(160,203,240,0.34) 0%, rgba(160,203,240,0) 72%),
     radial-gradient(32% 36% at 86% 72%, rgba(26,58,107,0.13) 0%, rgba(26,58,107,0) 74%),
     radial-gradient(118% 104% at 62% 46%, rgba(13,33,64,0) 46%, rgba(13,33,64,0.055) 80%, rgba(13,33,64,0.105) 100%);
-  animation: pp-atmos-breathe 26s ease-in-out infinite;
+  /* The breathe (pp-atmos-breathe) is removed on request — the wash is static. */
 }
-@keyframes pp-atmos-breathe { 0%, 100% { opacity: 0.76; } 50% { opacity: 1; } }
 
 /* Connection points, and light travelling the routes between them. Sky and
    white, never cyan: cyan is the action colour and nothing decorative may
    borrow it. Both drift on the render's isometric axes (~30°), so the motion
    reads as following the architecture rather than crossing it. */
+/* The pulse (pp-node-pulse) is removed on request. The nodes only became
+   visible inside that animation, so they hold at the same static 0.4 the
+   reduced-motion design already used — still marking the connection points,
+   no longer moving. */
 .tier1-site .pp-node {
-  position: absolute; width: 10px; height: 10px; border-radius: 50%; opacity: 0;
+  position: absolute; width: 10px; height: 10px; border-radius: 50%; opacity: 0.4;
   background: radial-gradient(circle, rgba(255,255,255,0.98) 0%, rgba(168,206,240,0.9) 40%, rgba(208,226,244,0) 72%);
   box-shadow: 0 0 20px 7px rgba(176,211,242,0.45);
-  animation: pp-node-pulse 9s ease-in-out infinite;
 }
 .tier1-site .pp-node--1 { left: 55%; top: 38%; }
 .tier1-site .pp-node--2 { left: 72%; top: 56%; animation-delay: 2.3s; }
 .tier1-site .pp-node--3 { left: 61%; top: 70%; animation-delay: 4.4s; }
 .tier1-site .pp-node--4 { left: 83%; top: 33%; width: 8px; height: 8px; animation-delay: 6.4s; }
 /* pulse and a few pixels of drift in one transform — they cannot compose */
-@keyframes pp-node-pulse {
-  0%, 100% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.7); }
-  45%      { opacity: 0.78; transform: translate3d(7px, 4px, 0) scale(1); }
-}
 
 .tier1-site .pp-trace {
   position: absolute; width: 7px; height: 7px; border-radius: 50%; opacity: 0;
   background: radial-gradient(circle, rgba(255,255,255,0.98) 0%, rgba(120,178,232,0.8) 42%, rgba(160,203,240,0) 72%);
   box-shadow: 0 0 15px 5px rgba(150,196,238,0.4);
 }
-.tier1-site .pp-trace--1 { left: 52%; top: 43%; animation: pp-trace-a 21s linear infinite; }
-.tier1-site .pp-trace--2 { left: 78%; top: 39%; animation: pp-trace-b 26s linear infinite 6s; }
-.tier1-site .pp-trace--3 { left: 60%; top: 63%; animation: pp-trace-c 24s linear infinite 12s; }
-@keyframes pp-trace-a {   /* down-right along the near axis */
-  0%   { opacity: 0; transform: translate3d(0, 0, 0); }
-  14%  { opacity: 0.9; }
-  76%  { opacity: 0.9; }
-  100% { opacity: 0; transform: translate3d(178px, 103px, 0); }
-}
-@keyframes pp-trace-b {   /* down-left along the far axis */
-  0%   { opacity: 0; transform: translate3d(0, 0, 0); }
-  16%  { opacity: 0.85; }
-  74%  { opacity: 0.85; }
-  100% { opacity: 0; transform: translate3d(-152px, 88px, 0); }
-}
-@keyframes pp-trace-c {   /* up-right, back toward the core */
-  0%   { opacity: 0; transform: translate3d(0, 0, 0); }
-  15%  { opacity: 0.8; }
-  75%  { opacity: 0.8; }
-  100% { opacity: 0; transform: translate3d(146px, -84px, 0); }
-}
+/* The travelling light (pp-trace-a/b/c) is removed on request. A trace is
+   nothing but its motion — with the animation gone the base opacity: 0 above
+   correctly leaves them hidden, which is what reduced-motion already did. */
+.tier1-site .pp-trace--1 { left: 52%; top: 43%; }
+.tier1-site .pp-trace--2 { left: 78%; top: 39%; }
+.tier1-site .pp-trace--3 { left: 60%; top: 63%; }
 
 /* Calms the left so the panel reads, then clears completely by 60% so the
    ecosystem stays crisp — it clears earlier than before because the panel is
@@ -170,18 +142,8 @@
       rgba(255,255,255,0) 78%, #F7FAFD 100%);
 }
 
-/* Scroll parallax, CSS-only. Chromium honours it; everywhere else simply
-   keeps the drift, which is the whole effect minus the depth. */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .tier1-site .pp-hero-env {
-      animation: pp-env-parallax linear both;
-      animation-timeline: view();
-      animation-range: contain 0% exit 100%;
-    }
-  }
-}
-@keyframes pp-env-parallax { to { transform: translate3d(0, 38px, 0); } }
+/* The scroll parallax on this photo area (pp-env-parallax) is removed on
+   request, along with the drift it added depth to. */
 
 /* ---- content ------------------------------------------------------ */
 .tier1-site .pp-hero-inner { position: relative; z-index: 2; max-width: 1216px; width: 100%; margin: 0 auto; }
@@ -199,19 +161,10 @@
 }
 /* same staggered settle as the Solutions hero */
 .tier1-site .pp-hero-glass > * { opacity: 0; transform: translateY(14px); animation: heroFade .5s ease forwards; }
-.tier1-site .pp-hero-eyebrow { animation-delay: .24s; }
 .tier1-site .pp-hero-glass h1 { animation-delay: .32s; }
 .tier1-site .pp-hero-sub      { animation-delay: .40s; }
 .tier1-site .pp-hero-body     { animation-delay: .48s; }
 .tier1-site .pp-hero-ctas     { animation-delay: .58s; }
-
-.tier1-site .pp-hero-eyebrow {
-  display: inline-flex; align-items: center;
-  background: rgba(93, 141, 205,0.18); color: var(--navy);
-  border: 1px solid rgba(93, 141, 205,0.42);
-  font-size: 10.5px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase;
-  padding: 6px 14px; border-radius: 20px; margin-bottom: 16px;
-}
 .tier1-site .pp-hero h1 {
   font-size: 48px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.04;
   margin-bottom: 10px; color: var(--navy);
@@ -282,7 +235,7 @@
   margin: 28px 0 0 190px; max-width: 520px;
   padding: 16px 22px 18px; border-radius: 20px;
   background: linear-gradient(152deg, rgba(255,255,255,0.44) 0%, rgba(208,226,244,0.28) 100%);
-  backdrop-filter: blur(11px) saturate(1.3); -webkit-backdrop-filter: blur(11px) saturate(1.3);
+  backdrop-filter: blur(5px) saturate(1.3); -webkit-backdrop-filter: blur(5px) saturate(1.3);
   border: 1px solid rgba(255,255,255,0.52);
   box-shadow:
     0 20px 48px rgba(13,33,64,0.13),
@@ -344,22 +297,19 @@
 @keyframes pp-thread-run { to { stroke-dashoffset: -100; } }
 
 /* the platform render, placed so its glowing core lands in the card lane */
-/* It carries .pp-reveal, whose .is-in resolves to `opacity:1; transform:none`.
-   This element needs neither — it must settle at 0.42 and keep its own
-   centring transform — so both settled values are restated at .is-in
-   specificity, declared after the shared rule. --tf is the one place each
-   breakpoint sets that transform. */
+/* --tf is the one place each breakpoint sets this element's transform. */
 .tier1-site .pp-philosophy-bg {
   position: absolute; left: 61%; top: 50%;
   /* offset tuned so the render's own glowing dome lands on the SVG core
      rather than beside it — two cores read as a mistake */
   --tf: translateY(calc(-50% - 23px));
-  transform: var(--tf); opacity: 0;
+  /* 0.42 is this element's resting opacity. It used to be parked on the
+     scroll-reveal settled state; the reveal is gone, so it lives here. */
+  transform: var(--tf); opacity: 0.42;
   width: 55%; max-width: 760px; pointer-events: none; z-index: 0;
   mask-image: radial-gradient(58% 62% at 69% 56%, #000 26%, transparent 78%);
   -webkit-mask-image: radial-gradient(58% 62% at 69% 56%, #000 26%, transparent 78%);
 }
-.tier1-site .pp-philosophy-bg.is-in { opacity: 0.42; transform: var(--tf); }
 .tier1-site .pp-philosophy-bg img { width: 100%; height: auto; display: block; }
 /* lifts the render's own core so it anchors the section */
 .tier1-site .pp-phil-halo {
@@ -397,10 +347,9 @@
   position: relative;
   display: grid; grid-template-columns: 42px 1fr; gap: 16px; align-items: center;
   padding: 18px 20px; border-radius: 14px;
-  background: linear-gradient(150deg, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.68) 100%);
+  background: linear-gradient(150deg, rgba(255,255,255,0.93) 0%, rgba(255,255,255,0.8) 100%);
   border: 1px solid rgba(255,255,255,0.8);
   box-shadow: 0 1px 2px rgba(13,33,64,0.04), 0 10px 26px rgba(13,33,64,0.06);
-  backdrop-filter: blur(7px) saturate(1.1); -webkit-backdrop-filter: blur(7px) saturate(1.1);
   transition: transform .32s cubic-bezier(.2,.8,.2,1), box-shadow .32s ease, border-color .32s ease;
 }
 .tier1-site .pp-principle:hover {
@@ -632,7 +581,8 @@
   background: rgba(255,255,255,0.82); border: 1px solid rgba(13,33,64,0.09);
   box-shadow: 0 6px 18px rgba(13,33,64,0.045);
   font-size: 13.5px; font-weight: 600; line-height: 1.4; color: var(--navy);
-  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  /* No backdrop blur: these sit on flat white, where it is invisible (measured:
+     at most 1/255 on any pixel) but still costs a pass per item per frame. */
   transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease, border-color .3s ease;
 }
 .tier1-site .pp-ind-col--left .pp-ind-item { text-align: right; }
@@ -651,9 +601,8 @@
 }
 .tier1-site .pp-ind-core-label span {
   display: block; font-size: 15px; font-weight: 700; color: var(--navy);
-  background: rgba(255,255,255,0.9); border: 1px solid var(--border);
+  background: rgba(255,255,255,0.95); border: 1px solid var(--border);
   padding: 12px 20px; border-radius: 12px; box-shadow: 0 10px 26px rgba(13,33,64,0.1);
-  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
 }
 .tier1-site .pp-ind-note {
   text-align: center; font-size: 13.5px; line-height: 1.6; color: var(--charcoal);
@@ -711,9 +660,8 @@
   /* ecosystem drops back and shrinks; it sits behind the cards, not the copy */
   .tier1-site .pp-philosophy-bg {
     left: auto; right: -12%; top: auto; bottom: 0; --tf: none;
-    width: 64%; max-width: 500px;
+    width: 64%; max-width: 500px; opacity: 0.30;
   }
-  .tier1-site .pp-philosophy-bg.is-in { opacity: 0.30; }
   .tier1-site .pp-principles { padding-right: 56px; gap: 12px; }
   .tier1-site .pp-cats { padding-top: 88px; padding-bottom: 84px; }
   .tier1-site .pp-cats .pp-section-head { margin-bottom: 48px; }
@@ -765,8 +713,8 @@
     width: 100%; max-width: none; margin-top: 2px;
     mask-image: radial-gradient(78% 78% at 56% 52%, #000 38%, transparent 86%);
     -webkit-mask-image: radial-gradient(78% 78% at 56% 52%, #000 38%, transparent 86%);
+    opacity: 0.62;
   }
-  .tier1-site .pp-philosophy-bg.is-in { opacity: 0.62; }
   .tier1-site .pp-phil-web { display: none; }
   .tier1-site .pp-phil-halo { display: none; }
   .tier1-site .pp-principles { padding-right: 0; gap: 10px; }

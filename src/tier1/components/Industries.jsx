@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { industries } from '@/content/solutions.js';
-import { useReveal } from '../hooks/useReveal.js';
 
 /**
  * Industry cards, built on the same .cat-* pattern as Solution Categories:
@@ -14,8 +13,6 @@ import { useReveal } from '../hooks/useReveal.js';
 export default function Industries() {
   const [openId, setOpenId] = useState(null);
   const gridRef = useRef(null);
-  const [headRef, headIn] = useReveal();
-  const [gridRevealRef, gridIn] = useReveal({ threshold: 0.08 });
 
   useEffect(() => {
     const onDocClick = (e) => {
@@ -27,17 +24,14 @@ export default function Industries() {
 
   return (
     <section>
-      <div ref={headRef} className={`section-head reveal${headIn ? ' is-in' : ''}`}>
+      <div className="section-head">
         <h2>Industry-Aligned Delivery</h2>
         <p>Our solutions are tailored for:</p>
       </div>
 
       <div
-        className={`cat-grid reveal reveal--late${gridIn ? ' is-in' : ''}`}
-        ref={(node) => {
-          gridRef.current = node;
-          gridRevealRef.current = node;
-        }}
+        className="cat-grid"
+        ref={gridRef}
       >
         {industries.map((ind) => (
           <article key={ind.id} className={`cat-card${openId === ind.id ? ' is-open' : ''}`}>

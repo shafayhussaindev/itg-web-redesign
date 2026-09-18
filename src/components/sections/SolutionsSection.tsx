@@ -1,11 +1,9 @@
-import { useStaggerAnimation } from '@/hooks/useScrollAnimation';
 import { ArrowRight, MSym } from "@/components/icons/material";
 / @ts-expect-error - plain JS content file, no types alongside it/
 import { solutions } from "@/content/home.js";
 
 
 export function SolutionsSection() {
-  const cardsRef = useStaggerAnimation();
 
   return (
     <section id="solutions" className="section-padding bg-surface-subtle">
@@ -19,7 +17,7 @@ export function SolutionsSection() {
         </div>
 
         {/* Solutions Grid */}
-        <div ref={cardsRef} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
           {solutions.cards.map((solution, index) => (
             <div
               key={solution.title}

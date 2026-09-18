@@ -1,15 +1,13 @@
-import { useStaggerAnimation } from "@/hooks/useScrollAnimation";
 import { ArrowRight, MSym } from "@/components/icons/material";
 / @ts-expect-error - plain JS content file, no types alongside it/    
 import { industries } from "@/content/home.js";
 
 
 export function IndustriesSection() {
-  const gridRef = useStaggerAnimation();
 
   return (
     <section id="industries" className="section-padding bg-card border-y border-border">
-      <div className="section-container">
+      <div className="section-container relative z-10">
         {/* Header */}
         <div className="section-header">
           <h2 className="section-title">{industries.title}</h2>
@@ -22,12 +20,12 @@ export function IndustriesSection() {
         </div>
 
         {/* Industries Grid */}
-        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {industries.cards.map((industry) => {
             return (
               <div
                 key={industry.name}
-                className="group relative overflow-hidden rounded-2xl bg-muted/50 p-6 lg:p-8 cursor-pointer transition-all duration-500 hover:-translate-y-1 border border-transparent hover:border-primary min-h-[320px] flex flex-col hover:shadow-lg"
+                className="group relative overflow-hidden rounded-2xl bg-muted/50 p-6 lg:p-8 cursor-pointer transition-[transform,box-shadow,border-color] duration-500 hover:-translate-y-1 border border-transparent hover:border-primary min-h-[320px] flex flex-col hover:shadow-lg"
               >
                 {/* Decorative background illustration */}
                 <div className="absolute inset-0 opacity-70 transition-opacity duration-500 pointer-events-none">
@@ -285,7 +283,7 @@ export function IndustriesSection() {
                   {/* Learn More Link */}
                   <a
                     href={industries.cardLinkHref}
-                    className="inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-all duration-500 group-hover:gap-2.5 mt-6"
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-[gap] duration-500 group-hover:gap-2.5 mt-6"
                   >
                     {industries.cardLinkLabel}
                     <ArrowRight className="w-4 h-4 origin-left transition-transform duration-500 group-hover:translate-x-0.5 group-hover:scale-105" />

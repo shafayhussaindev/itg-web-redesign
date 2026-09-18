@@ -1,5 +1,4 @@
 import { industriesIntro } from '@/content/industries.js';
-import { useReveal } from '../../hooks/useReveal.js';
 
 /**
  * Introduction — ice-blue band, the three approved paragraphs in a single
@@ -15,12 +14,11 @@ import { useReveal } from '../../hooks/useReveal.js';
  * hierarchy applied to existing copy in its existing order, not an edit.
  */
 export default function IndustriesIntro() {
-  const [ref, shown] = useReveal({ threshold: 0.2 });
 
   return (
     <section className="ind-intro">
       <IntroLattice />
-      <div ref={ref} className={`ind-intro-glass reveal${shown ? ' is-in' : ''}`}>
+      <div className="ind-intro-glass glass-card">
         <span className="ind-intro-rule" aria-hidden="true" />
         {industriesIntro.map((para, i) => (
           <p key={para} className={i === 0 ? 'ind-intro-lead' : 'ind-intro-body'}>

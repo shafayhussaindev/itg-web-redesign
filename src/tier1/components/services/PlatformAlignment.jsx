@@ -1,5 +1,5 @@
 import { platformAlignment } from '@/content/services.js';
-import { useReveal } from '../../hooks/useReveal.js';
+import { useInView } from '../../hooks/useInView.js';
 import { useAnimationActivity } from '@/hooks/useAnimationActivity';
 
 /**
@@ -12,20 +12,19 @@ import { useAnimationActivity } from '@/hooks/useAnimationActivity';
  * swaps in a stacked vertical layout instead (see services.css).
  */
 export default function PlatformAlignment() {
-  const [headRef, headIn] = useReveal();
-  const [figRef, figIn] = useReveal({ threshold: 0.25 });
+  const [figRef, figIn] = useInView({ threshold: 0.25 });
 
   return (
     <section className="svc-align" id="alignment">
       <div className="svc-align-glow" aria-hidden="true" />
 
-      <div ref={headRef} className={`section-head reveal${headIn ? ' is-in' : ''}`}>
+      <div className="section-head">
         <h2>{platformAlignment.title}</h2>
         <span className="svc-rule svc-rule--light" aria-hidden="true" />
         <p>{platformAlignment.intro}</p>
       </div>
 
-      <div ref={figRef} className={`svc-align-stage reveal${figIn ? ' is-in' : ''}`}>
+      <div ref={figRef} className="svc-align-stage">
         <EcosystemDiagram active={figIn} />
       </div>
 

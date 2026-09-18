@@ -1,4 +1,3 @@
-import { useStaggerAnimation } from '@/hooks/useScrollAnimation';
 / @ts-expect-error - plain JS content file, no types alongside it/
 import { howWeWork } from "@/content/home.js";
 
@@ -28,13 +27,12 @@ const steps = [
 ];
 
 export function HowWeWorkSection() {
-  const stepsRef = useStaggerAnimation();
 
   return (
     <section className="section-padding bg-surface-subtle relative overflow-hidden">
       <div className="absolute inset-0 hidden dark:block bg-[url('/bg-last-section.webp')] bg-cover bg-center bg-no-repeat opacity-25 pointer-events-none" />
       <div className="absolute inset-0 hidden dark:block bg-background/70 pointer-events-none" />
-      <div className="section-container">
+      <div className="section-container relative z-10">
         {/* Header */}
         <div className="section-header">
           <h2 className="section-title">{howWeWork.title}</h2>
@@ -44,7 +42,7 @@ export function HowWeWorkSection() {
         </div>
 
         {/* Process Steps */}
-        <div ref={stepsRef} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
           {steps.map((step, index) => (
             <div key={step.title} className="relative">
               {/* Step card */}

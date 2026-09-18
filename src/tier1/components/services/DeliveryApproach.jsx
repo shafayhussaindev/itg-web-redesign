@@ -1,5 +1,4 @@
 import { deliveryApproach } from '@/content/services.js';
-import { useReveal } from '../../hooks/useReveal.js';
 import Icon from './icons.jsx';
 
 /**
@@ -8,18 +7,16 @@ import Icon from './icons.jsx';
  * heading and the points has been removed.
  */
 export default function DeliveryApproach() {
-  const [headRef, headIn] = useReveal();
-  const [panelRef, panelIn] = useReveal();
 
   return (
     <section className="ice-bg svc-approach" id="delivery">
-      <div ref={headRef} className={`section-head reveal${headIn ? ' is-in' : ''}`}>
+      <div className="section-head">
         <h2>{deliveryApproach.title}</h2>
         <span className="svc-rule" aria-hidden="true" />
         <p>{deliveryApproach.intro}</p>
       </div>
 
-      <div ref={panelRef} className={`svc-approach-panel reveal${panelIn ? ' is-in' : ''}`}>
+      <div className="svc-approach-panel">
         <h3>{deliveryApproach.panelHeading}</h3>
         <ul className="svc-approach-grid">
           {deliveryApproach.points.map((pt) => (

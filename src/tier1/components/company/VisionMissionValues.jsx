@@ -1,5 +1,4 @@
 import { visionMissionValues as vmv } from '@/content/company.js';
-import { useReveal } from '../../hooks/useReveal.js';
 import Icon from './icons.jsx';
 
 /**
@@ -11,13 +10,12 @@ import Icon from './icons.jsx';
  * aligned rather than sized to their content.
  */
 export default function VisionMissionValues() {
-  const [headRef, headIn] = useReveal();
 
   return (
     <section className="co-vmv">
       <div className="co-vmv-glow" aria-hidden="true" />
 
-      <div ref={headRef} className={`section-head reveal${headIn ? ' is-in' : ''}`}>
+      <div className="section-head">
         <h2>{vmv.title}</h2>
         <span className="co-rule co-rule--light" aria-hidden="true" />
         <p>{vmv.intro}</p>
@@ -33,12 +31,11 @@ export default function VisionMissionValues() {
 }
 
 function Panel({ item, index }) {
-  const [ref, shown] = useReveal({ threshold: 0.2 });
 
   return (
     <article
-      ref={ref}
-      className={`co-vmv-card reveal${shown ? ' is-in' : ''}`}
+     
+      className="co-vmv-card"
       style={{ transitionDelay: `${index * 0.1}s` }}
     >
       <span className="co-vmv-icon">

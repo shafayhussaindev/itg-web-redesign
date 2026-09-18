@@ -1,5 +1,4 @@
 import { Suspense, lazy } from 'react';
-import { useReveal } from '../hooks/useReveal.js';
 import { useAnimationActivity } from '@/hooks/useAnimationActivity';
 
 const HowItWorksLottie = lazy(() => import('./HowItWorksLottie.jsx'));
@@ -13,12 +12,11 @@ const HowItWorksLottie = lazy(() => import('./HowItWorksLottie.jsx'));
  * whether or not the chunk has arrived, so the fallback causes no layout shift.
  */
 export default function HowItWorks() {
-  const [tabletRef, tabletIn] = useReveal({ threshold: 0.12 });
   const { ref, active, hasEntered } = useAnimationActivity();
 
   return (
     <section ref={ref}>
-      <div ref={tabletRef} className={`tablet-wrap reveal${tabletIn ? ' is-in' : ''}`}>
+      <div className="tablet-wrap">
         <div className="tablet-frame">
           <div className="tablet-screen">
             <div className="lottie-stage">

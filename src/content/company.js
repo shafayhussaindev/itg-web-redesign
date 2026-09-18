@@ -126,6 +126,7 @@ export const ourStory = {
    --------------------------------------------------------------- */
 export const leadership = {
   title: 'Leadership and Governance',
+  icon: 'scales',
   intro: 'Decision-making with accountability and oversight.',
   image: '/assets/company/leadership.jpg',
   items: [
@@ -209,6 +210,7 @@ export const globalPresence = {
    --------------------------------------------------------------- */
 export const security = {
   title: 'Security and Compliance',
+  icon: 'shield',
   intro: 'Enterprise confidence through standards and controls.',
   image: '/assets/company/security.jpg',
   items: [
@@ -248,6 +250,7 @@ export const security = {
    --------------------------------------------------------------- */
 export const people = {
   title: 'People and Careers',
+  icon: 'people',
   // NEEDS CONFIRMATION — the section's one-line intro was overlapped by the
   // heading above it mid-animation in the source screenshot; only the bottom
   // few pixels of the glyphs survive and no upscaling recovers them. The
@@ -297,6 +300,7 @@ export const people = {
    --------------------------------------------------------------- */
 export const responsibility = {
   title: 'Corporate Responsibility',
+  icon: 'leaf',
   intro: 'Long-term impact beyond technology.',
   image: '/assets/company/responsibility.jpg',
   itemsMayBeIncomplete: true,

@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+/* Sora and JetBrains Mono load from index.html (with preconnect). A second
+   @import of the same stylesheet here was a duplicate, render-blocking request. */
 
 /* Off-screen loops resume at the same point when they approach the viewport. */
 [data-animation-paused],
@@ -326,7 +327,7 @@
   .card-enterprise {
     @apply bg-card rounded-xl border border-border;
     box-shadow: var(--shadow-card);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .card-enterprise:hover {
@@ -342,15 +343,19 @@
   /* Generous whitespace — 64 / 96 / 128px, on the 4px scale */
   .section-padding {
     @apply py-16 md:py-24 lg:py-32;
+    /* Skip layout/paint for these sections while they are off-screen. The
+       browser renders them as they approach the viewport, so every animation
+       and reveal still fires — it just does no work for sections the visitor
+       cannot see, which is most of a long page at any moment. `auto` remembers
+       each section's real height after first render so the scrollbar does not
+       jump. The hero is excluded (it does not use this class). */
+    content-visibility: auto;
+    contain-intrinsic-size: auto 640px;
   }
 
   /* Section Header Spacing */
   .section-header {
     @apply text-center max-w-3xl mx-auto mb-12 lg:mb-16;
-  }
-
-  .section-label {
-    @apply text-sm font-semibold text-[hsl(var(--foreground))] uppercase tracking-widest mb-3 block;
   }
 
   .section-title {
@@ -365,28 +370,10 @@
   .wave-gradient {
     background: var(--gradient-wave);
   }
-
-  .wave-bar {
-    height: 6px;
-    background: var(--gradient-wave-bar);
-  }
-  
-  /* Grid Backgrounds */
-  .bg-grid-pattern {
-    background-image: 
-      linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px);
-    background-size: 60px 60px;
-  }
   
   .bg-dot-pattern {
     background-image: radial-gradient(circle, hsl(var(--border)) 1px, transparent 1px);
     background-size: 24px 24px;
-  }
-  
-  /* Gradient Overlays */
-  .gradient-fade-top {
-    background: linear-gradient(to top, transparent, hsl(var(--background)));
   }
   
   .gradient-fade-bottom {
@@ -441,7 +428,12 @@
      sections and has to keep navy links legible over whatever passes beneath.
      At 0.72 the links hold 5.70:1 even over a navy band — the worst case on
      the site — against the 4.5:1 they need. The saturate() is what makes it
-     read as glass rather than a flat wash. */
+     read as glass rather than a flat wash.
+
+     PERFORMANCE NOTE: this bar is fixed across the viewport and its backdrop
+     is the whole page scrolling past, so it is a genuine per-frame backdrop
+     blur that is on screen for the entire scroll. Kept at the original radius
+     by request; drop it toward 8-10px if the scroll ever feels heavy. */
   .nav-glass {
     background: rgba(255, 255, 255, 0.72);
     backdrop-filter: blur(16px) saturate(1.6);
@@ -591,80 +583,19 @@
     border: 1.5px solid var(--navy);
     transition: background 0.25s ease, color 0.25s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .btn-outline-brand:hover {
-    background: var(--navy);
-    color: #fff;
-    transform: translateY(-2px);
-  }
-  .btn-outline-brand:active { transform: translateY(0); }
 
   /* Ghost — in-text / low-priority links */
   .btn-ghost {
-    @apply inline-flex items-center gap-2 font-semibold text-[14px] transition-all duration-200;
+    @apply inline-flex items-center gap-2 font-semibold text-[14px] transition-colors duration-200;
     color: var(--brand-accent);
     text-decoration: none;
   }
   .btn-ghost:hover { color: var(--navy); }
-
-  /* Legacy aliases — folded onto the two approved faces so they can't drift */
-  .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 font-semibold text-[14px] text-white transition-colors duration-200;
-    background: var(--btn-navy);
-    min-height: 48px;
-    padding: 0 30px;
-    border-radius: 10px;
-    border: 1px solid var(--btn-navy-rim);
-    box-shadow: var(--btn-navy-shadow);
-  }
-  .btn-primary:hover { background: var(--btn-navy-hover); }
-
-  .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 font-semibold text-[14px] text-[#0D2140] transition-colors duration-200;
-    background: transparent;
-    min-height: 48px;
-    padding: 0 28px;
-    border-radius: 10px;
-    border: 1.5px solid var(--navy);
-  }
-  .btn-secondary:hover { background: var(--navy); color: #fff; }
-
-  /* Link Styles */
-  .link-enterprise {
-    @apply text-[hsl(var(--foreground))] font-semibold inline-flex items-center gap-1 transition-all duration-200;
-  }
-
-  .link-enterprise:hover {
-    @apply gap-2;
-  }
 }
 
 @layer utilities {
-  /* Text Gradient */
-  .text-gradient-primary {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
   
-  /* Backdrop Blur */
-  .backdrop-enterprise {
-    @apply backdrop-blur-lg bg-background/80 border-b border-border;
-  }
   
-  /* Animation Classes */
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-out forwards;
-  }
-  
-  .animate-slide-up {
-    animation: slideUp 0.5s ease-out forwards;
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
   
   /* Lenis Smooth Scroll */
   html.lenis, html.lenis body {
@@ -687,16 +618,7 @@
     pointer-events: none;
   }
 
-  @keyframes slideUp {
-    from { 
-      opacity: 0; 
-      transform: translateY(20px); 
-    }
-    to { 
-      opacity: 1;
-      transform: translateY(0); 
-    }
-  }
+  
   
   /* Focus States — kept for components that already opt in; the base layer
      now gives every focusable element the same ring by default. */

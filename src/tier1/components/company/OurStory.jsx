@@ -1,5 +1,4 @@
 import { ourStory } from '@/content/company.js';
-import { useReveal } from '../../hooks/useReveal.js';
 
 /**
  * Our Story — an animated SVG/CSS timeline rather than another Lottie, and
@@ -15,11 +14,10 @@ import { useReveal } from '../../hooks/useReveal.js';
  * length-independent), then each mark fades up in sequence.
  */
 export default function OurStory() {
-  const [ref, shown] = useReveal({ threshold: 0.2 });
 
   return (
     <section className="co-story" id="story">
-      <div ref={ref} className={`co-story-inner${shown ? ' is-active' : ''}`}>
+      <div className="co-story-inner">
         <div className="co-story-lede">
           <h2>{ourStory.title}</h2>
           <span className="co-rule" aria-hidden="true" />
@@ -38,7 +36,7 @@ export default function OurStory() {
 
           <ol className="co-story-marks">
             {ourStory.standFor.map((entry, i) => (
-              <li key={entry} className="co-story-mark" style={{ '--i': i }}>
+              <li key={entry} className="co-story-mark">
                 <span className="co-story-dot" aria-hidden="true" />
                 <span className="co-story-label">{entry}</span>
               </li>

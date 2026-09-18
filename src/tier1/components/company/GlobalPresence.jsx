@@ -1,5 +1,5 @@
 import { globalPresence } from '@/content/company.js';
-import { useReveal } from '../../hooks/useReveal.js';
+import { useInView } from '../../hooks/useInView.js';
 import Icon from './icons.jsx';
 import WorldMap from './WorldMap.jsx';
 
@@ -16,8 +16,7 @@ import WorldMap from './WorldMap.jsx';
  * regions, and labelling the markers would be inventing content.
  */
 export default function GlobalPresence() {
-  const [headRef, headIn] = useReveal();
-  const [mapRef, mapIn] = useReveal({ threshold: 0.2 });
+  const [mapRef, mapIn] = useInView({ threshold: 0.2 });
 
   return (
     <section className="co-global" id="global">
@@ -29,13 +28,13 @@ export default function GlobalPresence() {
         <div className="co-global-wash" />
       </div>
 
-      <div ref={headRef} className={`section-head reveal${headIn ? ' is-in' : ''}`}>
+      <div className="section-head">
         <h2>{globalPresence.title}</h2>
         <span className="co-rule co-rule--light" aria-hidden="true" />
         <p>{globalPresence.intro}</p>
       </div>
 
-      <div ref={mapRef} className={`co-global-map reveal${mapIn ? ' is-in' : ''}`}>
+      <div ref={mapRef} className="co-global-map">
         <WorldMap active={mapIn} />
       </div>
 
@@ -49,12 +48,11 @@ export default function GlobalPresence() {
 }
 
 function Card({ item, index }) {
-  const [ref, shown] = useReveal({ threshold: 0.2 });
 
   return (
     <li
-      ref={ref}
-      className={`co-global-card reveal${shown ? ' is-in' : ''}`}
+     
+      className="co-global-card"
       style={{ transitionDelay: `${index * 0.08}s` }}
     >
       <span className="co-global-icon">

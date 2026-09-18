@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { solutionCategories } from '@/content/solutions.js';
-import { useReveal } from '../hooks/useReveal.js';
 
 /**
  * Default state shows only the category title plus a glass button.
@@ -10,8 +9,6 @@ import { useReveal } from '../hooks/useReveal.js';
 export default function SolutionCategories() {
   const [openId, setOpenId] = useState(null);
   const gridRef = useRef(null);
-  const [headRef, headIn] = useReveal();
-  const [gridRevealRef, gridIn] = useReveal({ threshold: 0.08 });
 
   useEffect(() => {
     const onDocClick = (e) => {
@@ -23,15 +20,12 @@ export default function SolutionCategories() {
 
   return (
     <section className="ice-bg">
-      <div ref={headRef} className={`section-head reveal${headIn ? ' is-in' : ''}`}>
+      <div className="section-head">
         <h2>Solution Categories</h2>
       </div>
       <div
-        className={`cat-grid reveal reveal--late${gridIn ? ' is-in' : ''}`}
-        ref={(node) => {
-          gridRef.current = node;
-          gridRevealRef.current = node;
-        }}
+        className="cat-grid"
+        ref={gridRef}
       >
         {solutionCategories.map((cat) => (
           <article key={cat.id} className={`cat-card${openId === cat.id ? ' is-open' : ''}`}>

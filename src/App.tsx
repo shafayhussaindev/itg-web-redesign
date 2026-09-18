@@ -6,7 +6,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import Index from "./pages/Index";
-const Home2 = lazy(() => import("./pages/Home2"));
 const Solutions = lazy(() => import("./pages/Solutions"));
 const Products = lazy(() => import("./pages/Products"));
 const ProductCategory = lazy(() => import("./pages/ProductCategory"));
@@ -33,7 +32,6 @@ const App = () => (
           <Suspense fallback={<div role="status" className="min-h-screen grid place-items-center">Loading…</div>}>
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/home2" element={<Home2 />} />
               <Route path="/solutions" element={<Solutions />} />
               <Route path="/products" element={<Products />} />
               {productPages.map(page => (

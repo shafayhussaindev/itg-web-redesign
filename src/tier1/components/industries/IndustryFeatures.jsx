@@ -1,5 +1,6 @@
 import { industryFeatures, focusHeading } from '@/content/industries.js';
-import { useReveal, useParallax } from '../../hooks/useReveal.js';
+import { useParallax } from '../../hooks/useInView.js';
+import { useGlassOverlap } from '../../hooks/useGlassOverlap.js';
 import Icon from './icons.jsx';
 
 /**
@@ -34,13 +35,13 @@ export default function IndustryFeatures() {
  *
  * The image counter-scrolls fractionally slower than the page. Both the
  * reveal and the parallax no-op under prefers-reduced-motion — see
- * `hooks/useReveal.js`.
+ * `hooks/useInView.js`.
  *
  * `loading="lazy"` on every image: all eight are below the fold.
  */
 function Feature({ item }) {
-  const [ref, shown] = useReveal({ threshold: 0.1 });
   const imgRef = useParallax(0.05, true);
+  const [mediaRef, panelRef] = useGlassOverlap();
 
   // The hook returns pixels, which is what opens a gap: the travel is fixed
   // while the bleed hiding it (`inset: -8%` plus the scale) is a percentage of
@@ -51,26 +52,36 @@ function Feature({ item }) {
 
   return (
     <article
-      ref={ref}
+     
       id={item.id}
-      className={`ind-feature ind-feature--${item.side} reveal${shown ? ' is-in' : ''}`}
+      className={`ind-feature ind-feature--${item.side}`}
       aria-labelledby={`ind-${item.id}-name`}
     >
-      <div className="ind-feature-media">
-        <div
-          ref={imgRef}
-          className="ind-feature-img"
-          style={{ transform: 'translate3d(0, var(--parallax-offset, 0%), 0) scale(1.1)' }}
-        >
+      <div ref={mediaRef} className="ind-feature-media parallax-frame">
+        <div ref={imgRef} className="ind-feature-img parallax-layer">
           <img src={item.image} alt="" loading="lazy" decoding="async" />
         </div>
+
+
+        {/* Cached blurred copy of the photograph for the glass panel — see
+            .glass-frost in tier1/styles/index.css. Sits under the scrim, like the
+            sharp photo, and drifts with it. */}
+        <div className="glass-frost" aria-hidden="true">
+          <div className="glass-frost-layer parallax-layer">
+            <img src={item.image} alt="" loading="lazy" decoding="async" />
+          </div>
+        </div>
+
         <div className="ind-feature-scrim" />
         <span className="ind-feature-number" aria-hidden="true">
           {item.number}
         </span>
       </div>
 
-      <div className="ind-feature-panel">
+      <div
+        ref={panelRef}
+        className="ind-feature-panel glass-overlap glass-card"
+      >
         <header className="ind-feature-head">
           <span className="ind-feature-icon">
             <Icon name={item.icon} size={22} />

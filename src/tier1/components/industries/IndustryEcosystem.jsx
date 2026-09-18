@@ -1,5 +1,5 @@
 import { industryFeatures } from '@/content/industries.js';
-import { useReveal } from '../../hooks/useReveal.js';
+import { useInView } from '../../hooks/useInView.js';
 import { useAnimationActivity } from '@/hooks/useAnimationActivity';
 
 /**
@@ -17,7 +17,7 @@ import { useAnimationActivity } from '@/hooks/useAnimationActivity';
  * fallback under 900px where a two-sided fan-out stops being legible.
  */
 export default function IndustryEcosystem() {
-  const [ref, shown] = useReveal({ threshold: 0.2 });
+  const [ref, shown] = useInView({ threshold: 0.2 });
 
   return (
     <section className="ind-eco-band" aria-hidden="true">

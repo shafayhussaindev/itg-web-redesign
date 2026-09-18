@@ -5,15 +5,24 @@ const visible = new Set<Layer>();
 let observer: IntersectionObserver | undefined;
 let frame = 0;
 
+/** Full travel on desktop, ~2/3 on tablets, ~40% on phones — matching the
+ *  CSS keyframes in tier1/styles/index.css. */
+function intensity() {
+  const width = window.innerWidth;
+  return width <= 680 ? 0.42 : width < 1024 ? 0.67 : 1;
+}
+
 function update() {
   frame = 0;
+  const scale = intensity();
+  const limit = 6 * scale;
   // Read all geometry before writing styles to avoid repeated forced layouts.
   const updates = Array.from(visible, layer => {
     // The untransformed media frame gives stable geometry: measuring the moving
     // layer itself feeds its previous transform back into the next frame.
     const rect = layer.media.getBoundingClientRect();
-    const offset = -(rect.top + rect.height / 2 - window.innerHeight / 2) * layer.strength;
-    const shift = layer.percent ? Math.max(-6, Math.min(6, offset / 6)) : offset;
+    const offset = -(rect.top + rect.height / 2 - window.innerHeight / 2) * layer.strength * scale;
+    const shift = layer.percent ? Math.max(-limit, Math.min(limit, offset / 6)) : offset;
     return { layer, value: `${shift.toFixed(3)}${layer.percent ? '%' : 'px'}` };
   });
   updates.forEach(({ layer, value }) => layer.node.style.setProperty('--parallax-offset', value));

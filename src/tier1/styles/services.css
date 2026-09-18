@@ -25,18 +25,9 @@
   --ease: cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
-/* ---------- shared scroll reveal ---------------------------
-   One-way. `.is-in` is set by useReveal once the element enters view.
-   ----------------------------------------------------------- */
-.tier1-site .svc-page .reveal {
-  opacity: 0;
-  transform: translateY(26px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-}
-.tier1-site .svc-page .reveal.is-in {
-  opacity: 1;
-  transform: none;
-}
+/* The scroll reveal is shared by all five tier-1 pages and lives in
+   tier1/styles/index.css (branch 1 of the pipeline in tier1/lib/scrollfx.js).
+   Only genuine per-page exceptions belong here. */
 
 /* Short cyan rule under section headings. */
 .tier1-site .svc-rule {
@@ -90,8 +81,8 @@
 .tier1-site .svc-statement--dark {
   border-left-color: var(--brand-accent-soft);
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03));
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  /* No backdrop blur: it sits on flat navy, where blurring is invisible
+     (measured: at most 2/255 on any pixel) but still costs a pass per frame. */
 }
 .tier1-site .svc-statement--dark strong { color: #fff; }
 
@@ -205,8 +196,8 @@
   padding: 18px 18px;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(9px) saturate(1.15);
-  -webkit-backdrop-filter: blur(9px) saturate(1.15);
+  backdrop-filter: blur(4px) saturate(1.15);
+  -webkit-backdrop-filter: blur(4px) saturate(1.15);
   border: 1px solid rgba(255, 255, 255, 0.24);
   box-shadow: 0 10px 30px rgba(6, 18, 38, 0.2);
   color: #fff;
@@ -239,27 +230,6 @@
    ENTERPRISE DELIVERY — flat ice section + one glass diagram
    ============================================================ */
 .tier1-site .svc-approach .section-head { max-width: 720px; }
-
-.tier1-site .svc-flow-stage { max-width: 1000px; margin: 0 auto 56px; }
-.tier1-site .svc-flow-glass {
-  padding: 40px 40px 32px;
-  border-radius: 24px;
-  background: linear-gradient(150deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.42));
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.75);
-  box-shadow: 0 20px 54px rgba(13, 33, 64, 0.13), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-}
-.tier1-site .svc-flow-svg { width: 100%; height: auto; display: block; }
-.tier1-site .svc-flow-disc { fill: #fff; opacity: 0.75; }
-.tier1-site .svc-flow-ring { fill: none; stroke: rgba(13, 33, 64, 0.16); stroke-width: 1.5; }
-.tier1-site .svc-flow-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 17px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  fill: var(--navy);
-}
 /* Connectors trace in once the section is on screen. */
 /* The paths carry pathLength="1", so the dash is length-independent. A fixed
    pixel dash silently clips any path longer than the dash. */
@@ -269,34 +239,6 @@
   transition: stroke-dashoffset 0.9s var(--ease);
   transition-delay: var(--link-delay, 0s);
 }
-.tier1-site .svc-flow-svg.is-active .svc-flow-link { stroke-dashoffset: 0; }
-.tier1-site .svc-flow-node {
-  opacity: 0;
-  transition: opacity 0.6s var(--ease);
-  transition-delay: var(--node-delay, 0s);
-}
-.tier1-site .svc-flow-svg.is-active .svc-flow-node { opacity: 1; }
-.tier1-site .svc-flow-pulse { opacity: 0; }
-.tier1-site .svc-flow-svg.is-active .svc-flow-pulse { opacity: 0.9; }
-
-.tier1-site .svc-flow-legend {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-top: 8px;
-  padding-top: 22px;
-  border-top: 1px solid rgba(13, 33, 64, 0.08);
-  list-style: none;
-  text-align: center;
-}
-.tier1-site .svc-flow-legend-label {
-  display: block;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--navy);
-  margin-bottom: 3px;
-}
-.tier1-site .svc-flow-legend-note { display: block; font-size: 12.5px; color: var(--light-text); }
 
 .tier1-site .svc-approach-panel {
   max-width: 1000px;
@@ -357,25 +299,23 @@
   overflow: hidden;
   box-shadow: var(--shadow-soft);
 }
-.tier1-site .svc-pillar-img {
-  position: absolute;
-  inset: -8%;
-  background-size: cover;
-  background-position: center;
-  will-change: transform;
+/* Drift and will-change come from .parallax-layer (tier1/styles/index.css). */
+.tier1-site .svc-pillar-img { position: absolute; inset: -8%; }
+.tier1-site .svc-pillar-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
+
 .tier1-site .svc-pillar-panel {
   position: relative;
   z-index: 2;
   grid-row: 1;
   padding: 40px 40px 42px;
   border-radius: 22px;
-  background: linear-gradient(155deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.78));
-  backdrop-filter: blur(13px) saturate(1.2);
-  -webkit-backdrop-filter: blur(13px) saturate(1.2);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  box-shadow: var(--shadow-lift), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  /* Fill, blur, border and shadow come from .glass-card / .glass-overlap
+     (tier1/styles/index.css). */
 }
 
 /* Panel right: image occupies cols 1-8, panel overlaps from col 7 to 13. */
@@ -439,7 +379,6 @@
   line-height: 1.25;
   margin-bottom: 5px;
 }
-.tier1-site .svc-pillar-sub { font-size: 14.5px; font-weight: 600; color: var(--navy-mid); line-height: 1.4; }
 .tier1-site .svc-pillar-body { font-size: 14.5px; color: var(--charcoal); line-height: 1.68; margin-bottom: 26px; }
 
 .tier1-site .svc-pillar-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
@@ -585,103 +524,11 @@
   padding: 20px 18px;
 }
 .tier1-site .svc-align-step--hub span { font-size: 18px; font-weight: 700; color: #fff; }
-
-/* ============================================================
-   INDUSTRIES — photography + gradient + glass label bar
-   ============================================================ */
-.tier1-site .svc-ind-grid {
-  max-width: 1280px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
 /* Seven industries into three columns leaves one card alone on the last row;
    centre it rather than letting it hang off the left edge.
    Must be gated to the 3-column layout: nth-child(3n+1) still matches the 7th
    card at narrower widths, where `grid-column: 2` would invent a phantom
    second column and shrink every card in the grid. */
-@media (min-width: 1025px) {
-  .tier1-site .svc-ind-card:last-child:nth-child(3n + 1) { grid-column: 2; }
-}
-
-.tier1-site .svc-ind-card {
-  position: relative;
-  height: 280px;
-  border-radius: 18px;
-  overflow: hidden;
-  cursor: pointer;
-  box-shadow: 0 10px 26px rgba(13, 33, 64, 0.14);
-  border: 1px solid transparent;
-  transition: box-shadow 0.38s var(--ease), transform 0.38s var(--ease), border-color 0.38s var(--ease);
-}
-/* Stagger the cards in behind the grid's own reveal. */
-.tier1-site .svc-ind-grid.reveal .svc-ind-card {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease),
-    box-shadow 0.38s var(--ease), border-color 0.38s var(--ease);
-  transition-delay: var(--card-delay, 0s);
-}
-.tier1-site .svc-ind-grid.reveal.is-in .svc-ind-card { opacity: 1; transform: none; }
-.tier1-site .svc-ind-card:hover,
-.tier1-site .svc-ind-card:focus-visible {
-  transform: translateY(-4px);
-  box-shadow: 0 22px 48px rgba(13, 33, 64, 0.26);
-  border-color: rgba(93, 141, 205, 0.45);
-  outline: none;
-}
-.tier1-site .svc-ind-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.55s var(--ease);
-}
-.tier1-site .svc-ind-card:hover img,
-.tier1-site .svc-ind-card:focus-visible img { transform: scale(1.04); }
-.tier1-site .svc-ind-scrim {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(13, 33, 64, 0) 34%, rgba(13, 33, 64, 0.5) 66%, rgba(13, 33, 64, 0.88) 100%);
-  transition: background 0.38s var(--ease);
-}
-.tier1-site .svc-ind-card:hover .svc-ind-scrim,
-.tier1-site .svc-ind-card:focus-visible .svc-ind-scrim {
-  background: linear-gradient(180deg, rgba(13, 33, 64, 0.12) 18%, rgba(13, 33, 64, 0.64) 58%, rgba(13, 33, 64, 0.94) 100%);
-}
-/* Glass label bar over the photo's foot. */
-.tier1-site .svc-ind-bar {
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: 14px;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 15px 17px;
-  border-radius: 13px;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(8px) saturate(1.15);
-  -webkit-backdrop-filter: blur(8px) saturate(1.15);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  transition: background 0.38s var(--ease), border-color 0.38s var(--ease);
-}
-.tier1-site .svc-ind-card:hover .svc-ind-bar,
-.tier1-site .svc-ind-card:focus-visible .svc-ind-bar {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.4);
-}
-.tier1-site .svc-ind-bar h3 { font-size: 14px; font-weight: 700; color: #fff; line-height: 1.35; }
-.tier1-site .svc-ind-arrow {
-  flex-shrink: 0;
-  color: var(--cyan);
-  transition: transform 0.38s var(--ease);
-}
-.tier1-site .svc-ind-card:hover .svc-ind-arrow,
-.tier1-site .svc-ind-card:focus-visible .svc-ind-arrow { transform: translateX(4px); }
 
 /* ============================================================
    WHY ITG — approved component, hover + cyan accent added
@@ -748,8 +595,13 @@
   border-radius: 26px;
   text-align: center;
   background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(11px) saturate(1.15);
-  -webkit-backdrop-filter: blur(11px) saturate(1.15);
+  /* No backdrop blur. Unlike the Industries and Company closing CTAs — whose
+     overlays were deliberately lightened so the facade reads (~50% of the photo
+     shows, so their blur is doing visible work) — this one's overlay runs
+     0.82-0.94 navy. The photograph is 82-94% covered before the glass ever sees
+     it, so the blur was smearing an almost flat surface: a live per-frame pass
+     for no visible result. The glass reads from its fill, hairline border and
+     inset highlight, which are untouched. */
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 24px 62px rgba(6, 18, 38, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
@@ -789,12 +641,10 @@
   .tier1-site .svc-hero-glass h1 { font-size: 38px; }
   .tier1-site .svc-hero-chips { max-width: 620px; }
   .tier1-site .svc-hero-lines { opacity: 0.5; }
-  .tier1-site .svc-ind-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 960px) {
   .tier1-site .svc-approach-grid { grid-template-columns: 1fr; gap: 20px; }
-  .tier1-site .svc-flow-glass { padding: 28px 24px 24px; }
 }
 
 @media (max-width: 760px) {
@@ -828,9 +678,6 @@
   .tier1-site .svc-pillar--right .svc-pillar-number { left: 20px; }
   .tier1-site .svc-pillar--left .svc-pillar-number { right: 20px; }
   .tier1-site .svc-pillar-list { gap: 56px; }
-
-  .tier1-site .svc-ind-grid { grid-template-columns: 1fr; }
-  .tier1-site .svc-flow-legend { grid-template-columns: 1fr; gap: 12px; }
   .tier1-site .svc-statement { margin-top: 40px; padding: 20px 22px; }
   .tier1-site .svc-statement strong { font-size: 15px; }
 
@@ -847,8 +694,6 @@
    REDUCED MOTION — everything static, nothing hidden
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
-  .tier1-site .svc-page .reveal,
-  .tier1-site .svc-page .reveal.is-in { opacity: 1; transform: none; transition: none; }
   .tier1-site .svc-hero-glass,
   .tier1-site .svc-hero-glass .eyebrow,
   .tier1-site .svc-hero-glass h1,
@@ -864,7 +709,6 @@
   .tier1-site .svc-flow-pulse,
   .tier1-site .svc-eco-pulse,
   .tier1-site .svc-hero-pulse { display: none; }
-  .tier1-site .svc-ind-grid.reveal .svc-ind-card { opacity: 1; transform: none; transition: none; }
   .tier1-site .svc-pillar-img { transform: none !important; }
   .tier1-site .svc-page * { scroll-behavior: auto; }
 }
