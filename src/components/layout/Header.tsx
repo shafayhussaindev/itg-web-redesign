@@ -401,7 +401,7 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
                   Services
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <MegaMenu items={servicesItems} categoryWidth="w-[300px]" panelWidth="w-[440px]" />
+                  <MegaMenu items={servicesItems} categoryWidth="w-[300px]" panelWidth="w-[440px]" categoriesAreLinks />
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
@@ -417,6 +417,7 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
                     items={industriesItems}
                     categoryWidth="w-[380px]"
                     panelWidth="w-[520px]"
+                    categoriesAreLinks
                     twoColumnCategories
                     childColumns={3}
                     showChildDescriptions={false}
@@ -448,12 +449,7 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
             */}
 
             <a href={contactHref} className="btn-nav-cta hidden md:inline-flex">
-              {/* Two copies of the label: the second is the face that rolls in,
-                  and is hidden from assistive tech so it is not read twice. */}
-              <span className="btn-roll">
-                <span className="btn-roll__out">{navCta.label}</span>
-                <span className="btn-roll__in" aria-hidden="true">{navCta.label}</span>
-              </span>
+              <span>{navCta.label}</span>
               <MSym name="arrow_forward" size={17} weight={500} className="cta-arrow" />
             </a>
 
@@ -598,6 +594,15 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
                   </CollapsibleTrigger>
                   <CollapsibleContent className="pl-2">
                     <div className="mt-2 ml-2 flex flex-col gap-2">
+                      {/* View All Services Link */}
+                      <a
+                        href="/services"
+                        onClick={closeMobileMenu}
+                        className="flex items-center gap-2 text-sm font-semibold text-primary px-3 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors"
+                      >
+                        View All Services
+                        <ArrowRight className="w-4 h-4" />
+                      </a>
                       {servicesItems.map((category) => (
                         <Collapsible
                           key={category.title}
@@ -610,6 +615,13 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
                           </CollapsibleTrigger>
                           <CollapsibleContent className="pl-2">
                             <div className="mt-1 ml-4 flex flex-col gap-1">
+                              <a
+                                href={category.href}
+                                onClick={closeMobileMenu}
+                                className="text-sm font-semibold text-primary py-3 px-2 rounded-lg hover:bg-accent"
+                              >
+                                {category.overviewLabel}
+                              </a>
                               {category.children?.map((child) => (
                                 <a
                                   key={child.title}
@@ -638,6 +650,15 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
                   </CollapsibleTrigger>
                   <CollapsibleContent className="pl-2">
                     <div className="mt-2 ml-2 flex flex-col gap-2">
+                      {/* View All Industries Link */}
+                      <a
+                        href="/industries"
+                        onClick={closeMobileMenu}
+                        className="flex items-center gap-2 text-sm font-semibold text-primary px-3 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors"
+                      >
+                        View All Industries
+                        <ArrowRight className="w-4 h-4" />
+                      </a>
                       {industriesItems.map((category) => (
                         <Collapsible
                           key={category.title}
@@ -650,6 +671,13 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
                           </CollapsibleTrigger>
                           <CollapsibleContent className="pl-2">
                             <div className="mt-1 ml-4 flex flex-col gap-1">
+                              <a
+                                href={category.href}
+                                onClick={closeMobileMenu}
+                                className="text-sm font-semibold text-primary py-3 px-2 rounded-lg hover:bg-accent"
+                              >
+                                {category.overviewLabel}
+                              </a>
                               {category.children?.map((child) => (
                                 <a
                                   key={child.title}

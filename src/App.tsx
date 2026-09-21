@@ -11,7 +11,11 @@ const Products = lazy(() => import("./pages/Products"));
 const ProductCategory = lazy(() => import("./pages/ProductCategory"));
 import { productPages } from "@/content/product-detail.js";
 const Services = lazy(() => import("./pages/Services"));
+const ServiceCategory = lazy(() => import("./pages/ServiceCategory"));
+import { servicePages } from "@/content/service-detail.js";
 const Industries = lazy(() => import("./pages/Industries"));
+const IndustryDetail = lazy(() => import("./pages/IndustryDetail"));
+import { industryPages } from "@/content/industry-detail.js";
 const Company = lazy(() => import("./pages/Company"));
 const AIIntelligence = lazy(() => import("./pages/AIIntelligence"));
 const SolutionDetail = lazy(() => import("./pages/SolutionDetail"));
@@ -38,7 +42,13 @@ const App = () => (
                 <Route key={page.id} path={page.href} element={<ProductCategory key={page.id} page={page} />} />
               ))}
               <Route path="/services" element={<Services />} />
+              {servicePages.map(page => (
+                <Route key={page.id} path={page.href} element={<ServiceCategory key={page.id} page={page} />} />
+              ))}
               <Route path="/industries" element={<Industries />} />
+              {industryPages.map(page => (
+                <Route key={page.id} path={page.href} element={<IndustryDetail key={page.id} page={page} />} />
+              ))}
               <Route path="/company" element={<Company />} />
               <Route path="/ai-intelligence" element={<AIIntelligence />} />
               {solutionPages.filter(page => page.id !== 'ai-intelligence').map(page => (

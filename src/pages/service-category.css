@@ -1,0 +1,49 @@
+/* Service categories reuse the tier-2 foundation in solution-detail.css.
+   The service cards are deliberately the same object as the product-category
+   platform cards — identity panel on the left, detail on the right — so the
+   three tier-2 families read as one system. Only the class prefix differs. */
+.service-category .sc-hero-label { color: rgba(255,255,255,.65); font: 10px 'JetBrains Mono', monospace; text-align: right; }
+.service-category .sc-lead { font-size: 22px; font-weight: 500; color: var(--navy); }
+.service-category .sc-services { display: grid; gap: 24px; }
+.service-category .sc-service { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); border: 1px solid rgba(13,33,64,.12); border-radius: 16px; overflow: hidden; background: white; box-shadow: var(--shadow-card); }
+.service-category .sc-service:target { outline: 2px solid var(--brand-accent); outline-offset: 4px; }
+.service-category .sc-service-identity { padding: 40px; background: linear-gradient(140deg, #f3f7fc, #e4edf7); border-right: 1px solid rgba(13,33,64,.08); }
+.service-category .sc-service-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+.service-category .sc-service-top .sd-icon { background: white; width: 56px; height: 56px; }
+.service-category .sc-service h3 { font-size: clamp(25px, 2.5vw, 34px); line-height: 1.2; letter-spacing: -.025em; margin-bottom: 16px; }
+.service-category .sc-service-identity p { font-size: 14px; color: var(--charcoal); max-width: 300px; }
+.service-category .sc-service-body { padding: 40px 48px; }
+.service-category .sc-service-body > p { color: var(--charcoal); font-size: 15px; }
+.service-category .sc-service-body h4 { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; font-weight: 600; margin: 24px 0 16px; }
+.service-category .sc-service-body ul { display: grid; gap: 12px; margin-bottom: 24px; }
+.service-category .sc-service-body li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.6; color: var(--charcoal); }
+.service-category .sc-service-body li .msym { color: var(--teal-deep); flex-shrink: 0; margin-top: 2px; }
+.service-category .sc-discuss-link { text-decoration: none; }
+.service-category .sc-discuss-label { display: inline-block; transform-origin: left center; transition: transform .22s ease; }
+.service-category .sc-discuss-link > .msym { transition: transform .22s ease; }
+.service-category .sc-discuss-link:is(:hover, :focus-visible) .sc-discuss-label { transform: scale(1.04); }
+.service-category .sc-discuss-link:is(:hover, :focus-visible) > .msym { transform: translateX(8px); }
+
+/* Six categories means five "explore the others" cards, where the solution and
+   product pages have four. Five across keeps every category one click away
+   rather than hiding one to preserve a 4-up grid. Below 1024px the shared
+   two-column rule in solution-detail.css takes over. */
+@media (min-width: 1024px) {
+  .service-category .sd-related { grid-template-columns: repeat(5, 1fr); gap: 20px; }
+  .service-category .sd-related-card > div { padding: 20px; }
+  .service-category .sd-related-card h3 { font-size: 15px; margin-bottom: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .service-category .sc-discuss-link .sc-discuss-label,
+  .service-category .sc-discuss-link > .msym { transform: none; }
+}
+@media (max-width: 1023px) {
+  .service-category .sc-hero-label { display: none; }
+  .service-category .sc-service-identity, .service-category .sc-service-body { padding: 32px; }
+}
+@media (max-width: 767px) {
+  .service-category .sc-service { grid-template-columns: minmax(0, 1fr); }
+  .service-category .sc-service-identity { border-right: 0; border-bottom: 1px solid rgba(13,33,64,.08); }
+  .service-category .sc-service-identity, .service-category .sc-service-body { padding: 24px; }
+  .service-category .sc-service-top { margin-bottom: 24px; }
+}

@@ -490,31 +490,10 @@
   }
   .btn-nav-cta:active { transform: translateY(0); }
 
-  /* ── Nav CTA: rolling label + tilting arrow ────────────────────
-     The label is two stacked copies of the same words. On hover the
-     top one tips away from the reader and the bottom one tips in,
-     both pivoting on the shared edge between them, so it reads as
-     one solid face turning rather than two labels sliding. */
-  .btn-roll {
-    display: grid;
-    overflow: hidden;
-    perspective: 340px;
-    /* clips the faces as they pass the horizontal */
-  }
-  .btn-roll > span {
-    grid-area: 1 / 1;
-    display: block;
-    backface-visibility: hidden;
-    transition: transform 0.44s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-  /* the face you see at rest, hinged on its lower edge */
-  .btn-roll__out { transform-origin: center bottom; }
-  /* the face waiting below, hinged on its upper edge and already tipped away */
-  .btn-roll__in  { transform-origin: center top; transform: rotateX(90deg); }
-  .btn-nav-cta:hover .btn-roll__out,
-  .btn-nav-cta:focus-visible .btn-roll__out { transform: rotateX(-90deg); }
-  .btn-nav-cta:hover .btn-roll__in,
-  .btn-nav-cta:focus-visible .btn-roll__in { transform: rotateX(0deg); }
+  /* Nav CTA: tilting arrow. The label used to roll on hover — two stacked
+     copies of the words, the top tipping away as the bottom tipped in. It was
+     removed on request; the label is now a single plain span. Only the arrow
+     moves. */
 
   /* Arrow sits at 45 degrees — an outbound mark — and levels out on hover.
      Named .cta-arrow, not .btn-arrow: the tier-1 pages already use the latter
@@ -527,13 +506,6 @@
   }
   .btn-nav-cta:hover .cta-arrow,
   .btn-nav-cta:focus-visible .cta-arrow { transform: rotate(0deg); }
-
-  /* Under reduced motion the roll would flick rather than turn, so the
-     second face is dropped and only the arrow changes, instantly. */
-  @media (prefers-reduced-motion: reduce) {
-    .btn-roll__in { display: none; }
-    .btn-roll__out { transform: none !important; }
-  }
 
   /* Translucent companion to .btn-modern — the secondary action on navy and
      over hero video, where an outline in navy would disappear. */

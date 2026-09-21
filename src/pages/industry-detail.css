@@ -1,0 +1,60 @@
+/* Industry pages reuse the tier-2 foundation in solution-detail.css.
+   The segment cards are deliberately the same object as the product-category
+   platform cards and the service cards — identity panel left, detail right —
+   so all four tier-2 families read as one system. Only the prefix differs. */
+.industry-detail .id-hero-label { color: rgba(255,255,255,.65); font: 10px 'JetBrains Mono', monospace; text-align: right; }
+.industry-detail .id-lead { font-size: 22px; font-weight: 500; color: var(--navy); }
+.industry-detail .id-segments { display: grid; gap: 24px; }
+.industry-detail .id-segment { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); border: 1px solid rgba(13,33,64,.12); border-radius: 16px; overflow: hidden; background: white; box-shadow: var(--shadow-card); }
+.industry-detail .id-segment:target { outline: 2px solid var(--brand-accent); outline-offset: 4px; }
+.industry-detail .id-segment-identity { padding: 40px; background: linear-gradient(140deg, #f3f7fc, #e4edf7); border-right: 1px solid rgba(13,33,64,.08); }
+.industry-detail .id-segment-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+.industry-detail .id-segment-top .sd-icon { background: white; width: 56px; height: 56px; }
+.industry-detail .id-segment h3 { font-size: clamp(25px, 2.5vw, 34px); line-height: 1.2; letter-spacing: -.025em; margin-bottom: 16px; }
+.industry-detail .id-segment-identity p { font-size: 14px; color: var(--charcoal); max-width: 300px; }
+.industry-detail .id-segment-body { padding: 40px 48px; }
+.industry-detail .id-segment-body > p { color: var(--charcoal); font-size: 15px; }
+.industry-detail .id-segment-body h4 { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; font-weight: 600; margin: 24px 0 16px; }
+.industry-detail .id-segment-body ul { display: grid; gap: 12px; margin-bottom: 24px; }
+.industry-detail .id-segment-body li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.6; color: var(--charcoal); }
+.industry-detail .id-segment-body li .msym { color: var(--teal-deep); flex-shrink: 0; margin-top: 2px; }
+.industry-detail .id-discuss-link { text-decoration: none; }
+.industry-detail .id-discuss-label { display: inline-block; transform-origin: left center; transition: transform .22s ease; }
+.industry-detail .id-discuss-link > .msym { transition: transform .22s ease; }
+.industry-detail .id-discuss-link:is(:hover, :focus-visible) .id-discuss-label { transform: scale(1.04); }
+.industry-detail .id-discuss-link:is(:hover, :focus-visible) > .msym { transform: translateX(8px); }
+
+/* "What we deliver": four capability areas. Lighter than the segment cards on
+   purpose — the segments answer "is this us?", these answer "what then?", and
+   giving both the same visual weight flattens the page. Same construction as
+   .sd-outcome so it stays inside the existing vocabulary. */
+.industry-detail .id-capabilities { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+.industry-detail .id-capability { border-top: 1px solid rgba(13,33,64,.16); padding-top: 32px; }
+.industry-detail .id-capability h3 { margin: 20px 0 12px; font-size: 18px; }
+.industry-detail .id-capability p { color: var(--charcoal); font-size: 14px; }
+
+/* Eleven sectors means ten "explore the others" cards. Five across gives two
+   even rows and keeps every sector one click away. Below 1024px the shared
+   two-column rule in solution-detail.css takes over. */
+@media (min-width: 1024px) {
+  .industry-detail .sd-related { grid-template-columns: repeat(5, 1fr); gap: 20px; }
+  .industry-detail .sd-related-card > div { padding: 20px; }
+  .industry-detail .sd-related-card h3 { font-size: 15px; margin-bottom: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .industry-detail .id-discuss-link .id-discuss-label,
+  .industry-detail .id-discuss-link > .msym { transform: none; }
+}
+@media (max-width: 1023px) {
+  .industry-detail .id-hero-label { display: none; }
+  .industry-detail .id-segment-identity, .industry-detail .id-segment-body { padding: 32px; }
+  .industry-detail .id-capabilities { grid-template-columns: repeat(2, 1fr); gap: 32px 24px; }
+}
+@media (max-width: 767px) {
+  .industry-detail .id-segment { grid-template-columns: minmax(0, 1fr); }
+  .industry-detail .id-segment-identity { border-right: 0; border-bottom: 1px solid rgba(13,33,64,.08); }
+  .industry-detail .id-segment-identity, .industry-detail .id-segment-body { padding: 24px; }
+  .industry-detail .id-segment-top { margin-bottom: 24px; }
+  .industry-detail .id-capabilities { grid-template-columns: 1fr; gap: 24px; }
+  .industry-detail .id-capability { padding-top: 24px; }
+}

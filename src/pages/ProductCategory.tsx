@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ArrowRight, MSym } from '@/components/icons/material';
-import { useLenis } from '@/hooks/useLenis';
+import { useHashScroll } from '@/hooks/useHashScroll';
 import { productPages, productDetail as copy } from '@/content/product-detail.js';
 import './solution-detail.css';
 import './product-category.css';
@@ -10,7 +10,6 @@ import './product-category.css';
 type ProductCategoryContent = typeof productPages[number];
 
 export default function ProductCategory({ page }: { page: ProductCategoryContent }) {
-  const lenis = useLenis();
 
   useEffect(() => {
     const previousTitle = document.title;
@@ -24,27 +23,9 @@ export default function ProductCategory({ page }: { page: ProductCategoryContent
     };
   }, [page]);
 
-  useEffect(() => {
-    let frame = 0;
-    const scrollToHash = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        let id: string;
-        try { id = decodeURIComponent(window.location.hash.slice(1)); } catch { return; }
-        const target = id && document.getElementById(id);
-        if (target) {
-          lenis.current?.resize();
-          target.scrollIntoView({ block: 'start', behavior: 'instant' });
-        }
-      });
-    };
-    scrollToHash();
-    window.addEventListener('hashchange', scrollToHash);
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener('hashchange', scrollToHash);
-    };
-  }, [page, lenis]);
+  // Deep links from the menus land on a section of this page.
+  useHashScroll(page);
+
 
   const enquiryHref = (name: string) => copy.contactEmail
     ? `mailto:${copy.contactEmail}?subject=${encodeURIComponent(`${name} product enquiry`)}`

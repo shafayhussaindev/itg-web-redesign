@@ -23,6 +23,8 @@ You do not need to open anything else.
 | yoursite.com/digital-experience                | `digital-experience.js` |
 | yoursite.com/sustainability-compliance         | `sustainability-compliance.js` |
 | Shared tier-2 labels, delivery steps and email | `solution-detail.js` |
+| The six service category pages, and their shared labels | `service-detail.js` |
+| The eleven industry pages, and their shared labels | `industry-detail.js` |
 
 Inside each file the blocks appear **in the same order as the page**, top to
 bottom, with a comment saying which part of the page each one is.
@@ -59,6 +61,61 @@ preserve direct links such as `/enterprise-business-platforms#integra-erp`.
 Set `productDetail.contactEmail` in `product-detail.js` to enable demo enquiry
 emails. Until configured, the closing button says “Meet the ITG Team” and links
 to Company.
+
+## Tier-2 service category pages
+
+The six service category pages all live in one file, `service-detail.js` — the
+category copy, the individual services and the wording shared across all six.
+
+Routes are `/digital-engineering-services`, `/data-analytics-intelligence`,
+`/automation-process-services`, `/enterprise-platform-services`,
+`/ai-advanced-technology-services` and `/cloud-infrastructure-services`.
+Individual services are sections within these pages, so there are no tier-3
+service routes.
+
+Two things to keep in step, both noted at the top of the file:
+
+- the slugs in `serviceCategoryPaths`, because the menu and any link you have
+  shared point at them;
+- each service `id`, because the menu links to `/<slug>#<id>` and the page
+  scrolls to that section. `/cloud-infrastructure-services#hybrid-multicloud`
+  is an example.
+
+The four delivery steps shown at the bottom of every service page are in
+`serviceDetail.steps`. Edit them once and all six pages change.
+
+Set `serviceDetail.contactEmail` to enable enquiry emails, exactly as for the
+solution and product pages. Until configured the closing button says
+“Meet the ITG Team” and links to Company.
+
+## Tier-2 industry pages
+
+The eleven industry pages all live in one file, `industry-detail.js` — the
+sector copy, the segments inside each sector, and the wording shared across all
+eleven.
+
+Routes are `/enterprise-corporate`, `/manufacturing-industrial`,
+`/retail-consumer-goods`, `/logistics-supply-chain`,
+`/healthcare-life-sciences`, `/real-estate-construction`,
+`/professional-services`, `/government-public-sector`,
+`/energy-sustainability-esg`, `/education-research` and `/travel-hospitality`.
+Segments are sections within these pages, so there are no tier-3 industry
+routes.
+
+Two things to keep in step, both noted at the top of the file:
+
+- the slugs in `industryPaths`, because the menu and any link you have shared
+  point at them;
+- each segment `id`, because the menu links to `/<slug>#<id>` and the page
+  scrolls to that section.
+
+**Two sectors still need artwork.** Education & Research and Travel &
+Hospitality have no photography of their own, so they borrow a related picture.
+Both are marked `NEEDS ARTWORK` in the file. Drop a proper image into
+`public/assets/industries/` and change the path.
+
+Set `industryDetail.contactEmail` to enable enquiry emails, as for the other
+families.
 
 ## The four rules
 
