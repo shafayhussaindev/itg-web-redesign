@@ -65,9 +65,7 @@ type MegaMenuProps = {
   /** Width of the tier-3 flyout, e.g. "w-[460px]". */
   panelWidth: string;
   /** Column count for the tier-3 grid. */
-  childColumns?: 1 | 2 | 3;
-  /** Tier-3 entries show their description under the title. */
-  showChildDescriptions?: boolean;
+  childColumns?: 1 | 2;
 };
 
 /**
@@ -75,8 +73,7 @@ type MegaMenuProps = {
  * Selection stays fixed while the user moves into the child panel.
  */
 function MegaMenu({
-  items, categoryWidth, panelWidth,
-  childColumns = 1, showChildDescriptions = true,
+  items, categoryWidth, panelWidth, childColumns = 1,
 }: MegaMenuProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const panelId = useId();
@@ -113,12 +110,12 @@ function MegaMenu({
         ))}
       </ul>
       <div id={panelId} data-lenis-prevent className={cn("shrink-0 p-4 max-h-[calc(100dvh-200px)] overflow-y-auto overscroll-contain", panelWidth)}>
-        <ul className={cn("grid gap-1", childColumns === 2 && "grid-cols-2", childColumns === 3 && "grid-cols-3")}>
+        <ul className={cn("grid gap-1", childColumns === 2 && "grid-cols-2")}>
           {active.children?.map(child => (
             <li key={child.href}>
               <NavigationMenuLink href={child.href} className="block min-h-11 rounded-md p-3 hover:bg-accent focus:bg-accent">
                 <span className="block text-sm font-medium leading-snug">{child.title}</span>
-                {showChildDescriptions && <span className="block text-xs text-muted-foreground leading-snug mt-1">{child.description}</span>}
+                <span className="block text-xs text-muted-foreground leading-snug mt-1">{child.description}</span>
               </NavigationMenuLink>
             </li>
           ))}
@@ -310,16 +307,15 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
                 <NavigationMenuContent>
                   <MegaMenu
                     items={industriesItems}
-                    /* 620px, not 380px. Eleven sectors stacked at 380px ran
-                       978px tall — 149px past a 1440x900 window — because every
-                       description wrapped to two lines. With the dropdown's own
-                       scroll removed that put the last sectors out of reach.
-                       The wider column puts each description on one line and
-                       brings the menu to 813px, which fits. */
+                    /* Same one-column, described tier-3 list as Services.
+                       KNOWN ISSUE: eleven sectors stacked run 978px tall, so at
+                       1440x900 the last two (Education, Travel) sit 133px below
+                       the fold and the dropdown has no scroll of its own. The
+                       380px category column was an attempt at this — it does
+                       NOT fix it; 10 of 11 descriptions still wrap to two
+                       lines. Left as-is on the owner's instruction. */
                     categoryWidth="w-[380px]"
-                    panelWidth="w-[520px]"
-                    childColumns={3}
-                    showChildDescriptions={false}
+                    panelWidth="w-[440px]"
                   />
                 </NavigationMenuContent>
               </NavigationMenuItem>
