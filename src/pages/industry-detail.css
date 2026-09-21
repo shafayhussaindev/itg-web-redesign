@@ -1,5 +1,4 @@
 /* Shared brand foundation, with organization profiles and a sector directory. */
-.industry-detail .id-hero-label { color: rgba(255,255,255,.65); font: 10px 'JetBrains Mono', monospace; text-align: right; }
 .industry-detail .id-lead { font-size: 22px; font-weight: 500; color: var(--navy); }
 .industry-detail .id-segments { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .industry-detail .id-segment { display: flex; flex-direction: column; border-top: 3px solid var(--brand-accent); background: white; padding: 32px; }
@@ -35,7 +34,6 @@
   .industry-detail .id-discuss-link > .msym { transform: none; }
 }
 @media (max-width: 1023px) {
-  .industry-detail .id-hero-label { display: none; }
   .industry-detail .id-segment { padding: 24px; }
   .industry-detail .id-capabilities { grid-template-columns: repeat(2, 1fr); gap: 32px 24px; }
 }

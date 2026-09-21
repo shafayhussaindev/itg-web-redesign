@@ -1,5 +1,4 @@
 /* Shared brand foundation, with open service rows and a delivery timeline. */
-.service-category .sc-hero-label { color: rgba(255,255,255,.65); font: 10px 'JetBrains Mono', monospace; text-align: right; }
 .service-category .sc-lead { font-size: 22px; font-weight: 500; color: var(--navy); }
 .service-category .sc-services { display: grid; }
 .service-category .sc-service { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 64px; padding: 48px 0; border-top: 1px solid rgba(13,33,64,.18); }
@@ -26,7 +25,6 @@
   .service-category .sc-discuss-link > .msym { transform: none; }
 }
 @media (max-width: 1023px) {
-  .service-category .sc-hero-label { display: none; }
   .service-category .sc-service { gap: 32px; }
 }
 @media (max-width: 767px) {

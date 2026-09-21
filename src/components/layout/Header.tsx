@@ -84,11 +84,19 @@ function MegaMenu({
 
   return (
     <div className="flex w-max items-start">
-      <ul data-lenis-prevent className={cn("shrink-0 border-r border-border p-4 grid content-start gap-2 max-h-[calc(100dvh-200px)] overflow-y-auto overscroll-contain", categoryWidth)}>
+      <ul className={cn("shrink-0 border-r border-border p-4 grid content-start gap-2", categoryWidth)}>
         {items.map((item, index) => (
-          <li key={item.href} className={cn("flex items-center rounded-md", activeIndex === index && "bg-accent")}>
+          <li
+            key={item.href}
+            onMouseEnter={() => setActiveIndex(index)}
+            className={cn("flex items-center rounded-md", activeIndex === index && "bg-accent")}
+          >
             <NavigationMenuLink asChild>
-              <a href={item.href} className="min-w-0 flex-1 rounded-md p-3 hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary">
+              <a
+                href={item.href}
+                onFocus={() => setActiveIndex(index)}
+                className="min-w-0 flex-1 rounded-md p-3 hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+              >
                 <span className="block text-sm font-medium leading-snug">{item.title}</span>
                 <span className="line-clamp-2 text-xs text-muted-foreground leading-snug mt-1">{item.description}</span>
               </a>
@@ -105,9 +113,6 @@ function MegaMenu({
         ))}
       </ul>
       <div id={panelId} data-lenis-prevent className={cn("shrink-0 p-4 max-h-[calc(100dvh-200px)] overflow-y-auto overscroll-contain", panelWidth)}>
-        <NavigationMenuLink href={active.href} className="flex items-center justify-between gap-3 rounded-md p-3 mb-3 text-sm font-semibold text-primary hover:bg-accent focus:bg-accent">
-          {active.title}<ArrowRight className="w-4 h-4 shrink-0" />
-        </NavigationMenuLink>
         <ul className={cn("grid gap-1", childColumns === 2 && "grid-cols-2", childColumns === 3 && "grid-cols-3")}>
           {active.children?.map(child => (
             <li key={child.href}>
@@ -257,11 +262,11 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
               <NavigationMenuItem>
                 <NavigationMenuTrigger
                   className={cn(navItemClass, "cursor-pointer")}
+                  onClick={() => { window.location.href = "/solutions"; }}
                 >
                   Solutions
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <NavigationMenuLink href="/solutions" className="block border-b px-6 py-4 text-sm font-semibold hover:bg-accent focus:bg-accent">View All Solutions</NavigationMenuLink>
                   <MegaMenu
                     items={solutionsItems}
                     categoryWidth="w-[300px]"
@@ -274,11 +279,11 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
               <NavigationMenuItem>
                 <NavigationMenuTrigger
                   className={cn(navItemClass, "cursor-pointer")}
+                  onClick={() => { window.location.href = "/products"; }}
                 >
                   Products
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <NavigationMenuLink href="/products" className="block border-b px-6 py-4 text-sm font-semibold hover:bg-accent focus:bg-accent">View All Products</NavigationMenuLink>
                   <MegaMenu items={productsItems} categoryWidth="w-[280px]" panelWidth="w-[420px]" />
                 </NavigationMenuContent>
               </NavigationMenuItem>
@@ -286,11 +291,11 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
               <NavigationMenuItem>
                 <NavigationMenuTrigger
                   className={cn(navItemClass, "cursor-pointer")}
+                  onClick={() => { window.location.href = "/services"; }}
                 >
                   Services
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <NavigationMenuLink href="/services" className="block border-b px-6 py-4 text-sm font-semibold hover:bg-accent focus:bg-accent">View All Services</NavigationMenuLink>
                   <MegaMenu items={servicesItems} categoryWidth="w-[300px]" panelWidth="w-[440px]" />
                 </NavigationMenuContent>
               </NavigationMenuItem>
@@ -298,13 +303,19 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
               <NavigationMenuItem>
                 <NavigationMenuTrigger
                   className={cn(navItemClass, "cursor-pointer")}
+                  onClick={() => { window.location.href = "/industries"; }}
                 >
                   Industries
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <NavigationMenuLink href="/industries" className="block border-b px-6 py-4 text-sm font-semibold hover:bg-accent focus:bg-accent">View All Industries</NavigationMenuLink>
                   <MegaMenu
                     items={industriesItems}
+                    /* 620px, not 380px. Eleven sectors stacked at 380px ran
+                       978px tall — 149px past a 1440x900 window — because every
+                       description wrapped to two lines. With the dropdown's own
+                       scroll removed that put the last sectors out of reach.
+                       The wider column puts each description on one line and
+                       brings the menu to 813px, which fits. */
                     categoryWidth="w-[380px]"
                     panelWidth="w-[520px]"
                     childColumns={3}

@@ -69,7 +69,6 @@ export default function IndustryDetail({ page }: { page: IndustryPageContent }) 
             </div>
             <div className="sd-hero-bottom">
               <ul className="sd-hero-tags">{page.tags.map(tag => <li key={tag}><MSym name="check_circle" size={16} />{tag}</li>)}</ul>
-              <span className="id-hero-label">{copy.industries} / {page.shortName}</span>
             </div>
           </div>
         </section>

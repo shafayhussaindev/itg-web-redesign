@@ -1,5 +1,4 @@
 /* Product categories reuse the tier-2 foundation, with open product summaries. */
-.product-category .pc-hero-label { color: rgba(255,255,255,.65); font: 10px 'JetBrains Mono', monospace; text-align: right; }
 .product-category .pc-lead { font-size: 22px; font-weight: 500; color: var(--navy); }
 .product-category .pc-platforms { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 24px; }
 .product-category .pc-platform { display: flex; flex-direction: column; min-width: 0; border: 1px solid rgba(13,33,64,.12); border-radius: 16px; overflow: hidden; background: white; box-shadow: var(--shadow-card); }
@@ -25,7 +24,6 @@
   .product-category .pc-discuss-link > .msym { transform: none; }
 }
 @media (max-width: 1023px) {
-  .product-category .pc-hero-label { display: none; }
   .product-category .pc-platform-identity, .product-category .pc-platform-body { padding: 32px; }
 }
 @media (max-width: 767px) {

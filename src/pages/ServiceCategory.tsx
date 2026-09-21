@@ -67,7 +67,6 @@ export default function ServiceCategory({ page }: { page: ServiceCategoryContent
             </div>
             <div className="sd-hero-bottom">
               <ul className="sd-hero-tags">{page.tags.map(tag => <li key={tag}><MSym name="check_circle" size={16} />{tag}</li>)}</ul>
-              <span className="sc-hero-label">{copy.services} / {page.shortName}</span>
             </div>
           </div>
         </section>

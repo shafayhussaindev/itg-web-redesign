@@ -62,7 +62,6 @@ export default function ProductCategory({ page }: { page: ProductCategoryContent
             </div>
             <div className="sd-hero-bottom">
               <ul className="sd-hero-tags">{page.tags.map(tag => <li key={tag}><MSym name="check_circle" size={16} />{tag}</li>)}</ul>
-              <span className="pc-hero-label">{copy.products} / {page.shortName}</span>
             </div>
           </div>
         </section>
