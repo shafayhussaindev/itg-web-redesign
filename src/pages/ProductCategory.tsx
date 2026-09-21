@@ -45,6 +45,7 @@ export default function ProductCategory({ page }: { page: ProductCategoryContent
               <a href="/products">{copy.products}</a><span aria-hidden="true">/</span>
               <span aria-current="page">{page.title}</span>
             </nav>
+            <div className="pc-hero-layout">
             <div className="sd-hero-copy">
               <p className="sd-eyebrow"><MSym name={page.icon} size={20} />{page.title}</p>
               <h1 id="product-title">{page.headline}<span>{page.accent}</span></h1>
@@ -53,6 +54,11 @@ export default function ProductCategory({ page }: { page: ProductCategoryContent
                 <a className="btn-modern" href="#platforms">{copy.explore}<ArrowRight size={18} /></a>
                 <a className="btn-modern-ghost" href="#contact">{copy.talk}</a>
               </div>
+            </div>
+            <aside className="pc-catalogue" aria-label={copy.platforms}>
+              <p className="sd-eyebrow">{copy.platformsEyebrow}</p>
+              {page.platforms.map((platform, index) => <a key={platform.id} href={`#${platform.id}`}><span className="sd-number">{String(index + 1).padStart(2, '0')}</span><span><strong>{platform.name}</strong><small>{platform.description}</small></span><ArrowRight size={18} /></a>)}
+            </aside>
             </div>
             <div className="sd-hero-bottom">
               <ul className="sd-hero-tags">{page.tags.map(tag => <li key={tag}><MSym name="check_circle" size={16} />{tag}</li>)}</ul>

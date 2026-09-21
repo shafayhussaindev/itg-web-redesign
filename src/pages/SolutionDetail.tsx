@@ -68,7 +68,7 @@ export default function SolutionDetail({ page }: { page: SolutionPageContent }) 
     <>
       <a className="solution-skip" href="#solution-main">{copy.skipLink}</a>
       <Header contactHref="#contact" />
-      <main id="solution-main" className="solution-detail" tabIndex={-1}>
+      <main id="solution-main" className="solution-detail solution-category" tabIndex={-1}>
         <section className="sd-hero" data-dark-hero aria-labelledby="solution-title">
           <img className="sd-hero-image" src={page.image} alt="" loading="eager" />
           <div className="sd-hero-scrim" />

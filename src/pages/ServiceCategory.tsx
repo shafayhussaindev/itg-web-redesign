@@ -15,9 +15,8 @@ type ServiceCategoryContent = typeof servicePages[number];
  * solution and product pages, so all three families read as one system; the
  * only page-specific styling is in `service-category.css`.
  *
- * The extra section here is Delivery. Services is the one tier-1 page whose
- * subject IS the delivery model, so each category page closes on the same four
- * steps rather than a generic "our approach" block.
+ * Delivery comes before the service catalogue to explain the engagement first.
+ * Open service rows and a vertical timeline distinguish this family.
  */
 export default function ServiceCategory({ page }: { page: ServiceCategoryContent }) {
 
@@ -78,8 +77,8 @@ export default function ServiceCategory({ page }: { page: ServiceCategoryContent
             <span className="sd-section-name"><MSym name={page.icon} size={20} />{page.shortName}</span>
             <div className="sd-section-links">
               <a href="#overview">{copy.overview}</a>
-              <a href="#services">{copy.servicesNav}</a>
               <a href="#delivery">{copy.delivery}</a>
+              <a href="#services">{copy.servicesNav}</a>
             </div>
           </div>
         </nav>
@@ -96,6 +95,22 @@ export default function ServiceCategory({ page }: { page: ServiceCategoryContent
                 <h3>{item.title}</h3><p>{item.body}</p>
               </article>
             ))}</div>
+          </div>
+        </section>
+
+        <section id="delivery" className="sd-section">
+          <div className="section-container">
+            <div className="sd-section-heading">
+              <p className="sd-eyebrow">{copy.deliveryEyebrow}</p>
+              <h2>{copy.deliveryTitle}</h2>
+              <p>{copy.deliveryIntro}</p>
+            </div>
+            <ol className="sd-steps">{copy.steps.map((step, index) => (
+              <li key={step.title}>
+                <span className="sd-step-number">{String(index + 1).padStart(2, '0')}</span>
+                <h3>{step.title}</h3><p>{step.body}</p>
+              </li>
+            ))}</ol>
           </div>
         </section>
 
@@ -142,32 +157,15 @@ export default function ServiceCategory({ page }: { page: ServiceCategoryContent
           </div>
         </section>
 
-        <section id="delivery" className="sd-section">
-          <div className="section-container">
-            <div className="sd-section-heading">
-              <p className="sd-eyebrow">{copy.deliveryEyebrow}</p>
-              <h2>{copy.deliveryTitle}</h2>
-              <p>{copy.deliveryIntro}</p>
-            </div>
-            <ol className="sd-steps">{copy.steps.map((step, index) => (
-              <li key={step.title}>
-                <span className="sd-step-number">{String(index + 1).padStart(2, '0')}</span>
-                <h3>{step.title}</h3><p>{step.body}</p>
-              </li>
-            ))}</ol>
-          </div>
-        </section>
-
         <section className="sd-section sd-ice" aria-labelledby="related-title">
           <div className="section-container">
             <div className="sd-section-heading">
               <p className="sd-eyebrow">{copy.relatedEyebrow}</p>
               <h2 id="related-title">{copy.relatedTitle}</h2>
             </div>
-            <div className="sd-related">{related.map(item => (
-              <a href={item.href} key={item.id} className="sd-related-card">
-                <img src={item.image} alt="" loading="lazy" />
-                <div><h3>{item.name}</h3><span>{copy.relatedLink}<ArrowRight size={17} /></span></div>
+            <div className="sc-related-services">{related.map((item, index) => (
+              <a href={item.href} key={item.id}>
+                <span className="sd-number">{String(index + 1).padStart(2, '0')}</span><h3>{item.name}</h3><ArrowRight size={20} />
               </a>
             ))}</div>
           </div>

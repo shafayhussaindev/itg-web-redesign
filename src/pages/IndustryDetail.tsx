@@ -181,10 +181,9 @@ export default function IndustryDetail({ page }: { page: IndustryPageContent }) 
               <p className="sd-eyebrow">{copy.relatedEyebrow}</p>
               <h2 id="related-title">{copy.relatedTitle}</h2>
             </div>
-            <div className="sd-related">{related.map(item => (
-              <a href={item.href} key={item.id} className="sd-related-card">
-                <img src={item.image} alt="" loading="lazy" />
-                <div><h3>{item.shortName}</h3><span>{copy.relatedLink}<ArrowRight size={17} /></span></div>
+            <div className="id-sector-directory">{related.map(item => (
+              <a href={item.href} key={item.id}>
+                <MSym name={item.icon} size={24} /><span>{item.shortName}</span><ArrowRight size={18} />
               </a>
             ))}</div>
           </div>

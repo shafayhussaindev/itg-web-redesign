@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 import { ChevronDown, ChevronRight, Menu, Moon, Sun, X, ArrowRight, MSym } from "@/components/icons/material";
 import { Button } from "@/components/ui/button";
@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
-// @ts-expect-error - plain JS content file, no types alongside it
 import { mainNav } from "@/content/site.js";
 // Same file as the colour mark with its ink turned white, so the two share an
 // identical outline and box — swapping them reads as a recolour, not a resize.
@@ -65,199 +64,91 @@ type MegaMenuProps = {
   categoryWidth: string;
   /** Width of the tier-3 flyout, e.g. "w-[460px]". */
   panelWidth: string;
-  /** Tier-2 laid out in two columns (Industries has eleven entries). */
-  twoColumnCategories?: boolean;
   /** Column count for the tier-3 grid. */
   childColumns?: 1 | 2 | 3;
   /** Tier-3 entries show their description under the title. */
   showChildDescriptions?: boolean;
-  /** Tier-2 rows navigate on click instead of acting as hover targets only. */
-  categoriesAreLinks?: boolean;
 };
 
 /**
- * Tier-2 list with the tier-3 items in a flyout that hangs off whichever row is
- * hovered, so the pointer reaches tier 3 by moving straight across rather than
- * cutting diagonally over its neighbours. Two guards keep a stray pass from
- * swapping the panel out from under the pointer: switching to a different row
- * waits out a short intent delay, and hovering the flyout locks the selection.
+ * Category names navigate; adjacent disclosure buttons select their children.
+ * Selection stays fixed while the user moves into the child panel.
  */
 function MegaMenu({
-  items,
-  categoryWidth,
-  panelWidth,
-  twoColumnCategories = false,
-  childColumns = 1,
-  showChildDescriptions = true,
-  categoriesAreLinks = false,
+  items, categoryWidth, panelWidth,
+  childColumns = 1, showChildDescriptions = true,
 }: MegaMenuProps) {
   const [activeIndex, setActiveIndex] = useState(0);
-
-  const switchTimer = useRef<number>();
-  const pointerInPanel = useRef(false);
-  const lastPointerX = useRef<number | null>(null);
-  const headingForPanel = useRef(false);
-
+  const panelId = useId();
   const active = items[activeIndex];
 
-  useEffect(() => () => window.clearTimeout(switchTimer.current), []);
-
-  const openFor = useCallback(
-    (index: number, immediate: boolean) => {
-      window.clearTimeout(switchTimer.current);
-      if (pointerInPanel.current) return;
-      const apply = () => setActiveIndex(index);
-      // Keyboard focus lands instantly. A pointer waits out a brush-past, and
-      // waits considerably longer when it is travelling towards the flyout —
-      // that run crosses the second category column on the wider menus.
-      if (immediate) apply();
-      else switchTimer.current = window.setTimeout(apply, headingForPanel.current ? 260 : 90);
-    },
-    [],
-  );
-
-  const releaseHoverGuards = () => {
-    window.clearTimeout(switchTimer.current);
-    pointerInPanel.current = false;
-    lastPointerX.current = null;
-    headingForPanel.current = false;
-  };
-
-  // The flyout is always to the right, so rightward travel reads as "on the way
-  // to tier 3" rather than "picking a different tier-2 row".
-  const trackPointerDirection = (event: React.MouseEvent) => {
-    const previous = lastPointerX.current;
-    if (previous !== null && Math.abs(event.clientX - previous) > 2) {
-      headingForPanel.current = event.clientX > previous;
-    }
-    lastPointerX.current = event.clientX;
-  };
-
-  const rowClass = (index: number) =>
-    cn(
-      "w-full text-left flex items-center justify-between select-none rounded-md leading-none outline-none transition-[color,background-color,box-shadow] duration-200",
-      twoColumnCategories ? "p-2.5" : "p-3",
-      activeIndex === index
-        ? "bg-accent text-accent-foreground shadow-sm"
-        : "hover:bg-accent/50 hover:text-accent-foreground",
-    );
-
-  const renderRow = (item: CategoryItem, index: number) => {
-    const body = (
-      <>
-        <div className="flex-1">
-          <div className="text-sm font-medium leading-none">{item.title}</div>
-          <p className="line-clamp-2 text-xs leading-snug text-muted-foreground mt-1">{item.description}</p>
-        </div>
-        <ChevronRight
-          className={cn(
-            "h-4 w-4 shrink-0 ml-2 transition-[color,transform] duration-200",
-            activeIndex === index ? "text-primary translate-x-0.5" : "text-muted-foreground",
-          )}
-        />
-      </>
-    );
-
-    return (
-      <li key={item.title}>
-        {categoriesAreLinks ? (
-          <NavigationMenuLink asChild>
-            <a
-              href={item.href}
-              className={rowClass(index)}
-              onMouseEnter={() => openFor(index, false)}
-              onFocus={() => openFor(index, true)}
-            >
-              {body}
-            </a>
-          </NavigationMenuLink>
-        ) : (
-          <button
-            type="button"
-            className={rowClass(index)}
-            onMouseEnter={() => openFor(index, false)}
-            onFocus={() => openFor(index, true)}
-          >
-            {body}
-          </button>
-        )}
-      </li>
-    );
-  };
-
-  const splitAt = twoColumnCategories ? Math.ceil(items.length / 2) : items.length;
-
   return (
-    <div className="flex w-max" onMouseMove={trackPointerDirection} onMouseLeave={releaseHoverGuards}>
-      <div className={cn("shrink-0 border-r border-border p-4 flex gap-3", categoryWidth)}>
-        <ul className="flex-1 space-y-1">{items.slice(0, splitAt).map((item, index) => renderRow(item, index))}</ul>
-        {twoColumnCategories && (
-          <ul className="flex-1 space-y-1">
-            {items.slice(splitAt).map((item, index) => renderRow(item, index + splitAt))}
-          </ul>
-        )}
-      </div>
-
-      {/* Tier-3 flyout — collapsed to nothing until a tier-2 row is hovered. */}
-      <div
-        className={cn("relative shrink-0 overflow-hidden", panelWidth)}
-        onMouseEnter={() => {
-          pointerInPanel.current = true;
-          window.clearTimeout(switchTimer.current);
-        }}
-        onMouseLeave={() => {
-          pointerInPanel.current = false;
-        }}
-      >
-        {/* Pinned to the top of the dropdown: the tier-3 list always starts
-            level with the first category, whichever row is hovered. */}
-        <div className={cn(panelWidth, "p-4")}>
-          {active && (
-            <>
-              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
-                {active.title}
-              </div>
-              <ul
-                className={cn(
-                  "gap-x-2",
-                  childColumns === 1 && "space-y-1",
-                  childColumns === 2 && "grid grid-cols-2 gap-y-1",
-                  childColumns === 3 && "grid grid-cols-3 gap-y-0.5",
-                )}
-              >
-                {active.children?.map((child) => (
-                  <li key={child.title}>
-                    <NavigationMenuLink asChild>
-                      <a
-                        href={child.href}
-                        className={cn(
-                          "block select-none rounded-md leading-none no-underline outline-none transition-colors",
-                          showChildDescriptions ? "p-3" : "px-2.5 py-2",
-                          "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-                        )}
-                      >
-                        <div className="text-sm font-medium leading-tight">{child.title}</div>
-                        {showChildDescriptions && (
-                          <p className="text-xs leading-snug text-muted-foreground mt-1">{child.description}</p>
-                        )}
-                      </a>
-                    </NavigationMenuLink>
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
-        </div>
+    <div className="flex w-max items-start">
+      <ul data-lenis-prevent className={cn("shrink-0 border-r border-border p-4 grid content-start gap-2 max-h-[calc(100dvh-200px)] overflow-y-auto overscroll-contain", categoryWidth)}>
+        {items.map((item, index) => (
+          <li key={item.href} className={cn("flex items-center rounded-md", activeIndex === index && "bg-accent")}>
+            <NavigationMenuLink asChild>
+              <a href={item.href} className="min-w-0 flex-1 rounded-md p-3 hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary">
+                <span className="block text-sm font-medium leading-snug">{item.title}</span>
+                <span className="line-clamp-2 text-xs text-muted-foreground leading-snug mt-1">{item.description}</span>
+              </a>
+            </NavigationMenuLink>
+            <button
+              type="button"
+              aria-label={`Show ${item.title} options`}
+              aria-expanded={activeIndex === index}
+              aria-controls={panelId}
+              onClick={() => setActiveIndex(index)}
+              className="flex min-h-11 w-11 shrink-0 items-center justify-center rounded-md hover:bg-primary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+            ><ChevronRight className="w-4 h-4" /></button>
+          </li>
+        ))}
+      </ul>
+      <div id={panelId} data-lenis-prevent className={cn("shrink-0 p-4 max-h-[calc(100dvh-200px)] overflow-y-auto overscroll-contain", panelWidth)}>
+        <NavigationMenuLink href={active.href} className="flex items-center justify-between gap-3 rounded-md p-3 mb-3 text-sm font-semibold text-primary hover:bg-accent focus:bg-accent">
+          {active.title}<ArrowRight className="w-4 h-4 shrink-0" />
+        </NavigationMenuLink>
+        <ul className={cn("grid gap-1", childColumns === 2 && "grid-cols-2", childColumns === 3 && "grid-cols-3")}>
+          {active.children?.map(child => (
+            <li key={child.href}>
+              <NavigationMenuLink href={child.href} className="block min-h-11 rounded-md p-3 hover:bg-accent focus:bg-accent">
+                <span className="block text-sm font-medium leading-snug">{child.title}</span>
+                {showChildDescriptions && <span className="block text-xs text-muted-foreground leading-snug mt-1">{child.description}</span>}
+              </NavigationMenuLink>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
 }
-
 export function Header({ contactHref = navCta.href }: { contactHref?: string } = {}) {
   const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(() => window.scrollY > 20);
   const [darkHeroDepth, setDarkHeroDepth] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const mobileMenuButton = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+        mobileMenuButton.current?.focus();
+      }
+    };
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    const closeOnDesktop = () => { if (desktop.matches) setIsMobileMenuOpen(false); };
+    window.addEventListener('keydown', closeOnEscape);
+    desktop.addEventListener('change', closeOnDesktop);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', closeOnEscape);
+      desktop.removeEventListener('change', closeOnDesktop);
+    };
+  }, [isMobileMenuOpen]);
   const [openMobileSections, setOpenMobileSections] = useState<Record<string, boolean>>({});
   const [openMobileProducts, setOpenMobileProducts] = useState<Record<string, boolean>>({});
   const [openMobileSolutions, setOpenMobileSolutions] = useState<Record<string, boolean>>({});
@@ -267,13 +158,13 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
   // The bar is transparent only at rest at the very top. The first scroll brings
   // the white background in — over the hero as much as anywhere else — and
   // coming back to the top takes it away again.
-  const showSolidBar = isScrolled;
+  const showSolidBar = isScrolled || isMobileMenuOpen;
   // White mark and white type belong to that transparent state, and only over a
   // hero dark enough to carry them. Pages mark such a hero with data-dark-hero;
   // one without it (the light Products hero, the policy pages) gets navy type
   // from the start. darkHeroDepth is measured below; here only its presence
   // matters, since at rest at the top the hero is necessarily behind the bar.
-  const isDarkHero = !isScrolled && darkHeroDepth > 0;
+  const isDarkHero = !isScrolled && !isMobileMenuOpen && darkHeroDepth > 0;
   const navItemClass = cn(NAV_ITEM_BASE, isDarkHero ? NAV_ITEM_ON_DARK : NAV_ITEM_ON_LIGHT);
 
   // Layout effect, not a plain effect: the hero has to be measured before the
@@ -344,7 +235,7 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
           showSolidBar ? "nav-glass" : "bg-transparent",
         )}
       >
-        <div className="section-container grid grid-cols-[1fr_auto_1fr] items-center">
+        <div className="section-container grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center">
           {/* Both marks are the same artwork at the same box, so stacking them and
               crossing the opacity turns the swap into a recolour rather than a cut. */}
           <a href="/" className="relative flex items-center justify-start">
@@ -366,17 +257,16 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
               <NavigationMenuItem>
                 <NavigationMenuTrigger
                   className={cn(navItemClass, "cursor-pointer")}
-                  onClick={() => window.location.href = '/solutions'}
                 >
                   Solutions
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
+                  <NavigationMenuLink href="/solutions" className="block border-b px-6 py-4 text-sm font-semibold hover:bg-accent focus:bg-accent">View All Solutions</NavigationMenuLink>
                   <MegaMenu
                     items={solutionsItems}
                     categoryWidth="w-[300px]"
                     panelWidth="w-[460px]"
                     childColumns={2}
-                    categoriesAreLinks
                   />
                 </NavigationMenuContent>
               </NavigationMenuItem>
@@ -384,41 +274,39 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
               <NavigationMenuItem>
                 <NavigationMenuTrigger
                   className={cn(navItemClass, "cursor-pointer")}
-                  onClick={() => window.location.href = '/products'}
                 >
                   Products
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <MegaMenu items={productsItems} categoryWidth="w-[280px]" panelWidth="w-[420px]" categoriesAreLinks />
+                  <NavigationMenuLink href="/products" className="block border-b px-6 py-4 text-sm font-semibold hover:bg-accent focus:bg-accent">View All Products</NavigationMenuLink>
+                  <MegaMenu items={productsItems} categoryWidth="w-[280px]" panelWidth="w-[420px]" />
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
                 <NavigationMenuTrigger
                   className={cn(navItemClass, "cursor-pointer")}
-                  onClick={() => window.location.href = '/services'}
                 >
                   Services
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <MegaMenu items={servicesItems} categoryWidth="w-[300px]" panelWidth="w-[440px]" categoriesAreLinks />
+                  <NavigationMenuLink href="/services" className="block border-b px-6 py-4 text-sm font-semibold hover:bg-accent focus:bg-accent">View All Services</NavigationMenuLink>
+                  <MegaMenu items={servicesItems} categoryWidth="w-[300px]" panelWidth="w-[440px]" />
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
                 <NavigationMenuTrigger
                   className={cn(navItemClass, "cursor-pointer")}
-                  onClick={() => window.location.href = '/industries'}
                 >
                   Industries
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
+                  <NavigationMenuLink href="/industries" className="block border-b px-6 py-4 text-sm font-semibold hover:bg-accent focus:bg-accent">View All Industries</NavigationMenuLink>
                   <MegaMenu
                     items={industriesItems}
                     categoryWidth="w-[380px]"
                     panelWidth="w-[520px]"
-                    categoriesAreLinks
-                    twoColumnCategories
                     childColumns={3}
                     showChildDescriptions={false}
                   />
@@ -456,12 +344,15 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
             <button
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
               className={cn(
-                "tap-target lg:hidden p-2 rounded-lg transition-colors duration-200 focus-enterprise",
+                "flex min-h-11 min-w-11 items-center justify-center lg:hidden p-2 rounded-lg transition-colors duration-200 focus-enterprise",
                 isDarkHero
                   ? "text-white/90 hover:text-white [filter:drop-shadow(0_1px_6px_rgba(3,12,28,0.55))]"
                   : "text-muted-foreground hover:text-foreground hover:bg-accent",
               )}
               aria-label="Toggle menu"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation"
+              ref={mobileMenuButton}
             >
               {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -469,8 +360,8 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
         </div>
 
         {isMobileMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 bg-background border-b border-border">
-            <nav className="section-container py-4 flex flex-col gap-1">
+          <div id="mobile-navigation" data-lenis-prevent className="lg:hidden absolute top-full left-0 right-0 max-h-[calc(100dvh-80px)] overflow-y-auto overscroll-contain bg-background border-b border-border shadow-lg">
+            <nav aria-label="Mobile navigation" className="section-container py-4 pb-8 flex flex-col gap-1 [&_button]:min-h-11 [&_button]:text-left [&_a]:min-h-11 [&_a]:flex [&_a]:items-center [&_a]:leading-snug [&_button_.msym]:shrink-0">
               <div className="space-y-2">
                 <Collapsible
                   open={openMobileSections.solutions ?? false}

@@ -32,7 +32,7 @@
 .solution-detail .sd-section-nav { border-bottom: 1px solid rgba(13,33,64,.12); background: white; }
 .solution-detail .sd-section-nav-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; min-height: 80px; }
 .solution-detail .sd-section-name { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; }
-.solution-detail .sd-section-links { display: flex; align-items: center; gap: 32px; }
+.solution-detail .sd-section-links { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
 .solution-detail .sd-section-links a { display: inline-flex; align-items: center; min-height: 48px; font-size: 12px; color: var(--charcoal); border-bottom: 2px solid transparent; }
 .solution-detail .sd-section-links a:hover { border-color: var(--brand-accent); color: var(--navy); }
 .solution-detail .sd-section { padding: 128px 0; }
@@ -82,7 +82,7 @@
 .solution-detail .sd-application { padding: 32px; border-radius: 12px; background: white; border: 1px solid rgba(13,33,64,.12); box-shadow: var(--shadow-card); }
 .solution-detail .sd-application > .msym { color: var(--brand-accent); }
 .solution-detail .sd-application h3 { margin: 24px 0 16px; }
-.solution-detail .sd-feature { display: grid; grid-template-columns: 1fr 1fr; background: var(--navy); }
+.solution-detail .sd-feature { display: grid; grid-template-columns: 1fr 1fr; background: var(--navy); max-width: 1216px; margin-inline: auto; border-radius: 16px; overflow: hidden; }
 .solution-detail .sd-feature-photo { position: relative; min-height: 520px; }
 .solution-detail .sd-feature-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .solution-detail .sd-feature-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg,rgba(13,33,64,.1),rgba(13,33,64,.35)); }
@@ -154,11 +154,29 @@
   .solution-detail .sd-related-card h3 { font-size: 14px; }
 }
 @media (max-width: 639px) {
+  .solution-detail .sd-related { grid-template-columns: 1fr; }
   .solution-detail .sd-actions { flex-direction: column; align-items: stretch; }
   .solution-detail .sd-actions .sd-text-link { justify-content: center; }
   .solution-detail .sd-section-links { gap: 12px; }
   .solution-detail .sd-hero .sd-eyebrow { font-size: 10px; }
   .solution-detail .sd-steps { grid-template-columns: 1fr; gap: 32px; }
+}
+
+/* Solutions lead with business outcomes, then the indexed capability guide. */
+.solution-category .sd-outcomes { gap: 0; background: var(--ice); border-radius: 16px; overflow: hidden; }
+.solution-category .sd-outcome { border-top: 0; padding: 32px; }
+.solution-category .sd-outcome + .sd-outcome { border-left: 1px solid rgba(13,33,64,.12); }
+.solution-category .sd-outcome .sd-icon { background: white; }
+.solution-category .sd-application { border: 0; border-left: 2px solid var(--brand-accent); border-radius: 0; box-shadow: none; padding: 8px 28px; }
+@media (max-width: 1279px) {
+  .solution-detail .sd-feature { margin-inline: 32px; }
+}
+@media (max-width: 767px) {
+  .solution-detail .sd-feature { margin-inline: 24px; }
+  .solution-category .sd-outcome + .sd-outcome { border-left: 0; border-top: 1px solid rgba(13,33,64,.12); }
+}
+@media (max-width: 639px) {
+  .solution-detail .sd-feature { margin-inline: 16px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .solution-detail .sd-discuss-link .sd-discuss-label,
