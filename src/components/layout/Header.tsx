@@ -64,8 +64,15 @@ type MegaMenuProps = {
   categoryWidth: string;
   /** Width of the tier-3 flyout, e.g. "w-[460px]". */
   panelWidth: string;
+  /** Column count for the tier-2 category list. Two fills top-to-bottom,
+   *  then left-to-right, so the list still reads in order. */
+  categoryColumns?: 1 | 2;
   /** Column count for the tier-3 grid. */
-  childColumns?: 1 | 2;
+  childColumns?: 1 | 2 | 3;
+  /** Tier-3 entries show their description under the title. */
+  showChildDescriptions?: boolean;
+  /** Tier-3 panel is headed with the active category's name. */
+  showPanelHeading?: boolean;
 };
 
 /**
@@ -73,26 +80,81 @@ type MegaMenuProps = {
  * Selection stays fixed while the user moves into the child panel.
  */
 function MegaMenu({
-  items, categoryWidth, panelWidth, childColumns = 1,
+  items, categoryWidth, panelWidth, categoryColumns = 1,
+  childColumns = 1, showChildDescriptions = true, showPanelHeading = false,
 }: MegaMenuProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const panelId = useId();
   const active = items[activeIndex];
 
+  /* Selecting on plain mouseenter breaks once the category list has two
+     columns: sweeping right from a first-column item crosses a second-column
+     item on the way to the flyout, and that crossing stole the selection. So
+     an entry made while travelling mostly RIGHTWARDS — toward the panel — is
+     held for a beat instead of committed, and dropped if the pointer keeps
+     going. Arriving from above or below, which is how the list is actually
+     read, still commits at once. Leaving the list clears anything pending. */
+  const pointer = useRef({ x: 0, y: 0 });
+  const pending = useRef<number>();
+  const clearPending = () => window.clearTimeout(pending.current);
+  useEffect(() => clearPending, []);
+
+  const trackPointer = (event: React.MouseEvent) => {
+    pointer.current = { x: event.clientX, y: event.clientY };
+  };
+
+  const selectOnHover = (event: React.MouseEvent, index: number) => {
+    // Measured against the last move inside the list, so this is the heading
+    // at the moment of crossing. A wrong guess only ever costs 150ms, never a
+    // wrong selection, so the test is deliberately biased toward waiting.
+    const dx = event.clientX - pointer.current.x;
+    const dy = event.clientY - pointer.current.y;
+    clearPending();
+    if (dx > Math.abs(dy)) pending.current = window.setTimeout(() => setActiveIndex(index), 150);
+    else setActiveIndex(index);
+  };
+
+  const select = (index: number) => { clearPending(); setActiveIndex(index); };
+
+  // Column-first fill needs a row count derived from the item count, which
+  // Tailwind's JIT cannot see — runtime-built class names are never generated.
+  const categoryGrid = categoryColumns === 2
+    ? {
+        gridAutoFlow: 'column' as const,
+        gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+        gridTemplateRows: `repeat(${Math.ceil(items.length / 2)}, auto)`,
+      }
+    : undefined;
+
   return (
     <div className="flex w-max items-start">
-      <ul className={cn("shrink-0 border-r border-border p-4 grid content-start gap-2", categoryWidth)}>
+      <ul
+        style={categoryGrid}
+        onMouseEnter={trackPointer}
+        onMouseMove={trackPointer}
+        onMouseLeave={clearPending}
+        className={cn(
+          "shrink-0 border-r border-border p-4 grid content-start",
+          /* Two-up runs six rows deep, so it is tightened to keep the last
+             sector above the fold on a 720px-tall viewport. */
+          categoryColumns === 2 ? "gap-0.5" : "gap-2",
+          categoryWidth,
+        )}
+      >
         {items.map((item, index) => (
           <li
             key={item.href}
-            onMouseEnter={() => setActiveIndex(index)}
+            onMouseEnter={(event) => selectOnHover(event, index)}
             className={cn("flex items-center rounded-md", activeIndex === index && "bg-accent")}
           >
             <NavigationMenuLink asChild>
               <a
                 href={item.href}
-                onFocus={() => setActiveIndex(index)}
-                className="min-w-0 flex-1 rounded-md p-3 hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+                onFocus={() => select(index)}
+                className={cn(
+                  "min-w-0 flex-1 rounded-md px-3 hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary",
+                  categoryColumns === 2 ? "py-2" : "py-3",
+                )}
               >
                 <span className="block text-sm font-medium leading-snug">{item.title}</span>
                 <span className="line-clamp-2 text-xs text-muted-foreground leading-snug mt-1">{item.description}</span>
@@ -103,19 +165,26 @@ function MegaMenu({
               aria-label={`Show ${item.title} options`}
               aria-expanded={activeIndex === index}
               aria-controls={panelId}
-              onClick={() => setActiveIndex(index)}
+              onClick={() => select(index)}
               className="flex min-h-11 w-11 shrink-0 items-center justify-center rounded-md hover:bg-primary/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
             ><ChevronRight className="w-4 h-4" /></button>
           </li>
         ))}
       </ul>
       <div id={panelId} data-lenis-prevent className={cn("shrink-0 p-4 max-h-[calc(100dvh-200px)] overflow-y-auto overscroll-contain", panelWidth)}>
-        <ul className={cn("grid gap-1", childColumns === 2 && "grid-cols-2")}>
+        {showPanelHeading && (
+          <p className="px-3 pb-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+            {active.title}
+          </p>
+        )}
+        <ul className={cn("grid gap-1", childColumns === 2 && "grid-cols-2", childColumns === 3 && "grid-cols-3")}>
           {active.children?.map(child => (
             <li key={child.href}>
               <NavigationMenuLink href={child.href} className="block min-h-11 rounded-md p-3 hover:bg-accent focus:bg-accent">
                 <span className="block text-sm font-medium leading-snug">{child.title}</span>
-                <span className="block text-xs text-muted-foreground leading-snug mt-1">{child.description}</span>
+                {showChildDescriptions && (
+                  <span className="block text-xs text-muted-foreground leading-snug mt-1">{child.description}</span>
+                )}
               </NavigationMenuLink>
             </li>
           ))}
@@ -307,15 +376,18 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
                 <NavigationMenuContent>
                   <MegaMenu
                     items={industriesItems}
-                    /* Same one-column, described tier-3 list as Services.
-                       KNOWN ISSUE: eleven sectors stacked run 978px tall, so at
-                       1440x900 the last two (Education, Travel) sit 133px below
-                       the fold and the dropdown has no scroll of its own. The
-                       380px category column was an attempt at this — it does
-                       NOT fix it; 10 of 11 descriptions still wrap to two
-                       lines. Left as-is on the owner's instruction. */
-                    categoryWidth="w-[380px]"
-                    panelWidth="w-[440px]"
+                    /* The only two-up category list. Eleven sectors stacked in
+                       one column ran 978px tall, so at 1440x900 the last two
+                       sat below the fold with no scroll to reach them; six
+                       rows of two bring that back inside the viewport. The
+                       tier-3 panel drops descriptions and takes a heading
+                       instead, because 51 segments are browsed by name. */
+                    categoryWidth="w-[460px]"
+                    categoryColumns={2}
+                    panelWidth="w-[520px]"
+                    childColumns={3}
+                    showChildDescriptions={false}
+                    showPanelHeading
                   />
                 </NavigationMenuContent>
               </NavigationMenuItem>
