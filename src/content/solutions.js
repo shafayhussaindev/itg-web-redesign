@@ -1,3 +1,5 @@
+import enterpriseCorporateImage from '../assets/industries/enterprise-corporate.png';
+
 /* ============================================================================
  * SOLUTIONS PAGE
  * ==============
@@ -61,7 +63,7 @@ export const industries = [
     id: 'enterprise',
     title: 'Enterprise & Corporate',
     body: 'Digital intelligence and compliance solutions for regulated healthcare environments.',
-    image: 'src/assets/industries/enterprise-corporate.png',
+    image: enterpriseCorporateImage,
   },
   {
     id: 'manufacturing',
