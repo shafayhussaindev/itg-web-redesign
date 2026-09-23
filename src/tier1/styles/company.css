@@ -616,7 +616,7 @@
 .tier1-site .co-global .section-head h2 { color: #fff; }
 .tier1-site .co-global .section-head p { color: rgba(255, 255, 255, 0.68); }
 
-.tier1-site .co-global-map { position: relative; z-index: 2; max-width: 940px; margin: 0 auto 56px; }
+.tier1-site .co-global-map { position: relative; z-index: 2; max-width: 1160px; margin: 0 auto 56px; }
 .tier1-site .co-map { position: relative; }
 .tier1-site .co-map-viewport { overflow: visible; }
 .tier1-site .co-map-stage { position: relative; width: 100%; aspect-ratio: 1614 / 689; }
@@ -675,7 +675,7 @@
 }
 .tier1-site .co-map-pin-body svg { display: block; width: 100%; height: 100%; overflow: visible; }
 .tier1-site .co-map-pin-body path { fill: #122c4d; stroke: #f1f5fb; stroke-width: 1.6; }
-.tier1-site .co-map-pin-body .co-map-pin-core { fill: #ed1b35; stroke: #fff; stroke-width: 0.8; }
+.tier1-site .co-map-pin-body .co-map-pin-core { fill: #7eb1d8; stroke: #fff; stroke-width: 0.8; }
 .tier1-site .co-map-pin-body .co-map-pin-center { fill: #fff; }
 .tier1-site .co-map-pin-pulse {
   position: absolute;
@@ -683,7 +683,7 @@
   bottom: 0;
   width: 8px;
   height: 8px;
-  border: 1px solid rgba(237, 27, 53, 0.8);
+  border: 1px solid rgba(169, 216, 245, 0.8);
   border-radius: 50%;
   transform: translate(-50%, 50%) scale(0);
   pointer-events: none;
@@ -714,37 +714,12 @@
   pointer-events: none;
 }
 .tier1-site .co-map-pin:hover .co-map-pin-label,
+.tier1-site .co-map-pin:focus .co-map-pin-label,
 .tier1-site .co-map-pin:focus-visible .co-map-pin-label {
   opacity: 1;
   transform: translate(-50%, -100%);
 }
-.tier1-site .co-map-key {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px 18px;
-  margin: 18px 0 0;
-  padding: 0;
-  list-style: none;
-}
 .tier1-site .co-map-swipe-hint { display: none; }
-.tier1-site .co-map-key li {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  color: rgba(255, 255, 255, 0.88);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-.tier1-site .co-map-key li::before {
-  content: '';
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #ed1b35;
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.75);
-}
 @media (max-width: 640px) {
   .tier1-site .co-map-viewport {
     overflow-x: auto;
@@ -761,7 +736,6 @@
     font-size: 11px;
     text-align: center;
   }
-  .tier1-site .co-map-key { padding-bottom: 6px; }
 }
 
 .tier1-site .co-global-grid {

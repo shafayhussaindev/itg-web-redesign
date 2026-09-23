@@ -1,5 +1,5 @@
-// @ts-expect-error - plain JS content file, no types alongside it
-import { footer } from "@/content/site.js";
+/ @ts-expect-error - plain JS content file, no types alongside it/
+  import { footer } from "@/content/site.js";
 
 /**
  * The four link columns were written out four times, so adding a link meant

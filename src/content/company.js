@@ -168,13 +168,16 @@ export const globalPresence = {
   title: 'Global Presence',
   intro: 'Scale delivery and regional understanding.',
   image: '/assets/company/global-presence.jpg',
-  // Country-level markers supplied for the initial map. Replace these with
-  // verified office city coordinates when the full location list is approved.
+  // These are country-level reference points, except Hong Kong's city centre.
+  // Replace them with verified office coordinates when those are available.
   locations: [
-    { country: 'Pakistan', latitude: 30.3753, longitude: 69.3451 },
-    { country: 'India', latitude: 20.5937, longitude: 78.9629 },
-    { country: 'Bangladesh', latitude: 23.685, longitude: 90.3563 },
-    { country: 'China', latitude: 35.8617, longitude: 104.1954 },
+    { name: 'USA', latitude: 39.8283, longitude: -98.5795 },
+    { name: 'Finland', latitude: 61.9241, longitude: 25.7482 },
+    { name: 'Pakistan', latitude: 30.3753, longitude: 69.3451 },
+    { name: 'UAE', latitude: 23.4241, longitude: 53.8478 },
+    { name: 'Bangladesh', latitude: 23.685, longitude: 90.3563 },
+    { name: 'Hong Kong', latitude: 22.3193, longitude: 114.1694 },
+    { name: 'Australia', latitude: -25.2744, longitude: 133.7751 },
   ],
   items: [
     {

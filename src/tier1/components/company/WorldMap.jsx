@@ -20,8 +20,8 @@ export default function WorldMap({ active }) {
   useEffect(() => {
     const viewport = viewportRef.current;
     if (!viewport || window.matchMedia('(min-width: 641px)').matches) return;
-    // Start the narrow viewport near the four supplied countries. The visitor
-    // can still pan across the complete world map.
+    // Start the narrow viewport over Europe, Asia and Australia. The visitor
+    // can pan west to the USA and across the complete world map.
     viewport.scrollLeft = Math.max(0, viewport.scrollWidth * 0.72 - viewport.clientWidth * 0.55);
   }, []);
 
@@ -38,12 +38,12 @@ export default function WorldMap({ active }) {
 
           {locations.map((location, index) => (
             <button
-              key={location.country}
+              key={location.name}
               className="co-map-pin"
               type="button"
               style={{ ...project(location.latitude, location.longitude), '--pin-index': index }}
-              aria-label={`${location.country} location`}
-              title={location.country}
+              aria-label={`${location.name} location`}
+              title={location.name}
             >
               <span className="co-map-pin-pulse" aria-hidden="true" />
               <span className="co-map-pin-body" aria-hidden="true">
@@ -53,16 +53,13 @@ export default function WorldMap({ active }) {
                   <circle className="co-map-pin-center" cx="13" cy="13" r="2.1" />
                 </svg>
               </span>
-              <span className="co-map-pin-label" aria-hidden="true">{location.country}</span>
+              <span className="co-map-pin-label" aria-hidden="true">{location.name}</span>
             </button>
           ))}
         </div>
       </div>
 
       <p className="co-map-swipe-hint">Swipe to explore the full map</p>
-      <ul className="co-map-key" aria-label="Countries shown on the map">
-        {locations.map((location) => <li key={location.country}>{location.country}</li>)}
-      </ul>
     </div>
   );
 }
