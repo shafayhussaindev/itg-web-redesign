@@ -12,8 +12,8 @@ import WorldMap from './WorldMap.jsx';
  * this section does not use `PhotoModule` — the photograph is a ground here,
  * not a subject.
  *
- * The map deliberately carries no place names. The approved copy names no
- * regions, and labelling the markers would be inventing content.
+ * The map uses country-level markers supplied by the client. Exact office
+ * coordinates can replace them in the content data without changing the map.
  */
 export default function GlobalPresence() {
   const [mapRef, mapIn] = useInView({ threshold: 0.2 });

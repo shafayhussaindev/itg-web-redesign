@@ -168,6 +168,14 @@ export const globalPresence = {
   title: 'Global Presence',
   intro: 'Scale delivery and regional understanding.',
   image: '/assets/company/global-presence.jpg',
+  // Country-level markers supplied for the initial map. Replace these with
+  // verified office city coordinates when the full location list is approved.
+  locations: [
+    { country: 'Pakistan', latitude: 30.3753, longitude: 69.3451 },
+    { country: 'India', latitude: 20.5937, longitude: 78.9629 },
+    { country: 'Bangladesh', latitude: 23.685, longitude: 90.3563 },
+    { country: 'China', latitude: 35.8617, longitude: 104.1954 },
+  ],
   items: [
     {
       id: 'offices',
