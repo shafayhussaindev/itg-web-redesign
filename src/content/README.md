@@ -8,23 +8,40 @@ You do not need to open anything else.
 
 ## Which file do I open?
 
-| I want to change…                             | Open                  |
-| --------------------------------------------- | --------------------- |
-| The top menu bar, or the footer                | `site.js`             |
-| The front page (the one with the video)        | `home.js`             |
-| yoursite.com/solutions                         | `solutions.js`        |
-| yoursite.com/products                          | `products.js`         |
-| yoursite.com/services                          | `services.js`         |
-| yoursite.com/industries                        | `industries.js`       |
-| yoursite.com/company                           | `company.js`          |
-| yoursite.com/ai-intelligence                   | `ai-intelligence.js`  |
-| yoursite.com/enterprise-systems                | `enterprise-systems.js` |
-| yoursite.com/automation-cloud                  | `automation-cloud.js` |
-| yoursite.com/digital-experience                | `digital-experience.js` |
-| yoursite.com/sustainability-compliance         | `sustainability-compliance.js` |
-| Shared tier-2 labels, delivery steps and email | `solution-detail.js` |
-| The six service category pages, and their shared labels | `service-detail.js` |
-| The eleven industry pages, and their shared labels | `industry-detail.js` |
+The folder is split the same way the site is:
+
+```
+content/
+├─ site.js       menu bar + footer (every page)
+├─ home.js       the front page
+├─ contact.js    the Contact page
+├─ tier1/        the five top-level pages
+└─ tier2/        the pages one level down (the drop-down menu pages)
+   └─ solutions/ one file per solution page
+```
+
+| I want to change…                                  | Open                                           |
+| -------------------------------------------------- | ---------------------------------------------- |
+| The top menu bar, or the footer                     | `site.js`                                      |
+| The front page (the one with the video)             | `home.js`                                      |
+| yoursite.com/contact                                | `contact.js`                                   |
+| **Tier 1**                                          |                                                |
+| yoursite.com/solutions                              | `tier1/solutions.js`                           |
+| yoursite.com/platforms                              | `tier1/platforms.js`                           |
+| yoursite.com/services                               | `tier1/services.js`                            |
+| yoursite.com/industries                             | `tier1/industries.js`                          |
+| yoursite.com/company                                | `tier1/company.js`                             |
+| **Tier 2**                                          |                                                |
+| yoursite.com/artificial-intelligence                | `tier2/solutions/artificial-intelligence.js`   |
+| yoursite.com/enterprise-solutions                   | `tier2/solutions/enterprise-solutions.js`      |
+| yoursite.com/esg-solutions                          | `tier2/solutions/esg-solutions.js`             |
+| yoursite.com/custom-solutions                       | `tier2/solutions/custom-solutions.js`          |
+| yoursite.com/industrial-solutions                   | `tier2/solutions/industrial-solutions.js`      |
+| yoursite.com/data-privacy-solutions                 | `tier2/solutions/data-privacy-solutions.js`    |
+| Shared solution-page labels, delivery steps, email  | `tier2/solutions/solution-detail.js`           |
+| The six platform pages (and their products)         | `tier2/platform-detail.js`                     |
+| The five Services pages                             | `tier2/service-detail.js`                      |
+| The five industry pages                             | `tier2/industry-detail.js`                     |
 
 Inside each file the blocks appear **in the same order as the page**, top to
 bottom, with a comment saying which part of the page each one is.
@@ -33,43 +50,64 @@ bottom, with a comment saying which part of the page each one is.
 
 ## Tier-2 solution pages
 
-Each of the five solution pages has a `solutionPage` block in its content file.
+Each of the six solution pages has a `solutionPage` block in its content file.
 Edit the hero, outcomes, capability descriptions, applications and closing copy
 there. AI & Intelligence also reuses its existing `capabilities` and `dpp` blocks.
 
-To enable email enquiries across all five pages, set `contactEmail` in
+To enable email enquiries across all six pages, set `contactEmail` in
 `solution-detail.js`. Leave it empty to show the Company-page link instead.
 No form submission or email service is required: the configured link opens the
 visitor's email application with the solution name in the subject.
 
+The six pages, in menu order: Artificial Intelligence, Enterprise Solutions,
+ESG Solutions, Custom Solutions, Industrial Solutions, Data Privacy Solutions.
+To add or re-order one, change the Solutions menu in `site.js`, the list in
+`src/pages/tier2/solutions/solutionPages.ts`, and `solutionCategories` in
+`tier1/solutions.js` (the cards on /solutions).
+
+Each page’s address is its `id`, e.g. `id: esg-solutions` → `/esg-solutions`,
+and the file is named the same. The old addresses (`/ai-intelligence`,
+`/sustainability-compliance`, …) still work: they forward to the new ones.
+
 Capability `id` values match the menu links in `site.js`. If you change an ID,
-update its menu link too. Those links open the capability and scroll to it.
+update the matching Tier 3 `id` in `site.js` too. Those links open the capability and scroll to it.
 
-## Tier-2 product category pages
+## Tier-2 platform pages  (the "Platforms" menu, formerly "Products")
 
-The five product category pages use `product-detail.js`. Edit the category
-headlines, overview paragraphs, product summaries, integration section and
-closing CTA there. Category names, descriptions and images come from `products.js`.
+There are six platforms: Sourcing, Supply Chain, Contract Lifecycle, Supplier
+Info & Risk Management, Product Lifecycle Management and Data Privacy.
 
-Routes are `/enterprise-business-platforms`, `/sustainability-compliance-platforms`,
-`/asset-operations-platforms`, `/ai-intelligence-platforms` and
-`/digital-experience-platforms`. Products appear as visible sections within these
-pages; there are no tier-3 product routes. The Products menu and category buttons
-use the same content, so links stay in sync. Keep product `id` values stable to
-preserve direct links such as `/enterprise-business-platforms#integra-erp`.
+- **The list of platforms** — name, short line, card text, image, and the
+  product names on each card — is `tier1/platforms.js`. Each platform's
+  address is its `id`: `id: 'supply-chain'` → `/supply-chain`.
+- **Each platform's page** — headline, overview, tags, and its **products**
+  (Tier 3) — is `tier2/platform-detail.js`.
 
-Set `productDetail.contactEmail` in `product-detail.js` to enable demo enquiry
-emails. Until configured, the closing button says “Meet the ITG Team” and links
-to Company.
+Products are sections on their platform's page and links in the Platforms menu,
+e.g. `/supply-chain#aullect`. Keep product `id` values stable. When you move a
+product between platforms, move its block in `platform-detail.js` **and** its
+name in the `includes` list in `platforms.js`.
+
+A platform with no products yet (Data Privacy, for now) still has a page. Its
+menu fly-out shows one "About …" link, and the empty products section is hidden.
+Add products to its `products: []` list and they appear everywhere.
+
+The old addresses (`/products` and the five old `…-platforms` category pages)
+forward to `/platforms`.
+
+Set `platformDetail.contactEmail` in `platform-detail.js` to enable demo
+enquiry emails. Until configured, the button goes to the Contact page.
 
 ## Tier-2 service category pages
 
-The six service category pages all live in one file, `service-detail.js` — the
-category copy, the individual services and the wording shared across all six.
+The five Services pages all live in one file, `service-detail.js` — the
+page copy, the individual services and the wording shared across all five.
+The same five are also the "Services We Deliver" cards in `tier1/services.js`.
 
-Routes are `/digital-engineering-services`, `/data-analytics-intelligence`,
-`/automation-process-services`, `/enterprise-platform-services`,
-`/ai-advanced-technology-services` and `/cloud-infrastructure-services`.
+Routes are `/engineering-services`, `/data-management-services`,
+`/esg-services`, `/cloud-infrastructure-services` and `/bpo-services`. The old addresses
+(`/digital-engineering-services` etc.) forward to the new ones; the two
+removed categories (Enterprise Platforms, AI & Advanced) forward to `/services`.
 Individual services are sections within these pages, so there are no tier-3
 service routes.
 
@@ -82,7 +120,7 @@ Two things to keep in step, both noted at the top of the file:
   is an example.
 
 The four delivery steps shown at the bottom of every service page are in
-`serviceDetail.steps`. Edit them once and all six pages change.
+`serviceDetail.steps`. Edit them once and all five pages change.
 
 Set `serviceDetail.contactEmail` to enable enquiry emails, exactly as for the
 solution and product pages. Until configured the closing button says
@@ -90,15 +128,20 @@ solution and product pages. Until configured the closing button says
 
 ## Tier-2 industry pages
 
-The eleven industry pages all live in one file, `industry-detail.js` — the
+The five industry pages all live in one file, `industry-detail.js` — the
 sector copy, the segments inside each sector, and the wording shared across all
-eleven.
+five.
 
-Routes are `/enterprise-corporate`, `/manufacturing-industrial`,
-`/retail-consumer-goods`, `/logistics-supply-chain`,
-`/healthcare-life-sciences`, `/real-estate-construction`,
-`/professional-services`, `/government-public-sector`,
-`/energy-sustainability-esg`, `/education-research` and `/travel-hospitality`.
+Routes are `/consumer-goods`, `/manufacturing-industries`,
+`/logistics-supply-chain-operations`, `/real-estate-construction-facilities`
+and `/professional-services`. The old addresses forward to the new ones; the six
+removed sectors (Enterprise & Corporate, Healthcare, Government, Energy & ESG,
+Education, Travel) forward to `/industries`.
+
+The same five industries are also listed on the Home page (`home.js`), the
+/industries page (`tier1/industries.js` for the photo sections and diagram,
+`tier1/solutions.js` for the photo grid) and the /platforms page
+(`tier1/platforms.js`). Keep those lists in step when you add or remove one.
 Segments are sections within these pages, so there are no tier-3 industry
 routes.
 
@@ -108,11 +151,6 @@ Two things to keep in step, both noted at the top of the file:
   point at them;
 - each segment `id`, because the menu links to `/<slug>#<id>` and the page
   scrolls to that section.
-
-**Two sectors still need artwork.** Education & Research and Travel &
-Hospitality have no photography of their own, so they borrow a related picture.
-Both are marked `NEEDS ARTWORK` in the file. Drop a proper image into
-`public/assets/industries/` and change the path.
 
 Set `industryDetail.contactEmail` to enable enquiry emails, as for the other
 families.
@@ -207,9 +245,9 @@ back. The most common cause by far is rule 2 above.
 
 ## What is *not* in this folder
 
-- **Colours, fonts, spacing, layout** — those live in `src/index.css` and
-  `src/tier1/styles/`.
+- **Colours, fonts, spacing, layout** — those live in `src/index.css` and in
+  the `.css` file inside each page folder under `src/pages/`.
 - **Legal pages** (`/terms`, `/privacy`) — those are long documents and live in
-  `src/pages/Terms.tsx` and `src/pages/Privacy.tsx`.
+  `src/pages/legal/Terms.tsx` and `src/pages/legal/Privacy.tsx`.
 - **How the page is put together** (which block sits where) — that is in the
   page's component file. Ask before changing those.

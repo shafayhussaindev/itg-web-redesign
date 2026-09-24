@@ -13,10 +13,11 @@ import {
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
 import { mainNav } from "@/content/site.js";
-// Same file as the colour mark with its ink turned white, so the two share an
+// Header logos — in public/assets, like every other image on the site. The
+// white one is the colour mark with its ink turned white, so the two share an
 // identical outline and box — swapping them reads as a recolour, not a resize.
-import logoOnDark from "@/assets/logo-trimmed-white.png";
-import logoOnLight from "@/assets/logo-trimmed.png";
+const logoOnDark = "/assets/logo-trimmed-white.png";
+const logoOnLight = "/assets/logo-trimmed.png";
 
 type MenuItem = {
   title: string;
@@ -31,7 +32,7 @@ export type CategoryItem = MenuItem & {
 // The menu entries themselves live in content/site.js so they can be edited
 // without opening this file.
 const { solutions: solutionsItems, industries: industriesItems,
-        products: productsItems, services: servicesItems,
+        platforms: platformsItems, services: servicesItems,
         extraLinks: primaryLinks, cta: navCta } = mainNav;
 
 // Shared shape + motion for every top-level nav item. The scale is what makes the
@@ -221,7 +222,7 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
     };
   }, [isMobileMenuOpen]);
   const [openMobileSections, setOpenMobileSections] = useState<Record<string, boolean>>({});
-  const [openMobileProducts, setOpenMobileProducts] = useState<Record<string, boolean>>({});
+  const [openMobilePlatforms, setOpenMobilePlatforms] = useState<Record<string, boolean>>({});
   const [openMobileSolutions, setOpenMobileSolutions] = useState<Record<string, boolean>>({});
   const [openMobileServices, setOpenMobileServices] = useState<Record<string, boolean>>({});
   const [openMobileIndustries, setOpenMobileIndustries] = useState<Record<string, boolean>>({});
@@ -232,7 +233,7 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
   const showSolidBar = isScrolled || isMobileMenuOpen;
   // White mark and white type belong to that transparent state, and only over a
   // hero dark enough to carry them. Pages mark such a hero with data-dark-hero;
-  // one without it (the light Products hero, the policy pages) gets navy type
+  // one without it (the light Platforms hero, the policy pages) gets navy type
   // from the start. darkHeroDepth is measured below; here only its presence
   // matters, since at rest at the top the hero is necessarily behind the bar.
   const isDarkHero = !isScrolled && !isMobileMenuOpen && darkHeroDepth > 0;
@@ -268,7 +269,7 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
     setOpenMobileSections({});
-    setOpenMobileProducts({});
+    setOpenMobilePlatforms({});
     setOpenMobileSolutions({});
     setOpenMobileServices({});
     setOpenMobileIndustries({});
@@ -278,8 +279,8 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
     setOpenMobileSections((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  const toggleMobileProduct = (key: string) => {
-    setOpenMobileProducts((prev) => ({ ...prev, [key]: !prev[key] }));
+  const toggleMobilePlatform = (key: string) => {
+    setOpenMobilePlatforms((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
   const toggleMobileSolution = (key: string) => {
@@ -345,12 +346,12 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
               <NavigationMenuItem>
                 <NavigationMenuTrigger
                   className={cn(navItemClass, "cursor-pointer")}
-                  onClick={() => { window.location.href = "/products"; }}
+                  onClick={() => { window.location.href = "/platforms"; }}
                 >
-                  Products
+                  Platforms
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <MegaMenu items={productsItems} categoryWidth="w-[280px]" panelWidth="w-[420px]" />
+                  <MegaMenu items={platformsItems} categoryWidth="w-[280px]" panelWidth="w-[420px]" />
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
@@ -374,21 +375,10 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
                   Industries
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <MegaMenu
-                    items={industriesItems}
-                    /* The only two-up category list. Eleven sectors stacked in
-                       one column ran 978px tall, so at 1440x900 the last two
-                       sat below the fold with no scroll to reach them; six
-                       rows of two bring that back inside the viewport. The
-                       tier-3 panel drops descriptions and takes a heading
-                       instead, because 51 segments are browsed by name. */
-                    categoryWidth="w-[460px]"
-                    categoryColumns={2}
-                    panelWidth="w-[520px]"
-                    childColumns={3}
-                    showChildDescriptions={false}
-                    showPanelHeading
-                  />
+                  {/* Five sectors (Sept 2026, was eleven) fit one column, so this
+                      uses the same layout as Services. The old two-up list with
+                      name-only children existed only to fit eleven on screen. */}
+                  <MegaMenu items={industriesItems} categoryWidth="w-[320px]" panelWidth="w-[440px]" />
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
@@ -499,29 +489,29 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
                 </Collapsible>
 
                 <Collapsible
-                  open={openMobileSections.products ?? false}
-                  onOpenChange={() => toggleMobileSection("products")}
+                  open={openMobileSections.platforms ?? false}
+                  onOpenChange={() => toggleMobileSection("platforms")}
                 >
                   <CollapsibleTrigger className="w-full flex items-center justify-between text-base font-medium text-foreground px-2 py-2 rounded-lg hover:bg-accent">
-                    Products
+                    Platforms
                     <ChevronDown className="h-4 w-4 text-muted-foreground" />
                   </CollapsibleTrigger>
                   <CollapsibleContent className="pl-2">
                     <div className="mt-2 ml-2 flex flex-col gap-2">
-                      {/* View All Products Link */}
+                      {/* View All Platforms Link */}
                       <a
-                        href="/products"
+                        href="/platforms"
                         onClick={closeMobileMenu}
                         className="flex items-center gap-2 text-sm font-semibold text-primary px-3 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors"
                       >
-                        View All Products
+                        View All Platforms
                         <ArrowRight className="w-4 h-4" />
                       </a>
-                      {productsItems.map((category) => (
+                      {platformsItems.map((category) => (
                         <Collapsible
                           key={category.title}
-                          open={openMobileProducts[category.title] ?? false}
-                          onOpenChange={() => toggleMobileProduct(category.title)}
+                          open={openMobilePlatforms[category.title] ?? false}
+                          onOpenChange={() => toggleMobilePlatform(category.title)}
                         >
                           <CollapsibleTrigger className="w-full flex items-center justify-between text-sm font-medium text-foreground px-2 py-2 rounded-lg hover:bg-accent">
                             {category.title}

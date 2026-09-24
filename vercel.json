@@ -1,4 +1,32 @@
 {
+  "redirects": [
+    { "source": "/ai-intelligence", "destination": "/artificial-intelligence", "permanent": true },
+    { "source": "/enterprise-systems", "destination": "/enterprise-solutions", "permanent": true },
+    { "source": "/sustainability-compliance", "destination": "/esg-solutions", "permanent": true },
+    { "source": "/digital-experience", "destination": "/custom-solutions", "permanent": true },
+    { "source": "/automation-cloud", "destination": "/industrial-solutions", "permanent": true },
+    { "source": "/products", "destination": "/platforms", "permanent": true },
+    { "source": "/enterprise-business-platforms", "destination": "/platforms", "permanent": true },
+    { "source": "/sustainability-compliance-platforms", "destination": "/platforms", "permanent": true },
+    { "source": "/asset-operations-platforms", "destination": "/platforms", "permanent": true },
+    { "source": "/ai-intelligence-platforms", "destination": "/platforms", "permanent": true },
+    { "source": "/digital-experience-platforms", "destination": "/platforms", "permanent": true },
+    { "source": "/digital-engineering-services", "destination": "/engineering-services", "permanent": true },
+    { "source": "/data-analytics-intelligence", "destination": "/data-management-services", "permanent": true },
+    { "source": "/automation-process-services", "destination": "/bpo-services", "permanent": true },
+    { "source": "/enterprise-platform-services", "destination": "/services", "permanent": true },
+    { "source": "/ai-advanced-technology-services", "destination": "/services", "permanent": true },
+    { "source": "/retail-consumer-goods", "destination": "/consumer-goods", "permanent": true },
+    { "source": "/manufacturing-industrial", "destination": "/manufacturing-industries", "permanent": true },
+    { "source": "/logistics-supply-chain", "destination": "/logistics-supply-chain-operations", "permanent": true },
+    { "source": "/real-estate-construction", "destination": "/real-estate-construction-facilities", "permanent": true },
+    { "source": "/enterprise-corporate", "destination": "/industries", "permanent": true },
+    { "source": "/healthcare-life-sciences", "destination": "/industries", "permanent": true },
+    { "source": "/government-public-sector", "destination": "/industries", "permanent": true },
+    { "source": "/energy-sustainability-esg", "destination": "/industries", "permanent": true },
+    { "source": "/education-research", "destination": "/industries", "permanent": true },
+    { "source": "/travel-hospitality", "destination": "/industries", "permanent": true }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",

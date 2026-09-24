@@ -1,0 +1,55 @@
+/* Shared brand foundation, with open service rows and a delivery timeline. */
+.service-category .sc-lead { font-size: 22px; font-weight: 500; color: var(--navy); }
+.service-category .sc-services { display: grid; }
+.service-category .sc-service { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 64px; padding: 48px 0; border-top: 1px solid rgba(13,33,64,.18); }
+.service-category .sc-service:target { outline: 2px solid var(--brand-accent); outline-offset: 4px; }
+.service-category .sc-service-identity { padding: 0; }
+.service-category .sc-service-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+.service-category .sc-service-top .sd-icon { background: white; width: 56px; height: 56px; }
+.service-category .sc-service h3 { font-size: clamp(25px, 2.5vw, 34px); line-height: 1.2; letter-spacing: -.025em; margin-bottom: 16px; }
+.service-category .sc-service-identity p { font-size: 14px; color: var(--charcoal); max-width: 300px; }
+.service-category .sc-service-body { padding: 0; }
+.service-category .sc-service-body > p { color: var(--charcoal); font-size: 15px; }
+.service-category .sc-service-body h4 { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; font-weight: 600; margin: 24px 0 16px; }
+.service-category .sc-service-body ul { display: grid; gap: 12px; margin-bottom: 24px; }
+.service-category .sc-service-body li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.6; color: var(--charcoal); }
+.service-category .sc-service-body li .msym { color: var(--teal-deep); flex-shrink: 0; margin-top: 2px; }
+.service-category .sc-discuss-link { text-decoration: none; }
+.service-category .sc-discuss-label { display: inline-block; transform-origin: left center; transition: transform .22s ease; }
+.service-category .sc-discuss-link > .msym { transition: transform .22s ease; }
+.service-category .sc-discuss-link:is(:hover, :focus-visible) .sc-discuss-label { transform: scale(1.04); }
+.service-category .sc-discuss-link:is(:hover, :focus-visible) > .msym { transform: translateX(8px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .service-category .sc-discuss-link .sc-discuss-label,
+  .service-category .sc-discuss-link > .msym { transform: none; }
+}
+@media (max-width: 1023px) {
+  .service-category .sc-service { gap: 32px; }
+}
+@media (max-width: 767px) {
+  .service-category .sc-service { grid-template-columns: minmax(0, 1fr); }
+  .service-category .sc-service { padding: 32px 0; gap: 24px; }
+  .service-category .sc-service-top { margin-bottom: 24px; }
+}
+
+/* Services read as a scope of work followed by a delivery timeline.
+   The hero is the shared full-bleed photo + gradient from tier2/shared/base.css
+   (the old split hero, photo on the right half only, was removed on request). */
+.service-category .sd-hero-copy { max-width: 680px; }
+.service-category #delivery > .section-container { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 80px; align-items: start; }
+.service-category #delivery { padding-top: 0; }
+.service-category .sd-feature { margin-block: 96px; }
+.service-category .sd-steps { display: block; border-left: 1px solid rgba(13,33,64,.2); padding-left: 32px; }
+.service-category .sd-steps li { border: 0; padding: 0 0 36px; }
+.service-category .sd-steps li:last-child { padding-bottom: 0; }
+.service-category .sd-step-number { position: absolute; left: -49px; background: var(--white); padding: 8px 0; width: 34px; text-align: center; }
+.service-category .sd-steps h3 { margin: 0 0 12px; padding-top: 4px; }
+.service-category .sc-related-services { border-top: 1px solid rgba(13,33,64,.18); }
+.service-category .sc-related-services a { display: flex; align-items: center; gap: 24px; padding: 24px 0; border-bottom: 1px solid rgba(13,33,64,.18); }
+.service-category .sc-related-services h3 { flex: 1; font-size: clamp(17px, 2vw, 24px); }
+.service-category .sc-related-services a:hover { color: var(--brand-accent); }
+@media (max-width: 767px) {
+  .service-category #delivery > .section-container { grid-template-columns: 1fr; gap: 16px; }
+  .service-category .sd-steps { margin-left: 16px; }
+}

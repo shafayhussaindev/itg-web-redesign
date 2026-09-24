@@ -66,7 +66,7 @@ export const contact = {
     topicLegend: 'What can we help with?',
     topics: [
       { id: 'project', label: 'A new project' },
-      { id: 'product', label: 'Our products' },
+      { id: 'product', label: 'Our platforms' },
       { id: 'partnership', label: 'Partnership' },
       { id: 'careers', label: 'Careers' },
       { id: 'other', label: 'Something else' },

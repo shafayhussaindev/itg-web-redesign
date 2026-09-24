@@ -1,3 +1,0 @@
-Shipped the ITG Technologies site. Five top-level pages, twenty-seven detail pages, fifty-one industry segments — every one of them generated from a single content layer a non-developer can edit.
-
-One card component. One page foundation. Four families of detail pages that all read as one system.

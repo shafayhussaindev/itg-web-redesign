@@ -1,0 +1,690 @@
+/* ============================================================
+   ITG Technologies — Industries page
+   Extends the tokens and primitives in index.css. Palette is the
+   locked 8 colours; every surface below is one of them at an alpha,
+   or white/navy at an alpha. No ninth colour.
+
+   Industries is the photographic page of the three: the same glass
+   system as Services, given less of each composition so the
+   photography carries more of it.
+   ============================================================ */
+
+.tier1-site .ind-page {
+  --glass-edge: rgba(255, 255, 255, 0.32);
+  --shadow-soft: 0 12px 40px rgba(13, 33, 64, 0.16);
+  --shadow-lift: 0 26px 64px rgba(13, 33, 64, 0.26);
+  --ease: cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+/* ---------- shared scroll reveal ---------------------------
+   ----------------------------------------------------------- */
+/* The scroll reveal is shared by all five tier-1 pages and lives in
+   tier1/shared/base.css (branch 1 of the pipeline in tier1/shared/scrollfx.js).
+   Only genuine per-page exceptions belong here. */
+
+/* Restrained halo on the primary CTA — light, not neon. Matches Services. */
+.tier1-site .ind-btn-glow {
+  position: relative;
+  box-shadow: 0 6px 22px rgba(93, 141, 205, 0.34);
+  transition: box-shadow 0.3s var(--ease), transform 0.3s var(--ease), filter 0.25s ease;
+}
+.tier1-site .ind-btn-glow:hover {
+  box-shadow: 0 10px 30px rgba(93, 141, 205, 0.46);
+  transform: translateY(-1px);
+  filter: brightness(0.97);
+}
+.tier1-site .ind-btn-glow:active { transform: translateY(0); }
+
+/* ============================================================
+   HERO — photo, angled gradient, glass panel, ambient lattice
+   ============================================================ */
+.tier1-site .ind-hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 244px 32px 85px;
+  display: flex;
+  align-items: flex-start;
+  overflow: hidden;
+  background: var(--navy);
+}
+.tier1-site .ind-hero-media { position: absolute; inset: 0; z-index: 0; }
+.tier1-site .ind-hero-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  /* The campus sits left of frame and the distribution park right. Anchoring
+     at 58% keeps both in shot as the viewport narrows. */
+  background-position: 58% center;
+  background-repeat: no-repeat;
+}
+/* Angled so the left third — where the glass panel sits — darkens, and the
+   highway, offices and loading bays on the right stay visible. The second
+   layer is a soft top-down so the fixed nav has something to sit on. */
+.tier1-site .ind-hero-grad {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(96deg, rgba(9, 24, 48, 0.92) 0%, rgba(10, 26, 52, 0.72) 32%,
+      rgba(13, 33, 64, 0.3) 58%, rgba(13, 33, 64, 0.1) 100%),
+    linear-gradient(180deg, rgba(9, 24, 48, 0.5) 0%, rgba(13, 33, 64, 0) 32%);
+}
+.tier1-site .ind-hero-glow {
+  position: absolute;
+  left: -8%;
+  top: 20%;
+  width: 640px;
+  height: 640px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(93, 141, 205, 0.14) 0%, rgba(93, 141, 205, 0) 68%);
+  pointer-events: none;
+}
+.tier1-site .ind-hero-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+  pointer-events: none;
+}
+/* Connectors trace themselves in once, slowly, then hold. */
+.tier1-site .ind-hero-link {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: indDraw 1.6s var(--ease) var(--link-delay, 0s) forwards;
+}
+@keyframes indDraw { to { stroke-dashoffset: 0; } }
+.tier1-site .ind-hero-pulse { opacity: 0.85; }
+
+.tier1-site .ind-hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1216px;
+  margin: 0 auto;
+}
+.tier1-site .ind-hero-glass {
+  /* Panel removed: copy sits on the photograph, held by .ind-hero-grad. */
+  max-width: 640px;
+  padding: 0;
+  opacity: 0;
+  transform: translateY(28px);
+  animation: indRise 0.7s var(--ease) 0.1s forwards;
+}
+@keyframes indRise { to { opacity: 1; transform: none; } }
+.tier1-site .ind-hero-glass .eyebrow,
+.tier1-site .ind-hero-glass h1,
+.tier1-site .ind-hero-glass p,
+.tier1-site .ind-hero-glass .cta-row {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: indRise 0.55s ease forwards;
+}
+.tier1-site .ind-hero-glass .eyebrow { animation-delay: 0.26s; }
+.tier1-site .ind-hero-glass h1 { animation-delay: 0.36s; }
+.tier1-site .ind-hero-glass p { animation-delay: 0.46s; }
+.tier1-site .ind-hero-glass .cta-row { animation-delay: 0.56s; }
+.tier1-site .ind-hero-glass h1 {
+  font-size: 46px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.14;
+  margin-bottom: 18px;
+  color: #fff;
+  text-shadow: 0 2px 20px rgba(6, 18, 38, 0.4);
+}
+.tier1-site .ind-hero-glass h1 .accent { color: var(--brand-accent-soft); }
+.tier1-site .ind-hero-glass p {
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 30px;
+  text-shadow: 0 1px 12px rgba(6, 18, 38, 0.35);
+}
+
+/* ============================================================
+   INTRODUCTION — ice band, pale glass panel over line geometry
+   ============================================================ */
+/* The ice field has to stay ice for most of its height. Fading it to white by
+   the midpoint left the panel as near-white glass on a near-white ground —
+   no separation, and the section read as empty, which is the exact fault the
+   redesign is fixing. It resolves to white only in the last fifth, to hand
+   off to the white features section below. */
+.tier1-site .ind-intro {
+  position: relative;
+  overflow: hidden;
+  padding: 116px 40px;
+  background: linear-gradient(180deg, var(--sky) 0%, var(--ice) 34%, var(--ice) 72%, var(--white) 100%);
+}
+.tier1-site .ind-intro-lattice {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.tier1-site .ind-intro-panel {
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 56px 60px 58px;
+  border-radius: 26px;
+  text-align: center;
+  /* Surface (fill, border, shadow) comes from the shared photo-module card
+     block in tier1/shared/base.css. This panel was glass with a live
+     backdrop-filter; re-blurring 860x390px of gradient lattice every scrolled
+     frame made this stretch of the page choppy. Do not put it back. */
+}
+.tier1-site .ind-intro-rule {
+  display: block;
+  width: 72px;
+  height: 3px;
+  margin: 0 auto 28px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--cyan), rgba(93, 141, 205, 0.15));
+}
+/* Hierarchy applied to existing copy in its existing order — the first
+   paragraph is the premise, the two below it are the argument. */
+.tier1-site .ind-intro-lead {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--navy);
+  margin-bottom: 22px;
+}
+.tier1-site .ind-intro-body {
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: var(--charcoal);
+  max-width: 660px;
+  margin: 0 auto 16px;
+}
+.tier1-site .ind-intro-body:last-child { margin-bottom: 0; }
+
+/* ============================================================
+   INDUSTRY FEATURES — photo with an overlapping glass panel
+   ============================================================ */
+.tier1-site .ind-features { padding: 104px 40px 96px; }
+.tier1-site .ind-feature-list { display: flex; flex-direction: column; gap: 104px; }
+
+.tier1-site .ind-feature {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  align-items: center;
+  /* Media spans wide; the panel overlaps it from one side. The two directions
+     differ only in placement, not in structure. */
+  grid-template-columns: repeat(12, 1fr);
+}
+.tier1-site .ind-feature-media {
+  position: relative;
+  grid-row: 1;
+  /* 16:9 on the media block itself, so the photograph keeps its proportion
+     rather than being cropped to an arbitrary fixed height. */
+  aspect-ratio: 16 / 9;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+@supports not (aspect-ratio: 1 / 1) { .tier1-site .ind-feature-media { height: 520px; } }
+/* Static: no parallax, no hover motion (both removed on request). */
+.tier1-site .ind-feature-img { position: absolute; inset: 0; }
+.tier1-site .ind-feature-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+.tier1-site .ind-feature-panel {
+  position: relative;
+  z-index: 2;
+  grid-row: 1;
+  /* Identical to the Services pillar panel — same padding, same glass stops —
+     so the two pages present one panel format rather than two near-misses.
+     (This was previously 0.88/0.74 to let more photograph read through.) */
+  padding: 40px 40px 42px;
+  border-radius: 22px;
+  /* Surface (fill, border, shadow) comes from the shared photo-module
+     card block in tier1/shared/base.css. No hover lift: the panel is static. */
+}
+
+/* Panel right: image occupies cols 1-9, panel overlaps from col 7 to 13, so
+   6 of 12 columns of photograph stay clear of the glass. */
+.tier1-site .ind-feature--right .ind-feature-media { grid-column: 1 / 10; }
+.tier1-site .ind-feature--right .ind-feature-panel { grid-column: 7 / 13; }
+/* Panel left: mirrored. */
+.tier1-site .ind-feature--left .ind-feature-media { grid-column: 4 / 13; }
+.tier1-site .ind-feature--left .ind-feature-panel { grid-column: 1 / 7; }
+
+/* Scrim darkens the edge the panel overlaps so the glass has something to sit
+   against, and stays near-clear across the middle so the photograph keeps its
+   own contrast where it is actually on show. */
+.tier1-site .ind-feature-scrim { position: absolute; inset: 0; }
+.tier1-site .ind-feature--right .ind-feature-scrim {
+  background: linear-gradient(90deg, rgba(13, 33, 64, 0.4) 0%, rgba(13, 33, 64, 0.06) 40%, rgba(13, 33, 64, 0.56) 100%);
+}
+.tier1-site .ind-feature--left .ind-feature-scrim {
+  background: linear-gradient(270deg, rgba(13, 33, 64, 0.4) 0%, rgba(13, 33, 64, 0.06) 40%, rgba(13, 33, 64, 0.56) 100%);
+}
+
+.tier1-site .ind-feature-number {
+  position: absolute;
+  top: 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 72px;
+  font-weight: 400;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.22);
+  letter-spacing: -0.02em;
+  user-select: none;
+}
+.tier1-site .ind-feature--right .ind-feature-number { left: 30px; }
+.tier1-site .ind-feature--left .ind-feature-number { right: 30px; }
+
+/* Geometry matched to .svc-pillar-head so the two pages present one card. */
+.tier1-site .ind-feature-head { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 16px; }
+.tier1-site .ind-feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  border-radius: 13px;
+  background: rgba(13, 148, 136, 0.1);
+  border: 1px solid rgba(13, 148, 136, 0.22);
+  color: var(--teal);
+}
+.tier1-site .ind-feature-head h2 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--navy);
+  line-height: 1.25;
+}
+.tier1-site .ind-feature-sub {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--charcoal);
+  line-height: 1.68;
+  margin-bottom: 6px;
+}
+.tier1-site .ind-feature-body {
+  font-size: 14.5px;
+  color: var(--charcoal);
+  line-height: 1.68;
+  margin-bottom: 26px;
+}
+
+.tier1-site .ind-feature-focus-head {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 16px;
+}
+/* Two columns: four entries become a compact 2x2 block rather than a long
+   ladder, which is what let the panel stay inside the photograph's height. */
+.tier1-site .ind-feature-focus {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 22px;
+}
+.tier1-site .ind-feature-focus li { display: flex; gap: 9px; align-items: flex-start; }
+.tier1-site .ind-feature-focus svg, .tier1-site .ind-feature-focus .msym { color: var(--teal); flex-shrink: 0; margin-top: 2px; }
+.tier1-site .ind-feature-focus span { font-size: 13.5px; color: var(--charcoal); line-height: 1.45; }
+
+/* ============================================================
+   ECOSYSTEM — dark navy, vector only, no copy of its own
+   ============================================================ */
+.tier1-site .ind-eco-band {
+  position: relative;
+  overflow: hidden;
+  padding: 96px 40px;
+  background: linear-gradient(165deg, #0D2140 0%, #14294C 48%, #1A3A6B 100%);
+}
+.tier1-site .ind-eco-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 780px;
+  height: 620px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(93, 141, 205, 0.12) 0%, rgba(93, 141, 205, 0) 66%);
+  pointer-events: none;
+}
+.tier1-site .ind-eco-stage { position: relative; z-index: 2; max-width: 1040px; margin: 0 auto; }
+.tier1-site .ind-eco { width: 100%; height: auto; display: block; }
+
+.tier1-site .ind-eco-hub { fill: rgba(13, 33, 64, 0.74); }
+.tier1-site .ind-eco-hub-ring { fill: none; stroke: rgba(93, 141, 205, 0.42); stroke-width: 1.5; }
+.tier1-site .ind-eco-node { fill: rgba(255, 255, 255, 0.07); }
+.tier1-site .ind-eco-node-ring { fill: none; stroke: rgba(255, 255, 255, 0.2); stroke-width: 1; }
+.tier1-site .ind-eco-node-label {
+  font-family: 'Sora', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  fill: rgba(255, 255, 255, 0.9);
+}
+/* pathLength="1" on every link, so the dash is length-independent. A fixed
+   pixel dasharray silently clips any path longer than the dash. */
+.tier1-site .ind-eco-link {
+  fill: none;
+  stroke: url(#indEcoIn);
+  stroke-width: 1.5;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1s var(--ease);
+  transition-delay: var(--eco-delay, 0s);
+}
+.tier1-site .ind-eco.is-active .ind-eco-link { stroke-dashoffset: 0; }
+.tier1-site .ind-eco-item {
+  opacity: 0;
+  transition: opacity 0.65s var(--ease);
+  transition-delay: var(--eco-delay, 0s);
+}
+.tier1-site .ind-eco.is-active .ind-eco-item { opacity: 1; }
+.tier1-site .ind-eco-pulse { opacity: 0; }
+.tier1-site .ind-eco.is-active .ind-eco-pulse { opacity: 0.95; }
+
+/* Phone fallback — hidden until the 900px breakpoint. */
+.tier1-site .ind-eco-stack {
+  display: none;
+  position: relative;
+  z-index: 2;
+  flex-direction: column;
+  align-items: center;
+  max-width: 360px;
+  margin: 0 auto;
+}
+.tier1-site .ind-eco-stack-hub {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 22px 18px;
+  margin-bottom: 26px;
+  border-radius: 18px;
+  background: rgba(13, 33, 64, 0.74);
+  border: 1px solid rgba(93, 141, 205, 0.42);
+}
+.tier1-site .ind-eco-stack-hub img { height: 34px; display: block; }
+.tier1-site .ind-eco-stack-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  width: 100%;
+}
+.tier1-site .ind-eco-stack-list li {
+  position: relative;
+  padding: 13px 16px 13px 30px;
+  border-radius: 13px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.tier1-site .ind-eco-stack-list li::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  border-radius: 50%;
+  background: var(--brand-accent-soft);
+}
+
+/* ============================================================
+   CLOSING CTA — photo, navy vignette, glass panel
+   ============================================================ */
+.tier1-site .ind-cta { padding: 0; position: relative; }
+.tier1-site .ind-cta-bg {
+  position: relative;
+  padding: 130px 40px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+/* Cached frosted backdrop for the glass panel, replacing a live
+   backdrop-filter. `background: inherit` resolves the same photograph at the
+   same cover/center against an identical box, so it lines up pixel-for-pixel
+   with the sharp photo behind it without any measurement. The blur is
+   rasterised once and cached; only the clip (set by useFrostClip) says where
+   the panel is. */
+.tier1-site .ind-cta-frost {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: inherit;
+  /* Rasterised at 1/6 and scaled back up. A full-size blur(18px) across a
+     section this wide is a very large filtered surface, which the browser
+     re-rasters in tiles as it scrolls — not the one-off cost it looks like.
+     Blurring 1/36th of the pixels and letting the upscale do the rest gives the
+     same heavy frost (which is what lets the panel above use light white glass
+     without its copy landing on lit office windows) for a fraction of the work.
+     The small box keeps the parent's aspect ratio, so cover/center crop the
+     same. */
+  width: calc(100% / 6);
+  height: calc(100% / 6);
+  transform: scale(6);
+  transform-origin: 0 0;
+  filter: blur(var(--frost-blur));
+  clip-path: var(--frost-clip, inset(50%));
+  pointer-events: none;
+}
+/* Much lighter than the Services CTA overlay: that one sits on a bright
+   daytime skyline, this is already a navy dusk elevation. Stacking a radial
+   and a linear at Services' weights multiplied out to ~0.94 and erased the
+   facade entirely. At these values the centre lands around 0.49, so the
+   building reads as architecture; the edges still go deep enough to carry the
+   section and hand off to the navy footer. Readability is bought back by the
+   panel below, not by drowning the photograph. */
+.tier1-site .ind-cta-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 78% 68% at 50% 46%, rgba(13, 33, 64, 0.22) 0%, rgba(13, 33, 64, 0.6) 100%),
+    linear-gradient(180deg, rgba(13, 33, 64, 0.68) 0%, rgba(13, 33, 64, 0.34) 40%, rgba(13, 33, 64, 0.8) 100%);
+}
+.tier1-site .ind-cta-glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 780px;
+  height: 460px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(93, 141, 205, 0.14) 0%, rgba(93, 141, 205, 0) 68%);
+  pointer-events: none;
+}
+.tier1-site .ind-cta-glass {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 50px 50px 52px;
+  border-radius: 26px;
+  text-align: center;
+  /* White glass, matching the Services CTA, by request.
+     This was previously navy: with the overlay lightened so the facade shows,
+     white glass left the body copy sitting on lit office windows. What makes it
+     workable now is that the frost behind this panel is CACHED rather than a
+     live backdrop-filter — so its radius is effectively free, and .ind-cta-frost
+     is blurred hard enough (18px) to average those window highlights into a
+     soft wash. The copy sits on frosted glass instead of on the building. */
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 24px 62px rgba(6, 18, 38, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  /* No backdrop-filter: the frosted backdrop is drawn by the cached
+     .ind-cta-frost layer behind this panel instead, so the blur is
+     rasterised once rather than recomputed every scrolled frame. */
+}
+.tier1-site .ind-cta-glass h2 {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.24;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+}
+.tier1-site .ind-cta-glass p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 15px;
+  line-height: 1.65;
+  margin-bottom: 32px;
+}
+.tier1-site .ind-cta-row { justify-content: center; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* Tablet: overlap needs width to read as depth. Below this the panel stops
+   overlapping and tucks under the image instead — the hierarchy survives,
+   the composition does not have to. */
+@media (max-width: 1180px) {
+  .tier1-site .ind-feature { grid-template-columns: 1fr; gap: 0; }
+  .tier1-site .ind-feature-media,
+  .tier1-site .ind-feature--right .ind-feature-media,
+  .tier1-site .ind-feature--left .ind-feature-media {
+    grid-column: 1;
+    aspect-ratio: 16 / 8;
+    border-radius: 22px 22px 0 0;
+  }
+  .tier1-site .ind-feature-panel,
+  .tier1-site .ind-feature--right .ind-feature-panel,
+  .tier1-site .ind-feature--left .ind-feature-panel {
+    grid-column: 1;
+    grid-row: 2;
+    margin: -32px 24px 0;
+    border-radius: 22px;
+  }
+  .tier1-site .ind-feature--right .ind-feature-scrim,
+  .tier1-site .ind-feature--left .ind-feature-scrim {
+    background: linear-gradient(180deg, rgba(13, 33, 64, 0.3) 0%, rgba(13, 33, 64, 0.1) 46%, rgba(13, 33, 64, 0.52) 100%);
+  }
+  .tier1-site .ind-feature--right .ind-feature-number { left: 26px; }
+  .tier1-site .ind-feature--left .ind-feature-number { right: auto; left: 26px; }
+  .tier1-site .ind-feature-list { gap: 80px; }
+}
+
+@media (max-width: 1023.98px) {
+  .tier1-site .ind-hero { min-height: 100vh; min-height: 100svh; padding: 180px 24px 90px; }
+  .tier1-site .ind-hero-glass { max-width: 600px; padding: 0; }
+  .tier1-site .ind-hero-glass h1 { font-size: 36px; }
+  .tier1-site .ind-hero-lines { opacity: 0.45; }
+  .tier1-site .ind-intro { padding: 88px 32px; }
+  .tier1-site .ind-intro-panel { padding: 46px 40px 48px; }
+  .tier1-site .ind-intro-lead { font-size: 20px; }
+  .tier1-site .ind-features { padding: 88px 32px 80px; }
+}
+
+@media (max-width: 900px) {
+  /* The two-sided fan-out is unreadable at this width; the CSS fallback
+     stacks the same eight names instead. */
+  .tier1-site .ind-eco-stage { display: none; }
+  .tier1-site .ind-eco-stack { display: flex; }
+  .tier1-site .ind-eco-band { padding: 72px 32px; }
+}
+
+@media (max-width: 680px) {
+  /* Match the site's 20px phone gutter. */
+  .tier1-site .ind-hero {
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: 140px 16px 64px;
+    background-position: center;
+  }
+  .tier1-site .ind-hero-img { background-position: 62% center; }
+  .tier1-site .ind-hero-grad {
+    background:
+      linear-gradient(180deg, rgba(9, 24, 48, 0.72) 0%, rgba(10, 26, 52, 0.5) 42%, rgba(13, 33, 64, 0.66) 100%);
+  }
+  .tier1-site .ind-hero-lines { display: none; }
+  .tier1-site .ind-hero-glass { max-width: 100%; padding: 0; }
+  .tier1-site .ind-hero-glass h1 { font-size: 28px; line-height: 1.2; }
+  .tier1-site .ind-hero-glass p { font-size: 14px; margin-bottom: 24px; }
+  .tier1-site .ind-hero-glass .cta-row { gap: 10px; }
+  .tier1-site .ind-hero-glass .cta-row a { width: 100%; justify-content: center; }
+
+  .tier1-site .ind-intro { padding: 64px 20px; }
+  .tier1-site .ind-intro-panel { padding: 34px 24px 36px; border-radius: 20px; }
+  .tier1-site .ind-intro-lead { font-size: 18px; margin-bottom: 18px; }
+  .tier1-site .ind-intro-body { font-size: 14.5px; }
+  .tier1-site .ind-intro-lattice { opacity: 0.5; }
+
+  /* Stack naturally: image, name, subtitle, description, focus areas. No
+     overlap, no negative margin — the panel is a full-width card under the
+     photograph. */
+  .tier1-site .ind-features { padding: 64px 20px 56px; }
+  .tier1-site .ind-feature-list { gap: 56px; }
+  .tier1-site .ind-feature-media,
+  .tier1-site .ind-feature--right .ind-feature-media,
+  .tier1-site .ind-feature--left .ind-feature-media { aspect-ratio: 4 / 3; }
+  .tier1-site .ind-feature-panel,
+  .tier1-site .ind-feature--right .ind-feature-panel,
+  .tier1-site .ind-feature--left .ind-feature-panel {
+    margin: -24px 0 0;
+    padding: 26px 22px 28px;
+  }
+  .tier1-site .ind-feature-number { font-size: 52px; top: 18px; }
+  .tier1-site .ind-feature--right .ind-feature-number,
+  .tier1-site .ind-feature--left .ind-feature-number { left: 20px; right: auto; }
+  .tier1-site .ind-feature-head { gap: 12px; margin-bottom: 12px; }
+  .tier1-site .ind-feature-icon { width: 40px; height: 40px; border-radius: 11px; }
+  .tier1-site .ind-feature-head h2 { font-size: 19px; }
+  .tier1-site .ind-feature-sub { font-size: 14px; }
+  .tier1-site .ind-feature-body { margin-bottom: 22px; }
+  /* One column: the 2x2 focus grid gives ~120px per entry at phone width,
+     which wraps every label onto three lines. */
+  .tier1-site .ind-feature-focus { grid-template-columns: 1fr; gap: 11px; }
+
+  .tier1-site .ind-eco-band { padding: 56px 20px; }
+  .tier1-site .ind-cta-bg { padding: 76px 20px; }
+  .tier1-site .ind-cta-glass { padding: 32px 24px 34px; border-radius: 20px; }
+  .tier1-site .ind-cta-glass h2 { font-size: 24px; }
+  .tier1-site .ind-cta-glass p { font-size: 14.5px; margin-bottom: 26px; }
+  .tier1-site .ind-cta-row a { width: 100%; justify-content: center; }
+
+  /* Touch targets. */
+  .tier1-site .ind-page .btn-cyan,
+  .tier1-site .ind-page .btn-glass { min-height: 44px; }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   Everything below is decoration. Nothing here is the only way a
+   piece of content becomes visible.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .tier1-site .ind-hero-glass,
+  .tier1-site .ind-hero-glass .eyebrow,
+  .tier1-site .ind-hero-glass h1,
+  .tier1-site .ind-hero-glass p,
+  .tier1-site .ind-hero-glass .cta-row {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  /* Lattice and ecosystem: hold the finished state, drop the travel. */
+  .tier1-site .ind-hero-link { animation: none; stroke-dashoffset: 0; }
+  .tier1-site .ind-eco-link { transition: none; stroke-dashoffset: 0; }
+  .tier1-site .ind-eco-item { transition: none; opacity: 1; }
+  .tier1-site .ind-hero-pulse,
+  .tier1-site .ind-eco-pulse { display: none; }
+  .tier1-site .ind-btn-glow { transition: none; }
+}

@@ -31,28 +31,48 @@ The dev server runs on http://localhost:8080.
 
 ## Layout
 
+The code is organised the same way the site is: home, tier 1 (the five
+top-level pages), tier 2 (the pages under each drop-down), then contact and
+legal. Every page folder holds that page's components **and** its stylesheet.
+
 ```
 src/
+  App.tsx            All routes, grouped home / tier 1 / tier 2 / other
+  content/           ALL editable copy (see content/README.md)
+    site.js          Menu bar + footer
+    home.js · contact.js
+    tier1/           solutions · platforms · services · industries · company
+    tier2/           platform-detail · service-detail · industry-detail
+      solutions/     one file per solution page + shared solution-detail.js
+  pages/
+    home/            HomePage.tsx + sections/
+    tier1/
+      shared/        Tier1Route (header/footer + base.css), CtaLabel, WhyITG, hooks
+      solutions/  platforms/  services/  industries/  company/
+    tier2/
+      shared/        base.css (the tier-2 foundation), useHashScroll
+      solutions/  platforms/  services/  industries/
+    contact/         Contact page
+    legal/           Terms, Privacy, LegalPage
+    NotFound.tsx
   components/
-    layout/        Header (shared nav), Footer, NavSearch
-    sections/      Home page sections
-    ui/            shadcn primitives
-  pages/           Route entry points
-  tier1/           Solutions, Products, Services, Industries, Company
-                   — their own components, data and stylesheets
-  hooks/           useLenis, scroll and counter animations
-  assets/          Logos and brand imagery
-public/            Static files served as-is (icons, video, photography)
+    layout/          Header (shared nav), Footer
+    ui/              shadcn primitives
+    icons/           Material Symbols wrapper
+  hooks/  lib/  contexts/   Site-wide helpers
+public/              ALL images, video and icons, served as-is.
+  assets/            Referenced by path, e.g. '/assets/logo-trimmed.png'
 ```
 
-The home page is built from `src/components/sections`; the tier-1 pages live
-under `src/tier1` with their own scoped stylesheets, and share the site header
-through `src/tier1/Tier1Route.tsx`.
+The home and legal pages use Tailwind. The tier-1 pages use hand-written CSS
+scoped to `.tier1-site`, loaded through `pages/tier1/shared/Tier1Route.tsx`.
+The tier-2 pages and Contact share `pages/tier2/shared/base.css`, and each adds
+its own stylesheet from its folder.
 
 ## Brand
 
 Palette tokens are defined once in `src/index.css` and mirrored for the tier-1
-scope in `src/tier1/styles/index.css`:
+scope in `src/pages/tier1/shared/base.css`:
 
 - **Navy** `#0D2140` — all filled actions (`--btn-navy`)
 - **Accent blue** `#3D6FB4`, lightened to `#A8C6EA` on dark surfaces — headings,

@@ -71,7 +71,7 @@ export const platforms = {
   title: 'Enterprise Platforms Built for Control, Intelligence and Scale',
   intro: 'ITG platforms become the digital backbone for enterprise performance, connecting workflows, documents, approvals, analytics, compliance evidence and AI-assisted decision support.',
   body: 'Each platform is engineered to integrate with existing systems, support regional and industry regulations, and scale across entities without compromising security, governance or operational clarity.',
-  cta: { label: 'Explore Platforms', href: '/products' },
+  cta: { label: 'Explore Platforms', href: '/platforms' },
   cards: [
     { icon: 'layers', title: 'Enterprise Business Systems Core operational and financial backbone platforms.' },
     { icon: 'verified_user', title: 'Sustainability & Regulatory Systems Integrated ESG, compliance and traceability layers' },
@@ -88,46 +88,32 @@ export const industries = {
   cardLinkLabel: 'Explore Industry',
   cardLinkHref: '/industries',
   cta: { label: 'Explore Industries', href: '/industries' },
+  // The five industries, in menu order. Keep in step with site.js.
   cards: [
     {
-      icon: 'domain',
-      name: 'Enterprise & Corporate',
-      description: 'Enterprise and corporate platforms built for governance, compliance and multi-entity control.',
-    },
-    {
-      icon: 'factory',
-      name: 'Manufacturing & Industrial',
-      description: 'Manufacturing and industrial operations strengthened through connected systems and data intelligence.',
-    },
-    {
       icon: 'shopping_bag',
-      name: 'Retail & Consumer Goods',
+      name: 'Consumer Goods',
       description: 'Retail and consumer goods operations unified across inventory, commerce and performance analytics.',
     },
     {
+      icon: 'factory',
+      name: 'Manufacturing & Industries',
+      description: 'Manufacturing and industrial operations strengthened through connected systems and data intelligence.',
+    },
+    {
       icon: 'local_shipping',
-      name: 'Logistics Supply Chain and Operations',
+      name: 'Logistics & Supply Chain Operations',
       description: 'Logistics, supply chain and operations aligned with real-time visibility and control.',
     },
     {
       icon: 'apartment',
-      name: 'Real Estate Construction and Facilities',
+      name: 'Real Estate, Construction & Facilities',
       description: 'Real estate, construction and facilities managed through integrated, audit-ready platforms.',
-    },
-    {
-      icon: 'health_and_safety',
-      name: 'Healthcare & Life Sciences',
-      description: 'Healthcare and life sciences platforms designed for compliance, data integrity and operational resilience.',
     },
     {
       icon: 'work',
       name: 'Professional Services',
       description: 'Professional services enabled by systems that improve utilization, governance and delivery control.',
-    },
-    {
-      icon: 'eco',
-      name: 'Energy Sustainability and ESG',
-      description: 'Energy, sustainability and ESG platforms that support traceability, reporting and regulatory readiness.',
     },
   ],
 };
