@@ -35,7 +35,7 @@ export function HowWeWorkSection() {
       <div className="section-container relative z-10">
         {/* Header */}
         <div className="section-header">
-          <h2 className="section-title">{howWeWork.title}</h2>
+          <h2 className="section-title whitespace-pre-line">{howWeWork.title}</h2>
           <p className="text-lg lg:text-xl text-muted-foreground mt-2">
             {howWeWork.intro}
           </p>

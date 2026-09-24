@@ -134,7 +134,8 @@ export const industries = {
 
 /* 7 — The four numbered steps. The numbers are added automatically. */
 export const howWeWork = {
-  title: 'A Disciplined Approach to Enterprise Transformation',
+  // \n starts a new line in the heading.
+  title: 'A Disciplined Approach to\nDigital Transformation',
   intro: 'Structured execution designed for scale, governance and long-term impact.',
   steps: [
     { icon: 'arrow_outward', title: 'Understand', description: 'Business structure, regulatory context and operational challenges.' },
