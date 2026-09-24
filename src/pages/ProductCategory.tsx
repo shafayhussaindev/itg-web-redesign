@@ -3,6 +3,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ArrowRight, MSym } from '@/components/icons/material';
 import { useHashScroll } from '@/hooks/useHashScroll';
+import { contactLink } from '@/lib/contact-link';
 import { productPages, productDetail as copy } from '@/content/product-detail.js';
 import './solution-detail.css';
 import './product-category.css';
@@ -29,7 +30,7 @@ export default function ProductCategory({ page }: { page: ProductCategoryContent
 
   const enquiryHref = (name: string) => copy.contactEmail
     ? `mailto:${copy.contactEmail}?subject=${encodeURIComponent(`${name} product enquiry`)}`
-    : copy.contactFallback.href;
+    : contactLink(copy.contactFallback.href, name);
 
   return (
     <>

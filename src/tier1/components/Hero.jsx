@@ -14,8 +14,8 @@ export default function Hero() {
           </h1>
           <p>{hero.body}</p>
           <div className="cta-row">
-            <button className="btn-cyan"><CtaLabel>{hero.primaryCta}</CtaLabel></button>
-            <button className="btn-glass glass"><CtaLabel>{hero.secondaryCta}</CtaLabel></button>
+            <a className="btn-cyan" href={hero.primaryCta.href}><CtaLabel>{hero.primaryCta.label}</CtaLabel></a>
+            <a className="btn-glass glass" href={hero.secondaryCta.href}><CtaLabel>{hero.secondaryCta.label}</CtaLabel></a>
           </div>
         </div>
       </div>

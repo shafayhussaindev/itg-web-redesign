@@ -18,8 +18,8 @@ export default function ServicesCta() {
           <h2>{servicesCta.title}</h2>
           <p>{servicesCta.body}</p>
           <div className="cta-row svc-cta-row">
-            <button className="btn-cyan svc-btn-glow"><CtaLabel>{servicesCta.primary}</CtaLabel></button>
-            <button className="btn-glass glass"><CtaLabel>{servicesCta.secondary}</CtaLabel></button>
+            <a className="btn-cyan svc-btn-glow" href={servicesCta.primary.href}><CtaLabel>{servicesCta.primary.label}</CtaLabel></a>
+            <a className="btn-glass glass" href={servicesCta.secondary.href}><CtaLabel>{servicesCta.secondary.label}</CtaLabel></a>
           </div>
         </div>
       </div>

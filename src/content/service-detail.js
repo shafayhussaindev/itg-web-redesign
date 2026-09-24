@@ -61,7 +61,7 @@ export const serviceDetail = {
   contactEyebrow: 'Your next step',
   // Configure an email to enable service enquiries. The fallback is a live page.
   contactEmail: '',
-  contactFallback: { label: 'Meet the ITG Team', href: '/company' },
+  contactFallback: { label: 'Start a Conversation', href: '/contact?topic=project' },
 };
 
 export const serviceCategories = [

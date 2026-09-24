@@ -27,8 +27,9 @@ export const industriesHero = {
   titleLine1: 'Industry-Focused Technology Solutions',
   titleLine2: 'Built for Real-World Complexity',
   body: 'ITG delivers enterprise platforms aligned to industry-specific operations, regulation and scale.',
-  primaryCta: 'Talk to an Industry Expert →',
-  secondaryCta: 'Explore Industries →',
+  primaryCta: { label: 'Talk to an Industry Expert →', href: '/contact?topic=project' },
+  // #industries is the Industry Features section id (IndustryFeatures.jsx).
+  secondaryCta: { label: 'Explore Industries →', href: '#industries' },
   image: '/assets/industries/hero-industries.jpg',
 };
 
@@ -198,6 +199,6 @@ export const focusHeading = 'Key Focus Areas';
 export const industriesCta = {
   title: 'Technology Solutions Designed for Your Industry',
   body: 'From enterprise operations to sustainability platforms, ITG delivers industry-aligned technology solutions that support growth, compliance and operational excellence.',
-  primary: 'Talk to an Industry Expert →',
+  primary: { label: 'Talk to an Industry Expert →', href: '/contact?topic=project' },
   background: '/assets/industries/cta-industries.jpg',
 };

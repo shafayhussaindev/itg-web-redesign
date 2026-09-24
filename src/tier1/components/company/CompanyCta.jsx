@@ -26,8 +26,8 @@ export default function CompanyCta() {
         <div ref={panelRef} className="co-cta-glass">
           <h2>{companyCta.title}</h2>
           <div className="cta-row co-cta-row">
-            <button className="btn-cyan co-btn-glow"><CtaLabel>{companyCta.primary}</CtaLabel></button>
-            <button className="btn-glass glass"><CtaLabel>{companyCta.secondary}</CtaLabel></button>
+            <a className="btn-cyan co-btn-glow" href={companyCta.primary.href}><CtaLabel>{companyCta.primary.label}</CtaLabel></a>
+            <a className="btn-glass glass" href={companyCta.secondary.href}><CtaLabel>{companyCta.secondary.label}</CtaLabel></a>
           </div>
         </div>
       </div>

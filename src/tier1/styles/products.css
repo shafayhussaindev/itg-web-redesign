@@ -35,8 +35,8 @@
    page rings .navcta in white over navy; on these light sections the ring is
    navy so it stays visible without introducing a colour. */
 .tier1-site .pp-cat-cta:focus-visible,
-.tier1-site .pp-hero-ctas button:focus-visible,
-.tier1-site .pp-cta-btns button:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; border-radius: 4px; }
+.tier1-site .pp-hero-ctas a:focus-visible,
+.tier1-site .pp-cta-btns a:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; border-radius: 4px; }
 
 
 /* ============================================================
@@ -698,7 +698,7 @@
   .tier1-site .pp-hero-sub { font-size: 17.5px; max-width: none; }
   .tier1-site .pp-hero-body { font-size: 14.5px; }
   .tier1-site .pp-hero-ctas { gap: 10px; margin-top: 24px; }
-  .tier1-site .pp-hero-ctas button { width: 100%; }
+  .tier1-site .pp-hero-ctas a { width: 100%; }
   .tier1-site .pp-hero-panel { margin: 14px 0 0; max-width: none; padding: 18px 20px 20px; border-radius: 18px; }
   .tier1-site .pp-hero-panel ul { grid-template-columns: 1fr; gap: 11px; }
   .tier1-site .pp-section-head { margin-bottom: 36px; }
@@ -721,7 +721,7 @@
   .tier1-site .pp-principle { grid-template-columns: 38px 1fr; gap: 14px; padding: 16px 16px; }
   .tier1-site .pp-principle-icon { width: 38px; height: 38px; border-radius: 10px; }
   .tier1-site .pp-cta h2 { font-size: 26px; }
-  .tier1-site .pp-cta-btns button { width: 100%; }
+  .tier1-site .pp-cta-btns a { width: 100%; }
 
   /* categories: full-width, visual becomes a top band so text never
      competes with the render. No gutters left, so no ecosystem. */

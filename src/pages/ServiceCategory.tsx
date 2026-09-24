@@ -3,6 +3,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ArrowRight, MSym } from '@/components/icons/material';
 import { useHashScroll } from '@/hooks/useHashScroll';
+import { contactLink } from '@/lib/contact-link';
 import { servicePages, serviceDetail as copy } from '@/content/service-detail.js';
 import './solution-detail.css';
 import './service-category.css';
@@ -38,7 +39,7 @@ export default function ServiceCategory({ page }: { page: ServiceCategoryContent
 
   const enquiryHref = (name: string) => copy.contactEmail
     ? `mailto:${copy.contactEmail}?subject=${encodeURIComponent(`${name} service enquiry`)}`
-    : copy.contactFallback.href;
+    : contactLink(copy.contactFallback.href, name);
 
   const related = servicePages.filter(item => item.id !== page.id);
 

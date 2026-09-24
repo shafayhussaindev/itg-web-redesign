@@ -3,7 +3,7 @@ export const solutionDetail = {
   // Add your email between the quotes to enable each page's email CTA.
   // Until then, the CTA uses the Company page with an accurate label.
   contactEmail: '',
-  contactFallback: { label: 'Meet the ITG Team', href: '/company' },
+  contactFallback: { label: 'Start a Conversation', href: '/contact?topic=project' },
   home: 'Home', solutions: 'Solutions', skipLink: 'Skip to content',
   explore: 'Explore Capabilities', talk: 'Talk to an Expert', scroll: 'Discover the solution',
   overview: 'Overview', capabilities: 'Capabilities', applications: 'Applications', approach: 'Our Approach',

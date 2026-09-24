@@ -201,7 +201,7 @@
     .tier1-site .hero h1{font-size:29px;line-height:1.2;}
     .tier1-site .hero p{font-size:14px;margin-bottom:24px;}
     .tier1-site .cta-row{gap:10px;}
-    .tier1-site .cta-row button{width:100%;justify-content:center;}
+    .tier1-site .cta-row a{width:100%;justify-content:center;}
     .tier1-site nav{padding:12px 20px;}
 
     /* Match the hero's 20px gutter. At 40px the content column was only

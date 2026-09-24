@@ -34,8 +34,8 @@ export default function IndustriesHero() {
           </h1>
           <p>{industriesHero.body}</p>
           <div className="cta-row">
-            <button className="btn-cyan ind-btn-glow"><CtaLabel>{industriesHero.primaryCta}</CtaLabel></button>
-            <button className="btn-glass glass"><CtaLabel>{industriesHero.secondaryCta}</CtaLabel></button>
+            <a className="btn-cyan ind-btn-glow" href={industriesHero.primaryCta.href}><CtaLabel>{industriesHero.primaryCta.label}</CtaLabel></a>
+            <a className="btn-glass glass" href={industriesHero.secondaryCta.href}><CtaLabel>{industriesHero.secondaryCta.label}</CtaLabel></a>
           </div>
         </div>
       </div>

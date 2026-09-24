@@ -31,8 +31,9 @@ export const productsHero = {
     'standalone tool - enabling integration, governance,',
     ' and long-term operational reliability.',
   ],
-  primaryCta: 'Request a Product Demo',
-  secondaryCta: 'Explore Platforms by Category',
+  primaryCta: { label: 'Request a Product Demo', href: '/contact?topic=product' },
+  // #categories and #industries are section ids on this page (ProductsPage.jsx).
+  secondaryCta: { label: 'Explore Platforms by Category', href: '#categories' },
   panel: {
     heading: 'Our platforms help organizations:',
     items: [
@@ -161,6 +162,6 @@ export const industries = {
 
 export const productsCta = {
   heading: 'Ready to Explore ITG Platforms?',
-  primary: 'Explore Platforms by Category',
-  secondary: 'View Industry Use Cases',
+  primary: { label: 'Explore Platforms by Category', href: '#categories' },
+  secondary: { label: 'View Industry Use Cases', href: '/industries' },
 };

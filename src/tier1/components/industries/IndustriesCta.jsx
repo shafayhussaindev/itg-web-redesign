@@ -27,7 +27,7 @@ export default function IndustriesCta() {
           <h2>{industriesCta.title}</h2>
           <p>{industriesCta.body}</p>
           <div className="cta-row ind-cta-row">
-            <button className="btn-cyan ind-btn-glow"><CtaLabel>{industriesCta.primary}</CtaLabel></button>
+            <a className="btn-cyan ind-btn-glow" href={industriesCta.primary.href}><CtaLabel>{industriesCta.primary.label}</CtaLabel></a>
           </div>
         </div>
       </div>

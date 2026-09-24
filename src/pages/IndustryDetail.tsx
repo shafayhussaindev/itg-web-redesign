@@ -3,6 +3,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ArrowRight, MSym } from '@/components/icons/material';
 import { useHashScroll } from '@/hooks/useHashScroll';
+import { contactLink } from '@/lib/contact-link';
 import { industryPages, industryDetail as copy } from '@/content/industry-detail.js';
 import './solution-detail.css';
 import './industry-detail.css';
@@ -40,7 +41,7 @@ export default function IndustryDetail({ page }: { page: IndustryPageContent }) 
 
   const enquiryHref = (name: string) => copy.contactEmail
     ? `mailto:${copy.contactEmail}?subject=${encodeURIComponent(`${name} enquiry`)}`
-    : copy.contactFallback.href;
+    : contactLink(copy.contactFallback.href, name);
 
   const related = industryPages.filter(item => item.id !== page.id);
 

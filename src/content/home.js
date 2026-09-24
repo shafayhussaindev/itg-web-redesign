@@ -182,5 +182,5 @@ export const globalPresence = {
 export const finalCta = {
   title: 'Engineering What’s Next — Together',
   body: 'Partner with ITG to modernize systems, deploy scalable platforms, and unlock intelligent enterprise performance.',
-  cta: { label: 'Speak with an ITG Solution Architect', href: '/company' },
+  cta: { label: 'Speak with an ITG Solution Architect', href: '/contact?topic=project' },
 };

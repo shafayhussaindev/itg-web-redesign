@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ArrowRight, ChevronDown, MSym } from '@/components/icons/material';
+import { contactLink } from '@/lib/contact-link';
 import { useLenis } from '@/hooks/useLenis';
 import { solutionDetail as copy } from '@/content/solution-detail.js';
 import { solutionPages, type SolutionPageContent } from './solutionPages';
@@ -62,7 +63,7 @@ export default function SolutionDetail({ page }: { page: SolutionPageContent }) 
   const related = solutionPages.filter(item => item.id !== page.id);
   const contactHref = copy.contactEmail
     ? `mailto:${copy.contactEmail}?subject=${encodeURIComponent(`${page.name} enquiry`)}`
-    : copy.contactFallback.href;
+    : contactLink(copy.contactFallback.href, page.name);
 
   return (
     <>

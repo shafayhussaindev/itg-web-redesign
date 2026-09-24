@@ -368,7 +368,7 @@ export const news = {
 
 export const companyCta = {
   title: 'Ready to Partner with a Long-Term Technology Provider?',
-  primary: 'Explore ITG Solutions →',
-  secondary: 'View Industry Expertise →',
+  primary: { label: 'Explore ITG Solutions →', href: '/solutions' },
+  secondary: { label: 'View Industry Expertise →', href: '/industries' },
   background: '/assets/company/cta-partnership.jpg',
 };

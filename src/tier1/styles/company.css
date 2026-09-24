@@ -1009,7 +1009,7 @@
   .tier1-site .co-cta-bg { padding: 76px 20px; }
   .tier1-site .co-cta-glass { padding: 32px 24px 34px; border-radius: 20px; }
   .tier1-site .co-cta-glass h2 { font-size: 24px; margin-bottom: 26px; }
-  .tier1-site .co-cta-row button { width: 100%; justify-content: center; }
+  .tier1-site .co-cta-row a { width: 100%; justify-content: center; }
   .tier1-site .co-page .btn-cyan, .tier1-site .co-page .btn-glass { min-height: 44px; }
 }
 

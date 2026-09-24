@@ -32,8 +32,8 @@ export default function ServicesHero() {
           </h1>
           <p>{servicesHero.body}</p>
           <div className="cta-row">
-            <button className="btn-cyan svc-btn-glow"><CtaLabel>{servicesHero.primaryCta}</CtaLabel></button>
-            <button className="btn-glass glass"><CtaLabel>{servicesHero.secondaryCta}</CtaLabel></button>
+            <a className="btn-cyan svc-btn-glow" href={servicesHero.primaryCta.href}><CtaLabel>{servicesHero.primaryCta.label}</CtaLabel></a>
+            <a className="btn-glass glass" href={servicesHero.secondaryCta.href}><CtaLabel>{servicesHero.secondaryCta.label}</CtaLabel></a>
           </div>
         </div>
 

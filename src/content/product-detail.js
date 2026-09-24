@@ -32,7 +32,7 @@ export const productDetail = {
   contactBody: 'Tell us about your operations, existing systems and priorities so we can help identify the right platform and the next steps.',
   // Configure an email to enable product enquiries. The fallback is a live page.
   contactEmail: '', contactLabel: 'Request a Product Demo',
-  contactFallback: { label: 'Meet the ITG Team', href: '/company' },
+  contactFallback: { label: 'Request a Product Demo', href: '/contact?topic=product' },
 };
 
 const categoryDetails = {

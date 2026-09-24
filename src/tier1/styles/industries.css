@@ -619,7 +619,7 @@
   .tier1-site .ind-hero-glass h1 { font-size: 28px; line-height: 1.2; }
   .tier1-site .ind-hero-glass p { font-size: 14px; margin-bottom: 24px; }
   .tier1-site .ind-hero-glass .cta-row { gap: 10px; }
-  .tier1-site .ind-hero-glass .cta-row button { width: 100%; justify-content: center; }
+  .tier1-site .ind-hero-glass .cta-row a { width: 100%; justify-content: center; }
 
   .tier1-site .ind-intro { padding: 64px 20px; }
   .tier1-site .ind-intro-panel { padding: 34px 24px 36px; border-radius: 20px; }
@@ -658,7 +658,7 @@
   .tier1-site .ind-cta-glass { padding: 32px 24px 34px; border-radius: 20px; }
   .tier1-site .ind-cta-glass h2 { font-size: 24px; }
   .tier1-site .ind-cta-glass p { font-size: 14.5px; margin-bottom: 26px; }
-  .tier1-site .ind-cta-row button { width: 100%; justify-content: center; }
+  .tier1-site .ind-cta-row a { width: 100%; justify-content: center; }
 
   /* Touch targets. */
   .tier1-site .ind-page .btn-cyan,

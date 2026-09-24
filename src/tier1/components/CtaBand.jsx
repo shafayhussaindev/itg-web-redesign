@@ -10,9 +10,9 @@ export default function CtaBand() {
           <h2>{ctaBand.title}</h2>
           <p>{ctaBand.body}</p>
           <div className="cta-btns">
-            <button className="btn-cyan"><CtaLabel>{ctaBand.primary}</CtaLabel></button>
-            <button className="btn-glass glass"><CtaLabel>{ctaBand.secondary}</CtaLabel></button>
-            <button className="btn-ghost-white"><CtaLabel>{ctaBand.tertiary}</CtaLabel></button>
+            <a className="btn-cyan" href={ctaBand.primary.href}><CtaLabel>{ctaBand.primary.label}</CtaLabel></a>
+            <a className="btn-glass glass" href={ctaBand.secondary.href}><CtaLabel>{ctaBand.secondary.label}</CtaLabel></a>
+            <a className="btn-ghost-white" href={ctaBand.tertiary.href}><CtaLabel>{ctaBand.tertiary.label}</CtaLabel></a>
           </div>
         </div>
       </div>

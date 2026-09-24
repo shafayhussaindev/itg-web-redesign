@@ -524,7 +524,7 @@ export const footer = {
         { label: "About Us", href: "#" },
         { label: "Careers", href: "#" },
         { label: "Insights", href: "#" },
-        { label: "Contact", href: "#" },
+        { label: "Contact", href: "/contact" },
       ],
     },
     {

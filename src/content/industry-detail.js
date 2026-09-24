@@ -72,7 +72,7 @@ export const industryDetail = {
   contactEyebrow: 'Your next step',
   // Configure an email to enable sector enquiries. The fallback is a live page.
   contactEmail: '',
-  contactFallback: { label: 'Meet the ITG Team', href: '/company' },
+  contactFallback: { label: 'Start a Conversation', href: '/contact?topic=project' },
 };
 
 export const industryCategories = [

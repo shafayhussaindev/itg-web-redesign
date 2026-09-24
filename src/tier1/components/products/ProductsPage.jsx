@@ -306,10 +306,10 @@ export default function ProductsPage() {
               ))}
 
               <div className="pp-hero-ctas">
-                <button className="btn-cyan"><CtaLabel>{productsHero.primaryCta}</CtaLabel></button>
-                <button className="btn-outline-navy">
-                  {productsHero.secondaryCta}<span className="btn-arrow">→</span>
-                </button>
+                <a className="btn-cyan" href={productsHero.primaryCta.href}><CtaLabel>{productsHero.primaryCta.label}</CtaLabel></a>
+                <a className="btn-outline-navy" href={productsHero.secondaryCta.href}>
+                  {productsHero.secondaryCta.label}<span className="btn-arrow">→</span>
+                </a>
               </div>
             </div>
 
@@ -354,7 +354,7 @@ export default function ProductsPage() {
         </section>
 
         {/* ---------- 3 · PRODUCT CATEGORIES ---------- */}
-        <section ref={categoriesRef} className="pp-cats">
+        <section ref={categoriesRef} className="pp-cats" id="categories">
           <div className="pp-section-head">
             <h2>{categoriesHeading}</h2>
           </div>
@@ -391,7 +391,7 @@ export default function ProductsPage() {
         </section>
 
         {/* ---------- 6 · PRODUCTS ACROSS INDUSTRIES ---------- */}
-        <section className="pp-industries">
+        <section className="pp-industries" id="industries">
           <div className="pp-section-head">
             <h2>{industries.heading}</h2>
             <p>{industries.intro}</p>
@@ -424,10 +424,10 @@ export default function ProductsPage() {
           <div>
             <h2>{productsCta.heading}</h2>
             <div className="pp-cta-btns">
-              <button className="btn-cyan"><CtaLabel>{productsCta.primary}</CtaLabel></button>
-              <button className="btn-outline-navy">
-                {productsCta.secondary}<span className="btn-arrow">→</span>
-              </button>
+              <a className="btn-cyan" href={productsCta.primary.href}><CtaLabel>{productsCta.primary.label}</CtaLabel></a>
+              <a className="btn-outline-navy" href={productsCta.secondary.href}>
+                {productsCta.secondary.label}<span className="btn-arrow">→</span>
+              </a>
             </div>
           </div>
         </section>

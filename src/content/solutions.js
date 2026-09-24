@@ -15,8 +15,8 @@ export const hero = {
   titleLine1: 'Business Outcomes',
   titleAccent: 'Powered by Scale',
   body: 'At ITG Technologies, our solutions are designed around real enterprise challenges — not tools, not buzzwords.',
-  primaryCta: 'Explore Our Products →',
-  secondaryCta: 'Talk to an Expert →',
+  primaryCta: { label: 'Explore Our Products →', href: '/products' },
+  secondaryCta: { label: 'Talk to an Expert →', href: '/contact?topic=project' },
 };
 
 // Solution Categories — image sits in /public/assets
@@ -122,9 +122,9 @@ export const whyItg = [
 export const ctaBand = {
   title: 'Ready to Solve Real Business Challenges?',
   body: 'Engineering scalable platforms aligned to your operational goals.',
-  primary: 'Explore Our Platforms →',
-  secondary: 'Speak With a Solution Architect →',
-  tertiary: 'Request a Strategic Demo →',
+  primary: { label: 'Explore Our Platforms →', href: '/products' },
+  secondary: { label: 'Speak With a Solution Architect →', href: '/contact?topic=project' },
+  tertiary: { label: 'Request a Strategic Demo →', href: '/contact?topic=product' },
   background: '/assets/cta-skyline.jpg',
 };
 
