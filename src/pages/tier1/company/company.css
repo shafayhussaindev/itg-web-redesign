@@ -370,40 +370,29 @@
   padding-left: 34px;
   margin-bottom: 26px;
 }
-/* The spine sits behind the marks and traces itself in. preserveAspectRatio
-   is none so the 400-unit viewBox stretches to whatever the list needs. */
-/* The height MUST be explicit. An SVG is a replaced element, so `height: auto`
-   resolves to its intrinsic height — 400px, from the 8x400 viewBox at 8px wide
-   — and `bottom` is ignored as over-constrained. Both of those left the rail
-   running hundreds of pixels past the last mark and out through the next
-   section's heading. A percentage height resolves against `.co-story-track`,
-   which is the positioned ancestor, so the rail tracks the list at any length.
-   `preserveAspectRatio="none"` then maps the 400-unit line onto it.
-
-   Geometry pins the rail to the dots on both axes. Horizontal: the dots
-   centre 17.5px from the track's left edge (list padding + dot offset), so
-   the 8px-wide spine sits at 13.5px, putting its x=4 centreline through them. Vertical: the first dot's
-   centre lands at title + list offset = 82px, and the track's height ends at
-   the last dot's centre, so the rail spans exactly first dot -> last dot. */
-.tier1-site .co-story-spine {
-  position: absolute;
-  left: 13.5px;
-  top: 82px;
-  width: 8px;
-  height: calc(100% - 82px);
-  overflow: visible;
-}
-.tier1-site .co-story-rail {
-  stroke: var(--cyan);
-  stroke-width: 2;
-  stroke-linecap: round;
-  opacity: 0.55;
-}
-
 .tier1-site .co-story-marks { list-style: none; display: flex; flex-direction: column; gap: 26px; }
 .tier1-site .co-story-mark {
   position: relative;
   padding-left: 34px;
+}
+/* The rail: each mark draws the segment from its own dot's centre down to the
+   next dot's centre, so the line always starts and ends exactly on a dot —
+   whatever the heading height, label wrapping or breakpoint. (It used to be one
+   SVG positioned by hard-coded offsets, which drifted 11.5px low and left a
+   tail below the last dot.) The dot is painted after this and has a white
+   fill, so the line runs behind it.
+   Geometry: dot centre = left 8 + 11/2 = 13.5px, top 7 + 11/2 = 12.5px.
+   Height = this mark's height + the 26px list gap = distance to the next dot. */
+.tier1-site .co-story-mark:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 12.5px;
+  top: 12.5px;
+  width: 2px;
+  height: calc(100% + 26px);
+  background: var(--cyan);
+  opacity: 0.55;
+  border-radius: 1px;
 }
 .tier1-site .co-story-dot {
   position: absolute;
@@ -1032,7 +1021,6 @@
   .tier1-site .co-net-pulse { display: none; }
   .tier1-site .co-gov-ring, .tier1-site .co-gov-shield, .tier1-site .co-gov-check { animation: none; stroke-dashoffset: 0; }
   .tier1-site .co-gov-ticks line { animation: none; opacity: 1; }
-  .tier1-site .co-story-rail { transition: none; stroke-dashoffset: 0; }
   .tier1-site .co-story-mark { transition: none; opacity: 1; transform: none; }
   .tier1-site .co-map.is-active .co-map-land,
   .tier1-site .co-map.is-active .co-map-pin-body { animation: none; opacity: 1; transform: none; }

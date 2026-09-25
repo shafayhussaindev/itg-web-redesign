@@ -28,7 +28,7 @@ export const platformsHero = {
     ' and long-term operational reliability.',
   ],
   primaryCta: { label: 'Request a Platform Demo', href: '/contact?topic=product' },
-  // #platforms and #industries are section ids on this page (PlatformsPage.jsx).
+  // #platforms and #platform-categories are section ids on this page (PlatformsPage.jsx).
   secondaryCta: { label: 'Explore the Platforms', href: '#platforms' },
   panel: {
     heading: 'Our platforms help organizations:',
@@ -166,19 +166,10 @@ export const howItWorks = {
   ],
 };
 
-export const industries = {
-  heading: 'Platforms Across Industries',
-  intro: 'ITG platforms are used across industries including:',
-  // The five industries, in menu order. Keep in step with site.js.
-  items: [
-    'Consumer Goods',
-    'Manufacturing & Industries',
-    'Logistics & Supply Chain Operations',
-    'Real Estate, Construction & Facilities',
-    'Professional Services',
-  ],
-  note: 'Each platform is configured to align with industry-specific operational and regulatory requirements.',
-};
+/* The photo-card grid near the foot of the page — same design as "Solution
+   Categories" on /solutions. It shows the six platforms above (title, lead,
+   body, image), so there is nothing else to edit here but the heading. */
+export const platformCardsHeading = 'Platform Categories';
 
 export const platformsCta = {
   heading: 'Ready to Explore ITG Platforms?',

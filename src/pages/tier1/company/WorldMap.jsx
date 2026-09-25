@@ -6,7 +6,19 @@ const HEIGHT = 689;
 
 // The supplied dot map uses an equirectangular 360-degree horizontal span.
 // Latitude 85 is at its top edge. The pin tip uses that same image scale.
-function project(latitude, longitude) {
+//
+// The artwork is stylised rather than a true projection, so latitude and
+// longitude alone can land a pin visibly off its coastline (North America is
+// stretched vertically — the Gulf coast is drawn ~20px lower than the maths
+// puts it). A location can pin itself exactly with `map: { x, y }`, given in
+// pixels of the 1614x689 map image; that wins over the calculated position.
+function project(latitude, longitude, map) {
+  if (map) {
+    return {
+      left: `${(map.x / WIDTH) * 100}%`,
+      top: `${(map.y / HEIGHT) * 100}%`,
+    };
+  }
   return {
     left: `${((longitude + 180) / 360) * 100}%`,
     top: `${(((85 - latitude) * WIDTH / 360) / HEIGHT) * 100}%`,
@@ -41,7 +53,7 @@ export default function WorldMap({ active }) {
               key={location.name}
               className="co-map-pin"
               type="button"
-              style={{ ...project(location.latitude, location.longitude), '--pin-index': index }}
+              style={{ ...project(location.latitude, location.longitude, location.map), '--pin-index': index }}
               aria-label={`${location.name} location`}
               title={location.name}
             >

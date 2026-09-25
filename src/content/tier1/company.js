@@ -168,10 +168,14 @@ export const globalPresence = {
   title: 'Global Presence',
   intro: 'Scale delivery and regional understanding.',
   image: '/assets/company/global-presence.jpg',
-  // These are country-level reference points, except Hong Kong's city centre.
+  // These are country-level reference points, except Texas (state centre) and
+  // Hong Kong (city centre).
   // Replace them with verified office coordinates when those are available.
   locations: [
-    { name: 'USA', latitude: 39.8283, longitude: -98.5795 },
+    // `map` pins Texas exactly on the dot artwork (pixels of the 1614x689
+    // world-dot-map.png): just north-west of the Gulf of Mexico's NW corner.
+    // The map is stylised, so latitude/longitude alone landed it over Arkansas.
+    { name: 'Texas', latitude: 31.9686, longitude: -99.9018, map: { x: 332, y: 257 } },
     { name: 'Finland', latitude: 61.9241, longitude: 25.7482 },
     { name: 'Pakistan', latitude: 30.3753, longitude: 69.3451 },
     { name: 'UAE', latitude: 23.4241, longitude: 53.8478 },

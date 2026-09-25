@@ -5,10 +5,11 @@ import PlatformEcosystem from './PlatformEcosystem.jsx';
 import HowItWorks from './HowItWorks.jsx';
 import {
   platformsHero, philosophy, platformsHeading, platforms,
-  ecosystem, howItWorks, industries, platformsCta,
+  ecosystem, howItWorks, platformCardsHeading, platformsCta,
 } from '@/content/tier1/platforms.js';
 import './platforms.css';
 import CtaLabel from '@/pages/tier1/shared/CtaLabel.jsx';
+import CategoryCards from '@/pages/tier1/shared/CategoryCards.jsx';
 
 /* ---------- small inline icon set (stroke, matches Solutions weight) ---------- */
 /* Material Symbols. The philosophy principles use the short keys below; the
@@ -392,34 +393,22 @@ export default function PlatformsPage() {
             </div>
           </section>
 
-          {/* ---------- 6 · PLATFORMS ACROSS INDUSTRIES ---------- */}
-          <section className="pp-industries" id="industries">
-            <div className="pp-section-head">
-              <h2>{industries.heading}</h2>
-              <p>{industries.intro}</p>
-            </div>
-
-            <div className="pp-ind-stage">
-              <div className="pp-ind-col pp-ind-col--left">
-                {industries.items.slice(0, Math.ceil(industries.items.length / 2)).map((it) => (
-                  <div className="pp-ind-item" key={it}>{it}</div>
-                ))}
-              </div>
-
-              <div className="pp-ind-core">
-                <img src="/assets/products/industries-anchor.webp" alt="" aria-hidden="true" loading="lazy" width="1200" height="643" />
-                <span className="pp-ind-core-label"><span>ITG Platform</span></span>
-              </div>
-
-              <div className="pp-ind-col pp-ind-col--right">
-                {industries.items.slice(Math.ceil(industries.items.length / 2)).map((it) => (
-                  <div className="pp-ind-item" key={it}>{it}</div>
-                ))}
-              </div>
-            </div>
-
-            <p className="pp-ind-note">{industries.note}</p>
-          </section>
+          {/* ---------- 6 · PLATFORM CATEGORIES ----------
+              The same photo-card grid as "Solution Categories" on /solutions
+              (shared component), one card per platform, each linking to its
+              tier-2 page. Replaced "Platforms Across Industries" (Sept 2026). */}
+          <CategoryCards
+            id="platform-categories"
+            title={platformCardsHeading}
+            items={platforms.map((p) => ({
+              id: p.id,
+              title: p.title,
+              sub: p.lead,
+              body: p.body,
+              image: p.image,
+              href: `/${p.id}`,
+            }))}
+          />
 
           {/* ---------- 7 · FINAL CTA ---------- */}
           <section className="pp-cta pp-grid-field">

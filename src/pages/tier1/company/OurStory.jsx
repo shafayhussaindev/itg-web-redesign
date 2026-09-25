@@ -10,8 +10,8 @@ import { ourStory } from '@/content/tier1/company.js';
  * their existing heading. It gives the section the sense of progression the
  * brief asks for without asserting a single thing the copy does not say.
  *
- * The spine draws itself in on entry (pathLength="1", so the dash is
- * length-independent), then each mark fades up in sequence.
+ * The spine is drawn in CSS (company.css, .co-story-mark::before): each mark
+ * draws the segment down to the next dot, so it always meets the dots exactly.
  */
 export default function OurStory() {
 
@@ -26,13 +26,6 @@ export default function OurStory() {
 
         <div className="co-story-track">
           <h3 className="co-story-track-title">{ourStory.standForTitle}</h3>
-
-          {/* The spine. Drawn as an SVG so the line can trace itself in; the
-              marks are DOM elements so the labels stay real, selectable text
-              rather than <text> inside the graphic. */}
-          <svg className="co-story-spine" viewBox="0 0 8 400" preserveAspectRatio="none" aria-hidden="true">
-            <line className="co-story-rail" x1="4" y1="0" x2="4" y2="400" pathLength="1" />
-          </svg>
 
           <ol className="co-story-marks">
             {ourStory.standFor.map((entry, i) => (
