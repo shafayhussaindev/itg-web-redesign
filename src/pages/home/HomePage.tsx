@@ -31,7 +31,6 @@ const HomePage = () => {
         <HowWeWorkSection />
         <WhyITGSection />
         <InsightsSection />
-        <GlobalPresenceSection />
         <FinalCTASection />
       </main>
 
