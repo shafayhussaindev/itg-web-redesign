@@ -394,19 +394,9 @@ export const mainNav = {
 export const footer = {
   tagline: "Engineering intelligent digital platforms for modern enterprises.",
 
-  // The four link columns, left to right.
+  // The link columns, left to right. (The Solutions column was removed on
+  // request, Sept 2026 — the Solutions menu in the header covers it.)
   columns: [
-    {
-      heading: "Solutions",
-      links: [
-        { label: "Artificial Intelligence", href: "/artificial-intelligence" },
-        { label: "Enterprise Solutions",    href: "/enterprise-solutions" },
-        { label: "ESG Solutions",           href: "/esg-solutions" },
-        { label: "Custom Solutions",        href: "/custom-solutions" },
-        { label: "Industrial Solutions",    href: "/industrial-solutions" },
-        { label: "Data Privacy Solutions",  href: "/data-privacy-solutions" },
-      ],
-    },
     {
       heading: "Company",
       links: [

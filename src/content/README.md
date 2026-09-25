@@ -138,10 +138,10 @@ and `/professional-services`. The old addresses forward to the new ones; the six
 removed sectors (Enterprise & Corporate, Healthcare, Government, Energy & ESG,
 Education, Travel) forward to `/industries`.
 
-The same five industries are also listed on the Home page (`home.js`), the
+The same five industries are also listed on the Home page (`home.js`) and the
 /industries page (`tier1/industries.js` for the photo sections and diagram,
-`tier1/solutions.js` for the photo grid) and the /platforms page
-(`tier1/platforms.js`). Keep those lists in step when you add or remove one.
+`tier1/solutions.js` for the photo grid). Keep those lists in step when you add
+or remove one.
 Segments are sections within these pages, so there are no tier-3 industry
 routes.
 

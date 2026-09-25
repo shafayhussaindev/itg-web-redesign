@@ -2,7 +2,7 @@
   import { footer } from "@/content/site.js";
 
 /**
- * The four link columns were written out four times, so adding a link meant
+ * The link columns were once written out one by one, so adding a link meant
  * copying a block of markup. They are one loop now, and every word, link and
  * heading lives in content/site.js.
  */
@@ -10,9 +10,9 @@ export function Footer() {
   return (
     <footer className="bg-[color:var(--navy)] border-t border-white/10 text-white">
       <div className="section-container py-12 lg:py-16">
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 lg:gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
           {/* Brand */}
-          <div className="col-span-2 sm:col-span-2 md:col-span-4 lg:col-span-1 mb-4 lg:mb-0">
+          <div className="col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-1 mb-4 lg:mb-0">
             <a href="/" className="flex items-center gap-2 mb-4">
               <img src="/logo_white.png" alt="ITG Technologies" className="h-8 lg:h-10 w-auto" />
             </a>
