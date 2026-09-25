@@ -138,7 +138,7 @@ export default function SolutionDetail({ page }: { page: SolutionPageContent }) 
                       <div><h4>{copy.focus}</h4><ul>{cap.focus.map(item => <li key={item}><MSym name="check" size={16} />{item}</li>)}</ul></div>
                       <div className="sd-capability-result"><h4>{copy.outcome}</h4><ul>{cap.outcome.map(item => <li key={item}><MSym name="check_circle" size={16} />{item}</li>)}</ul></div>
                     </div>
-                    <a href="#contact" className="sd-text-link sd-discuss-link"><span className="sd-discuss-label">{copy.discuss}</span><ArrowRight size={17} /></a>
+                    <a href={`/${page.id}/${cap.id}`} className="sd-text-link sd-discuss-link" aria-label={`${copy.capabilityLink}: ${cap.title}`}><span className="sd-discuss-label">{copy.capabilityLink}</span><ArrowRight size={17} /></a>
                   </div>
                 </article>;
               })}</div>

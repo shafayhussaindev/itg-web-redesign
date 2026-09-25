@@ -115,9 +115,9 @@ Two things to keep in step, both noted at the top of the file:
 
 - the slugs in `serviceCategoryPaths`, because the menu and any link you have
   shared point at them;
-- each service `id`, because the menu links to `/<slug>#<id>` and the page
-  scrolls to that section. `/cloud-infrastructure-services#hybrid-multicloud`
-  is an example.
+- each service `id`, because it is part of that service's own page address,
+  `/<slug>/<id>` — `/cloud-infrastructure-services/hybrid-multicloud` is an
+  example — and the menu links there.
 
 The four delivery steps shown at the bottom of every service page are in
 `serviceDetail.steps`. Edit them once and all five pages change.
@@ -149,8 +149,8 @@ Two things to keep in step, both noted at the top of the file:
 
 - the slugs in `industryPaths`, because the menu and any link you have shared
   point at them;
-- each segment `id`, because the menu links to `/<slug>#<id>` and the page
-  scrolls to that section.
+- each segment `id`, because it is part of that segment's own page address,
+  `/<slug>/<id>`, and the menu links there.
 
 Set `industryDetail.contactEmail` to enable enquiry emails, as for the other
 families.
@@ -251,3 +251,19 @@ back. The most common cause by far is rule 2 above.
   `src/pages/legal/Terms.tsx` and `src/pages/legal/Privacy.tsx`.
 - **How the page is put together** (which block sits where) — that is in the
   page's component file. Ask before changing those.
+
+
+## Tier 3 pages (one per menu item)
+
+Every capability, product, service and industry segment in the menus has its
+own page, at the Tier 2 page's address followed by the item's id — for example
+`/enterprise-solutions/erp-solutions` or `/supply-chain/aullect`.
+
+**You don't write these pages separately.** Each one is filled from the item's
+entry on its Tier 2 page (its title, short line, description and bullet
+points), so to change a Tier 3 page, edit that item in its Tier 2 content file
+and both pages update.
+
+`tier3/tier3-detail.js` holds the headings and button labels shared by all of
+them, and `pageExtras` at the bottom of it lets you give ONE page its own hero
+photo or an extra Overview section. There is an example in the file.

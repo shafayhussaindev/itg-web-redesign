@@ -47,6 +47,7 @@ export const industryDetail = {
   segmentsTitle: 'Organizations we work with.',
   segmentFocus: 'Where we typically help',
   discuss: 'Discuss this segment',
+  segmentLink: 'Explore segment',   // link from each segment to its own page
   capabilitiesEyebrow: 'Applied capability',
   capabilitiesTitle: 'What ITG delivers in this sector.',
   approachEyebrow: 'How we engage',

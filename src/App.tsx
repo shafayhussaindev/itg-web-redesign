@@ -13,6 +13,7 @@ import { solutionPages } from "@/pages/tier2/solutions/solutionPages";
 import { platformPages } from "@/content/tier2/platform-detail.js";
 import { servicePages } from "@/content/tier2/service-detail.js";
 import { industryPages } from "@/content/tier2/industry-detail.js";
+import { tier3Pages } from "@/pages/tier3/tier3Pages";
 
 // Home — loaded up front, it's the landing page.
 import HomePage from "@/pages/home/HomePage";
@@ -30,6 +31,9 @@ const SolutionDetail = lazy(() => import("@/pages/tier2/solutions/SolutionDetail
 const PlatformDetail = lazy(() => import("@/pages/tier2/platforms/PlatformDetail"));
 const ServiceCategory = lazy(() => import("@/pages/tier2/services/ServiceCategory"));
 const IndustryDetail = lazy(() => import("@/pages/tier2/industries/IndustryDetail"));
+
+// Tier 3 — one page per menu item, all sharing one template.
+const Tier3Detail = lazy(() => import("@/pages/tier3/Tier3Detail"));
 
 // Everything else.
 const Contact = lazy(() => import("@/pages/contact/Contact"));
@@ -77,6 +81,11 @@ const App = () => (
               {/* Tier 2 — Industries */}
               {industryPages.map(page => (
                 <Route key={page.id} path={page.href} element={<IndustryDetail key={page.id} page={page} />} />
+              ))}
+
+              {/* Tier 3 — /<tier 2 page>/<item id>, e.g. /enterprise-solutions/erp-solutions */}
+              {tier3Pages.map(page => (
+                <Route key={page.path} path={page.path} element={<Tier3Detail key={page.path} page={page} />} />
               ))}
 
               {/* Old addresses → their new ones (see lib/old-addresses.ts) */}

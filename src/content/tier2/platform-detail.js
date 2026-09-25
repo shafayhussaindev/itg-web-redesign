@@ -28,7 +28,7 @@ export const platformDetail = {
   overview: 'Overview', products: 'Products', integration: 'Integration',
   overviewEyebrow: 'Purpose-built platform',
   productsEyebrow: 'On this platform', productsTitle: 'Find your starting point.',
-  productFocus: 'Product focus', discuss: 'Discuss this product',
+  productFocus: 'Product focus', discuss: 'Discuss this product', productLink: 'Explore product',
   integrationEyebrow: 'Part of the ITG ecosystem',
   integrationTitle: 'Start with one platform. Build a connected enterprise.',
   integrationBody: 'ITG products can be adopted independently or as part of a broader enterprise architecture. Define how the platform will connect to your systems, teams and data before expanding to the next business need.',

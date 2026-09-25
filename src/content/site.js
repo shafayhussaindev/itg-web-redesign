@@ -32,23 +32,25 @@ import { industryPaths } from './tier2/industry-detail.js';
  *                    ...    │
  *                           │  (hover a Tier 2 row to see its Tier 3 list)
  *                           ▼
- *   TIER 3  ─────►   AI Strategy & Advisory        ← a SECTION on that page
- *   (a section)      Applied AI & Machine Learning   (/artificial-intelligence#ai-strategy)
+ *   TIER 3  ─────►   AI Strategy & Advisory        ← its own page
+ *   (a page)         Applied AI & Machine Learning   (/artificial-intelligence/ai-strategy)
  *
  * TIER 2 fields
  *     title          the words the visitor reads
  *     description    the small grey line underneath
  *     href           the page it opens, e.g. "/artificial-intelligence"
  *     overviewLabel  the "View … Overview" link at the top of its Tier 3 list
- *     tier3          the list of sections on that page (below)
+ *     tier3          the list of Tier 3 pages under it (below)
  *
- * TIER 3 fields (one line per section)
+ * TIER 3 fields (one line per page)
  *     title          the words the visitor reads
  *     description    the small grey line underneath
- *     id             the section on the Tier 2 page to jump to. The link is
- *                    built for you as  <Tier 2 href>#<id>
- *                    The id MUST match the section's id in that page's content
- *                    file, or the link will open the page but not scroll.
+ *     id             the item's id. The link is built for you as
+ *                    <Tier 2 href>/<id>
+ *                    The id MUST match the item's id in its Tier 2 content
+ *                    file, or the link will open a "page not found".
+ *                    (The Tier 3 pages themselves are built from those
+ *                    content files — see content/tier3/tier3-detail.js.)
  *
  * To remove a row, delete its whole { ... } block including the trailing comma.
  * To add one, copy an existing block and change the words.
@@ -56,12 +58,14 @@ import { industryPaths } from './tier2/industry-detail.js';
 
 // Turns a Tier 2 entry into the shape the menu (Header.tsx) reads.
 // You never need to edit this.
+// A Tier 3 row may give its own `href` instead of an `id` (used by a platform
+// with no products yet, whose one row points at its overview section).
 function tier2Page({ tier3, ...page }) {
   return {
     ...page,
-    children: tier3.map(({ id, ...section }) => ({
+    children: tier3.map(({ id, href, ...section }) => ({
       ...section,
-      href: `${page.href}#${id}`,
+      href: href ?? `${page.href}/${id}`,
     })),
   };
 }
@@ -268,8 +272,8 @@ const industriesMenu = [
  *     Tier 3 = the products on that page (from content/tier2/platform-detail.js)
  * To change the Platforms menu, edit those two files.
  *
- * A platform with no products yet gets a single Tier 3 link to its overview,
- * so its fly-out is never empty.
+ * A platform with no products yet gets a single link to its overview
+ * section, so its fly-out is never empty.
  * ========================================================================= */
 
 const platformsMenu = platformPages.map(page => tier2Page({
@@ -283,7 +287,7 @@ const platformsMenu = platformPages.map(page => tier2Page({
         description: product.description,
         id:          product.id,
       }))
-    : [{ title: `About ${page.title}`, description: page.lead, id: 'overview' }],
+    : [{ title: `About ${page.title}`, description: page.lead, href: `${page.href}#overview` }],
 }));
 
 

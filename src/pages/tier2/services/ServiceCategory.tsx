@@ -135,11 +135,11 @@ export default function ServiceCategory({ page }: { page: ServiceCategoryContent
                   <h4>{copy.serviceFocus}</h4>
                   <ul>{service.focus.map(item => <li key={item}><MSym name="check_circle" size={18} />{item}</li>)}</ul>
                   <a
-                    href={copy.contactEmail ? enquiryHref(service.name) : '#contact'}
+                    href={`${page.href}/${service.id}`}
                     className="sd-text-link sc-discuss-link"
-                    aria-label={`${copy.discuss}: ${service.name}`}
+                    aria-label={`${copy.serviceLink}: ${service.name}`}
                   >
-                    <span className="sc-discuss-label">{copy.discuss}</span><ArrowRight size={17} />
+                    <span className="sc-discuss-label">{copy.serviceLink}</span><ArrowRight size={17} />
                   </a>
                 </div>
               </article>

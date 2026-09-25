@@ -122,11 +122,11 @@ export default function IndustryDetail({ page }: { page: IndustryPageContent }) 
                   <h4>{copy.segmentFocus}</h4>
                   <ul>{segment.focus.map(item => <li key={item}><MSym name="check_circle" size={18} />{item}</li>)}</ul>
                   <a
-                    href={copy.contactEmail ? enquiryHref(segment.name) : '#contact'}
+                    href={`${page.href}/${segment.id}`}
                     className="sd-text-link id-discuss-link"
-                    aria-label={`${copy.discuss}: ${segment.name}`}
+                    aria-label={`${copy.segmentLink}: ${segment.name}`}
                   >
-                    <span className="id-discuss-label">{copy.discuss}</span><ArrowRight size={17} />
+                    <span className="id-discuss-label">{copy.segmentLink}</span><ArrowRight size={17} />
                   </a>
                 </div>
               </article>

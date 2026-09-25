@@ -98,7 +98,7 @@ export default function PlatformDetail({ page }: { page: PlatformPageContent }) 
                 </div>
                 <div className="pc-platform-body"><p>{product.body}</p><h4>{copy.productFocus}</h4>
                   <ul>{product.focus.map(item => <li key={item}><MSym name="check_circle" size={18} />{item}</li>)}</ul>
-                  <a href={copy.contactEmail ? enquiryHref(product.name) : '#contact'} className="sd-text-link pc-discuss-link" aria-label={`${copy.discuss}: ${product.name}`}><span className="pc-discuss-label">{copy.discuss}</span><ArrowRight size={17} /></a>
+                  <a href={`${page.href}/${product.id}`} className="sd-text-link pc-discuss-link" aria-label={`${copy.productLink}: ${product.name}`}><span className="pc-discuss-label">{copy.productLink}</span><ArrowRight size={17} /></a>
                 </div>
               </article>
             ))}</div>

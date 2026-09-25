@@ -48,6 +48,7 @@ export const serviceDetail = {
   servicesTitle: 'Find the engagement that fits.',
   serviceFocus: 'What this includes',
   discuss: 'Discuss this service',
+  serviceLink: 'Explore service',   // link from each service to its own page
   deliveryEyebrow: 'How we deliver',
   deliveryTitle: 'A structured path from scope to adoption.',
   deliveryIntro:
