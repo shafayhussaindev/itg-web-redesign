@@ -1,6 +1,12 @@
 import { useEffect, useRef } from 'react';
 import Lenis from 'lenis';
 
+// The instance for the page currently mounted, if any. Site-wide pieces that
+// sit outside a page (the back-to-top button) scroll through this so they don't
+// fight Lenis with a native smooth scroll.
+let activeLenis: Lenis | null = null;
+export const getActiveLenis = () => activeLenis;
+
 export function useLenis() {
   const lenisRef = useRef<Lenis | null>(null);
 
@@ -19,6 +25,7 @@ export function useLenis() {
     });
 
     lenisRef.current = lenis;
+    activeLenis = lenis;
 
     // The frame loop only runs while Lenis is easing a scroll. A permanent loop
     // woke the main thread on every display refresh (144 times a second on a
@@ -55,6 +62,7 @@ export function useLenis() {
       cancelAnimationFrame(frame);
       lenis.destroy();
       lenisRef.current = null;
+      if (activeLenis === lenis) activeLenis = null;
     };
   }, []);
 

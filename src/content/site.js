@@ -437,3 +437,18 @@ export const footer = {
   ],
   linkedin: "https://www.linkedin.com/company/itgtechnologiescompany/posts/?feedView=all",
 };
+
+
+/* ============================================================================
+ * 8. COOKIE BAR (the strip along the bottom on a visitor's first visit)
+ * ========================================================================= */
+
+export const cookieBar = {
+  title: "We value your privacy",
+  body: "We use cookies that are needed for the site to work and, with your permission, analytics cookies to understand how the site is used.",
+  policyLink: { label: "Read our Privacy Policy", href: "/privacy" },
+  acceptAll: "Accept all",
+  necessaryOnly: "Necessary only",
+  // The footer link that lets a visitor change their choice later.
+  settingsLink: "Cookie settings",
+};

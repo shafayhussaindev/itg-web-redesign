@@ -104,6 +104,7 @@ const icon = (glyph: string) => {
 };
 
 export const ArrowRight = icon("arrow_forward");
+export const ArrowUp = icon("arrow_upward");
 export const ArrowUpRight = icon("arrow_outward");
 export const Brain = icon("neurology");
 export const Briefcase = icon("work");
@@ -114,6 +115,7 @@ export const CheckCircle2 = icon("check_circle");
 export const ChevronDown = icon("keyboard_arrow_down");
 export const ChevronRight = icon("chevron_right");
 export const Cloud = icon("cloud");
+export const Cookie = icon("cookie");
 export const DraftingCompass = icon("architecture");
 export const Factory = icon("factory");
 export const Globe = icon("language");

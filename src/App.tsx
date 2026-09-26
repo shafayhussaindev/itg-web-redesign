@@ -6,6 +6,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { RedirectTo } from "@/components/RedirectTo";
+import { BackToTop } from "@/components/BackToTop";
+import { CookieBar } from "@/components/CookieBar";
 import { oldAddresses } from "@/lib/old-addresses";
 
 // Page lists for the tier-2 routes (one route per page in each list).
@@ -102,6 +104,8 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
+          <BackToTop />
+          <CookieBar />
         </BrowserRouter>
       </TooltipProvider>
     </ThemeProvider>

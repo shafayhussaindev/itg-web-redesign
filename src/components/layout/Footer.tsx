@@ -1,5 +1,6 @@
 / @ts-expect-error - plain JS content file, no types alongside it/
-  import { footer } from "@/content/site.js";
+  import { footer, cookieBar } from "@/content/site.js";
+import { openCookieSettings } from "@/lib/cookie-consent";
 
 /**
  * The link columns were once written out one by one, so adding a link meant
@@ -58,6 +59,15 @@ export function Footer() {
                   </a>
                 </span>
               ))}
+              <span aria-hidden="true" className="text-white/30">·</span>
+              {/* Reopens the cookie bar so a visitor can change their choice. */}
+              <button
+                type="button"
+                onClick={openCookieSettings}
+                className="text-xs lg:text-sm text-white/75 hover:text-white transition-colors duration-200"
+              >
+                {cookieBar.settingsLink}
+              </button>
             </nav>
           </div>
 
