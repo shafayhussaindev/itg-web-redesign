@@ -669,7 +669,7 @@ export function Header({ contactHref = navCta.href }: { contactHref?: string } =
               ))}
 
               <Button variant="default" className="mt-3 w-full" onClick={closeMobileMenu} asChild>
-                <a href={contactHref} onClick={closeMobileMenu}>{navCta.label}</a>
+                <a href={contactHref} onClick={closeMobileMenu}>{navCta.label}<MSym name="arrow_forward" size={18} weight={500} /></a>
               </Button>
             </nav>
           </div>

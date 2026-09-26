@@ -82,7 +82,6 @@ export const serviceCategories = [
     accent: 'Designed around how you work.',
     description:
       'Enterprise web and application platforms, designed and engineered around business workflows rather than assembled from templates.',
-    tags: ['Workflow-led design', 'Secure foundations', 'Built to scale'],
     overviewTitle: 'Engineering that starts with the workflow, not the screen.',
     lead: 'A platform is only as good as the process it supports.',
     overviewBody:
@@ -161,7 +160,6 @@ export const serviceCategories = [
     accent: 'Decisions people can defend.',
     description:
       'Analytics, business intelligence and reporting built on definitions your teams agree on, so the numbers hold up when they are questioned.',
-    tags: ['Agreed definitions', 'Operational reporting', 'Decision support'],
     overviewTitle: 'The hard part is agreement, not the dashboard.',
     lead: 'Most reporting problems are definition problems.',
     overviewBody:
@@ -224,7 +222,6 @@ export const serviceCategories = [
     accent: 'Improve with intent.',
     description:
       'ESG data, reporting and supply-chain due diligence, set up so the figures you publish can be traced back to their source.',
-    tags: ['Traceable data', 'Reporting readiness', 'Supplier visibility'],
     overviewTitle: 'Turn ESG obligations into a process your teams can run.',
     lead: 'Most ESG effort goes into finding the data, not using it.',
     overviewBody:
@@ -295,7 +292,6 @@ export const serviceCategories = [
     accent: 'Not just a lift and shift.',
     description:
       'Cloud strategy, architecture and migration across hybrid and multi-cloud environments, with cost and operational ownership addressed before the move.',
-    tags: ['Assessed workloads', 'Cost modelled', 'Operations defined'],
     overviewTitle: 'Decide what moves, what changes, and what stays.',
     lead: 'Not every workload belongs in the cloud.',
     overviewBody:
@@ -358,7 +354,6 @@ export const serviceCategories = [
     accent: 'Not less control.',
     description:
       'Workflow automation, robotic process automation and process redesign applied where they reduce effort without weakening oversight.',
-    tags: ['Process first', 'Audit retained', 'Measured effort saved'],
     overviewTitle: 'Automate the process you have fixed, not the one you have.',
     lead: 'Automating a broken process makes it fail faster.',
     overviewBody:

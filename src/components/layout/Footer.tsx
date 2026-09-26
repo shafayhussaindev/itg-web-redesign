@@ -60,7 +60,7 @@ export function Footer() {
                 </span>
               ))}
               <span aria-hidden="true" className="text-white/30">·</span>
-              {/* Reopens the cookie bar so a visitor can change their choice. */}
+              {/* Reopens cookie settings so a visitor can change their choice. */}
               <button
                 type="button"
                 onClick={openCookieSettings}

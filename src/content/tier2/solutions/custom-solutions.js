@@ -4,7 +4,6 @@ export const solutionPage = {
   image: '/assets/cat-digital.jpg',
   headline: 'Built around people.', accent: 'Connected to your business.',
   description: 'Create intuitive web, mobile and portal experiences that make complex business interactions feel simple.',
-  tags: ['Human-centered design', 'Connected platforms', 'Consistent experiences'],
   overview: { eyebrow: 'Purpose in every interaction', title: 'Make complex work feel intuitive.', body: 'Your digital experience is where people meet your business. ITG combines product thinking, design and engineering to make those interactions useful, consistent and connected to the systems behind them.', note: 'From a customer portal to an enterprise application, we design for the people who use it and the teams who maintain it.' },
   outcomes: [
     { icon: 'groups', title: 'Easier user journeys', body: 'Help customers and employees complete the tasks that matter with less friction.' },

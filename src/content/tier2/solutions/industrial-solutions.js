@@ -4,7 +4,6 @@ export const solutionPage = {
   image: '/assets/cat-automation.jpg',
   headline: 'Less friction.', accent: 'More forward motion.',
   description: 'Connect your systems, automate routine work and modernize your infrastructure with a cloud foundation built for everyday operations.',
-  tags: ['Intelligent workflows', 'Connected systems', 'Resilient infrastructure'],
   overview: { eyebrow: 'Make room for what matters', title: 'Let your systems do more of the work.', body: 'Manual handovers and disconnected infrastructure slow teams down. ITG connects applications, streamlines repeatable processes and builds cloud environments around your operational needs.', note: 'Automation and infrastructure work together, with security, visibility and human oversight designed in from the start.' },
   outcomes: [
     { icon: 'bolt', title: 'Less repetitive work', body: 'Free teams from routine handovers and repeated data entry.' },

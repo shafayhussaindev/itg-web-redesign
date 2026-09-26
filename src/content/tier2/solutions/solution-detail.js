@@ -5,7 +5,7 @@ export const solutionDetail = {
   contactEmail: '',
   contactFallback: { label: 'Start a Conversation', href: '/contact?topic=project' },
   home: 'Home', solutions: 'Solutions', skipLink: 'Skip to content',
-  explore: 'Explore Capabilities', talk: 'Talk to an Expert', scroll: 'Discover the solution',
+  explore: 'Explore Capabilities', talk: 'Talk to an Expert',
   overview: 'Overview', capabilities: 'Capabilities', applications: 'Applications', approach: 'Our Approach',
   capabilitiesEyebrow: 'What we help you build', capabilitiesTitle: 'The capabilities behind the outcome.',
   capabilityLink: 'Explore capability', focus: 'How we help', outcome: 'What this enables',

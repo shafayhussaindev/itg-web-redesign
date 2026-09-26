@@ -20,7 +20,7 @@ export const servicesHero = {
   titleLine1: 'How ITG Delivers',
   titleAccent: 'Enterprise Platforms',
   body: 'Structured delivery for scalable, secure and compliant enterprise systems.',
-  primaryCta: { label: 'Request a Service Consultation →', href: '/contact?topic=project' },
+  primaryCta: { label: 'Request a Consultation →', href: '/contact?topic=project' },
   // #pillars is the Delivery Pillars section id (DeliveryPillars.jsx).
   secondaryCta: { label: 'View Delivery Pillars →', href: '#pillars' },
   // Floating glass capability chips over the hero photograph.
@@ -200,7 +200,7 @@ export const serviceIndustries = {
 export const servicesCta = {
   title: 'Ready to Engage with ITG Delivery Teams?',
   body: 'Structured delivery, governed implementation, and long-term enablement.',
-  primary: { label: 'Request a Service Consultation →', href: '/contact?topic=project' },
+  primary: { label: 'Request a Consultation →', href: '/contact?topic=project' },
   secondary: { label: 'Explore ITG Solutions →', href: '/solutions' },
   // The architectural image already approved on the Solutions page CTA.
   background: '/assets/cta-skyline.jpg',

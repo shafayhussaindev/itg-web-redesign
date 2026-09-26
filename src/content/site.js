@@ -440,7 +440,7 @@ export const footer = {
 
 
 /* ============================================================================
- * 8. COOKIE BAR (the strip along the bottom on a visitor's first visit)
+ * 8. COOKIE SETTINGS (the popup on a visitor's first visit)
  * ========================================================================= */
 
 export const cookieBar = {
@@ -449,6 +449,13 @@ export const cookieBar = {
   policyLink: { label: "Read our Privacy Policy", href: "/privacy" },
   acceptAll: "Accept all",
   necessaryOnly: "Necessary only",
+  savePreferences: "Save preferences",
+  close: "Close cookie settings",
+  essentialTitle: "Essential",
+  essentialDescription: "Required for basic site functionality and saved preferences.",
+  alwaysActive: "Always active",
+  analyticsTitle: "Analytics",
+  analyticsDescription: "Help us understand aggregate site usage when analytics is enabled.",
   // The footer link that lets a visitor change their choice later.
   settingsLink: "Cookie settings",
 };

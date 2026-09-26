@@ -5,7 +5,6 @@ export const solutionPage = {
   image: '/assets/cat-sustainability.jpg',
   headline: 'From complex requirements', accent: 'to connected evidence.',
   description: 'Bring sustainability data, product traceability and reporting workflows together to support transparent, accountable operations.',
-  tags: ['Product traceability', 'Trusted evidence', 'Reporting readiness'],
   overview: { eyebrow: 'A foundation for transparency', title: 'Make sustainability part of your systems.', body: 'Sustainability information often sits across spreadsheets, suppliers and disconnected business platforms. ITG connects that information with the workflows and evidence needed to support reporting and review.', note: 'Build a flexible data foundation that can evolve as your organization and its reporting requirements change.' },
   outcomes: [
     { icon: 'hub', title: 'Connected evidence', body: 'Bring source information, ownership and supporting records into a structured environment.' },

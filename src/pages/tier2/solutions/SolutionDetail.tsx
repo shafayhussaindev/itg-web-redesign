@@ -56,10 +56,6 @@ export default function SolutionDetail({ page }: { page: SolutionPageContent }) 
     return () => cancelAnimationFrame(frame);
   }, [expanded, lenis]);
 
-  const openCapability = (id: string) => {
-    pendingAnchor.current = id;
-    setExpanded(current => Array.from(new Set([...current, id])));
-  };
   const related = solutionPages.filter(item => item.id !== page.id);
   const contactHref = copy.contactEmail
     ? `mailto:${copy.contactEmail}?subject=${encodeURIComponent(`${page.name} enquiry`)}`
@@ -87,10 +83,6 @@ export default function SolutionDetail({ page }: { page: SolutionPageContent }) 
                 <a className="btn-modern" href="#capabilities">{copy.explore}<ArrowRight size={18} /></a>
                 <a className="btn-modern-ghost" href="#contact">{copy.talk}</a>
               </div>
-            </div>
-            <div className="sd-hero-bottom">
-              <ul className="sd-hero-tags">{page.tags.map(tag => <li key={tag}><MSym name="check_circle" size={16} />{tag}</li>)}</ul>
-              <a href="#overview" className="sd-scroll">{copy.scroll}<ChevronDown size={18} /></a>
             </div>
           </div>
         </section>
@@ -120,11 +112,7 @@ export default function SolutionDetail({ page }: { page: SolutionPageContent }) 
         <section id="capabilities" className="sd-section sd-ice">
           <div className="section-container">
             <div className="sd-section-heading"><p className="sd-eyebrow">{copy.capabilitiesEyebrow}</p><h2>{copy.capabilitiesTitle}</h2><p>{page.capabilitiesIntro}</p></div>
-            <div className="sd-capability-layout">
-              <nav className="sd-capability-index" aria-label={copy.capabilities}>
-                {page.capabilities.map((cap, index) => <a key={cap.id} href={`#${cap.id}`} onClick={() => openCapability(cap.id)}><span className="sd-number">{String(index + 1).padStart(2, '0')}</span><span>{cap.title}</span><ArrowRight size={16} /></a>)}
-              </nav>
-              <div className="sd-capability-list">{page.capabilities.map((cap, index) => {
+            <div className="sd-capability-list">{page.capabilities.map((cap, index) => {
                 const isOpen = expanded.includes(cap.id);
                 return <article key={cap.id} id={cap.id} className={`sd-capability${isOpen ? ' is-open' : ''}`}>
                   <h3><button type="button" id={`${cap.id}-trigger`} aria-expanded={isOpen} aria-controls={`${cap.id}-panel`} onClick={() => setExpanded(current => isOpen ? current.filter(id => id !== cap.id) : [...current, cap.id])}>
@@ -142,7 +130,6 @@ export default function SolutionDetail({ page }: { page: SolutionPageContent }) 
                   </div>
                 </article>;
               })}</div>
-            </div>
           </div>
         </section>
 

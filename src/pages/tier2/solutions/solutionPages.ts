@@ -7,7 +7,7 @@ import { solutionPage as dataPrivacy } from '@/content/tier2/solutions/data-priv
 
 export type SolutionPageContent = {
   id: string; name: string; shortName: string; icon: string; image: string;
-  headline: string; accent: string; description: string; tags: string[];
+  headline: string; accent: string; description: string;
   overview: { eyebrow: string; title: string; body: string; note: string };
   outcomes: { icon: string; title: string; body: string }[];
   capabilitiesIntro: string;

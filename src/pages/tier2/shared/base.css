@@ -23,11 +23,6 @@
 .solution-detail .sd-hero h1 span { display: block; color: var(--brand-accent-soft); }
 .solution-detail .sd-hero-description { max-width: 630px; font-size: clamp(16px, 1.35vw, 19px); color: rgba(255,255,255,.88); margin-bottom: 32px; }
 .solution-detail .sd-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
-.solution-detail .sd-hero-bottom { display: flex; align-items: center; justify-content: space-between; gap: 24px; border-top: 1px solid rgba(255,255,255,.22); padding-top: 24px; }
-.solution-detail .sd-hero-tags { display: flex; flex-wrap: wrap; gap: 24px; }
-.solution-detail .sd-hero-tags li { display: flex; align-items: center; gap: 8px; font-size: 11px; color: rgba(255,255,255,.85); }
-.solution-detail .sd-hero-tags .msym { color: var(--brand-accent-soft); }
-.solution-detail .sd-scroll { display: flex; align-items: center; gap: 12px; font-size: 11px; min-height: 44px; }
 .solution-detail .sd-hero a:focus-visible { outline-color: white; }
 .solution-detail .sd-section-nav { border-bottom: 1px solid rgba(13,33,64,.12); background: white; }
 .solution-detail .sd-section-nav-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; min-height: 80px; }
@@ -48,13 +43,8 @@
 .solution-detail .sd-outcome p, .solution-detail .sd-application p, .solution-detail .sd-steps p { color: var(--charcoal); font-size: 14px; }
 .solution-detail .sd-section-heading { max-width: 740px; margin-bottom: 48px; }
 .solution-detail .sd-section-heading > p:last-child:not(.sd-eyebrow) { color: var(--charcoal); margin-top: 20px; max-width: 660px; font-size: 16px; }
-.solution-detail .sd-capability-layout { display: grid; grid-template-columns: 300px minmax(0,1fr); gap: 48px; align-items: start; }
-.solution-detail .sd-capability-index { display: flex; flex-direction: column; position: sticky; top: 112px; }
-.solution-detail .sd-capability-index a { display: flex; align-items: center; gap: 16px; min-height: 72px; border-bottom: 1px solid rgba(13,33,64,.12); padding: 16px 4px; font-size: 12px; line-height: 1.5; }
-.solution-detail .sd-capability-index a:hover { color: var(--brand-accent); }
-.solution-detail .sd-capability-index a > span:nth-child(2) { flex: 1; }
 .solution-detail .sd-number { font-family: 'JetBrains Mono', monospace; color: var(--light-text); font-size: 11px; }
-.solution-detail .sd-capability-list { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.solution-detail .sd-capability-list { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 960px; margin-inline: auto; }
 .solution-detail .sd-capability { background: white; border: 1px solid rgba(13,33,64,.12); border-radius: 12px; box-shadow: var(--shadow-card); }
 .solution-detail .sd-capability.is-open { border-color: rgba(61,111,180,.4); }
 .solution-detail .sd-capability h3 button { display: flex; gap: 16px; align-items: center; text-align: left; width: 100%; padding: 24px; border-radius: 12px; }
@@ -116,13 +106,9 @@
   .solution-detail .sd-section-name { display: none; }
   .solution-detail .sd-section-links { width: 100%; justify-content: space-between; }
   .solution-detail .sd-intro-grid { gap: 40px; }
-  .solution-detail .sd-capability-layout { grid-template-columns: 1fr; }
-  .solution-detail .sd-capability-index { display: none; }
   .solution-detail .sd-related { grid-template-columns: repeat(2,1fr); }
   .solution-detail .sd-steps { grid-template-columns: repeat(2,1fr); gap: 40px 32px; }
   .solution-detail .sd-feature-copy { padding: 48px 32px; }
-  .solution-detail .sd-hero-bottom { align-items: flex-start; }
-  .solution-detail .sd-scroll { display: none; }
 }
 @media (max-width: 767px) {
   .solution-detail .sd-section { padding: 64px 0; }
@@ -130,8 +116,6 @@
   .solution-detail .sd-breadcrumb { font-size: 10px; gap: 8px; margin-bottom: 32px; }
   .solution-detail .sd-hero-copy { padding-bottom: 40px; }
   .solution-detail .sd-hero h1 { font-size: clamp(34px,7.5vw,48px); line-height: 1.12; }
-  .solution-detail .sd-hero-tags { gap: 12px 20px; }
-  .solution-detail .sd-hero-tags li { font-size: 10px; }
   .solution-detail .sd-hero-scrim { background: linear-gradient(90deg,rgba(6,16,34,.9),rgba(9,24,48,.73)),linear-gradient(0deg,rgba(6,16,34,.5),transparent); }
   .solution-detail .sd-intro-grid, .solution-detail .sd-outcomes, .solution-detail .sd-applications, .solution-detail .sd-feature { grid-template-columns: 1fr; }
   .solution-detail .sd-outcomes { margin-top: 40px; gap: 24px; }
@@ -162,7 +146,7 @@
   .solution-detail .sd-steps { grid-template-columns: 1fr; gap: 32px; }
 }
 
-/* Solutions lead with business outcomes, then the indexed capability guide. */
+/* Solutions lead with business outcomes, then the capability accordion. */
 .solution-category .sd-outcomes { gap: 0; background: var(--ice); border-radius: 16px; overflow: hidden; }
 .solution-category .sd-outcome { border-top: 0; padding: 32px; }
 .solution-category .sd-outcome + .sd-outcome { border-left: 1px solid rgba(13,33,64,.12); }

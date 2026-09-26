@@ -563,6 +563,28 @@
     text-decoration: none;
   }
   .btn-ghost:hover { color: var(--navy); }
+
+  /* Shared CTA geometry. Labels can grow in width, but every action keeps
+     the same height, type size, gutters and arrow size. */
+  :is(.btn-cyan, .btn-modern, .btn-modern-ghost, .btn-navy, .btn-nav-cta) {
+    min-height: 48px;
+    padding-inline: 30px;
+    font-size: 14px;
+    gap: 8px;
+  }
+  :is(.btn-cyan, .btn-modern, .btn-modern-ghost, .btn-navy, .btn-nav-cta) svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+  .btn-modern-ghost:not(:has(svg, .btn-arrow))::after {
+    content: '→';
+    font-size: 18px;
+    line-height: 1;
+    transition: transform .3s cubic-bezier(.2,.8,.2,1);
+  }
+  .btn-modern-ghost:hover::after,
+  .btn-modern-ghost:focus-visible::after { transform: translateX(4px); }
 }
 
 @layer utilities {

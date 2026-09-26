@@ -43,8 +43,6 @@ export function BackToTop() {
         "hover:bg-[color:var(--navy)] hover:text-white hover:border-[color:var(--navy)]",
         "transition-[opacity,transform,background-color,color,border-color] duration-200",
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 pointer-events-none",
-        // Out of the way while the cookie bar covers the bottom edge.
-        "[[data-cookie-bar]_&]:hidden",
       )}
     >
       <ArrowUp className="w-5 h-5" aria-hidden />

@@ -82,7 +82,6 @@ export const industryCategories = [
     accent: 'Every channel.',
     description:
       'Commerce, inventory and customer platforms for retail and consumer businesses selling across stores, marketplaces and direct channels.',
-    tags: ['Omnichannel inventory', 'Customer data', 'Channel performance'],
     overviewTitle: 'The channel count went up. The stock did not.',
     lead: 'Most retail problems are inventory accuracy problems.',
     overviewBody:
@@ -166,7 +165,6 @@ export const industryCategories = [
     accent: 'Telling the same story.',
     description:
       'Digital platforms for production, traceability and smart factory operations, built to reconcile what the plan says with what the shop floor is actually doing.',
-    tags: ['Production visibility', 'Traceability', 'Connected operations'],
     overviewTitle: 'Close the gap between the plan and the floor.',
     lead: 'Planning systems and production reality drift apart daily.',
     overviewBody:
@@ -250,7 +248,6 @@ export const industryCategories = [
     accent: 'And what it costs.',
     description:
       'Platforms for warehousing, transport and distribution operations, where visibility and cost per movement decide whether the network works.',
-    tags: ['Network visibility', 'Cost per movement', 'Operational control'],
     overviewTitle: 'Visibility is only useful if it is current.',
     lead: 'A location updated once a day is a location you cannot act on.',
     overviewBody:
@@ -334,7 +331,6 @@ export const industryCategories = [
     accent: 'the cost of both.',
     description:
       'Integrated platforms for developers, contractors and facilities operators, connecting project delivery with the assets those projects become.',
-    tags: ['Project controls', 'Asset lifecycle', 'Cost visibility'],
     overviewTitle: 'The project ends. The asset does not.',
     lead: 'Handover is where most information is lost.',
     overviewBody:
@@ -418,7 +414,6 @@ export const industryCategories = [
     accent: 'Track it properly.',
     description:
       'Structured systems for consulting, legal, financial and managed service firms, where utilization and recoverability decide the result.',
-    tags: ['Utilization', 'Engagement margin', 'Client confidentiality'],
     overviewTitle: 'You cannot manage a margin you cannot see until month end.',
     lead: 'Recoverability is decided during the engagement, not after it.',
     overviewBody:

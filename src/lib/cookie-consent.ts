@@ -5,7 +5,7 @@ export type CookieConsent = "all" | "necessary";
 
 const STORAGE_KEY = "itg-cookie-consent";
 
-// Fired by the footer's "Cookie settings" link to reopen the bar.
+// Fired by the footer's "Cookie settings" link to reopen the dialog.
 export const OPEN_COOKIE_SETTINGS = "itg:open-cookie-settings";
 
 export function getCookieConsent(): CookieConsent | null {

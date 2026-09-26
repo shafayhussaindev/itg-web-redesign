@@ -12,7 +12,7 @@ export const hero = {
   eyebrow: 'AI & INTELLIGENCE',
   title: 'AI & Intelligence',
   subtitle: 'Embedding Intelligence Across Enterprise Systems, Data and Operations',
-  body: 'AI & Intelligence at ITG is not positioned as experimentation or isolated innovation. It is designed as a foundational enterprise capability - embedded into systems, data and workflows to support better decisions, automation and regulatory readiness.',
+  body: 'Artificial Intelligence at ITG is not positioned as experimentation or isolated innovation. It is designed as a foundational enterprise capability - embedded into systems, data and workflows to support better decisions, automation and regulatory readiness.',
   note: 'AI at ITG works with existing enterprise platforms and evolves with business needs.',
   primaryCta: { label: 'Explore Capabilities', href: '#capabilities' },
   secondaryCta: { label: 'Talk to an Expert', href: '#contact' },
@@ -210,7 +210,6 @@ export const solutionPage = {
   image: '/assets/cat-ai.jpg',
   headline: 'Turn data into decisions.', accent: 'Intelligence into advantage.',
   description: 'Embed intelligence across your enterprise systems, data and operations. Move from isolated experiments to AI that supports the way your business works.',
-  tags: ['Enterprise intelligence', 'Responsible AI', 'Connected data'],
   overview: { eyebrow: 'Intelligence with purpose', title: 'Put your data to work.', body: hero.body, note: hero.note },
   outcomes: [
     { icon: 'bar_chart', title: 'Better-informed decisions', body: 'Connect trusted data with the people and processes that need it.' },

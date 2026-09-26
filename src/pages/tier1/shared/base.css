@@ -109,6 +109,11 @@
   .tier1-site .btn-outline-navy:active{transform:translateY(0);}
   .tier1-site .btn-ghost-white{font-weight:600;font-size:14px;min-height:44px;padding:0 10px;display:inline-flex;align-items:center;gap:6px;color:#fff;background:transparent;border:none;cursor:pointer;text-decoration:none;}
 
+  .tier1-site :is(.btn-cyan,.btn-glass,.btn-outline-navy,.btn-ghost-white,.cat-btn){
+    min-height:48px;padding-inline:30px;font-size:14px;gap:8px;
+  }
+  .tier1-site .btn-arrow{font-size:18px;line-height:1;}
+
   .tier1-site section{padding:96px 40px;}
   .tier1-site .ice-bg{background:var(--ice);}
 
@@ -144,7 +149,7 @@
   .tier1-site .cat-card:has(.cat-btn:hover) .cat-reveal,.tier1-site .cat-card.is-open .cat-reveal{max-height:150px;opacity:1;margin-bottom:14px;}
   .tier1-site .cat-reveal .sub{font-size:12px;font-weight:600;color:var(--brand-accent-soft);margin-bottom:6px;line-height:1.35;}
   .tier1-site .cat-reveal p{font-size:12px;color:rgba(255,255,255,0.78);line-height:1.55;}
-  .tier1-site .cat-btn{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.16);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(255,255,255,0.4);color:#fff;font-size:14px;font-weight:600;min-height:44px;padding:0 20px;border-radius:10px;cursor:pointer;transition:background .25s ease,border-color .25s ease;}
+  .tier1-site .cat-btn{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.16);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(255,255,255,0.4);color:#fff;font-size:14px;font-weight:600;min-height:48px;padding:0 30px;border-radius:10px;cursor:pointer;transition:background .25s ease,border-color .25s ease;}
   .tier1-site .cat-btn:hover,.tier1-site .cat-card.is-open .cat-btn{background:rgba(255,255,255,0.28);border-color:rgba(255,255,255,0.6);}
   /* Cards whose data carries a title only: no reveal, no button, so the
      title sits directly on the foot padding instead of leaving room for a
@@ -227,8 +232,8 @@
     .tier1-site .cat-card{height:400px;}
 
     /* Touch targets: these sat at 38px. */
-    .tier1-site .btn-cyan,.tier1-site .btn-glass,.tier1-site .cat-btn,.tier1-site .btn-outline-navy,.tier1-site .btn-ghost-white,.tier1-site .navcta{min-height:44px;}
-    .tier1-site .cat-btn{padding:0 20px;}
+    .tier1-site .btn-cyan,.tier1-site .btn-glass,.tier1-site .cat-btn,.tier1-site .btn-outline-navy,.tier1-site .btn-ghost-white,.tier1-site .navcta{min-height:48px;}
+    .tier1-site .cat-btn{padding:0 30px;}
 
     .tier1-site .cta-bg{padding:72px 20px;}
     .tier1-site .cta-content h2{font-size:26px;}

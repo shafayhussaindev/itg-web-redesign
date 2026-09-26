@@ -14,7 +14,6 @@ export const solutionPage = {
   image: '/assets/company/security.jpg',
   headline: 'From scattered personal data', accent: 'to privacy by design.',
   description: 'Know where personal data lives, control how it is used and respond to individuals with confidence, built into the systems your teams already run.',
-  tags: ['Data discovery', 'Consent & rights', 'Protection by design'],
   overview: { eyebrow: 'A foundation for trust', title: 'Make privacy part of how your systems work.', body: 'Personal data spreads across applications, documents, suppliers and cloud services faster than policies can keep up. ITG connects that landscape with the controls, workflows and evidence privacy teams need to govern it.', note: 'Privacy requirements differ by market and keep changing. We build these capabilities alongside your legal and compliance advisers, not in place of them.' },
   outcomes: [
     { icon: 'manage_search', title: 'Visible personal data', body: 'Know which systems hold personal data, what kind, and who is responsible for it.' },

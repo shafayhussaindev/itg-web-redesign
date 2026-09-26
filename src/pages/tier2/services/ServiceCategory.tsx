@@ -66,9 +66,6 @@ export default function ServiceCategory({ page }: { page: ServiceCategoryContent
                 <a className="btn-modern-ghost" href="#contact">{copy.talk}</a>
               </div>
             </div>
-            <div className="sd-hero-bottom">
-              <ul className="sd-hero-tags">{page.tags.map(tag => <li key={tag}><MSym name="check_circle" size={16} />{tag}</li>)}</ul>
-            </div>
           </div>
         </section>
 

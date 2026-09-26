@@ -7,14 +7,14 @@
  * animated. This lifts the arrow into the .btn-arrow span the stylesheet
  * already styles, without changing a word of the copy.
  *
- * Labels with no trailing arrow pass straight through, so it is safe to wrap
- * every CTA regardless.
+ * Labels with no trailing arrow get the same arrow treatment, so every CTA
+ * using this component has a consistent affordance.
  */
 export default function CtaLabel({ children }) {
   if (typeof children !== 'string') return <>{children}</>;
 
   const match = children.match(/^([\s\S]*?)\s*([→↗➜])\s*$/);
-  if (!match) return <>{children}</>;
+  if (!match) return <>{children}<span className="btn-arrow" aria-hidden="true">→</span></>;
 
   return (
     <>

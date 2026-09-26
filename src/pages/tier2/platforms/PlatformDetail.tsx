@@ -67,9 +67,6 @@ export default function PlatformDetail({ page }: { page: PlatformPageContent }) 
               {page.products.map((product, index) => <a key={product.id} href={`#${product.id}`}><span className="sd-number">{String(index + 1).padStart(2, '0')}</span><span><strong>{product.name}</strong><small>{product.description}</small></span><ArrowRight size={18} /></a>)}
             </aside>}
             </div>
-            <div className="sd-hero-bottom">
-              <ul className="sd-hero-tags">{page.tags.map(tag => <li key={tag}><MSym name="check_circle" size={16} />{tag}</li>)}</ul>
-            </div>
           </div>
         </section>
 

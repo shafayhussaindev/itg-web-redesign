@@ -687,7 +687,7 @@
   .tier1-site .svc-cta-row a { width: 100%; justify-content: center; }
 
   /* Touch targets. */
-  .tier1-site .svc-btn-glow, .tier1-site .svc-page .btn-glass, .tier1-site .svc-page .btn-cyan { min-height: 44px; }
+  .tier1-site .svc-btn-glow, .tier1-site .svc-page .btn-glass, .tier1-site .svc-page .btn-cyan { min-height: 48px; }
 }
 
 /* ============================================================

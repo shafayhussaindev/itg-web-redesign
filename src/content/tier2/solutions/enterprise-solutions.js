@@ -9,7 +9,6 @@ export const solutionPage = {
   headline: 'One connected enterprise.',
   accent: 'Built to move forward.',
   description: 'Bring finance, operations, procurement and customer relationships together in business systems designed around the way you work.',
-  tags: ['Connected operations', 'Trusted information', 'Enterprise control'],
   overview: {
     eyebrow: 'A stronger business foundation',
     title: 'Connect the systems that run your business.',
