@@ -5,6 +5,7 @@ import { useLenis } from '@/hooks/useLenis';
 import { solutionDetail as copy } from '@/data/solutions/solution-detail.js';
 import { solutionPages, type SolutionPageContent } from '../../data/solutions/solutionPages';
 import '@/components/common/tier2/base.css';
+import '@/components/common/tier2/corporate.css';
 
 export default function SolutionDetail({ page }: { page: SolutionPageContent }) {
   const [expanded, setExpanded] = useState<string[]>([page.capabilities[0].id]);
@@ -75,7 +76,7 @@ export default function SolutionDetail({ page }: { page: SolutionPageContent }) 
             </nav>
             <div className="sd-hero-copy">
               <p className="sd-eyebrow"><MSym name={page.icon} size={20} />{page.name}</p>
-              <h1 id="solution-title">{page.headline}<span>{page.accent}</span></h1>
+              <h1 id="solution-title">{page.name}</h1>
               <p className="sd-hero-description">{page.description}</p>
               <div className="sd-actions">
                 <a className="btn-modern" href="#capabilities">{copy.explore}<ArrowRight size={18} /></a>

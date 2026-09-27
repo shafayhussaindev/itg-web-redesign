@@ -1,5 +1,6 @@
 import { tier2Navbar } from './navbar-tier2.js';
 import { tier3Navbar } from './navbar-tier3.js';
+import { pageContent } from './page-content.js';
 
 /* The top navigation is edited in two files: navbar-tier2.js and navbar-tier3.js.
  * Footer and cookie settings remain in this file. */
@@ -9,6 +10,7 @@ function withChildren(family) {
     ...page,
     children: (tier3Navbar[family][page.href] ?? []).map(({ id, href, ...item }) => ({
       ...item,
+      description: pageContent[family]?.[page.href]?.children?.[id]?.summary ?? item.description,
       href: href ?? `${page.href}/${id}`,
     })),
   }));

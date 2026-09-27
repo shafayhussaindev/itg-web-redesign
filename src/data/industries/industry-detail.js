@@ -487,7 +487,12 @@ export const industryCategories = [
   },
 ];
 
-export const industryPages = industryCategories.map(category => ({
-  ...category,
-  href: industryPaths[category.id],
-}));
+import { alignPageContent } from '@/data/shared/align-page-content.js';
+
+export const industryPages = industryCategories.map(category => {
+  const href = industryPaths[category.id];
+  return alignPageContent('industries', href, { ...category, href }, {
+    childrenKey: 'segments', pageTitleKey: 'name', childTitleKey: 'name',
+    childSummaryKey: 'description', childBodyKey: 'body',
+  });
+});

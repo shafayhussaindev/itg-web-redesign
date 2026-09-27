@@ -5,6 +5,7 @@ import { contactLink } from '@/lib/contact-link';
 import { platformPages, platformDetail as copy } from '@/data/platforms/platform-detail.js';
 import '@/components/common/tier2/base.css';
 import './platform-detail.css';
+import '@/components/common/tier2/corporate.css';
 
 type PlatformPageContent = typeof platformPages[number];
 
@@ -53,7 +54,7 @@ export default function PlatformDetail({ page }: { page: PlatformPageContent }) 
             <div className="pc-hero-layout">
             <div className="sd-hero-copy">
               <p className="sd-eyebrow"><MSym name={page.icon} size={20} />{page.title}</p>
-              <h1 id="product-title">{page.headline}<span>{page.accent}</span></h1>
+              <h1 id="product-title">{page.title}</h1>
               <p className="sd-hero-description">{page.body}</p>
               <div className="sd-actions">
                 <a className="btn-modern" href={hasProducts ? '#products' : '#overview'}>{copy.explore}<ArrowRight size={18} /></a>

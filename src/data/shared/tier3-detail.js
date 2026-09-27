@@ -11,8 +11,10 @@
  *   /consumer-goods/omnichannel
  *
  * WHERE THE WORDS COME FROM
- *   The title, tagline, description and bullet lists on each Tier 3 page are
- *   read from the item's entry on its Tier 2 page, so the two always agree:
+ *   Tier 3 titles follow navbar-tier3.js. The tagline, description and bullet
+ *   lists come from the item's Tier 2 entry, with updated copy in
+ *   page-content.js where an offering was renamed. Both pages read the same
+ *   aligned item, so they stay in agreement:
  *     Solutions   content/tier2/solutions/<page>.js   (capabilities)
  *     Platforms   content/tier2/platform-detail.js    (products)
  *     Services    content/tier2/service-detail.js     (services)
@@ -35,10 +37,10 @@ export const tier3Detail = {
   backTo: 'Back to {parent}',
   discuss: 'Discuss this {kind}',
   includedEyebrow: 'What’s included',
-  includedTitle: 'How we help.',
+  includedTitle: 'What {title} covers.',
   outcomeTitle: 'What this enables',
   whyEyebrow: 'Why it matters',
-  whyTitle: 'The outcomes it supports.',
+  whyTitle: 'How {title} supports {parent}.',
   appliedEyebrow: 'In practice',
   stepsEyebrow: 'How we work',
   stepsTitle: 'A clear path from scope to adoption.',

@@ -4,6 +4,7 @@ import { solutionPage as sustainability } from '@/data/solutions/esg-solutions.j
 import { solutionPage as digital } from '@/data/solutions/custom-solutions.js';
 import { solutionPage as automation } from '@/data/solutions/industrial-solutions.js';
 import { solutionPage as dataPrivacy } from '@/data/solutions/data-privacy-solutions.js';
+import { alignPageContent } from '@/data/shared/align-page-content.js';
 
 export type SolutionPageContent = {
   id: string; name: string; shortName: string; icon: string; image: string;
@@ -20,6 +21,10 @@ export type SolutionPageContent = {
 // Order matters: it is the order of the "related solutions" cards on each page,
 // and matches the Solutions menu in content/site.js. Every page here gets the
 // route /<id> automatically (see App.tsx).
-export const solutionPages: SolutionPageContent[] = [ai, enterprise, sustainability, digital, automation, dataPrivacy];
+export const solutionPages: SolutionPageContent[] = [ai, enterprise, sustainability, digital, automation, dataPrivacy]
+  .map(page => alignPageContent('solutions', `/${page.id}`, page, {
+    childrenKey: 'capabilities', pageTitleKey: 'name', childTitleKey: 'title',
+    childSummaryKey: 'subtitle', childBodyKey: 'description',
+  }));
 // The addresses these pages had before they were renamed are forwarded by
 // src/lib/old-addresses.ts.

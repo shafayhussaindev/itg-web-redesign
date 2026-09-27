@@ -421,7 +421,12 @@ export const serviceCategories = [
   },
 ];
 
-export const servicePages = serviceCategories.map(category => ({
-  ...category,
-  href: serviceCategoryPaths[category.id],
-}));
+import { alignPageContent } from '@/data/shared/align-page-content.js';
+
+export const servicePages = serviceCategories.map(category => {
+  const href = serviceCategoryPaths[category.id];
+  return alignPageContent('services', href, { ...category, href }, {
+    childrenKey: 'services', pageTitleKey: 'name', childTitleKey: 'name',
+    childSummaryKey: 'description', childBodyKey: 'body',
+  });
+});

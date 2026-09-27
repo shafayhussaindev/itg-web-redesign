@@ -8,6 +8,12 @@ Everything you are likely to want to change — headings, paragraphs, button
 labels, menu entries, card lists, image filenames — is in **this folder**.
 You do not need to open anything else.
 
+**Current Tier 2/3 naming:** `navbar-tier2.js` and `navbar-tier3.js` supply
+the displayed page titles. `page-content.js` holds updated supporting copy for
+offerings whose titles changed after their original detail data was written.
+Each entry is keyed by its existing route and item ID; keep those IDs stable.
+The same copy is used in the menu, the Tier 2 catalogue, and the Tier 3 page.
+
 ---
 
 ## Which file do I open?

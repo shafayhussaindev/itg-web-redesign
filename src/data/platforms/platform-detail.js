@@ -1,4 +1,5 @@
 import { platforms } from '@/data/platforms/index-content.js';
+import { alignPageContent } from '@/data/shared/align-page-content.js';
 
 /* ============================================================================
  * TIER 2: THE SIX PLATFORM PAGES
@@ -110,8 +111,14 @@ const platformDetails = {
   },
 };
 
-export const platformPages = platforms.map(platform => ({
-  ...platform,
-  ...platformDetails[platform.id],
-  href: `/${platform.id}`,
-}));
+export const platformPages = platforms.map(platform => {
+  const href = `/${platform.id}`;
+  return alignPageContent('platforms', href, {
+    ...platform,
+    ...platformDetails[platform.id],
+    href,
+  }, {
+    childrenKey: 'products', pageTitleKey: 'title', childTitleKey: 'name',
+    childSummaryKey: 'description', childBodyKey: 'body',
+  });
+});

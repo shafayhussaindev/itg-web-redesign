@@ -5,6 +5,7 @@ import { contactLink } from '@/lib/contact-link';
 import { servicePages, serviceDetail as copy } from '@/data/services/service-detail.js';
 import '@/components/common/tier2/base.css';
 import './service-detail.css';
+import '@/components/common/tier2/corporate.css';
 
 type ServiceCategoryContent = typeof servicePages[number];
 
@@ -57,7 +58,7 @@ export default function ServiceCategory({ page }: { page: ServiceCategoryContent
             </nav>
             <div className="sd-hero-copy">
               <p className="sd-eyebrow"><MSym name={page.icon} size={20} />{page.name}</p>
-              <h1 id="service-title">{page.headline}<span>{page.accent}</span></h1>
+              <h1 id="service-title">{page.name}</h1>
               <p className="sd-hero-description">{page.description}</p>
               <div className="sd-actions">
                 <a className="btn-modern" href="#services">{copy.explore}<ArrowRight size={18} /></a>

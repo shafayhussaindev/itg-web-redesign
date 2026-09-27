@@ -5,6 +5,7 @@ import { tier3Families } from '@/data/shared/tier3-detail.js';
 import { tier3Label as label, type Tier3Page } from '../../../data/shared/tier3Pages';
 import '@/components/common/tier2/base.css';
 import './tier3.css';
+import '@/components/common/tier2/corporate.css';
 
 const pad = (n: number) => String(n + 1).padStart(2, '0');
 
@@ -45,7 +46,8 @@ export default function Tier3Detail({ page }: { page: Tier3Page }) {
             </nav>
             <div className="sd-hero-copy">
               <p className="sd-eyebrow"><MSym name={page.parent.icon} size={20} />{page.parent.name}</p>
-              <h1 id="tier3-title">{page.title}<span>{page.tagline}</span></h1>
+              <h1 id="tier3-title">{page.title}</h1>
+              <p className="t3-tagline">{page.tagline}</p>
               <p className="sd-hero-description">{page.body}</p>
               <div className="sd-actions">
                 <a className="btn-modern" href="#contact">{label('discuss', page)}<ArrowRight size={18} /></a>
