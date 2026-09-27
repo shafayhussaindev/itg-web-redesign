@@ -1,0 +1,270 @@
+/* Contact page. Layered over the tier-2 foundation (tier2/shared/base.css) for
+   tokens, breadcrumb, eyebrow and buttons; everything here is scoped to
+   .contact-page so no other page can be affected. */
+
+.contact-page {
+  /* Field outline at 3.46:1 against white — the 3:1 non-text minimum, with
+     margin. The pale #B8C4D6 used for decorative rules elsewhere is 1.76:1
+     and would leave an empty field hard to find. */
+  --ct-border: #7C8BA1;
+  --ct-error: #B42318;       /* 6.57:1 on white */
+  --ct-error-bg: #FEF3F2;
+  --ct-top: 136px;           /* clears the fixed header at rest */
+}
+
+/* ---- Layout ---------------------------------------------------------------
+   One grid over a navy band. The intro sits on navy in the first row; the
+   form card starts level with it and runs on into the light second row, so it
+   overlaps the band's edge.
+
+   The band is the intro's own ::before stretched to both viewport edges, so
+   its height is exactly the intro's — there is no measured or hard-coded
+   height to fall out of step when the copy changes. The form spans a `1fr`
+   second row: an item spanning a flexible track is left out of auto-track
+   sizing, so the first row (and the band) is sized by the intro alone. */
+.contact-page .ct-shell { position: relative; isolation: isolate; background: var(--ice); overflow-x: clip; }
+.contact-page .ct-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  grid-template-rows: auto 1fr;
+  grid-template-areas: "intro form" "aside form";
+  column-gap: clamp(48px, 6vw, 96px);
+}
+
+/* ---- Navy intro -------------------------------------------------------- */
+.contact-page .ct-intro { grid-area: intro; position: relative; color: white; padding: var(--ct-top) 0 80px; }
+.contact-page .ct-intro::before,
+.contact-page .ct-intro::after { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; pointer-events: none; }
+.contact-page .ct-intro::before { left: -100vw; right: -100vw; background: var(--navy); }
+/* A single soft glow behind the top of the card. Its own box, anchored to the
+   intro, so the gradient's geometry doesn't depend on the 200vw band. */
+.contact-page .ct-intro::after {
+  left: 20%; width: 120vw;
+  background: radial-gradient(ellipse 45% 75% at 50% 0%, rgba(61, 111, 180, .34), transparent 72%);
+}
+.contact-page .ct-intro .sd-breadcrumb { margin-bottom: 40px; }
+.contact-page .ct-intro-copy { animation: sd-enter .7s cubic-bezier(.22, 1, .36, 1) both; }
+.contact-page .ct-intro .sd-eyebrow { color: var(--brand-accent-soft); }
+.contact-page .ct-intro h1 {
+  font-size: clamp(36px, 3.6vw, 54px); line-height: 1.08; letter-spacing: -.025em;
+  color: white; margin-bottom: 24px; text-wrap: balance;
+}
+.contact-page .ct-intro h1 span { display: block; color: var(--brand-accent-soft); }
+.contact-page .ct-lede { font-size: clamp(16px, 1.3vw, 18px); color: rgba(255, 255, 255, .84); max-width: 460px; }
+/* The foundation's accent focus ring is too faint on navy. */
+.contact-page .ct-intro a:focus-visible { outline-color: white; box-shadow: none; }
+
+.contact-page .ct-lines { margin-top: 48px; max-width: 440px; }
+.contact-page .ct-lines-title {
+  font-size: 11px; font-weight: 600; line-height: 1.5; letter-spacing: .13em; text-transform: uppercase;
+  color: rgba(255, 255, 255, .62); margin-bottom: 12px;
+}
+.contact-page .ct-lines ul { border-top: 1px solid rgba(255, 255, 255, .14); }
+.contact-page .ct-lines li a {
+  display: flex; align-items: center; gap: 16px; min-height: 68px; padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .14); color: white;
+}
+.contact-page .ct-line-icon {
+  display: grid; place-items: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .14);
+  color: var(--brand-accent-soft); transition: background .2s ease;
+}
+.contact-page .ct-line-text { display: flex; flex-direction: column; min-width: 0; font-size: 15px; font-weight: 500; line-height: 1.4; overflow-wrap: anywhere; }
+.contact-page .ct-line-label {
+  font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+  color: rgba(255, 255, 255, .62); margin-bottom: 2px;
+}
+.contact-page .ct-line-out { margin-left: auto; flex-shrink: 0; color: rgba(255, 255, 255, .6); transition: transform .2s ease, color .2s ease; }
+.contact-page .ct-lines li a:hover .ct-line-icon { background: rgba(255, 255, 255, .16); }
+.contact-page .ct-lines li a:hover .ct-line-out { color: white; transform: translate(2px, -2px); }
+.contact-page .ct-response { display: flex; align-items: center; gap: 8px; margin-top: 16px; font-size: 13px; color: rgba(255, 255, 255, .72); }
+
+/* ---- Form card --------------------------------------------------------- */
+.contact-page .ct-form-col { grid-area: form; padding: var(--ct-top) 0 128px; }
+.contact-page .ct-card {
+  position: relative; background: white; border: 1px solid rgba(13, 33, 64, .08); border-radius: 18px;
+  padding: 48px;
+  box-shadow: 0 40px 80px -32px rgba(6, 16, 34, .45), 0 12px 24px -12px rgba(6, 16, 34, .12);
+  animation: sd-enter .7s .08s cubic-bezier(.22, 1, .36, 1) both;
+}
+/* Focused only programmatically (skip link, header button); the jump itself is the cue. */
+.contact-page .ct-card:focus, .contact-page .ct-card h2:focus { outline: none; }
+.contact-page .ct-card h2 { font-size: clamp(24px, 2vw, 28px); line-height: 1.25; letter-spacing: -.02em; margin-bottom: 8px; }
+.contact-page .ct-form-intro { font-size: 13.5px; color: var(--charcoal); margin-bottom: 32px; }
+
+/* Label-to-input is 8px, field-to-field 24px: grouping by proximity. */
+.contact-page .ct-field { margin-bottom: 24px; }
+.contact-page .ct-field > label,
+.contact-page .ct-topics legend { display: block; font-size: 14px; font-weight: 600; line-height: 1.4; color: var(--navy); margin-bottom: 8px; }
+.contact-page .ct-optional { font-weight: 400; color: var(--charcoal); }
+.contact-page .ct-hint { font-size: 13px; line-height: 1.5; color: var(--charcoal); margin: -4px 0 8px; }
+
+.contact-page .ct-field input:is([type="text"], [type="email"], [type="tel"]),
+.contact-page .ct-field textarea {
+  display: block; width: 100%; min-height: 48px; padding: 12px 14px;
+  font: inherit; font-size: 16px;   /* 16px stops iOS zooming the page on focus */
+  line-height: 1.45; color: var(--navy); background: white;
+  border: 1px solid var(--ct-border); border-radius: 10px;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.contact-page .ct-field textarea { min-height: 152px; resize: vertical; }
+.contact-page .ct-field ::placeholder { color: #5E6C82; opacity: 1; }
+.contact-page .ct-field :is(input, textarea):hover { border-color: var(--navy-mid); }
+.contact-page .ct-field :is(input, textarea):focus {
+  border-color: var(--brand-accent);
+  box-shadow: 0 0 0 3px rgba(61, 111, 180, .22);
+  outline: 2px solid transparent;   /* still drawn in forced-colours mode */
+}
+.contact-page .ct-field :is(input, textarea)[aria-invalid="true"] { border-color: var(--ct-error); box-shadow: 0 0 0 1px var(--ct-error); }
+.contact-page .ct-field :is(input, textarea)[aria-invalid="true"]:focus { box-shadow: 0 0 0 1px var(--ct-error), 0 0 0 4px rgba(180, 35, 24, .16); }
+
+/* An icon as well as colour, so an error never relies on red alone. */
+.contact-page .ct-error {
+  display: flex; align-items: flex-start; gap: 6px; margin-top: 8px;
+  font-size: 13px; font-weight: 500; line-height: 1.45; color: var(--ct-error);
+}
+.contact-page .ct-error .msym { flex-shrink: 0; margin-top: 1px; }
+
+/* ---- Topic chips (radios) ---------------------------------------------- */
+.contact-page .ct-topics { border: 0; padding: 0; margin: 0 0 28px; min-width: 0; }
+.contact-page .ct-topics legend { padding: 0; margin-bottom: 12px; }
+.contact-page .ct-topics .ct-error { margin: -4px 0 12px; }
+.contact-page .ct-topic-list { display: flex; flex-wrap: wrap; gap: 10px; }
+/* The radio stays in the accessibility tree and keeps native arrow-key
+   behaviour; the label around it is what gets clicked. */
+.contact-page .ct-topic input {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+/* `> span`, not `span`: the check icon is a span too, and must not become a pill. */
+.contact-page .ct-topic > span {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 18px;
+  border: 1px solid var(--ct-border); border-radius: 999px; background: white;
+  font-size: 14px; font-weight: 500; color: var(--navy); cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+.contact-page .ct-topic:hover > span { border-color: var(--navy); }
+.contact-page .ct-topic .ct-topic-check { display: none; }
+.contact-page .ct-topic input:checked + span { background: var(--navy); border-color: var(--navy); color: white; padding-left: 14px; }
+.contact-page .ct-topic input:checked + span .ct-topic-check { display: inline-block; }
+.contact-page .ct-topic input:focus-visible + span { outline: 2px solid var(--brand-accent); outline-offset: 3px; }
+.contact-page .ct-topic input[aria-invalid="true"] + span { border-color: var(--ct-error); }
+
+/* ---- "Regarding" chip -------------------------------------------------- */
+.contact-page .ct-about {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 28px; padding: 6px 6px 6px 16px;
+  background: var(--ice); border: 1px solid rgba(61, 111, 180, .25); border-radius: 12px; font-size: 14px;
+}
+.contact-page .ct-about-label { flex-shrink: 0; font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--navy-mid); }
+.contact-page .ct-about-value { flex: 1; min-width: 0; font-weight: 600; color: var(--navy); overflow-wrap: anywhere; }
+.contact-page .ct-about button {
+  display: grid; place-items: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 8px; color: var(--navy);
+}
+.contact-page .ct-about button:hover { background: rgba(13, 33, 64, .08); }
+
+/* ---- Consent ----------------------------------------------------------- */
+.contact-page .ct-consent { display: grid; grid-template-columns: 24px minmax(0, 1fr); column-gap: 12px; align-items: start; margin-top: 4px; }
+.contact-page .ct-consent input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--navy); cursor: pointer; }
+.contact-page .ct-consent input[aria-invalid="true"] { outline: 2px solid var(--ct-error); outline-offset: 2px; }
+.contact-page .ct-consent > label { font-size: 14px; font-weight: 400; line-height: 1.55; color: var(--charcoal); margin: 0; cursor: pointer; }
+.contact-page .ct-consent a { color: var(--navy); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+.contact-page .ct-consent .ct-error { grid-column: 2; }
+
+/* Honeypot: off-screen rather than display:none, which some bots detect. */
+.contact-page .ct-hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+
+/* ---- Error summary ----------------------------------------------------- */
+.contact-page .ct-summary {
+  margin-bottom: 28px; padding: 16px 20px; border-radius: 10px;
+  background: var(--ct-error-bg); border: 1px solid rgba(180, 35, 24, .28); border-left: 4px solid var(--ct-error);
+}
+.contact-page .ct-summary:focus { outline: 2px solid var(--ct-error); outline-offset: 3px; }
+.contact-page .ct-summary h3 { display: flex; align-items: center; gap: 8px; font-size: 15px; line-height: 1.4; font-weight: 600; color: var(--ct-error); margin-bottom: 8px; }
+.contact-page .ct-summary ul { display: grid; gap: 4px; padding-left: 28px; }
+.contact-page .ct-summary a { font-size: 14px; color: var(--ct-error); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---- Submit and status ------------------------------------------------- */
+.contact-page .ct-submit { display: flex; margin-top: 32px; }
+.contact-page .ct-submit .btn-modern { min-width: 200px; }
+.contact-page .ct-submit .btn-modern:disabled { opacity: .75; cursor: progress; transform: none; }
+/* The live region is always in the DOM — one inserted along with its message
+   is not reliably announced. It is simply empty until there is news. */
+.contact-page .ct-status-note {
+  display: flex; gap: 12px; margin-top: 20px; padding: 16px 18px; border-radius: 10px;
+  background: var(--ct-error-bg); border: 1px solid rgba(180, 35, 24, .25); color: var(--ct-error);
+}
+.contact-page .ct-status-note.is-info { background: var(--ice); border-color: rgba(61, 111, 180, .3); color: var(--navy-mid); }
+.contact-page .ct-status-note .msym { flex-shrink: 0; margin-top: 1px; }
+.contact-page .ct-status-note p { font-size: 14px; line-height: 1.55; color: var(--charcoal); }
+.contact-page .ct-status-note .ct-status-title { font-weight: 600; color: inherit; margin-bottom: 2px; }
+.contact-page .ct-status-note a { color: var(--navy); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---- Sent -------------------------------------------------------------- */
+.contact-page .ct-done { padding: 16px 0 8px; }
+.contact-page .ct-done-icon {
+  display: inline-grid; place-items: center; width: 64px; height: 64px; margin-bottom: 24px;
+  border-radius: 50%; background: #E3F2EF; color: var(--teal-deep);
+}
+.contact-page .ct-done h2 { margin-bottom: 12px; }
+.contact-page .ct-done p { max-width: 460px; font-size: 15.5px; color: var(--charcoal); }
+.contact-page .ct-done a { color: var(--navy); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.contact-page .ct-again {
+  margin-top: 28px; min-height: 48px; padding: 0 24px; border-radius: 10px;
+  border: 1.5px solid var(--navy); color: var(--navy); font-size: 14px; font-weight: 600;
+  transition: background .2s ease, color .2s ease;
+}
+.contact-page .ct-again:hover { background: var(--navy); color: white; }
+
+/* ---- Aside ------------------------------------------------------------- */
+.contact-page .ct-aside { grid-area: aside; display: grid; align-content: start; gap: 56px; padding: 72px 0 128px; }
+/* The shared eyebrow blue (#3D6FB4) is 4.43:1 on ice — just under 4.5:1 for
+   11px text. One step darker on the same hue clears it at 4.71:1. */
+.contact-page .ct-aside .sd-eyebrow { margin-bottom: 20px; color: #3B6BAD; }
+.contact-page .ct-steps { border-top: 1px solid rgba(13, 33, 64, .14); }
+.contact-page .ct-steps li { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 12px; padding: 20px 0; border-bottom: 1px solid rgba(13, 33, 64, .14); }
+.contact-page .ct-step-number { padding-top: 3px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--navy-mid); }
+.contact-page .ct-steps h3 { font-size: 16px; line-height: 1.4; margin-bottom: 4px; }
+.contact-page .ct-steps p { font-size: 14px; line-height: 1.6; color: var(--charcoal); }
+.contact-page .ct-regions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.contact-page .ct-regions li {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 34px; padding: 0 14px;
+  background: white; border: 1px solid rgba(13, 33, 64, .1); border-radius: 999px;
+  font-size: 13px; font-weight: 500; color: var(--navy);
+}
+.contact-page .ct-regions .msym { color: var(--brand-accent); }
+
+/* ---- Responsive -------------------------------------------------------- */
+@media (max-width: 1023px) {
+  .contact-page { --ct-top: 112px; }
+  .contact-page .ct-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    grid-template-areas: "intro" "form" "aside";
+  }
+  /* The card rises 64px into the band; the band's bottom padding makes room. */
+  .contact-page .ct-intro { padding-bottom: 112px; }
+  .contact-page .ct-intro::after { left: -10%; }
+  .contact-page .ct-form-col { padding: 0; margin-top: -64px; }
+  .contact-page .ct-lines { max-width: 560px; }
+  .contact-page .ct-aside { grid-template-columns: 1fr 1fr; gap: 48px; padding: 64px 0 96px; }
+}
+@media (max-width: 767px) {
+  .contact-page { --ct-top: 96px; }
+  .contact-page .ct-intro { padding-bottom: 96px; }
+  .contact-page .ct-intro .sd-breadcrumb { margin-bottom: 28px; }
+  .contact-page .ct-lines { margin-top: 36px; }
+  .contact-page .ct-form-col { margin-top: -48px; }
+  .contact-page .ct-card { padding: 28px 20px; border-radius: 14px; }
+  .contact-page .ct-form-intro { margin-bottom: 24px; }
+  .contact-page .ct-aside { grid-template-columns: 1fr; padding: 48px 0 72px; }
+  .contact-page .ct-submit .btn-modern { width: 100%; }
+  /* Label over value, so a long page name gets the full width. */
+  .contact-page .ct-about { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 8px; row-gap: 2px; padding: 10px 6px 10px 16px; }
+  .contact-page .ct-about button { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+}
+/* Touch: taller targets than the pointer layout. */
+@media (pointer: coarse) {
+  .contact-page .ct-field input:is([type="text"], [type="email"], [type="tel"]) { min-height: 52px; }
+  .contact-page .ct-topic > span { min-height: 48px; }
+  .contact-page .ct-about button { width: 44px; height: 44px; }
+}

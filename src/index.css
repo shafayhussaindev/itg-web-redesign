@@ -1,0 +1,640 @@
+/* Sora and JetBrains Mono load from index.html (with preconnect). A second
+   @import of the same stylesheet here was a duplicate, render-blocking request. */
+
+/* Off-screen loops resume at the same point when they approach the viewport. */
+[data-animation-paused],
+[data-animation-paused] *,
+[data-animation-paused]::before,
+[data-animation-paused]::after,
+[data-animation-paused] *::before,
+[data-animation-paused] *::after {
+  animation-play-state: paused !important;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ITG Technologies Brand System — v2.0 (Locked)
+   Light-first · 8-color palette (hard cap)
+   Navy owns all actions · Teal (#0D9488) is visual-only
+   Brand Red (#E5001E) is logo-only — never in UI.
+*/
+
+@layer base {
+  :root {
+    /* ── Brand palette (literal hex) ─────────────────────────── */
+    --navy:       #0D2140;   /* headings, nav, buttons */
+    --navy-mid:   #1A3A6B;   /* hover states */
+    --sky:        #D0E2F4;   /* wave, background tints */
+    --ice:        #EAF0F8;   /* section backgrounds */
+    --white:      #FFFFFF;   /* page background */
+    --charcoal:   #4A5568;   /* body text */
+    --light-text: #5C6B80;   /* captions, muted labels — 5.43:1 on white, 4.73:1 on Ice */
+    /* Accent blue. Actions are navy (see --btn-navy); this is the accent that
+       marks headings, rules and diagram lines. --cyan is kept as an alias
+       because a hundred-odd declarations still reference it by that name. */
+    --brand-accent:      #3D6FB4;  /* accent on light surfaces and as a solid mark */
+    --brand-accent-soft: #A8C6EA;  /* the same accent, lightened for dark surfaces */
+    --cyan:        var(--brand-accent);
+    /* Supporting accent for icon tiles, ticks and diagram marks. A deep
+       teal rather than the original #00B8A9, which only managed ~2.2:1
+       against white; these hold up as small text and thin strokes. */
+    --teal:       #0D9488;   /* supporting accent — non-interactive only */
+    --teal-deep:  #0F766E;   /* small label text, where contrast matters */
+    --brand-red:  #E5001E;   /* logo only — never in UI */
+
+    /* ── Status ────────────────────────────────────────────────
+       Functional only, never decorative. Each clears 4.5:1 on white.
+       Distinct from --brand-red so the logo mark stays unique. */
+    --error:        #B91C1C;   /* 6.47:1 */
+    --error-tint:   #FEF2F2;
+    --success:      #047857;   /* 5.48:1 */
+    --success-tint: #F0FDF4;
+    --warning:      #B45309;   /* 5.02:1 */
+    --warning-tint: #FFFBEB;
+
+    /* ── Primary action face ─────────────────────────────────────
+       Filled CTAs are navy, not cyan: the flat cyan fill fought with
+       the hero photography and video on every page. Defined once here
+       and referenced by .btn-modern, .btn-cyan and the tier-1 button,
+       so every filled CTA on the site matches the header's Contact us. */
+    --btn-navy:           linear-gradient(135deg, #16386F 0%, #0D2140 55%, #091628 100%);
+    --btn-navy-hover:     linear-gradient(135deg, #1F4B8F 0%, #16386F 55%, #0D2140 100%);
+    --btn-navy-rim:       rgba(255, 255, 255, 0.20);
+    --btn-navy-rim-hover: rgba(255, 255, 255, 0.26);
+    --btn-navy-shadow:    0 10px 30px -10px rgba(6, 16, 34, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    --btn-navy-shadow-hover: 0 18px 40px -12px rgba(6, 16, 34, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.20);
+
+    /* Legacy brand aliases (HSL) — remapped onto the new palette so
+       existing `brand.*` / var(--brand-secondary) usages stay on-brand. */
+    --brand-primary:       217 66% 15%;  /* navy */
+    --brand-primary-light: 217 61% 26%;  /* navy-mid */
+    --brand-primary-dark:  217 66% 12%;
+    --brand-main:          217 66% 15%;  /* navy */
+    --brand-secondary:     210 62% 89%;  /* sky — decorative tint */
+    --brand-supportive:    214 50% 95%;  /* ice */
+
+    /* ── shadcn semantic tokens (HSL triplets, derived from brand) ── */
+    --background: 0 0% 100%;               /* white */
+    --foreground: 217 66% 15%;             /* navy */
+
+    --card: 214 50% 95%;                   /* ice */
+    --card-foreground: 217 66% 15%;        /* navy */
+
+    --popover: 0 0% 100%;                  /* white */
+    --popover-foreground: 217 66% 15%;     /* navy */
+
+    --primary: 217 66% 15%;                /* navy */
+    --primary-foreground: 0 0% 100%;       /* white */
+
+    --secondary: 214 50% 95%;              /* ice */
+    --secondary-foreground: 217 66% 15%;   /* navy */
+
+    --muted: 214 50% 95%;                  /* ice */
+    --muted-foreground: 218 17% 35%;       /* charcoal (body text) */
+
+    --accent: 210 62% 89%;                 /* sky (hover tint) */
+    --accent-foreground: 217 66% 15%;      /* navy */
+
+    /* Brand Red is logo-only; destructive uses the status red instead, which
+       is darker and desaturated enough never to be mistaken for the mark. */
+    --destructive: 0 74% 42%;              /* --error #B91C1C */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 30% 91%;                 /* navy @ ~10% on white */
+    --input: 215 30% 91%;
+    --ring: 215 49% 47%;                   /* --brand-accent #3D6FB4 (focus) */
+
+    --radius: 0.5rem;                      /* navy/outline buttons 6–8px; cards use 12px */
+
+    /* Section Surfaces */
+    --surface-hero: 214 50% 95%;           /* ice */
+    --surface-elevated: 0 0% 100%;         /* white */
+    --surface-subtle: 214 50% 95%;         /* ice */
+
+    /* Gradients — signature wave (exact, no variations) */
+    --gradient-wave: linear-gradient(135deg, #EAF0F8 0%, #D0E2F4 55%, #B8D4EC 100%);
+    --gradient-wave-bar: linear-gradient(90deg, #EAF0F8 0%, #D0E2F4 50%, #3D6FB4 100%);
+    --gradient-primary: linear-gradient(135deg, #0D2140, #1A3A6B);
+    --gradient-hero: linear-gradient(180deg, #EAF0F8 0%, #FFFFFF 100%);
+    --gradient-card: linear-gradient(180deg, #FFFFFF 0%, #EAF0F8 100%);
+
+    /* Shadows — soft, light-first */
+    --shadow-sm: 0 1px 2px 0 hsl(217 66% 15% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(217 66% 15% / 0.07), 0 2px 4px -2px hsl(217 66% 15% / 0.04);
+    --shadow-lg: 0 10px 15px -3px hsl(217 66% 15% / 0.08), 0 4px 6px -4px hsl(217 66% 15% / 0.04);
+    --shadow-xl: 0 20px 25px -5px hsl(217 66% 15% / 0.1), 0 8px 10px -6px hsl(217 66% 15% / 0.04);
+    --shadow-card: 0 1px 3px 0 hsl(217 66% 15% / 0.06), 0 1px 2px -1px hsl(217 66% 15% / 0.04);
+    --shadow-card-hover: 0 12px 32px -12px hsl(217 66% 15% / 0.14);
+
+    /* Glow effects retired for the light-first brand; kept as no-ops
+       so any lingering references don't break. */
+    --glow-primary: 0 0 0 0 transparent;
+    --glow-accent: 0 0 0 0 transparent;
+    --glow-brand: 0 0 0 0 transparent;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 218 17% 35%;
+    --sidebar-primary: 217 66% 15%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 214 50% 95%;
+    --sidebar-accent-foreground: 217 66% 15%;
+    --sidebar-border: 215 30% 91%;
+    --sidebar-ring: 191 83% 53%;
+  }
+
+  .dark {
+    /* Dark Mode - Premium Deep Navy */
+    --background: 220 25% 8%;
+    --foreground: 210 20% 95%;
+    
+    --card: 220 22% 11%;
+    --card-foreground: 210 20% 95%;
+    
+    --popover: 220 22% 11%;
+    --popover-foreground: 210 20% 95%;
+    
+    --primary: 215 75% 55%;
+    --primary-foreground: 220 25% 8%;
+    
+    --secondary: 220 18% 16%;
+    --secondary-foreground: 210 20% 90%;
+    
+    --muted: 220 18% 14%;
+    --muted-foreground: 215 15% 55%;
+    
+    --accent: 220 18% 16%;
+    --accent-foreground: 215 75% 55%;
+    
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 220 18% 18%;
+    --input: 220 18% 18%;
+    --ring: 215 75% 55%;
+    
+    /* Section Surfaces - Dark */
+    --surface-hero: 220 25% 6%;
+    --surface-elevated: 220 22% 11%;
+    --surface-subtle: 220 22% 9%;
+    
+    /* Gradients - Dark */
+    --gradient-primary: linear-gradient(135deg, hsl(215 75% 55%), hsl(215 60% 45%));
+    --gradient-hero: linear-gradient(180deg, hsl(220 25% 6%) 0%, hsl(220 25% 8%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(220 22% 12%) 0%, hsl(220 22% 10%) 100%);
+    
+    /* Shadows - Dark */
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.3);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.4), 0 2px 4px -2px hsl(0 0% 0% / 0.2);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.4), 0 4px 6px -4px hsl(0 0% 0% / 0.2);
+    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.5), 0 8px 10px -6px hsl(0 0% 0% / 0.2);
+    --shadow-card: 0 2px 8px 0 hsl(0 0% 0% / 0.3);
+    --shadow-card-hover: 0 10px 40px -10px hsl(215 75% 55% / 0.25);
+    
+    /* Glow Effects - Dark */
+    --glow-primary: 0 0 30px hsl(215 75% 55% / 0.25);
+    --glow-accent: 0 0 40px hsl(215 75% 55% / 0.15);
+    
+    /* Sidebar - Dark */
+    --sidebar-background: 220 22% 11%;
+    --sidebar-foreground: 210 20% 90%;
+    --sidebar-primary: 215 75% 55%;
+    --sidebar-primary-foreground: 220 25% 8%;
+    --sidebar-accent: 220 18% 16%;
+    --sidebar-accent-foreground: 210 20% 90%;
+    --sidebar-border: 220 18% 18%;
+    --sidebar-ring: 215 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Sora', system-ui, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* ── Material Symbols ─────────────────────────────────────────
+     One rule for every icon on the site. Size arrives as --msym from
+     the icon component; --msym-lg carries a responsive bump where the
+     original Tailwind classes had one (w-4 lg:w-5 and the like). */
+  .msym {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: var(--msym, 24px);
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    direction: ltr;
+    flex-shrink: 0;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
+  }
+  @media (min-width: 1024px) {
+    .msym { font-size: var(--msym-lg, var(--msym, 24px)); }
+  }
+
+  /* ── Focus ────────────────────────────────────────────────────
+     Every focusable element carries the accent ring. :focus-visible,
+     not :focus, so it appears for keyboard and assistive navigation
+     without flashing on every mouse click. */
+  :focus-visible {
+    outline: 2px solid var(--brand-accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  a:focus-visible,
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:not([tabindex="-1"]):focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(61, 111, 180, 0.22), 0 0 0 1px var(--brand-accent);
+  }
+  /* On navy and over hero video the blue ring disappears, so it inverts.
+     The header is a sibling of the hero rather than a child, so it carries
+     its own marker (see Header.tsx) instead of being matched by descent. */
+  [data-chrome="dark"] a:focus-visible,
+  [data-chrome="dark"] button:focus-visible,
+  [data-dark-hero] a:focus-visible,
+  [data-dark-hero] button:focus-visible,
+  .bg-primary a:focus-visible,
+  .bg-primary button:focus-visible,
+  footer a:focus-visible,
+  footer button:focus-visible {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.9);
+  }
+
+  /* ── Reduced motion ───────────────────────────────────────────
+     An accessibility requirement, not optional polish. Entrance
+     animation resolves instantly and smooth scrolling is dropped;
+     the Lenis instance bails out separately in useLenis. */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  
+  /* Typography Scale — Sora, headings in navy (via --foreground) */
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl font-bold tracking-tight;
+  }
+
+  /* Data, stats, and technical labels use JetBrains Mono */
+  .font-data {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  
+  h3 {
+    @apply text-xl md:text-2xl font-semibold;
+  }
+  
+  h4 {
+    @apply text-lg font-medium;
+  }
+  
+  p {
+    @apply leading-relaxed;
+  }
+}
+
+@layer components {
+  /* Card Styles — Ice background, subtle border, 12px radius */
+  .card-enterprise {
+    @apply bg-card rounded-xl border border-border;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-enterprise:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+
+  /* Section Container — 1280px max, centered */
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Generous whitespace — 64 / 96 / 128px, on the 4px scale */
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
+    /* Skip layout/paint for these sections while they are off-screen. The
+       browser renders them as they approach the viewport, so every animation
+       and reveal still fires — it just does no work for sections the visitor
+       cannot see, which is most of a long page at any moment. `auto` remembers
+       each section's real height after first render so the scrollbar does not
+       jump. The hero is excluded (it does not use this class). */
+    content-visibility: auto;
+    contain-intrinsic-size: auto 640px;
+  }
+
+  /* Section Header Spacing */
+  .section-header {
+    @apply text-center max-w-3xl mx-auto mb-12 lg:mb-16;
+  }
+
+  .section-title {
+    @apply mb-4 lg:mb-6;
+  }
+
+  .section-description {
+    @apply text-muted-foreground text-base lg:text-lg;
+  }
+
+  /* ── Signature wave surfaces ──────────────────────────────── */
+  .wave-gradient {
+    background: var(--gradient-wave);
+  }
+  
+  .bg-dot-pattern {
+    background-image: radial-gradient(circle, hsl(var(--border)) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  
+  .gradient-fade-bottom {
+    background: linear-gradient(to bottom, transparent, hsl(var(--background)));
+  }
+  
+  /* ── Buttons & CTAs (strict priority order) ───────────────── */
+
+  /* The single most important action per page/section. Class name kept —
+     it is on a dozen components — but the fill is navy now, matching the
+     header's Contact us button. */
+  .btn-cyan {
+    @apply inline-flex items-center justify-center gap-2 font-semibold text-[14px] text-white;
+    background: var(--btn-navy);
+    min-height: 48px;
+    padding: 0 30px;
+    border-radius: 10px;
+    border: 1px solid var(--btn-navy-rim);
+    box-shadow: var(--btn-navy-shadow);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, background 0.3s ease;
+  }
+  .btn-cyan:hover {
+    transform: translateY(-2px);
+    background: var(--btn-navy-hover);
+    border-color: var(--btn-navy-rim-hover);
+    box-shadow: var(--btn-navy-shadow-hover);
+  }
+  .btn-cyan:active { transform: translateY(0); }
+
+  /* Modern pills for actions that sit on top of the hero video, where the flat
+     cyan fill fought with the footage. Deep navy reads well over both the bright
+     and the dark hero cuts; the light rim keeps the edge defined either way. */
+  /* Frosted panel behind the home hero copy. Same recipe as .hero-glass on the
+     tier-1 pages, so the home page and Solutions read as one system. */
+  /* Hero copy sits directly on the photograph. No panel, no blur, no border:
+     the scrim below carries legibility, and the type carries the composition.
+     The class is kept so the hero markup and its entrance animation are
+     unchanged. */
+  .hero-glass-panel {
+    padding: 0;
+  }
+  /* Belt-and-braces over unpredictable video frames. Subtle enough not to
+     read as a glow at 60px, enough to hold an edge against a bright cut. */
+  .hero-glass-panel h1,
+  .hero-glass-panel p {
+    text-shadow: 0 1px 14px rgba(6, 16, 34, 0.55);
+  }
+
+  /* Scrolled header — frosted white rather than a solid fill, so page content
+     reads through the bar. White-dominant on purpose: the hero's blue-tinted
+     recipe is built for photography, whereas this sits over white and Ice
+     sections and has to keep navy links legible over whatever passes beneath.
+     At 0.72 the links hold 5.70:1 even over a navy band — the worst case on
+     the site — against the 4.5:1 they need. The saturate() is what makes it
+     read as glass rather than a flat wash.
+
+     PERFORMANCE NOTE: this bar is fixed across the viewport and its backdrop
+     is the whole page scrolling past, so it is a genuine per-frame backdrop
+     blur that is on screen for the entire scroll. Kept at the original radius
+     by request; drop it toward 8-10px if the scroll ever feels heavy. */
+  .nav-glass {
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(16px) saturate(1.6);
+    -webkit-backdrop-filter: blur(16px) saturate(1.6);
+    border-bottom: 1px solid rgba(13, 33, 64, 0.08);
+    box-shadow: 0 2px 12px rgba(13, 33, 64, 0.08);
+  }
+  /* Without backdrop-filter the bar is just a 72% white wash and the links sit
+     on raw page content. Those browsers get the old solid bar instead. */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .nav-glass {
+      background: #FFFFFF;
+      border-bottom-color: rgba(13, 33, 64, 0.10);
+      box-shadow: 0 2px 12px rgba(13, 33, 64, 0.10);
+    }
+  }
+
+  .btn-modern {
+    @apply inline-flex items-center justify-center gap-2 font-semibold text-[14px] text-white whitespace-nowrap;
+    min-height: 48px;
+    padding: 0 30px;
+    border-radius: 10px;
+    background: var(--btn-navy);
+    border: 1px solid var(--btn-navy-rim);
+    box-shadow: var(--btn-navy-shadow);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, background 0.3s ease;
+  }
+  .btn-modern:hover {
+    transform: translateY(-2px);
+    background: var(--btn-navy-hover);
+    border-color: var(--btn-navy-rim-hover);
+    box-shadow: var(--btn-navy-shadow-hover);
+  }
+  .btn-modern:active { transform: translateY(0); }
+
+  /* Nav CTA — the primary face at the header's tighter geometry (§04). Its own
+     class rather than utility overrides on .btn-modern, whose min-height would
+     otherwise win over an h-11. */
+  .btn-nav-cta {
+    @apply inline-flex items-center justify-center gap-2 font-semibold text-[14.5px] text-white whitespace-nowrap;
+    min-height: 44px;
+    padding: 0 24px;
+    border-radius: 10px;
+    background: var(--btn-navy);
+    border: 1px solid var(--btn-navy-rim);
+    box-shadow: var(--btn-navy-shadow);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, background 0.3s ease;
+  }
+  .btn-nav-cta:hover {
+    transform: translateY(-2px);
+    background: var(--btn-navy-hover);
+    border-color: var(--btn-navy-rim-hover);
+    box-shadow: var(--btn-navy-shadow-hover);
+  }
+  .btn-nav-cta:active { transform: translateY(0); }
+
+  /* Nav CTA: tilting arrow. The label used to roll on hover — two stacked
+     copies of the words, the top tipping away as the bottom tipped in. It was
+     removed on request; the label is now a single plain span. Only the arrow
+     moves. */
+
+  /* Arrow sits at 45 degrees — an outbound mark — and levels out on hover.
+     Named .cta-arrow, not .btn-arrow: the tier-1 pages already use the latter
+     for the → glyph on their outline buttons, and an unscoped transform here
+     would tilt every one of them. */
+  .btn-nav-cta .cta-arrow {
+    flex-shrink: 0;
+    transform: rotate(-45deg);
+    transition: transform 0.44s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .btn-nav-cta:hover .cta-arrow,
+  .btn-nav-cta:focus-visible .cta-arrow { transform: rotate(0deg); }
+
+  /* Translucent companion to .btn-modern — the secondary action on navy and
+     over hero video, where an outline in navy would disappear. */
+  .btn-modern-ghost {
+    @apply inline-flex items-center justify-center gap-2 font-semibold text-[14px] text-white whitespace-nowrap;
+    min-height: 48px;
+    padding: 0 28px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    box-shadow: 0 8px 24px -12px rgba(6, 16, 34, 0.6);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, background 0.3s ease;
+  }
+  .btn-modern-ghost:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.20);
+    box-shadow: 0 16px 34px -14px rgba(6, 16, 34, 0.7);
+  }
+  .btn-modern-ghost:active { transform: translateY(0); }
+
+  /* Navy — an alias of the primary face, kept so older markup keeps working */
+  .btn-navy {
+    @apply inline-flex items-center justify-center gap-2 font-semibold text-[14px] text-white;
+    background: var(--btn-navy);
+    min-height: 48px;
+    padding: 0 30px;
+    border-radius: 10px;
+    border: 1px solid var(--btn-navy-rim);
+    box-shadow: var(--btn-navy-shadow);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, background 0.3s ease;
+  }
+  .btn-navy:hover {
+    transform: translateY(-2px);
+    background: var(--btn-navy-hover);
+    border-color: var(--btn-navy-rim-hover);
+    box-shadow: var(--btn-navy-shadow-hover);
+  }
+  .btn-navy:active { transform: translateY(0); }
+
+  /* Outline — the secondary action beside a primary, on light surfaces */
+  .btn-outline-brand {
+    @apply inline-flex items-center justify-center gap-2 font-semibold text-[14px] text-[#0D2140];
+    background: transparent;
+    min-height: 48px;
+    padding: 0 28px;
+    border-radius: 10px;
+    border: 1.5px solid var(--navy);
+    transition: background 0.25s ease, color 0.25s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Ghost — in-text / low-priority links */
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 font-semibold text-[14px] transition-colors duration-200;
+    color: var(--brand-accent);
+    text-decoration: none;
+  }
+  .btn-ghost:hover { color: var(--navy); }
+
+  /* Shared CTA geometry. Labels can grow in width, but every action keeps
+     the same height, type size, gutters and arrow size. */
+  :is(.btn-cyan, .btn-modern, .btn-modern-ghost, .btn-navy, .btn-nav-cta) {
+    min-height: 48px;
+    padding-inline: 30px;
+    font-size: 14px;
+    gap: 8px;
+  }
+  :is(.btn-cyan, .btn-modern, .btn-modern-ghost, .btn-navy, .btn-nav-cta) svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+  .btn-modern-ghost:not(:has(svg, .btn-arrow))::after {
+    content: '→';
+    font-size: 18px;
+    line-height: 1;
+    transition: transform .3s cubic-bezier(.2,.8,.2,1);
+  }
+  .btn-modern-ghost:hover::after,
+  .btn-modern-ghost:focus-visible::after { transform: translateX(4px); }
+}
+
+@layer utilities {
+  
+  
+  
+  /* Lenis Smooth Scroll */
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+  
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+
+  
+  
+  /* Focus States — kept for components that already opt in; the base layer
+     now gives every focusable element the same ring by default. */
+  .focus-enterprise {
+    @apply focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/30 focus-visible:ring-offset-0;
+  }
+
+  /* ── Minimum touch target ─────────────────────────────────────
+     44 x 44 including padding. Applied to controls that are visually
+     smaller than that, so they grow their hit area, not their look. */
+  .tap-target {
+    position: relative;
+  }
+  .tap-target::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    min-width: 44px;
+    min-height: 44px;
+    transform: translate(-50%, -50%);
+  }
+}
