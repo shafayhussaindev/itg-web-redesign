@@ -18,7 +18,7 @@ export const hero = {
   headlineAccent: 'AI-driven World',
   body: 'ITG engineers enterprise AI software delivering speed, control, and measurable digital transformation for highly regulated modern organizations.',
   primaryCta: { label: 'Explore Solutions', href: '/solutions' },
-  secondaryCta: { label: 'Talk to an Expert', href: '#contact' },
+  secondaryCta: { label: 'Talk to an Expert', href: '/contact' },
   scrollHint: 'Scroll',
   // Files in the `public` folder. Replace the file, keep the name, and the
   // page picks up the new one.
