@@ -70,18 +70,6 @@ export default function IndustryDetail({ page }: { page: IndustryPageContent }) 
           </div>
         </section>
 
-        <nav className="sd-section-nav" aria-label={`${page.name} sections`}>
-          <div className="section-container sd-section-nav-inner">
-            <span className="sd-section-name"><MSym name={page.icon} size={20} />{page.shortName}</span>
-            <div className="sd-section-links">
-              <a href="#overview">{copy.overview}</a>
-              <a href="#segments">{copy.segmentsNav}</a>
-              <a href="#capabilities">{copy.capabilitiesNav}</a>
-              <a href="#approach">{copy.approachNav}</a>
-            </div>
-          </div>
-        </nav>
-
         <section id="overview" className="sd-section">
           <div className="section-container">
             <div className="sd-intro-grid">

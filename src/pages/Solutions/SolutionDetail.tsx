@@ -86,16 +86,6 @@ export default function SolutionDetail({ page }: { page: SolutionPageContent }) 
           </div>
         </section>
 
-        <nav className="sd-section-nav" aria-label={`${page.name} sections`}>
-          <div className="section-container sd-section-nav-inner">
-            <span className="sd-section-name"><MSym name={page.icon} size={20} />{page.shortName}</span>
-            <div className="sd-section-links">
-              <a href="#overview">{copy.overview}</a><a href="#capabilities">{copy.capabilities}</a>
-              <a href="#applications">{copy.applications}</a><a href="#approach">{copy.approach}</a>
-            </div>
-          </div>
-        </nav>
-
         <section id="overview" className="sd-section">
           <div className="section-container">
             <div className="sd-intro-grid">

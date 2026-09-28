@@ -13,7 +13,7 @@ type PlatformPageContent = typeof platformPages[number];
    are Tier 3: sections here, and links in the Platforms menu. */
 export default function PlatformDetail({ page }: { page: PlatformPageContent }) {
   // Data Privacy launches without products; its products section, catalogue
-  // panel and section-nav link are hidden until it has some.
+  // panel is hidden until it has some.
   const hasProducts = page.products.length > 0;
   const related = platformPages.filter(item => item.id !== page.id);
 
@@ -68,13 +68,6 @@ export default function PlatformDetail({ page }: { page: PlatformPageContent }) 
             </div>
           </div>
         </section>
-
-        <nav className="sd-section-nav" aria-label={`${page.title} sections`}>
-          <div className="section-container sd-section-nav-inner">
-            <span className="sd-section-name"><MSym name={page.icon} size={20} />{page.shortName}</span>
-            <div className="sd-section-links"><a href="#overview">{copy.overview}</a>{hasProducts && <a href="#products">{copy.products}</a>}<a href="#integration">{copy.integration}</a></div>
-          </div>
-        </nav>
 
         <section id="overview" className="sd-section">
           <div className="section-container sd-intro-grid">

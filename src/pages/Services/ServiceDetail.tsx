@@ -68,17 +68,6 @@ export default function ServiceCategory({ page }: { page: ServiceCategoryContent
           </div>
         </section>
 
-        <nav className="sd-section-nav" aria-label={`${page.name} sections`}>
-          <div className="section-container sd-section-nav-inner">
-            <span className="sd-section-name"><MSym name={page.icon} size={20} />{page.shortName}</span>
-            <div className="sd-section-links">
-              <a href="#overview">{copy.overview}</a>
-              <a href="#delivery">{copy.delivery}</a>
-              <a href="#services">{copy.servicesNav}</a>
-            </div>
-          </div>
-        </nav>
-
         <section id="overview" className="sd-section">
           <div className="section-container">
             <div className="sd-intro-grid">
