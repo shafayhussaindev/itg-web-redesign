@@ -7,7 +7,6 @@ import { IndustriesSection } from './sections/IndustriesSection';
 import { HowWeWorkSection } from './sections/HowWeWorkSection';
 import { WhyITGSection } from './sections/WhyITGSection';
 import { InsightsSection } from './sections/InsightsSection';
-import { GlobalPresenceSection } from './sections/GlobalPresenceSection';
 import { FinalCTASection } from './sections/FinalCTASection';
 import { useLenis } from '@/hooks/useLenis';
 

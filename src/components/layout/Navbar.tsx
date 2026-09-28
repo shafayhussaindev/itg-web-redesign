@@ -1,6 +1,5 @@
 import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
-import { useTheme } from "@/contexts/ThemeContext";
-import { ChevronDown, ChevronRight, Menu, Moon, Sun, X, ArrowRight, MSym } from "@/components/common/icons/material";
+import { ChevronDown, ChevronRight, Menu, X, ArrowRight, MSym } from "@/components/common/icons/material";
 import { Button } from "@/components/common/ui/button";
 import {
   NavigationMenu,
@@ -210,7 +209,6 @@ function MegaMenu({
   );
 }
 export function Navbar({ contactHref = navCta.href }: { contactHref?: string } = {}) {
-  const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(() => window.scrollY > 20);
   const [darkHeroDepth, setDarkHeroDepth] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -407,17 +405,6 @@ export function Navbar({ contactHref = navCta.href }: { contactHref?: string } =
           </NavigationMenu>
 
           <div className="flex items-center justify-end gap-2 lg:gap-3">
-
-            {/* Theme toggle hidden — brand system v2.0 is light-only.
-                Kept commented so the dark-mode feature can be re-enabled later.
-            <button
-              onClick={toggleTheme}
-              className={cn("p-2 rounded-lg hover:bg-accent transition-all duration-200 focus-enterprise", isDarkHero ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-foreground")}
-              aria-label="Toggle theme"
-            >
-              {theme === "light" ? <Moon className="w-4 h-4 lg:w-5 lg:h-5" /> : <Sun className="w-4 h-4 lg:w-5 lg:h-5" />}
-            </button>
-            */}
 
             <a href={contactHref} className="btn-nav-cta hidden md:inline-flex">
               <span>{navCta.label}</span>

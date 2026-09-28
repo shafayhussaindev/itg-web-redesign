@@ -38,7 +38,7 @@ describe("consent-gated analytics", () => {
     trackPageView("/");
     trackPageView("/solutions");
 
-    const dataLayer = (window as Window & { dataLayer: DataLayer }).dataLayer;
+    const dataLayer = (window as unknown as Window & { dataLayer: DataLayer }).dataLayer;
     const pageViews = dataLayer.filter(entry => entry[0] === "event" && entry[1] === "page_view");
     expect(pageViews).toHaveLength(2);
     expect(pageViews.map(entry => (entry[2] as { page_location: string }).page_location)).toEqual([
@@ -59,7 +59,7 @@ describe("consent-gated analytics", () => {
     syncAnalyticsConsent("necessary");
     trackPageView("/solutions");
 
-    const dataLayer = (window as Window & { dataLayer: DataLayer }).dataLayer;
+    const dataLayer = (window as unknown as Window & { dataLayer: DataLayer }).dataLayer;
     expect(dataLayer.filter(entry => entry[0] === "event" && entry[1] === "page_view")).toHaveLength(1);
     expect((window as unknown as Record<string, unknown>)["ga-disable-G-TEST123"]).toBe(true);
     expect(document.cookie).not.toContain("_ga=");

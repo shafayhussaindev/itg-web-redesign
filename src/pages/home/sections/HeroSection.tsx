@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useAnimationActivity } from '@/hooks/useAnimationActivity';
 import gsap from 'gsap';
-import { Button } from '@/components/common/ui/button';
 import { Spotlight } from '@/components/common/ui/spotlight';
 import { ArrowRight, ChevronDown } from "@/components/common/icons/material";
 import "@/index.css"
@@ -12,13 +11,12 @@ export function HeroSection() {
   const panelRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const subheadlineRef = useRef<HTMLParagraphElement>(null);
-  const supportingRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const ctx = gsap.context(() => {
       // The glass panel arrives as one piece; its contents settle inside it.
       gsap.set(panelRef.current, { opacity: 0, y: 26 });
-      gsap.set([headlineRef.current, subheadlineRef.current, supportingRef.current, ctaRef.current], {
+      gsap.set([headlineRef.current, subheadlineRef.current, ctaRef.current], {
         opacity: 0,
         y: 16,
       });
@@ -53,16 +51,6 @@ export function HeroSection() {
           '-=0.5'
         )
         .to(
-          supportingRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            ease: 'power3.out',
-          },
-          '-=0.5'
-        )
-        .to(
           ctaRef.current,
           {
             opacity: 1,
@@ -70,7 +58,7 @@ export function HeroSection() {
             duration: 0.7,
             ease: 'power3.out',
           },
-          '-=0.5'
+          '-=0.3'
         )
     }, containerRef);
 
@@ -138,13 +126,6 @@ export function HeroSection() {
                 {hero.body}
               </p>
 
-              {/* <p
-                ref={supportingRef}
-                className="text-sm md:text-base text-white/70 mb-8 lg:mb-10 text-left"
-              >
-                Trusted by enterprises and institutions across the Middle East, Europe and Asia.
-              </p> */}
-
               <div ref={ctaRef} className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
                 <a href={hero.primaryCta.href} className="btn-modern group w-full sm:w-auto">
                   {hero.primaryCta.label}
@@ -168,8 +149,6 @@ export function HeroSection() {
         <ChevronDown className="w-5 h-5 animate-bounce" />
       </div>
 
-      {/* Bottom fade */}
-      {/* <div className="absolute bottom-0 left-0 right-0 h-16 lg:h-24 gradient-fade-bottom" /> */}
     </section>
   );
 }

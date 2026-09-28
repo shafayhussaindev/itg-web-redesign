@@ -30,3 +30,6 @@ docs/
 
 # Large source videos kept locally, not shipped in the build
 video-src/
+
+# Generated TypeScript build cache
+*.tsbuildinfo

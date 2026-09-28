@@ -23,9 +23,9 @@ const SolutionSubDetail = lazy(() => import("@/pages/Solutions/SolutionSubDetail
 const PlatformSubDetail = lazy(() => import("@/pages/Platforms/PlatformSubDetail"));
 const ServiceSubDetail = lazy(() => import("@/pages/Services/ServiceSubDetail"));
 const IndustrySubDetail = lazy(() => import("@/pages/Industries/IndustrySubDetail"));
-const ContactPage = lazy(() => import("@/pages/contact/ContactPage"));
-const TermsAndConditions = lazy(() => import("@/pages/legal/TermsAndConditions"));
-const PrivacyPolicy = lazy(() => import("@/pages/legal/PrivacyPolicy"));
+const ContactPage = lazy(() => import("@/pages/Contact/ContactPage"));
+const TermsAndConditions = lazy(() => import("@/pages/Legal/TermsAndConditions"));
+const PrivacyPolicy = lazy(() => import("@/pages/Legal/PrivacyPolicy"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 
 export default function AppRoutes() {
