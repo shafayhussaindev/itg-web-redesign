@@ -3,6 +3,7 @@ import { lawIntoAction } from '@/data/platforms/law-into-action';
 import { platforms } from '@/data/platforms/landing-page.js';
 import { svitch } from './svitch';
 import { aullect } from './aullect';
+import { amaanah } from './amaanah';
 
 /* ============================================================================
  * TIER 2: THE SIX PLATFORM PAGES
@@ -107,9 +108,9 @@ const platformDetails = {
     icon: 'privacy_tip', shortName: 'Data Privacy',
     headline: 'Know your personal data.', accent: 'Protect it by design.',
     overviewTitle: 'A platform foundation for privacy.',
-    overviewBody: 'Personal data spreads across applications, documents and suppliers. Explore Amaanah as a starting point for governing personal data across your systems.',
+    overviewBody: 'Personal data spreads across applications, documents and suppliers. Explore Amaanah for PDPL compliance across processing activities, vendors and cross-border transfers.',
     products: [
-      { id: 'amaanah', name: 'Amaanah', icon: 'privacy_tip', description: 'Govern personal data across your systems', body: 'Discuss how Amaanah can support the governance of personal data across your systems.', focus: ['Personal data governance', 'Privacy requirements', 'Connected systems'] },
+      { id: 'amaanah', name: 'Amaanah', icon: 'privacy_tip', description: amaanah.tagline, body: amaanah.body, focus: amaanah.focus },
     ],
   },
 };

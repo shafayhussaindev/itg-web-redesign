@@ -1,4 +1,5 @@
 import { aullect } from '@/data/platforms/aullect';
+import { amaanah } from '@/data/platforms/amaanah';
 import { enterpriseAppDevelopment } from '@/data/solutions/enterprise-app-development';
 import { lastMileDelivery } from '@/data/industries/last-mile-delivery';
 import { mobileAppDevelopment } from '@/data/solutions/mobile-app-development';
@@ -101,5 +102,10 @@ export const pageExtras = {
     why: aullect.why,
     applied: aullect.applied,
     steps: aullect.steps,
+  },  '/data-privacy/amaanah': {
+    overview: amaanah.overview,
+    why: amaanah.why,
+    applied: amaanah.applied,
+    steps: amaanah.steps,
   },
 };
