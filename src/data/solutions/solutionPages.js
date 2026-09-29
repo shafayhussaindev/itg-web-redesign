@@ -7,7 +7,7 @@ import { solutionPage as dataPrivacy } from '@/data/solutions/data-privacy-solut
 
 // Order matters: it is the order of the "related solutions" cards on each page,
 // and matches the Solutions menu in data/site/site.js. Every page here gets the
-// route /<id> automatically (see routes/AppRoutes.tsx).
+// route /<id> automatically (see routes/AppRoutes.jsx).
 export const solutionPages = [ai, enterprise, sustainability, digital, automation, dataPrivacy]
   // An item with `coreCapabilities` lists their titles as its bullet points.
   .map(page => ({
@@ -17,4 +17,4 @@ export const solutionPages = [ai, enterprise, sustainability, digital, automatio
       : item),
   }));
 // The addresses these pages had before they were renamed are forwarded by
-// src/routes/oldAddresses.ts.
+// src/routes/oldAddresses.js.

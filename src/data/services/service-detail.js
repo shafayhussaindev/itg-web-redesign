@@ -8,7 +8,7 @@
  * Re-organised Sept 2026 from six categories. Two were removed (Enterprise
  * Platforms and Implementations, AI and Advanced Technologies) together with
  * their services; their old addresses forward to /services
- * (src/routes/oldAddresses.ts).
+ * (src/routes/oldAddresses.js).
  *
  * Everything you might want to reword or re-image is in this file. Change the
  * text between the quote marks and save — the site picks it up on its own.

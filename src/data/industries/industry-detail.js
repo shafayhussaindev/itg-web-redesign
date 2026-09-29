@@ -18,7 +18,7 @@ import { lastMileDelivery } from '@/data/industries/last-mile-delivery';
  *
  * The six sectors removed in Sept 2026 (Enterprise & Corporate, Healthcare,
  * Government, Energy & ESG, Education, Travel) forward to /industries
- * (src/routes/oldAddresses.ts).
+ * (src/routes/oldAddresses.js).
  *
  * ICONS are Material Symbols names. A name that is not listed in the
  * `icon_names=` list in `index.html` renders as an empty box — add it there

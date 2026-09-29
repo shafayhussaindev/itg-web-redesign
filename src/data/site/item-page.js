@@ -23,7 +23,7 @@ import { mobileAppDevelopment } from '@/data/solutions/mobile-app-development';
  *     Services    src/data/services/service-detail.js   (services)
  *     Industries  src/data/industries/industry-detail.js (segments)
  *   Edit the item there and the menu, the parent page and the item page all
- *   change together. The page template is src/pages/ItemPage/ItemPage.tsx.
+ *   change together. The page template is src/pages/ItemPage/ItemPage.jsx.
  *
  *   This file holds only the wording shared by all item pages (headings,
  *   button labels), plus `pageExtras` below for anything you want on ONE

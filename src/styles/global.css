@@ -269,7 +269,7 @@
   }
   /* On navy and over hero video the blue ring disappears, so it inverts.
      The header is a sibling of the hero rather than a child, so it carries
-     its own marker (see Header.tsx) instead of being matched by descent. */
+     its own marker (see Header.jsx) instead of being matched by descent. */
   [data-chrome="dark"] a:focus-visible,
   [data-chrome="dark"] button:focus-visible,
   [data-dark-hero] a:focus-visible,

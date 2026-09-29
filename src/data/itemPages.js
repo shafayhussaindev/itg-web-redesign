@@ -7,7 +7,7 @@ import { solutionPages } from './solutions/solutionPages';
 import { contactLink } from '@/lib/contact-link';
 
 /* Every Tier 3 page, built from the item's entry on its Tier 2 page so the two
-   can't disagree. routes/AppRoutes.tsx turns each entry into a route at `path`. */
+   can't disagree. routes/AppRoutes.jsx turns each entry into a route at `path`. */
 
 const solutionParents = solutionPages.map(page => ({
   family: 'solutions', name: page.name, shortName: page.shortName, href: `/${page.id}`, icon: page.icon,

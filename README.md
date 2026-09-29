@@ -1,6 +1,6 @@
 # ITG Technologies — Corporate Website
 
-Marketing site for ITG Technologies. React 18 + TypeScript, built with Vite,
+Marketing site for ITG Technologies. React 18 + JavaScript (JSX), built with Vite,
 styled with Tailwind (home and legal pages) and plain CSS (everything else),
 routed with React Router, smooth scrolling by Lenis, GSAP for the home hero.
 No backend: all content is static and lives in `src/data/`.
@@ -26,17 +26,17 @@ npm run dev
 
 ```
 src/
-  main.tsx            starts the app, loads styles/global.css
-  App.tsx             wraps the site in the router
-  routes/             EVERY URL — AppRoutes.tsx (with a map at the top) + oldAddresses.ts (redirects)
-  layouts/            MainLayout.tsx (navbar + footer around every page),
-                      LandingPageLayout.tsx (wrapper for /solutions /platforms /services /industries /company)
+  main.jsx            starts the app, loads styles/global.css
+  App.jsx             wraps the site in the router
+  routes/             EVERY URL — AppRoutes.jsx (with a map at the top) + oldAddresses.js (redirects)
+  layouts/            MainLayout.jsx (navbar + footer around every page),
+                      LandingPageLayout.jsx (wrapper for /solutions /platforms /services /industries /company)
   pages/              one folder per page; the page file sits at the top, its pieces in sections/
     Home/  Solutions/  Platforms/  Services/  Industries/  Company/  Contact/  Legal/
     ItemPage/         the ONE template behind all 90 item pages (e.g. /esg-solutions/carbon-circularity)
   components/
     navigation/       Navbar, Footer, BackToTop
-    common/           CookieBanner, AnalyticsManager, RedirectTo, Icons (Material Symbols)
+    common/           CookieBanner, MeasurementManager, RedirectTo, Icons (Material Symbols)
     sections/         blocks shared by several landing pages (CategoryCards, WhyITG, CtaLabel)
     ui/               shadcn/ui primitives (lowercase file names are the shadcn convention)
   data/               ALL the words, menus and image paths — see src/data/README.md
@@ -51,8 +51,8 @@ public/images/<section>/   every photo and video
 | Tier | Example URL | Page file |
 | --- | --- | --- |
 | Tier 1: landing page | `/solutions` | `pages/Solutions/SolutionsPage.jsx` |
-| Tier 2: detail page | `/esg-solutions` | `pages/Solutions/SolutionDetailPage.tsx` (one template for all six solutions) |
-| Tier 3: item page | `/esg-solutions/carbon-circularity` | `pages/ItemPage/ItemPage.tsx` (one template for all items in all four sections) |
+| Tier 2: detail page | `/esg-solutions` | `pages/Solutions/SolutionDetailPage.jsx` (one template for all six solutions) |
+| Tier 3: item page | `/esg-solutions/carbon-circularity` | `pages/ItemPage/ItemPage.jsx` (one template for all items in all four sections) |
 
 ## How do I…
 
@@ -63,7 +63,7 @@ table of which file holds which page, and a worked example.
 **…change a page's hero?**
 - Words: the page's data file (for `/esg-solutions/carbon-circularity`, the `carbon-circularity` block in `src/data/solutions/esg-solutions.js`).
 - Photo: the `image:` field in that same file.
-- Layout: the page template (`pages/ItemPage/ItemPage.tsx`, the `<section className="sd-hero">`).
+- Layout: the page template (`pages/ItemPage/ItemPage.jsx`, the `<section className="sd-hero">`).
 - Styling: `.sd-hero` rules in `src/styles/detail-pages.css`, with the site-wide look in `src/styles/detail-pages-theme.css`.
 
 **…change an image?** Put the file in `public/images/<section>/` and write its
@@ -71,7 +71,7 @@ path without `public` in the data file: `'/images/solutions/cat-ai.jpg'`. The li
 site caches images for a year, so use a **new file name** for a changed image.
 
 **…change global colours or fonts?**
-- Home and legal pages: CSS variables at the top of `src/styles/global.css`, plus `tailwind.config.ts`.
+- Home and legal pages: CSS variables at the top of `src/styles/global.css`, plus `tailwind.config.js`.
 - Landing pages: the `.tier1-site` variables at the top of `src/styles/landing-pages.css`.
 - Detail and item pages: they use the global variables.
 
@@ -88,21 +88,21 @@ the data. Add its id to `src/data/site/navbar-tier3.js` to show it in the menu.
 See `src/data/README.md` → Common jobs.
 
 **…add a completely new page (new URL, new layout)?**
-1. Create `src/pages/Careers/CareersPage.tsx`.
-2. Add a line to `src/routes/AppRoutes.tsx`:
+1. Create `src/pages/Careers/CareersPage.jsx`.
+2. Add a line to `src/routes/AppRoutes.jsx`:
    `const CareersPage = lazy(() => import("@/pages/Careers/CareersPage"));` and
    `<Route path="/careers" element={<CareersPage />} />`.
 3. Put its words in `src/data/`.
 
 **…rename a URL?** Change it, then add the old address to BOTH
-`src/routes/oldAddresses.ts` and the `redirects` in `vercel.json`, so shared
+`src/routes/oldAddresses.js` and the `redirects` in `vercel.json`, so shared
 links keep working.
 
 ## Good to know
 
 - Imports use `@/…` for anything in `src/` (e.g. `@/components/navigation/Navbar`), and `./…` inside the same folder.
 - Landing pages load `landing-pages.css` **before** their own stylesheet, and the import order is deliberate. Keep `LandingPageLayout` as the first import in those page files.
-- Tailwind only scans `.ts`/`.tsx` files. The `.jsx` landing-page files use plain CSS classes, not Tailwind.
+- Tailwind only scans the files listed under `content` in `tailwind.config.js` (home, legal, contact, detail pages, shared components). The landing-page files use plain CSS classes, not Tailwind; add a new Tailwind-styled file to that list.
 - After a change, run `npm run build` **and** open the page in the browser. A passing build doesn't prove the page renders.
 
 ## Analytics
