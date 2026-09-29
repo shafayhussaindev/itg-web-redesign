@@ -46,10 +46,10 @@ page address, so they stay the same when a title changes.
 ### A few items have their own file
 
 Items with a much richer page keep their extra content in a file named after
-them: `solutions/mobile-app-development.ts`, `solutions/enterprise-app-development.ts`,
-`platforms/aullect.ts`, `platforms/svitch.ts`, `platforms/law-into-action.ts`,
-`platforms/consumer-goods-intelligence.ts`, `industries/home-textile.ts`,
-`industries/last-mile-delivery.ts`. Their entry in the parent file points to it,
+them: `solutions/mobile-app-development.js`, `solutions/enterprise-app-development.js`,
+`platforms/aullect.js`, `platforms/svitch.js`, `platforms/law-into-action.js`,
+`platforms/consumer-goods-intelligence.js`, `industries/home-textile.js`,
+`industries/last-mile-delivery.js`. Their entry in the parent file points to it,
 e.g. `subtitle: mobileAppDevelopment.tagline`.
 
 ## The four rules

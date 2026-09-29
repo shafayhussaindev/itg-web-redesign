@@ -9,42 +9,7 @@ import { contactLink } from '@/lib/contact-link';
 /* Every Tier 3 page, built from the item's entry on its Tier 2 page so the two
    can't disagree. routes/AppRoutes.tsx turns each entry into a route at `path`. */
 
-type Card = { icon: string; title: string; body: string };
-type Step = { title: string; body: string };
-type Family = keyof typeof itemFamilies;
-
-export type ItemPageContent = {
-  path: string;
-  family: Family;
-  id: string;
-  title: string;
-  tagline: string;
-  body: string;
-  icon: string;
-  image: string;
-  imagePosition?: string;
-  parent: { name: string; shortName: string; href: string; icon: string };
-  focus: string[];
-  outcomes: string[];
-  why: Card[];
-  applied?: { title: string; intro?: string; items: Card[] };
-  steps: { eyebrow: string; title: string; intro?: string; items: Step[] };
-  siblings: { title: string; description: string; icon: string; href: string }[];
-  overview?: { title: string; body: string[] };
-  metrics?: { value: string; label: string }[];
-  contactHref: string;
-};
-
-type Extras = Partial<Pick<ItemPageContent, 'overview' | 'why' | 'applied' | 'steps' | 'metrics'>> & { image?: string };
-type Item = { id: string; title: string; tagline: string; body: string; icon: string; focus: string[]; outcomes?: string[]; extras?: Extras };
-type Parent = {
-  family: Family; name: string; shortName: string; href: string; icon: string;
-  image: string; imagePosition?: string; items: Item[]; why: Card[];
-  applied?: ItemPageContent['applied']; steps: ItemPageContent['steps'];
-  contact: { contactEmail: string; contactFallback: { href: string } };
-};
-
-const solutionParents: Parent[] = solutionPages.map(page => ({
+const solutionParents = solutionPages.map(page => ({
   family: 'solutions', name: page.name, shortName: page.shortName, href: `/${page.id}`, icon: page.icon,
   image: page.image,
   items: page.capabilities.map(cap => ({
@@ -64,7 +29,7 @@ const solutionParents: Parent[] = solutionPages.map(page => ({
 }));
 
 // Data Privacy has no products yet, so it contributes no Tier 3 pages.
-const platformParents: Parent[] = platformPages.map(page => ({
+const platformParents = platformPages.map(page => ({
   family: 'platforms', name: page.title, shortName: page.shortName, href: page.href, icon: page.icon,
   image: page.image, imagePosition: page.focus,
   items: page.products.map(product => ({ id: product.id, title: product.name, tagline: product.description, body: product.body, icon: product.icon, focus: product.focus })),
@@ -73,7 +38,7 @@ const platformParents: Parent[] = platformPages.map(page => ({
   contact: platformDetail,
 }));
 
-const serviceParents: Parent[] = servicePages.map(page => ({
+const serviceParents = servicePages.map(page => ({
   family: 'services', name: page.name, shortName: page.shortName, href: page.href, icon: page.icon,
   image: page.image, imagePosition: page.focus,
   items: page.services.map(service => ({ id: service.id, title: service.name, tagline: service.description, body: service.body, icon: service.icon, focus: service.focus })),
@@ -82,7 +47,7 @@ const serviceParents: Parent[] = servicePages.map(page => ({
   contact: serviceDetail,
 }));
 
-const industryParents: Parent[] = industryPages.map(page => ({
+const industryParents = industryPages.map(page => ({
   family: 'industries', name: page.name, shortName: page.shortName, href: page.href, icon: page.icon,
   image: page.image, imagePosition: page.focus,
   items: page.segments.map(segment => ({ id: segment.id, title: segment.name, tagline: segment.description, body: segment.body, icon: segment.icon, focus: segment.focus })),
@@ -92,12 +57,12 @@ const industryParents: Parent[] = industryPages.map(page => ({
   contact: industryDetail,
 }));
 
-export const itemPath = (parentHref: string, id: string) => `${parentHref}/${id}`;
+export const itemPath = (parentHref, id) => `${parentHref}/${id}`;
 
-export const itemPages: ItemPageContent[] = [...solutionParents, ...platformParents, ...serviceParents, ...industryParents]
+export const itemPages = [...solutionParents, ...platformParents, ...serviceParents, ...industryParents]
   .flatMap(parent => parent.items.map(item => {
     const path = itemPath(parent.href, item.id);
-    const extras: Extras = pageExtras[path] ?? item.extras ?? {};
+    const extras = pageExtras[path] ?? item.extras ?? {};
     const contactHref = parent.contact.contactEmail
       ? `mailto:${parent.contact.contactEmail}?subject=${encodeURIComponent(`${item.title} enquiry`)}`
       : contactLink(parent.contact.contactFallback.href, item.title);
@@ -119,7 +84,7 @@ export const itemPages: ItemPageContent[] = [...solutionParents, ...platformPare
   }));
 
 // Fills {kind}, {kinds}, {parent} and {title} in a label from site/item-page.js.
-export function itemLabel(key: keyof typeof itemPageLabels, page: ItemPageContent) {
+export function itemLabel(key, page) {
   const family = itemFamilies[page.family];
   return itemPageLabels[key]
     .replaceAll('{kinds}', family.kinds)

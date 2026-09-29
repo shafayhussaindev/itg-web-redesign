@@ -3,7 +3,9 @@ import { ArrowRight, ChevronDown, MSym } from '@/components/common/Icons';
 import { contactLink } from '@/lib/contact-link';
 import { useLenis } from '@/hooks/useLenis';
 import { solutionDetail as copy } from '@/data/solutions/solution-detail.js';
-import { solutionPages, type SolutionPageContent } from '@/data/solutions/solutionPages';
+import { solutionPages } from '@/data/solutions/solutionPages';
+
+type SolutionPageContent = typeof solutionPages[number];
 import '@/styles/detail-pages.css';
 import '@/styles/detail-pages-theme.css';
 

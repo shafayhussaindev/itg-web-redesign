@@ -6,7 +6,9 @@ import { useEffect } from 'react';
 import { ArrowRight, MSym } from '@/components/common/Icons';
 import { useHashScroll } from '@/hooks/useHashScroll';
 import { itemFamilies } from '@/data/site/item-page.js';
-import { itemLabel as label, type ItemPageContent } from '@/data/itemPages';
+import { itemLabel as label, type itemPages } from '@/data/itemPages';
+
+type ItemPageContent = typeof itemPages[number];
 import '@/styles/detail-pages.css';
 import './item-page.css';
 import '@/styles/detail-pages-theme.css';
@@ -14,7 +16,7 @@ import '@/styles/detail-pages-theme.css';
 const pad = (n: number) => String(n + 1).padStart(2, '0');
 
 /* One template for every Tier 3 page (a capability, product, service or
-   industry segment). All words come from itemPages.ts, which reads them from
+   industry segment). All words come from itemPages.js, which reads them from
    the Tier 2 content files. */
 export default function ItemPage({ page }: { page: ItemPageContent }) {
   const family = itemFamilies[page.family];
