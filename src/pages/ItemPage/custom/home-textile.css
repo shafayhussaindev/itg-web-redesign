@@ -1,0 +1,8 @@
+.tier3-detail .t3-applied .ht-item { grid-template-columns: minmax(0, 1fr); }
+.ht-table-wrap { overflow-x: auto; }
+.ht-table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 14px; line-height: 1.6; text-align: left; }
+.ht-table th, .ht-table td { padding: 18px; border-bottom: 1px solid rgba(13, 33, 64, .16); vertical-align: top; }
+.ht-table thead { background: var(--navy); color: white; }
+.ht-table tbody tr:nth-child(even) { background: var(--ice); }
+.ht-table tbody th { width: 22%; }
+.ht-source { margin-top: 40px; font-size: 13px; color: var(--charcoal); }

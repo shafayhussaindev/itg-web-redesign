@@ -8,7 +8,7 @@
  * Re-organised Sept 2026 from six categories. Two were removed (Enterprise
  * Platforms and Implementations, AI and Advanced Technologies) together with
  * their services; their old addresses forward to /services
- * (src/lib/old-addresses.ts).
+ * (src/routes/oldAddresses.ts).
  *
  * Everything you might want to reword or re-image is in this file. Change the
  * text between the quote marks and save — the site picks it up on its own.
@@ -81,11 +81,11 @@ export const serviceCategories = [
     headline: 'Platforms built to hold.',
     accent: 'Designed around how you work.',
     description:
-      'Enterprise web and application platforms, designed and engineered around business workflows rather than assembled from templates.',
-    overviewTitle: 'Engineering that starts with the workflow, not the screen.',
+      'Engineering services for AI integration, connected devices, cloud platforms and dedicated product delivery.',
+    overviewTitle: 'Build and modernize systems that work together.',
     lead: 'A platform is only as good as the process it supports.',
     overviewBody:
-      'Digital engineering at ITG begins with how work actually moves through your organization — who needs what information, at which point, and under what controls. The interface, the architecture and the integration points follow from that. The result is a platform your teams can use without workarounds and your engineers can extend without rewriting.',
+      'ITG combines software, data and platform engineering to connect AI capabilities, edge devices and enterprise applications. Teams can engage for a defined integration or a dedicated product workstream.',
     outcomes: [
       { icon: 'route', title: 'Workflows that match reality', body: 'Interfaces and data models shaped by the process they serve, not the other way round.' },
       { icon: 'shield', title: 'Secure by construction', body: 'Access control, validation and audit built into the foundation rather than added late.' },
@@ -96,33 +96,33 @@ export const serviceCategories = [
         id: 'web-development',
         name: 'AI & Agentic Systems Integration',
         icon: 'language',
-        description: 'Enterprise web platforms and portals',
-        body: 'Build web platforms that carry real business processes — customer portals, partner systems and internal applications with the performance, accessibility and security an enterprise environment requires.',
-        focus: ['Enterprise portals and web applications', 'Performance, accessibility and responsive delivery', 'Integration with business systems and identity'],
+        description: 'Connect AI agents to business systems.',
+        body: 'Integrate AI services and agent workflows with enterprise data, tools and approvals so useful automation can operate within clear controls.',
+        focus: ['Use-case and workflow design', 'Model, tool and data integration', 'Human approval, observability and governance'],
       },
       {
         id: 'application-development',
         name: 'Embedded / IoT & Edge Computing',
         icon: 'deployed_code',
-        description: 'Custom application engineering',
-        body: 'Engineer applications around processes that standard software does not cover. Scope, architecture and release approach are defined against your operating environment before build begins.',
-        focus: ['Custom business application design', 'API and service architecture', 'Staged release and quality assurance'],
+        description: 'Software for connected devices and the edge.',
+        body: 'Build embedded and IoT systems that capture device data, act locally where needed and connect reliably to enterprise platforms.',
+        focus: ['Device and sensor integration', 'Edge processing and connectivity', 'Secure data exchange and fleet management'],
       },
       {
         id: 'ui-ux-design',
         name: 'Cloud & Platform Modernization',
         icon: 'devices',
-        description: 'Human-centered product design',
-        body: 'Design interfaces around the people who use them daily. Research, structure and interaction are resolved before build, so engineering work is spent on a design that has already been tested.',
-        focus: ['User research and journey mapping', 'Interaction and interface design systems', 'Accessibility and usability validation'],
+        description: 'Modernize cloud foundations and platforms.',
+        body: 'Assess application dependencies, design target architecture and move workloads in controlled stages with security and operations built in.',
+        focus: ['Platform and workload assessment', 'Cloud architecture and migration', 'Reliability, security and operating model'],
       },
       {
         id: 'graphic-design',
         name: 'Dedicated Product Engineering (PODs)',
         icon: 'palette',
-        description: 'Brand and visual systems',
-        body: 'Establish a visual language that holds together across products, documents and channels — defined as a reusable system rather than a set of one-off assets.',
-        focus: ['Visual identity and design systems', 'Product and campaign visual assets', 'Brand consistency across digital channels'],
+        description: 'A dedicated team for sustained product delivery.',
+        body: 'Assemble a focused engineering pod with product, design and delivery skills to build, improve and support a defined product roadmap.',
+        focus: ['Roadmap and team setup', 'Iterative build and quality assurance', 'Documentation and product handover'],
       },
       {
         id: 'sharepoint-solutions',
@@ -141,11 +141,7 @@ export const serviceCategories = [
       image: '/images/services/ind-enterprise.jpg',
       imageAlt: 'Engineering teams working on enterprise digital platforms',
     },
-    cta: {
-      title: 'Have a platform to build?',
-      body: 'Bring the workflow, the constraints and the systems it has to sit alongside. We will help define a scope worth committing to.',
-      label: 'Discuss an Engineering Engagement',
-    },
+    cta: { title: 'Need engineering capacity for a complex system?', body: 'Tell us what you need to connect, build or modernize. We will help define a practical delivery scope.', label: 'Discuss Engineering Services' },
   },
 
   /* ── Data Management Services ────────────────────────────────────────────── */
@@ -159,55 +155,44 @@ export const serviceCategories = [
     headline: 'Reporting people trust.',
     accent: 'Decisions people can defend.',
     description:
-      'Analytics, business intelligence and reporting built on definitions your teams agree on, so the numbers hold up when they are questioned.',
-    overviewTitle: 'The hard part is agreement, not the dashboard.',
+      'Improve the quality, movement and structure of data used across your business.',
+    overviewTitle: 'Make operational data dependable and usable.',
     lead: 'Most reporting problems are definition problems.',
     overviewBody:
-      'When two teams report different revenue figures, the tool is rarely at fault — the underlying definitions were never reconciled. We start by settling what each measure means and where it comes from, then build the models and reports on top. What follows is a reporting layer that survives scrutiny in a board meeting.',
+      'Data programs begin with trusted definitions and controlled movement. ITG helps teams clean source data, migrate it safely and build warehouse structures that support reporting and future analytics.',
     outcomes: [
-      { icon: 'balance', title: 'One set of definitions', body: 'Measures agreed across finance and operations before a report is built.' },
-      { icon: 'grid_view', title: 'Reporting that fits the role', body: 'Executive summaries and operational detail drawn from the same trusted model.' },
-      { icon: 'verified_user', title: 'Governed access', body: 'Clear ownership of data, refresh cycles and who can see what.' },
-    ],
+        { icon: 'check_circle', title: 'Data you can trust', body: 'Quality rules and ownership applied before information reaches downstream systems.' },
+        { icon: 'route', title: 'Controlled movement', body: 'Migration and pipeline steps reconciled from source to destination.' },
+        { icon: 'bar_chart', title: 'A foundation for analysis', body: 'Warehouse structures designed around consistent definitions and useful access.' },
+      ],
     services: [
       {
         id: 'power-bi',
         name: 'Data Cleansing, Validation & Hygiene',
         icon: 'bar_chart',
-        description: 'Power BI dashboards and analytics',
-        body: 'Build Power BI from the model upward — data sources, relationships and measures defined first, then reports designed for the decisions they support.',
-        focus: ['Data modelling and measure definition', 'Report and dashboard design', 'Refresh, workspace and access governance'],
+        description: 'Improve data quality at the source.',
+        body: 'Profile, standardize and validate data so teams can resolve duplicates, missing values and inconsistent definitions before information reaches reports or applications.',
+        focus: ['Data profiling and quality rules', 'Cleansing and deduplication workflows', 'Validation, monitoring and ownership'],
       },
       {
         id: 'bi-solutions',
         name: 'Data Migration & ETL Pipeline Services',
         icon: 'trending_up',
-        description: 'Enterprise BI platforms',
-        body: 'Establish the reporting layer that sits across your business systems, with the data pipelines, warehouse structure and governance to keep it dependable.',
-        focus: ['Data warehouse and pipeline design', 'Cross-system reporting architecture', 'Data quality and ownership frameworks'],
+        description: 'Move data through controlled pipelines.',
+        body: 'Plan source-to-target mapping, build extraction and transformation pipelines, and reconcile results so migrations and recurring data flows remain dependable.',
+        focus: ['Source mapping and migration planning', 'ETL pipeline design and orchestration', 'Reconciliation, testing and cutover'],
       },
       {
         id: 'data-visualization',
         name: 'Data Warehousing',
         icon: 'grid_view',
-        description: 'Reports and visual storytelling',
-        body: 'Present information so the conclusion is visible without explanation — reporting packs, operational views and board material designed for the reader.',
-        focus: ['Report and visualization design standards', 'Operational and executive reporting packs', 'Distribution, scheduling and commentary'],
+        description: 'Organize data for reliable analysis.',
+        body: 'Design warehouse models, ingestion and governance around the questions teams need to answer, with clear ownership and refresh rules.',
+        focus: ['Warehouse architecture and modelling', 'Ingestion and transformation layers', 'Access, lineage and refresh governance'],
       },
     ],
-    feature: {
-      eyebrow: 'Before the first report',
-      title: 'Settle the numbers, then build the view.',
-      body: 'We run a definition workshop before any modelling starts. Each measure gets an owner, a source and a written meaning. It is unglamorous work, and it is the difference between a dashboard that gets used and one that gets argued with.',
-      points: ['Agreed measures with named owners', 'Documented sources and refresh cycles', 'Reporting designed to the decision'],
-      image: '/images/services/ind-manufacturing.jpg',
-      imageAlt: 'Operational data reviewed on screen in an industrial setting',
-    },
-    cta: {
-      title: 'Not confident in the numbers?',
-      body: 'Tell us which reports get questioned and where the figures diverge. That is usually the right place to start.',
-      label: 'Discuss a Data Engagement',
-    },
+    feature: { eyebrow: 'Data discipline', title: 'Know the source before moving the data.', body: 'Cleansing, migration and warehousing only work when the meaning and ownership of each field are understood. We document those decisions and validate each handoff before the next system depends on it.', points: ['Source definitions agreed', 'Quality and reconciliation rules applied', 'Ownership and lineage documented'], image: '/images/services/pillar-data.jpg', imageAlt: 'Enterprise data systems and analysis' },
+    cta: { title: 'Where does your data lose reliability?', body: 'Tell us which source, migration or report is hardest to trust. We will define the first improvement step.', label: 'Discuss Data Management' },
   },
 
   /* ── ESG Services  (added Sept 2026 — first-draft copy, review before launch) ── */
@@ -236,33 +221,33 @@ export const serviceCategories = [
         id: 'esg-data-reporting',
         name: 'Carbon Accounting & ESG Dashboards',
         icon: 'bar_chart',
-        description: 'Indicators, data collection and reports',
-        body: 'Define the indicators that matter to your business and stakeholders, map where each one comes from, and build the collection and reporting workflow around them.',
-        focus: ['Materiality-led indicator selection', 'Data source mapping and ownership', 'Reporting dashboards and disclosures'],
+        description: 'Measure emissions and report ESG performance.',
+        body: 'Bring activity data, calculation methods and ESG indicators into dashboards and disclosure workflows that retain the evidence behind each figure.',
+        focus: ['Emissions data and calculation workflows', 'ESG indicator dashboards', 'Review, approval and source traceability'],
       },
       {
         id: 'csrd-readiness',
         name: 'Supply Chain ESG & Vendor Sustainability',
         icon: 'verified_user',
-        description: 'Gap analysis and roadmap',
-        body: 'Understand how far your current data and processes are from what CSRD-related reporting will ask of you, and agree a practical plan to close the gaps.',
-        focus: ['Double materiality support', 'Data and process gap analysis', 'Prioritised readiness roadmap'],
+        description: 'Understand sustainability across suppliers.',
+        body: 'Collect relevant vendor ESG information, assess risks and improvement opportunities, and connect supplier responses to procurement decisions.',
+        focus: ['Supplier questionnaires and data requests', 'Risk and performance assessment', 'Follow-up actions and evidence records'],
       },
       {
         id: 'carbon-accounting',
         name: 'Green IT & Carbon Footprint Optimization',
         icon: 'eco',
-        description: 'Scope 1, 2 and 3 emissions',
-        body: 'Establish an emissions baseline across your operations and value chain, using methods your specialists select, and keep it current as activity data changes.',
-        focus: ['Activity data collection across scopes', 'Emission factors and method versioning', 'Baseline, targets and reduction tracking'],
+        description: 'Reduce the footprint of technology operations.',
+        body: 'Measure the energy and emissions associated with IT services, then identify practical changes to infrastructure, workloads and equipment lifecycle.',
+        focus: ['IT energy and emissions baseline', 'Infrastructure and workload optimization', 'Progress tracking and reporting'],
       },
       {
         id: 'supplier-due-diligence',
         name: 'Automated Regulatory Disclosure Engines',
         icon: 'account_tree',
-        description: 'Supply-chain risk and evidence',
-        body: 'Collect ESG information from suppliers in a structured way, flag the risks that need attention, and keep the evidence behind each assessment.',
-        focus: ['Supplier questionnaires and data requests', 'Risk screening and follow-up workflows', 'Evidence records for each supplier'],
+        description: 'Prepare disclosures with controlled data flows.',
+        body: 'Connect source data, calculation rules, approvals and report outputs to reduce manual work in recurring regulatory disclosures.',
+        focus: ['Disclosure requirements and data mapping', 'Automated collection and validation', 'Review, audit trail and report generation'],
       },
     ],
     feature: {
@@ -284,47 +269,47 @@ export const serviceCategories = [
   {
     id: 'cloud',
     name: 'Cyber Security',
-    shortName: 'Cloud & Infrastructure',
+    shortName: 'Cyber Security',
     icon: 'cloud',
     image: '/images/services/pillar-cloud.jpg',
     focus: 'center',
     headline: 'Move with a plan.',
     accent: 'Not just a lift and shift.',
     description:
-      'Cloud strategy, architecture and migration across hybrid and multi-cloud environments, with cost and operational ownership addressed before the move.',
-    overviewTitle: 'Decide what moves, what changes, and what stays.',
-    lead: 'Not every workload belongs in the cloud.',
+      'Protect infrastructure and applications through assessment, engineering, operations and governance.',
+    overviewTitle: 'Build security into the operating environment.',
+    lead: 'Security decisions depend on current evidence about systems, threats and controls.',
     overviewBody:
-      'A migration that copies existing servers into a cloud account usually costs more and runs no better. We assess each workload against its dependencies, data residency requirements and running cost, then choose per workload: migrate as-is, re-architect, or leave it where it is. The result is a plan you can fund and defend.',
+      'Cyber security work has to cover the estate teams actually run. ITG connects cloud and infrastructure controls, targeted testing, security operations review and GRC implementation into a practical improvement plan.',
     outcomes: [
-      { icon: 'architecture', title: 'A decision per workload', body: 'Migrate, re-architect or retain, assessed against dependencies and cost.' },
-      { icon: 'bar_chart', title: 'Cost modelled beforehand', body: 'Projected running cost established before commitment, not discovered after.' },
-      { icon: 'settings', title: 'Operations defined', body: 'Monitoring, backup and ownership agreed as part of the migration.' },
-    ],
+        { icon: 'shield', title: 'Controls with clear ownership', body: 'Security responsibilities and safeguards mapped to the systems they protect.' },
+        { icon: 'manage_search', title: 'Risks that can be prioritized', body: 'Assessment findings ranked by impact, exposure and remediation effort.' },
+        { icon: 'verified_user', title: 'Improvement you can verify', body: 'Actions tracked through implementation, testing and review.' },
+      ],
     services: [
       {
         id: 'cloud-consulting',
         name: 'Cloud & Infrastructure Security',
         icon: 'cloud',
-        description: 'Cloud readiness and strategy',
-        body: 'Establish where cloud adoption makes sense for your estate — workload assessment, target architecture and a cost model you can take to a budget discussion.',
-        focus: ['Workload assessment and readiness review', 'Target architecture and platform selection', 'Cost modelling and migration business case'],
+        description: 'Secure cloud and infrastructure foundations.',
+        body: 'Review identity, network, configuration and monitoring controls across cloud and on-premises systems, then implement prioritized improvements.',
+        focus: ['Architecture and configuration review', 'Identity and access controls', 'Monitoring, hardening and recovery'],
       },
       {
         id: 'cloud-migration',
         name: 'Security Assessment and Testing',
         icon: 'architecture',
-        description: 'Architect and migrate workloads',
-        body: 'Design the target environment and move workloads into it in controlled waves, with networking, identity, security and rollback settled before each one.',
-        focus: ['Landing zone, network and identity design', 'Phased migration waves and cutover planning', 'Security baselines and rollback procedures'],
+        description: 'Find and validate security weaknesses.',
+        body: 'Assess applications, infrastructure and processes with a defined testing scope, then prioritize findings and verify remediation.',
+        focus: ['Assessment scope and threat scenarios', 'Technical testing and evidence', 'Risk-ranked findings and retesting'],
       },
       {
         id: 'hybrid-multicloud',
         name: 'SOC Maturity Assessment',
         icon: 'hub',
-        description: 'Flexible cloud operating models',
-        body: 'Operate across on-premise and more than one cloud without losing consistency, with connectivity, identity and monitoring handled as one environment.',
-        focus: ['Hybrid connectivity and identity federation', 'Consistent policy and governance across providers', 'Unified monitoring, backup and recovery'],
+        description: 'Assess the maturity of security operations.',
+        body: 'Review monitoring coverage, alert handling, incident workflows and team capability to define a realistic SOC improvement roadmap.',
+        focus: ['Logging and detection coverage', 'Triage and response processes', 'People, tooling and maturity roadmap'],
       },
       {
         id: 'grc-implementation',
@@ -335,19 +320,8 @@ export const serviceCategories = [
         focus: ['Governance requirements', 'Risk controls', 'Compliance processes'],
       },
     ],
-    feature: {
-      eyebrow: 'What gets missed',
-      title: 'The running cost is the real decision.',
-      body: 'Migration cost is visible and finite. Running cost is neither, and it is where cloud programmes lose support internally. We model it per workload before the move and agree who owns it afterwards.',
-      points: ['Running cost projected per workload', 'Ownership agreed before migration', 'Monitoring and backup in scope from day one'],
-      image: '/images/services/ind-government.jpg',
-      imageAlt: 'Secure public sector infrastructure and connected facilities',
-    },
-    cta: {
-      title: 'Weighing up a migration?',
-      body: 'Share the estate and what is driving the move. We will help you work out what should actually go.',
-      label: 'Discuss a Cloud Engagement',
-    },
+    feature: { eyebrow: 'Security in practice', title: 'Make every finding actionable.', body: 'A useful assessment shows where a control is weak, who owns the fix and how the team will verify it. We connect testing, implementation and operating procedures so the result improves day-to-day security.', points: ['Findings tied to affected systems', 'Remediation owners and priorities agreed', 'Controls retested after changes'], image: '/images/services/pillar-platform.jpg', imageAlt: 'Enterprise technology infrastructure' },
+    cta: { title: 'Ready to strengthen your security posture?', body: 'Tell us which systems or controls you need to assess. We will help define a focused starting scope.', label: 'Discuss Cyber Security' },
   },
 
   /* ── BPO Services (was Automation and Process Services; copy still describes automation) ── */
@@ -361,40 +335,40 @@ export const serviceCategories = [
     headline: 'Less manual effort.',
     accent: 'Not less control.',
     description:
-      'Workflow automation, robotic process automation and process redesign applied where they reduce effort without weakening oversight.',
-    overviewTitle: 'Automate the process you have fixed, not the one you have.',
-    lead: 'Automating a broken process makes it fail faster.',
+      'Managed support and operations for technology, data, sales and finance teams.',
+    overviewTitle: 'Extend operations with accountable service delivery.',
+    lead: 'A managed service works when the handoffs and measures are explicit.',
     overviewBody:
-      'We map the process before proposing any automation, because a workflow with unclear ownership or missing controls will simply break at machine speed. Once the process is sound, automation is applied where the effort and error rate justify it — and the approvals, logs and exception paths stay in place.',
+      'ITG supports repeatable business processes with clear service levels, documented handoffs and reporting. Engagements are scoped around the work, quality controls and information access needed to deliver reliably.',
     outcomes: [
-      { icon: 'route', title: 'Processes mapped first', body: 'Handoffs, exceptions and approvals documented before anything is automated.' },
-      { icon: 'lock', title: 'Controls preserved', body: 'Approval gates and audit trails carried through the automated path.' },
-      { icon: 'target', title: 'Effort measured', body: 'A baseline taken before, so the saving can be shown afterwards.' },
-    ],
+        { icon: 'work', title: 'Reliable response', body: 'Requests and exceptions handled through clear queues, priorities and escalations.' },
+        { icon: 'check_circle', title: 'Quality under control', body: 'Work reviewed against agreed standards with visible error and rework trends.' },
+        { icon: 'bar_chart', title: 'Transparent performance', body: 'Service levels, throughput and outcomes reported in a consistent way.' },
+      ],
     services: [
       {
         id: 'workflow-automation',
         name: 'Technical Support & IT Help Desk',
         icon: 'route',
-        description: 'Streamlined process flows',
-        body: 'Rebuild approval and handoff-heavy processes as governed digital workflows, with routing, escalation and exception handling made explicit.',
-        focus: ['Process mapping and redesign', 'Approval routing and escalation rules', 'Exception handling and audit trails'],
+        description: 'Responsive support for users and systems.',
+        body: 'Provide a structured help desk for incidents and requests, with triage, escalation, knowledge capture and service reporting.',
+        focus: ['Ticket intake and classification', 'Resolution and escalation workflows', 'Knowledge base and service metrics'],
       },
       {
         id: 'rpa',
         name: 'AI Training Data Operations',
         icon: 'bolt',
-        description: 'Bot-driven task automation',
-        body: 'Apply software robots to the repetitive, rule-based tasks that sit between systems, with monitoring and fallback defined before anything runs unattended.',
-        focus: ['Task assessment and automation suitability', 'Bot development, testing and deployment', 'Monitoring, exception alerts and fallback paths'],
+        description: 'High-quality data operations for AI teams.',
+        body: 'Prepare, label, review and govern training data with documented instructions and quality checks suited to the model use case.',
+        focus: ['Data preparation and annotation', 'Quality sampling and review', 'Secure handling and throughput reporting'],
       },
       {
         id: 'digital-transformation',
         name: 'B2B SDR Support',
         icon: 'auto_awesome',
-        description: 'Operating model modernization',
-        body: 'Work through the sequencing when the change is larger than a single process — which capability moves first, what it depends on, and how the organization absorbs it.',
-        focus: ['Current-state assessment and roadmap', 'Sequencing and dependency planning', 'Change, adoption and capability building'],
+        description: 'Support business-to-business prospecting.',
+        body: 'Coordinate research, outreach preparation, CRM updates and appointment support within an agreed sales development process.',
+        focus: ['Account and contact research', 'Outreach workflow support', 'CRM hygiene and activity reporting'],
       },
       {
         id: 'finance-accounting-outsourcing',
@@ -405,28 +379,9 @@ export const serviceCategories = [
         focus: ['Finance operations', 'Accounting support', 'Reporting and controls'],
       },
     ],
-    feature: {
-      eyebrow: 'The honest assessment',
-      title: 'Some processes should not be automated.',
-      body: 'Part of the work is telling you where automation will not pay back — low volume, high variation, or a process due to be replaced anyway. We would rather narrow the scope early than deliver a bot that nobody trusts six months later.',
-      points: ['Suitability assessed before commitment', 'Volume and error baselines taken', 'Scope narrowed where payback is thin'],
-      image: '/images/services/ind-logistics.jpg',
-      imageAlt: 'Logistics operations coordinated across connected systems',
-    },
-    cta: {
-      title: 'Know which process is costing you?',
-      body: 'Bring the one your teams complain about most. We will look at whether automation is the right answer before proposing it.',
-      label: 'Discuss an Automation Engagement',
-    },
+    feature: { eyebrow: 'Service governance', title: 'Define the work before scaling it.', body: 'We document inputs, decisions, quality checks and escalation paths at the start. That gives both teams a common operating picture and a way to improve the service as volume grows.', points: ['Clear scope and service levels', 'Documented handoffs and escalation', 'Regular quality and performance review'], image: '/images/services/ind-enterprise.jpg', imageAlt: 'Team coordinating enterprise operations' },
+    cta: { title: 'Need capacity in a critical workflow?', body: 'Describe the volume, turnaround and controls your team needs. We will outline an appropriate service model.', label: 'Discuss BPO Services' },
   },
 ];
 
-import { alignPageContent } from '@/data/shared/align-page-content.js';
-
-export const servicePages = serviceCategories.map(category => {
-  const href = serviceCategoryPaths[category.id];
-  return alignPageContent('services', href, { ...category, href }, {
-    childrenKey: 'services', pageTitleKey: 'name', childTitleKey: 'name',
-    childSummaryKey: 'description', childBodyKey: 'body',
-  });
-});
+export const servicePages = serviceCategories.map(category => ({ ...category, href: serviceCategoryPaths[category.id] }));

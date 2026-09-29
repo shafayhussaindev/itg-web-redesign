@@ -4,21 +4,115 @@ export const solutionPage = {
   id: 'esg-solutions', name: 'ESG Solutions', shortName: 'ESG', icon: 'eco',
   image: '/images/solutions/cat-sustainability.jpg',
   headline: 'From complex requirements', accent: 'to connected evidence.',
-  description: 'Bring sustainability data, product traceability and reporting workflows together to support transparent, accountable operations.',
-  overview: { eyebrow: 'A foundation for transparency', title: 'Make sustainability part of your systems.', body: 'Sustainability information often sits across spreadsheets, suppliers and disconnected business platforms. ITG connects that information with the workflows and evidence needed to support reporting and review.', note: 'Build a flexible data foundation that can evolve as your organization and its reporting requirements change.' },
+  description: 'Manage sustainability reporting, climate targets, ESG risk, circularity and the controls behind reliable disclosures.',
+  overview: { eyebrow: 'Connected sustainability operations', title: 'Make ESG information actionable and auditable.', body: 'Sustainability programs depend on current data, accountable owners and repeatable decisions. ITG connects reporting, targets, risk and circularity workflows so teams can manage progress through the year.', note: 'Controls, evidence and access rules support every reported figure and decision.' },
   outcomes: [
-    { icon: 'hub', title: 'Connected evidence', body: 'Bring source information, ownership and supporting records into a structured environment.' },
-    { icon: 'route', title: 'Product visibility', body: 'Connect product and supplier information across relevant lifecycle stages.' },
-    { icon: 'verified_user', title: 'Readiness for review', body: 'Support reporting teams with documented processes, controls and traceable data.' },
-  ],
+        { icon: 'hub', title: 'Connected evidence', body: 'Bring source information, ownership and supporting records into a structured environment.' },
+        { icon: 'target', title: 'Targets and risks in view', body: 'Monitor climate commitments and ESG risks through current indicators and assigned actions.' },
+        { icon: 'verified_user', title: 'Readiness for review', body: 'Support reporting teams with documented controls and traceable data.' },
+      ],
+  // Shared by this solution's item pages (e.g. /esg-solutions/<id>): the icons on the
+  // "why it matters" cards and the "How we work" steps.
+  itemPage: {
+    whyIcons: ['hub', 'trending_up', 'verified_user'],
+    steps: { eyebrow: 'How we work', title: 'From assessment to ongoing governance.', items: [
+      { title: 'Assess & prioritize', body: 'Map obligations, current data and controls, then agree priorities and accountable owners.' },
+      { title: 'Connect & validate', body: 'Implement workflows, connect source records and validate the evidence with relevant teams.' },
+      { title: 'Monitor & review', body: 'Track performance, exceptions and corrective actions as requirements and operations change.' },
+    ] },
+  },
   capabilitiesIntro: 'Build the systems that help teams collect, connect and explain sustainability and compliance information.',
   capabilities: [
-    { id: 'esg-solutions', icon: 'eco', title: 'Sustainability Reporting & Management', subtitle: 'A shared foundation for sustainability information.', description: 'Organize environmental, social and governance information around the indicators, responsibilities and workflows your organization defines.', focus: ['ESG data collection and indicator management', 'Ownership, review and approval workflows', 'Dashboards and supporting evidence'], outcome: ['More structured sustainability information', 'Clearer accountability for data and reporting'] },
-    { id: 'csrd', icon: 'bar_chart', title: 'SBTi Management', subtitle: 'Support your reporting team with connected data.', description: 'Build data and workflow capabilities that support CSRD-related reporting preparation, with scope and requirements defined alongside your reporting and advisory teams.', focus: ['Reporting data inventories and gap tracking', 'Evidence collection and review workflows', 'Data lineage and reporting integrations'], outcome: ['A clearer view of reporting data readiness', 'Better-organized evidence for internal and external review'] },
-    { id: 'dpp-eu', icon: 'verified_user', title: 'ESG Risk Management', subtitle: 'Connect products with their supporting information.', description: 'Develop product information foundations and passport experiences around the requirements relevant to your products and markets.', focus: ['Product identifiers and structured information models', 'Supplier data and supporting documentation', 'Passport access and enterprise integration'], outcome: ['More accessible product information', 'A foundation for evolving passport requirements'] },
-    { id: 'traceability', icon: 'route', title: 'Circularity Management', subtitle: 'Follow information across the value chain.', description: 'Connect product, material and supplier records so teams can understand relevant relationships and trace information back to its source.', focus: ['Supplier and material data relationships', 'Lifecycle events and chain-of-custody records', 'Traceability views and exception handling'], outcome: ['Better visibility into product and material history', 'More consistent source records for review'] },
-    { id: 'compliance-audit', icon: 'shield', title: 'Compliance & Audit Management', subtitle: 'Put evidence within reach.', description: 'Support governance and assurance teams with structured controls, document workflows and records of who changed or approved information.', focus: ['Control registers and evidence management', 'Review, approval and issue-resolution workflows', 'Access controls and audit trails'], outcome: ['More organized review processes', 'Traceable ownership of controls and evidence'] },
-    { id: 'carbon-circularity', icon: 'eco', title: 'Data Privacy & Information Security', subtitle: 'Turn lifecycle information into useful insight.', description: 'Connect activity and product lifecycle data to support analysis of emissions and circularity using methodologies selected by your specialist teams.', focus: ['Activity data collection and source tracking', 'Calculation inputs and methodology versioning', 'Lifecycle dashboards and improvement tracking'], outcome: ['More transparent analytical inputs', 'Better visibility into opportunities for improvement'] },
+    {
+      id: 'esg-solutions', icon: 'eco', title: 'Sustainability Reporting & Management',
+      subtitle: 'Turn sustainability information into traceable, audit-ready disclosures.',
+      description: 'Sustainability Reporting & Management establishes verifiable, auditable frameworks for collecting, validating, and disclosing corporate environmental, social, and governance (ESG) metrics. This capability bridges operational activities with global disclosure mandates—such as the Corporate Sustainability Due Diligence Directive (CSDDD), Corporate Sustainability Reporting Directive (CSRD/ESRS), Global Reporting Initiative (GRI), and IFRS Sustainability Disclosure Standards (ISSB S1/S2). By transitioning from fragmented annual surveys to automated, audit-ready data pipelines, organizations provide stakeholders, investors, and regulatory bodies with transparent, traceable sustainability performance.',
+      outcome: ['Connected and validated ESG data', 'Evidence-backed stakeholder disclosures', 'Visible progress against transition plans'],
+      // Listed on this solution's page as bullet points and on the item's own page as cards.
+      coreCapabilities: [
+        { icon: 'policy', title: 'Regulatory Reporting Framework Alignment', body: 'Operationalizing data aggregation models mapped directly to CSRD (European Sustainability Reporting Standards), GRI, TCFD, and SEC climate disclosure rules.' },
+        { icon: 'layers', title: 'Double Materiality Assessments', body: 'Conducting structured impact and financial materiality evaluations to identify, quantify, and document which ESG factors present material risks and opportunities to the enterprise.' },
+        { icon: 'hub', title: 'Automated ESG Data Aggregation', body: 'Engineering automated connectors to pull environmental consumption metrics, workforce demographics, and governance records directly from enterprise ERP, utility providers, and HR systems.' },
+        { icon: 'verified_user', title: 'Audit-Ready Data Lineage & Assurance', body: 'Establishing non-repudiable data trails, source evidence linking, and documentation trees to support mandatory limited and reasonable third-party assurance audits.' },
+        { icon: 'groups', title: 'Stakeholder Disclosures & Benchmarking', body: 'Structuring unified disclosure packages for rating agencies, institutional investors, supply chain clients, and benchmark indexes (such as CDP and Dow Jones Sustainability Index).' },
+        { icon: 'eco', title: 'Decarbonization Roadmap Tracking', body: 'Modeling multi-year transition plans and operational initiatives to quantify expected versus actual emissions abatements and capital allocation efficiency.' },
+      ],
+    },
+    {
+      id: 'csrd', icon: 'bar_chart', title: 'SBTi Management',
+      subtitle: 'Translate science-based climate targets into monitored reduction roadmaps.',
+      description: 'Science Based Targets initiative (SBTi) Management guides enterprises through setting, submitting, validating, and monitoring corporate decarbonization targets aligned with climate science and the 1.5°C threshold of the Paris Agreement. This discipline focuses on building granular greenhouse gas (GHG) inventories across Scope 1, Scope 2, and Scope 3 emissions, converting long-term net-zero commitments into actionable, trajectory-modeled reduction roadmaps across the corporate value chain.',
+      outcome: ['Consistent Scope 1, 2 and 3 inventories', 'Documented target submissions and boundaries', 'Clear progress and variance tracking'],
+      // Listed on this solution's page as bullet points and on the item's own page as cards.
+      coreCapabilities: [
+        { icon: 'policy', title: 'GHG Protocol Inventory Accounting', body: 'Ingesting activity data across direct operations and indirect value chains in strict compliance with the GHG Protocol Corporate Standard and Scope 3 Calculation Guidance.' },
+        { icon: 'layers', title: 'Near-Term & Long-Term Target Modeling', body: 'Structuring compliant 5- to 10-year near-term targets and 2050 net-zero targets across absolute contraction and sector-specific decarbonization approaches (SDA).' },
+        { icon: 'hub', title: 'Scope 3 Value Chain Decarbonization', body: 'Measuring and prioritizing reduction pathways across the 15 Scope 3 categories, specifically purchased goods, upstream transport, business travel, and use-of-sold products.' },
+        { icon: 'verified_user', title: 'Formal SBTi Dossier & Validation Submission', body: 'Preparing official technical submissions, calculation workbooks, boundary justifications, and methodological documentation required for formal validation by the SBTi committee.' },
+        { icon: 'groups', title: 'Target Recalculation & Boundary Governance', body: 'Establishing trigger mechanisms for target recalculations based on structural corporate changes, including mergers, acquisitions, and divestitures.' },
+        { icon: 'eco', title: 'Annual Progress Tracking & Variance Analysis', body: 'Generating annual progress tracking statements against validated trajectory lines, identifying variance drivers and guiding operational interventions.' },
+      ],
+    },
+    {
+      id: 'dpp-eu', icon: 'verified_user', title: 'ESG Risk Management',
+      subtitle: 'Identify and manage environmental, social and governance exposures.',
+      description: 'ESG Risk Management identifies, evaluates, and mitigates material exposures arising from environmental shifts, social responsibilities, and governance vulnerabilities across enterprise operations and value chains. By embedding ESG factors into existing Enterprise Risk Management (ERM) frameworks, this practice enables organizations to quantify physical, transition, regulatory, and reputational risks, protecting balance sheets from climate liabilities and compliance penalties.',
+      outcome: ['ESG risks connected to enterprise risk management', 'Better visibility into climate and supply chain exposure', 'Defined mitigation and incident escalation'],
+      // Listed on this solution's page as bullet points and on the item's own page as cards.
+      coreCapabilities: [
+        { icon: 'policy', title: 'Climate Scenario Analysis & Physical Risk Modeling', body: 'Modeling acute and chronic physical climate risks—such as extreme weather disruptions, sea-level rise, and heat stress—against physical assets and production facilities under NGFS and IPCC climate scenarios.' },
+        { icon: 'layers', title: 'Transition Risk & Carbon Price Exposure', body: 'Assessing vulnerability to economic transitions, including incoming carbon border taxes (CBAM), carbon pricing mechanisms, shifting consumer sentiment, and raw material phase-outs.' },
+        { icon: 'hub', title: 'Social & Human Rights Impact Assessments', body: 'Reviewing labor standards, health and safety records, community relations, and modern slavery risks throughout the upstream and downstream supply network.' },
+        { icon: 'verified_user', title: 'Governance Vulnerability & Business Ethics Review', body: 'Systematically evaluating corporate board diversity, executive remuneration ties to ESG performance, anti-corruption policies, and whistleblower protections.' },
+        { icon: 'groups', title: 'ERM Integration & Risk Register Quantification', body: 'Translating qualitative ESG indicators into quantitative financial metrics integrated directly into enterprise-wide risk heat maps and Value-at-Risk (VaR) calculations.' },
+        { icon: 'eco', title: 'Crisis Management & Incident Response Planning', body: 'Establishing rapid escalation paths and contingency operational procedures for addressing high-visibility environmental incidents or regulatory investigations.' },
+      ],
+    },
+    {
+      id: 'traceability', icon: 'route', title: 'Circularity Management',
+      subtitle: 'Retain material value through circular design, recovery and reuse.',
+      description: 'Circularity Management guides organizations from linear "take-make-waste" operating models to closed-loop circular systems. This practice evaluates material flows, optimizes product architecture for remanufacturing, and implements take-back logistics to retain material value throughout the economic lifecycle. By decoupling revenue generation from virgin resource extraction, companies lower material acquisition costs, reduce operational waste, and fulfill expanding circular economy regulations.',
+      outcome: ['Traceable material flows and recovery potential', 'Connected take-back and reuse programs', 'Evidence for circular product decisions'],
+      // Listed on this solution's page as bullet points and on the item's own page as cards.
+      coreCapabilities: [
+        { icon: 'policy', title: 'Material Flow Analysis (MFA) & Mass Balance Tracking', body: 'Quantifying the volume, lifecycle, and fate of materials entering and leaving facilities to identify resource losses, byproduct streams, and recovery potential.' },
+        { icon: 'layers', title: 'Circular Product Design & Disassembly Optimization', body: 'Implementing design strategies that prioritize modularity, non-toxic inputs, recycled-content integration, and ease of mechanical disassembly at end-of-life.' },
+        { icon: 'hub', title: 'Reverse Logistics & Take-Back Program Architecture', body: 'Designing return networks, sorting workflows, and processing partnerships to recover post-consumer and post-industrial assets for secondary utilization.' },
+        { icon: 'verified_user', title: 'Waste Diversion & Zero-Waste-to-Landfill Certification', body: 'Establishing monitoring architectures to eliminate waste sent to landfills, verifying diversion rates through certified recovery, composting, and recycling channels.' },
+        { icon: 'groups', title: 'Digital Product Passports (DPP) & Material Lineage', body: 'Implementing serialized tracking frameworks that log raw material origin, repair histories, disassembly instructions, and recycled content for downstream value preservation.' },
+        { icon: 'eco', title: 'Secondary Market & Industrial Symbiosis Facilitation', body: 'Structuring programs to monetize manufacturing scrap, surplus inventory, and byproducts as secondary feedstock for adjacent manufacturing industries.' },
+      ],
+    },
+    {
+      id: 'compliance-audit', icon: 'shield', title: 'Compliance & Audit Management',
+      subtitle: 'Connect obligations, internal controls, audit evidence and remediation.',
+      description: 'Compliance & Audit Management establishes unified governance architectures to systematically manage corporate compliance obligations, internal policy enforcement, and audit cycles. By consolidating multiple regulatory standards into an integrated control framework, this domain eliminates redundant verification workflows, closes policy enforcement gaps, and maintains continuous audit-readiness across business units.',
+      outcome: ['Less duplicated control testing', 'Accountable corrective actions', 'Continuous readiness for audit and review'],
+      // Listed on this solution's page as bullet points and on the item's own page as cards.
+      coreCapabilities: [
+        { icon: 'policy', title: 'Unified Compliance Framework Architecture', body: 'Mapping overlapping cross-industry mandates (e.g., ISO standards, SOX, OSHA, environmental permits) to single internal controls, eliminating duplicate testing overhead.' },
+        { icon: 'layers', title: 'Automated Internal Audit Workflow Management', body: 'Designing end-to-end audit lifecycle operations—from risk assessment and universe planning to fieldwork execution, testing documentation, and issue remediation tracking.' },
+        { icon: 'hub', title: 'Corrective and Preventive Action (CAPA) Systems', body: 'Standardizing root-cause analysis, assigning corrective action ownership, and tracking remediation milestones for compliance findings and non-conformities.' },
+        { icon: 'verified_user', title: 'Continuous Regulatory Horizon Scanning', body: 'Tracking international and regional legislative updates, industry guidelines, and regulatory enforcement actions to proactively adjust internal control procedures.' },
+        { icon: 'groups', title: 'Policy Management & Distribution Lifecycle', body: 'Centralizing policy authoring, executive review, mandatory employee attestation, and version-controlled policy distribution across the organization.' },
+        { icon: 'eco', title: 'Audit Trail & Regulatory Inquiries Preparation', body: 'Compiling evidence repositories and traceable testing documentation to respond efficiently to external regulatory inquiries, statutory audits, and certifications.' },
+      ],
+    },
+    {
+      id: 'carbon-circularity', icon: 'eco', title: 'Data Privacy & Information Security',
+      subtitle: 'Protect information through integrated privacy and security governance.',
+      description: 'Data Privacy & Information Security establishes the administrative, technical, and physical safeguards needed to protect corporate data assets, preserve customer trust, and maintain compliance with global privacy regimes. This practice delivers integrated security and privacy governance programs, aligning infrastructure controls with frameworks like ISO/IEC 27001, SOC 2, NIST CSF, GDPR, and regional privacy frameworks.',
+      outcome: ['Visibility into sensitive data and processing risks', 'Consistent privacy and security controls', 'Prepared incident and breach response workflows'],
+      // Listed on this solution's page as bullet points and on the item's own page as cards.
+      coreCapabilities: [
+        { icon: 'policy', title: 'Privacy Program Governance & Cross-Border Compliance', body: 'Designing operational privacy programs covering data subject access requests (DSAR), cross-border data transfer mechanisms, and privacy notice management under GDPR, CCPA/CPRA, and equivalent regimes.' },
+        { icon: 'layers', title: 'Data Discovery, Classification & Sensitive Data Lineage', body: 'Deploying automated discovery engines to catalog, tag, and trace Personally Identifiable Information (PII) and corporate intellectual property across cloud, on-premises, and SaaS environments.' },
+        { icon: 'hub', title: 'Information Security Management Systems (ISMS)', body: 'Developing and maintaining comprehensive ISMS frameworks in full alignment with ISO/IEC 27001, NIST Cybersecurity Framework, and CIS Controls.' },
+        { icon: 'verified_user', title: 'Data Protection Impact Assessments (DPIA)', body: 'Evaluating privacy risks introduced by new product architectures, third-party software, or automated processing systems prior to operational deployment.' },
+        { icon: 'groups', title: 'Incident Response & Breach Notification Protocols', body: 'Formulating defined incident classification matrices, technical containment procedures, forensic procedures, and regulatory notification workflows for data compromise events.' },
+        { icon: 'eco', title: 'Privacy-by-Design Technical Implementations', body: 'Establishing engineering standards for pseudonymization, encryption in transit and at rest, tokenization, dynamic masking, and automated data retention/deletion rules.' },
+      ],
+    },
   ],
   applications: [
     { icon: 'factory', title: 'Manufacturers & exporters', body: 'Connect materials, production and product records to support customer and market information needs.' },

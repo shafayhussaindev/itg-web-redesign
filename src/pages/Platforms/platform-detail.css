@@ -33,27 +33,15 @@
   .product-category .pc-platform-top { margin-bottom: 24px; }
 }
 
-/* A catalogue hero gives visitors direct access to the actual platforms. */
+/* Platform hero layout. */
 .product-category .sd-hero { min-height: 780px; }
 .product-category .sd-hero-image { opacity: .35; }
-.product-category .pc-hero-layout { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 64px; align-items: center; margin: auto 0; padding-bottom: 64px; }
+.product-category .pc-hero-layout { display: grid; grid-template-columns: minmax(0, 1fr); align-items: center; margin: auto 0; padding-bottom: 64px; }
 .product-category .sd-hero-copy { padding-bottom: 0; }
 .product-category .sd-hero h1 { font-size: clamp(36px, 3.5vw, 52px); }
-.product-category .pc-catalogue { background: white; color: var(--navy); border-radius: 16px; padding: 32px; }
-.product-category .pc-catalogue .sd-eyebrow { color: var(--brand-accent); }
-.product-category .pc-catalogue a { display: flex; align-items: center; gap: 16px; padding: 24px 0; border-top: 1px solid rgba(13,33,64,.12); }
-.product-category .pc-catalogue a > span:nth-child(2) { flex: 1; }
-.product-category .pc-catalogue strong { display: block; font-size: 20px; line-height: 1.3; }
-.product-category .pc-catalogue small { display: block; margin-top: 8px; font-size: 12px; line-height: 1.6; color: var(--charcoal); }
-.product-category .pc-catalogue a:hover { color: var(--brand-accent); }
-.product-category .pc-catalogue a:focus-visible { outline-color: var(--brand-accent); }
 .product-category .pc-platform:only-child { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 @supports (grid-template-rows: subgrid) {
   .product-category .pc-platform:not(:only-child) { display: grid; grid-template-rows: subgrid; grid-row: span 2; row-gap: 0; }
-}
-@media (max-width: 1023px) {
-  .product-category .pc-hero-layout { gap: 32px; }
-  .product-category .pc-catalogue { padding: 24px; }
 }
 @media (max-width: 767px) {
   .product-category .sd-hero { min-height: auto; }

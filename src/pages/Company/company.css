@@ -1,6 +1,6 @@
 /* ============================================================
    ITG Technologies — Company page
-   Extends the tokens in index.css and the glass system built for
+   Extends the tokens in styles/global.css and the glass system built for
    Services and reused on Industries. Palette is the locked 8
    colours; every surface below is one of them at an alpha, or
    white/navy at an alpha. No ninth colour.
@@ -17,7 +17,7 @@
 }
 
 /* The scroll reveal is shared by all five tier-1 pages and lives in
-   tier1/shared/base.css (branch 1 of the pipeline in tier1/shared/scrollfx.js).
+   styles/landing-pages.css (branch 1 of the pipeline in hooks/scrollfx.js).
    Only genuine per-page exceptions belong here. */
 
 .tier1-site .co-rule {
@@ -202,7 +202,7 @@
   padding: 44px 44px 46px;
   border-radius: 22px;
   /* Surface (fill, border, shadow) comes from the shared photo-module
-     card block in tier1/shared/base.css. */
+     card block in styles/landing-pages.css. */
 }
 .tier1-site .co-about-panel h2 {
   font-size: 32px;
@@ -453,7 +453,7 @@
   padding: 40px 40px 42px;
   border-radius: 22px;
   /* Surface (fill, border, shadow) comes from the shared photo-module
-     card block in tier1/shared/base.css. No hover lift: the panel is static. */
+     card block in styles/landing-pages.css. No hover lift: the panel is static. */
 }
 
 /* Panel right: media cols 1-8, panel 6-13. Panel left: mirrored. */

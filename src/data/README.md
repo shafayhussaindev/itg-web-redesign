@@ -1,20 +1,103 @@
-# Edit website content here
+# Editing the website's text
 
-Start with the four files at this folder's top level. They point to the content
-for the Solutions, Platforms, Services and Industries menus. The files inside
-each matching folder contain the actual headings, descriptions, images and
-child entries. Each child `id` becomes part of its URL, so keep existing IDs
-stable when editing copy.
+Every heading, paragraph, button label, card, menu entry and image path is in
+**this folder** (`src/data/`). The page files in `src/pages/` only arrange it.
 
-| Site area | Content file |
+**Quickest way to find any sentence:** in VS Code press `Ctrl+Shift+F`, paste a
+few words you can see on the page, and search. Each sentence on the site is
+written in exactly one file here.
+
+## Which file do I open?
+
+| Page (URL) | File |
 | --- | --- |
-| Solutions | `solutionsData.ts` and `solutions/*.js` |
-| Platforms | `platformsData.ts` and `platforms/platform-detail.js` |
-| Services | `servicesData.ts` and `services/service-detail.js` |
-| Industries | `industriesData.ts` and `industries/industry-detail.js` |
-| Home, navigation, footer, contact | `shared/home.js`, `shared/site.js`, `shared/contact.js` |
-| Company page | `company/index-content.js` |
+| Home `/` | `site/home.js` |
+| Menu bar: which pages appear, and in what order | `site/navbar-tier2.js` (menus), `site/navbar-tier3.js` (their items) |
+| Footer, cookie popup | `site/site.js` |
+| Contact `/contact` | `site/contact.js` |
+| Company `/company` | `company/landing-page.js` |
+| `/solutions`, `/platforms`, `/services`, `/industries` | `<section>/landing-page.js` |
+| One solution, e.g. `/esg-solutions` | `solutions/esg-solutions.js` (file name = URL) |
+| One platform, e.g. `/supply-chain` | `platforms/platform-detail.js` (card title/image: `platforms/landing-page.js`) |
+| One service area, e.g. `/esg-services` | `services/service-detail.js` |
+| One industry, e.g. `/consumer-goods` | `industries/industry-detail.js` |
+| An item page, e.g. `/esg-solutions/carbon-circularity` | the item's entry in its parent's file above (search for its id) |
+| Labels shared by all item pages ("Back to…", "Discuss this…") | `site/item-page.js` |
+| Labels shared by all solution / platform / service / industry pages | `solutions/solution-detail.js`, top of `platforms/platform-detail.js`, `services/service-detail.js`, `industries/industry-detail.js` |
 
-Put site images in `public/images/<section>/` and refer to them with a leading
-slash, for example `/images/solutions/cat-ai.jpg`. Page layouts are in
-`src/pages/`; URL definitions are in `src/routes/AppRoutes.tsx`.
+### Worked example: `/esg-solutions/carbon-circularity`
+
+Everything on that page comes from the `id: 'carbon-circularity'` block in
+`solutions/esg-solutions.js`:
+
+- `title` — the big heading, "Data Privacy & Information Security" (also used in the menu)
+- `subtitle` — the line under it, "Protect information through integrated…" (also the menu's short line)
+- `description` — the Overview paragraph
+- `outcome` — the "why it matters" cards
+- `coreCapabilities` — the "Core capabilities" cards (and the bullet list on `/esg-solutions`)
+
+The hero photo is the parent page's `image:` near the top of the same file
+(`/images/solutions/cat-sustainability.jpg` = `public/images/solutions/cat-sustainability.jpg`).
+To give ONE item page its own photo, add it under `pageExtras` in `site/item-page.js`.
+
+Note: the id `carbon-circularity` is older than the title. Ids are part of the
+page address, so they stay the same when a title changes.
+
+### A few items have their own file
+
+Items with a much richer page keep their extra content in a file named after
+them: `solutions/mobile-app-development.ts`, `solutions/enterprise-app-development.ts`,
+`platforms/aullect.ts`, `platforms/svitch.ts`, `platforms/law-into-action.ts`,
+`platforms/consumer-goods-intelligence.ts`, `industries/home-textile.ts`,
+`industries/last-mile-delivery.ts`. Their entry in the parent file points to it,
+e.g. `subtitle: mobileAppDevelopment.tagline`.
+
+## The four rules
+
+**1. Only change what is between the quote marks.**
+
+```js
+title: 'Enterprise Solutions Designed for Real-World Complexity',
+        └──────────── change this ────────────────────────────┘
+```
+
+Leave the word before the colon (`title:`) and the comma at the end alone.
+
+**2. If your text contains an apostrophe, use the curly one: `’` not `'`.**
+A straight apostrophe ends the text early and breaks the page.
+
+**3. Anything after `//` or between `/*` and `*/` is a note.** The site ignores it.
+
+**4. To remove an item from a list, delete its whole `{ … },` block.** To add
+one, copy an existing block, paste it below and change the words. An item's
+`id` becomes part of its page address — don't change ids of existing items.
+
+## Common jobs
+
+**Add a new item page** (e.g. a new ESG capability): copy a block in
+`solutions/esg-solutions.js`, give it a new `id`, change the words, then add
+`{ id: "your-new-id" },` to the `/esg-solutions` list in `site/navbar-tier3.js`
+so it appears in the menu. The page `/esg-solutions/your-new-id` exists
+automatically.
+
+**Change a button:** `cta: { label: 'Explore All Solutions', href: '/solutions' }`
+— `label` is the text, `href` is where it goes (`/page`, `#section`, or `https://…`).
+
+**Swap a photo or video:** files live in `public/images/<section>/`. Write the
+path without `public`: `public/images/solutions/cat-ai.jpg` → `'/images/solutions/cat-ai.jpg'`.
+The live site caches images for a year, so give a changed image a **new file
+name** and update the path, rather than overwriting the old file.
+
+**Change an icon:** icons are names like `icon: 'neurology'` from
+<https://fonts.google.com/icons>. A name not used anywhere on the site yet must
+also be added to the `icon_names=` list in `index.html` (project root), or it
+shows blank.
+
+**If the page goes blank after an edit,** a quote mark or comma is broken.
+Undo (Ctrl+Z) and the page comes back.
+
+## Not in this folder
+
+- Colours, fonts, spacing: `src/styles/` and each page folder's `.css` file.
+- Legal pages (`/terms`, `/privacy`): `src/pages/Legal/`.
+- Page layout (which section sits where): the page files in `src/pages/`.

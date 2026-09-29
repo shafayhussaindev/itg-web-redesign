@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState, type FormEvent, type MouseEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ArrowRight, MSym } from '@/components/common/icons/material';
-import { contact as copy } from '@/data/shared/contact.js';
-import { globalPresence } from '@/data/company/index-content.js';
-import { footer } from '@/data/shared/site.js';
-import '@/components/common/tier2/base.css';
+import { ArrowRight, MSym } from '@/components/common/Icons';
+import { contact as copy } from '@/data/site/contact.js';
+import { globalPresence } from '@/data/company/landing-page.js';
+import { footer } from '@/data/site/site.js';
+import '@/styles/detail-pages.css';
 import './contact.css';
 
 type FieldKey = 'topic' | 'name' | 'email' | 'company' | 'phone' | 'message' | 'consent';
@@ -28,14 +28,14 @@ const topicIds = form.topics.map(t => t.id);
 /**
  * /contact — the destination for every "Contact us" on the site.
  *
- * Built on the tier-2 foundation (`tier2/shared/base.css`) so it shares their
+ * Built on the tier-2 foundation (`styles/detail-pages.css`) so it shares their
  * header, tokens and buttons; layout specific to this page is in `contact.css`.
  *
  * The form validates on the browser's own rules where they exist (the email
  * format comes from `type="email"` itself), but renders its own messages:
  * checked when a field is left, cleared as soon as the visitor edits it, and
  * gathered into a focused summary on submit. How a valid message is delivered
- * depends on `contact.connect` — see the note at the top of `content/contact.js`.
+ * depends on `contact.connect` — see the note at the top of `data/site/contact.js`.
  */
 export default function Contact() {
   const [params] = useSearchParams();
@@ -211,7 +211,7 @@ export default function Contact() {
       return;
     }
 
-    console.warn('[Contact] No formEndpoint or email is set in src/content/contact.js, so this enquiry has nowhere to go.');
+    console.warn('[Contact] No formEndpoint or email is set in src/data/site/contact.js, so this enquiry has nowhere to go.');
     setStatus('offline');
   };
 

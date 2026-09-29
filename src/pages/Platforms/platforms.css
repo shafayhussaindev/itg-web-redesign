@@ -1,6 +1,6 @@
 /* ============================================================
    ITG Technologies — Products page
-   Extends the approved Solutions system (index.css). No new tokens,
+   Extends the approved Solutions system (styles/global.css). No new tokens,
    no new fonts, no parallel design system: this file only adds the
    layout patterns the Products page needs and reuses .btn-cyan,
    .btn-outline-navy, .section-head, .ice-bg, section padding etc.
@@ -43,7 +43,7 @@
    1 — HERO
    Structurally the approved Solutions hero: a full-bleed environment
    with a glassmorphism content panel sitting over it, same rhythm,
-   same radii, same entry motion (heroRise / heroFade from index.css).
+   same radii, same entry motion (heroRise / heroFade from styles/global.css).
 
    The one deliberate inversion: the Solutions environment is a dark
    photograph, so its panel is dark glass with white type. This

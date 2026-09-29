@@ -1,11 +1,14 @@
-import { platforms } from '@/data/platforms/index-content.js';
-import { alignPageContent } from '@/data/shared/align-page-content.js';
+import { consumerGoodsIntelligence } from '@/data/platforms/consumer-goods-intelligence';
+import { lawIntoAction } from '@/data/platforms/law-into-action';
+import { platforms } from '@/data/platforms/landing-page.js';
+import { svitch } from './svitch';
+import { aullect } from './aullect';
 
 /* ============================================================================
  * TIER 2: THE SIX PLATFORM PAGES
  * ==============================
  * One page per platform, at /<platform id> — e.g. /supply-chain. The card
- * fields (title, lead, body, image) come from content/tier1/platforms.js;
+ * fields (title, lead, body, image) come from data/platforms/landing-page.js;
  * everything else on the page is here.
  *
  * TIER 3 = the products on each page (`products` below). Each product is a
@@ -53,33 +56,33 @@ const platformDetails = {
   'sourcing': {
     icon: 'shopping_cart', shortName: 'Sourcing',
     headline: 'Source with confidence.', accent: 'Spend with control.',
-    overviewTitle: 'A connected foundation for how you buy.',
-    overviewBody: 'Requisitions, supplier choices, purchasing and the relationships behind them each need a clear process. Explore the products on this platform to find a starting point that fits the way your organization buys.',
+    overviewTitle: 'Make sourcing decisions with connected information.',
+    overviewBody: 'Bring product, supplier and regulatory information into a consistent decision process so teams can compare options and act with greater confidence.',
     products: [
-      { id: 'integra-erp', name: 'Consumer Goods Intelligence', icon: 'domain', description: 'Unified enterprise resource planning', body: 'Bring core business functions into a shared operational framework. Start a conversation about how enterprise resource planning can support your finance and operations teams.', focus: ['Enterprise resource planning', 'Finance and operations', 'Business process coordination'] },
-      { id: 'integra-crm', name: 'Law Into Action', icon: 'groups', description: 'Customer engagement & relationship management', body: 'Give customer relationships a structured home within your enterprise. Explore how CRM can connect customer information with the teams responsible for engagement.', focus: ['Customer relationships', 'Customer engagement', 'Team coordination'] },
-    ],
+      { id: 'integra-erp', name: 'Consumer Goods Intelligence', icon: 'domain', description: consumerGoodsIntelligence.tagline, body: consumerGoodsIntelligence.body, focus: consumerGoodsIntelligence.sections[0].items.map(item => item.title) },
+      { id: 'integra-crm', name: 'Law Into Action', icon: 'groups', description: lawIntoAction.tagline, body: lawIntoAction.body, focus: ['4-step compliance check wizard', 'Product-level regulation and HS code matching', 'Conversational AI legal intelligence', 'Regulatory views and governance mapping', 'CBAM carbon cost estimator', 'Weekly AI Radar and Partner API'] },
+    ], body: 'Intelligence and tools that support informed sourcing decisions across products, suppliers and legal requirements.', lead: 'Source with a clearer view of products, obligations and demand.',
   },
   'supply-chain': {
     icon: 'local_shipping', shortName: 'Supply Chain',
     headline: 'Connect the chain.', accent: 'Keep operations moving.',
-    overviewTitle: 'Bring visibility to goods, assets and production.',
-    overviewBody: 'Logistics, assets and production each hold information teams rely on every day. Explore products for logistics intelligence, asset tracking and manufacturing planning across your supply chain.',
+    overviewTitle: 'Connect planning, movement and industrial assets.',
+    overviewBody: 'Supply chain decisions rely on current information from production, logistics and assets. These products create focused operating views for each of those needs.',
     products: [
-      { id: 'aullect', name: 'CGI Industrial ERP', icon: 'local_shipping', description: 'AI-powered logistics & operations intelligence', body: 'Explore intelligence in the context of logistics and operational decisions. Start with the processes, data and information gaps that matter most to your teams.', focus: ['Logistics intelligence', 'Operational insights', 'Decision support'] },
-      { id: 'astaric', name: 'RILITS', icon: 'deployed_code', description: 'Asset lifecycle & RFID management', body: 'Explore a structured approach to managing assets across their lifecycle. Discuss your asset environment, identification needs and the role of RFID in your operations.', focus: ['Asset lifecycle management', 'RFID-based identification', 'Asset operations'] },
-      { id: 'cyclo-erp', name: 'Aullect', icon: 'factory', description: 'Manufacturing & spinning mills ERP', body: 'Approach enterprise planning around the needs of manufacturing and spinning mills. Discuss the production context, operational processes and information your teams need to manage.', focus: ['Manufacturing operations', 'Spinning mill processes', 'Industry-specific resource planning'] },
-    ],
+      { id: 'aullect', name: 'CGI Industrial ERP', icon: 'local_shipping', description: 'ERP for industrial production and planning.', body: 'Connect materials, production orders, costing and operational reporting in an ERP workflow designed for industrial teams.', focus: ['Production and material planning', 'Inventory and cost control', 'Shop-floor and management reporting'] },
+      { id: 'astaric', name: 'RILITS', icon: 'deployed_code', description: 'Visibility into logistics and industrial assets.', body: 'Track the identity, location and status of assets and movements across sites and partners so teams can resolve exceptions sooner.', focus: ['Asset and shipment identification', 'Location and event tracking', 'Exception and performance views'] },
+      { id: 'cyclo-erp', name: 'Aullect', icon: 'route', description: aullect.tagline, body: aullect.body, focus: aullect.focus },
+    ], body: 'Platforms for industrial planning, logistics intelligence and asset visibility across the supply chain.',
   },
   'contract-lifecycle': {
     icon: 'contract', shortName: 'Spend Management',
     headline: 'Govern every agreement.', accent: 'From draft to renewal.',
-    overviewTitle: 'Keep contracts, approvals and obligations in one place.',
-    overviewBody: 'Contracts carry commitments that outlast the conversations that created them. Explore products for managing contract documents and records, and for capturing the meetings and decisions around them.',
+    overviewTitle: 'Control commitments before they become costs.',
+    overviewBody: 'Connect purchasing and people-related spend to approved workflows, current records and useful reporting.',
     products: [
-      { id: 'documax', name: 'Enterprise Procurement', icon: 'menu_book', description: 'Document management & compliance platform', body: 'Make document management part of your operational foundation. Define how records, document workflows and governance should support the teams that use them.', focus: ['Document management', 'Document workflows', 'Records governance'] },
-      { id: 'zeito', name: 'Human Resource', icon: 'auto_awesome', description: 'AI meeting & engagement intelligence', body: 'Explore how meeting and engagement intelligence can support your teams. Discuss the conversations, information and working practices that shape your needs.', focus: ['Meeting intelligence', 'Engagement insights', 'Team information needs'] },
-    ],
+      { id: 'documax', name: 'Enterprise Procurement', icon: 'menu_book', description: 'Enterprise purchasing under control.', body: 'Manage requisitions, supplier decisions, purchase orders and approvals in one procurement process with traceable commitments.', focus: ['Purchase request and approval workflows', 'Supplier and order management', 'Spend visibility and controls'] },
+      { id: 'zeito', name: 'Human Resource', icon: 'auto_awesome', description: 'Workforce information and HR processes.', body: 'Organize employee records and recurring HR workflows with appropriate access, approvals and management visibility.', focus: ['Employee records and lifecycle', 'HR requests and approvals', 'Workforce reporting and access control'] },
+    ], body: 'Platforms to manage procurement and workforce spending with clearer controls and visibility.', lead: 'Keep purchasing and workforce commitments visible.',
   },
   'supplier-info-risk-management': {
     icon: 'handshake', shortName: 'Supplier Risk',
@@ -87,7 +90,7 @@ const platformDetails = {
     overviewTitle: 'Keep supplier information current and risk in view.',
     overviewBody: 'Supplier data, sustainability information and risk indicators are only useful when they are up to date and easy to review. Explore products that bring supplier and ESG information into a structured, reportable environment.',
     products: [
-      { id: 'ecomagnet', name: 'Svitch', icon: 'eco', description: 'Sustainability, ESG & CSRD intelligence', body: 'Create a starting point for discussions about sustainability information and reporting readiness. Align the platform scope with the data, reporting processes and governance your organization needs.', focus: ['Sustainability information', 'ESG intelligence', 'CSRD reporting readiness'] },
+      { id: 'ecomagnet', name: 'Svitch', icon: 'eco', description: svitch.tagline, body: svitch.body, focus: svitch.modules.map(module => module.title) },
     ],
   },
   'product-lifecycle-management': {
@@ -113,12 +116,5 @@ const platformDetails = {
 
 export const platformPages = platforms.map(platform => {
   const href = `/${platform.id}`;
-  return alignPageContent('platforms', href, {
-    ...platform,
-    ...platformDetails[platform.id],
-    href,
-  }, {
-    childrenKey: 'products', pageTitleKey: 'title', childTitleKey: 'name',
-    childSummaryKey: 'description', childBodyKey: 'body',
-  });
+  return { ...platform, ...platformDetails[platform.id], href };
 });

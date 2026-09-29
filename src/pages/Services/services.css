@@ -1,6 +1,6 @@
 /* ============================================================
    ITG Technologies — Services page
-   Extends the tokens and primitives in index.css. Palette is the
+   Extends the tokens and primitives in styles/global.css. Palette is the
    locked 8 colours; every surface below is one of them at an alpha,
    or white/navy at an alpha. No ninth colour.
    ============================================================ */
@@ -26,7 +26,7 @@
 }
 
 /* The scroll reveal is shared by all five tier-1 pages and lives in
-   tier1/shared/base.css (branch 1 of the pipeline in tier1/shared/scrollfx.js).
+   styles/landing-pages.css (branch 1 of the pipeline in hooks/scrollfx.js).
    Only genuine per-page exceptions belong here. */
 
 /* Short cyan rule under section headings. */
@@ -315,7 +315,7 @@
   padding: 40px 40px 42px;
   border-radius: 22px;
   /* Surface (fill, border, shadow) comes from the shared photo-module
-     card block in tier1/shared/base.css. */
+     card block in styles/landing-pages.css. */
 }
 
 /* Panel right: image occupies cols 1-8, panel overlaps from col 7 to 13. */

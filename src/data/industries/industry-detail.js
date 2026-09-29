@@ -1,3 +1,5 @@
+import { homeTextile } from '@/data/industries/home-textile';
+import { lastMileDelivery } from '@/data/industries/last-mile-delivery';
 /* ============================================================================
  * INDUSTRY PAGES  (tier 2)
  * =======================
@@ -16,7 +18,7 @@
  *
  * The six sectors removed in Sept 2026 (Enterprise & Corporate, Healthcare,
  * Government, Energy & ESG, Education, Travel) forward to /industries
- * (src/lib/old-addresses.ts).
+ * (src/routes/oldAddresses.ts).
  *
  * ICONS are Material Symbols names. A name that is not listed in the
  * `icon_names=` list in `index.html` renders as an empty box — add it there
@@ -100,43 +102,43 @@ export const industryCategories = [
     segments: [
       {
         id: 'omnichannel',
-        name: 'Retail & Omni-Channel Businesses',
+        name: "Electronics",
         icon: 'shopping_cart',
-        description: 'Unified retail channels',
-        body: 'Retailers running stores alongside digital channels, where the operational challenge is a single stock and pricing position that every channel can trust.',
-        focus: ['Unified inventory and pricing', 'Click-and-collect and cross-channel fulfilment', 'Store and online performance reporting'],
+        description: 'Connected electronics retail and distribution.',
+        body: 'Unify model, serial number, warranty and channel information across electronics sales and service so stock and customer promises stay accurate.',
+        focus: ['Serial-number and warranty records', 'Stock visibility across stores and channels', 'Returns and after-sales workflows'],
       },
       {
         id: 'fmcg',
-        name: 'Consumer Goods & FMCG',
+        name: "Fashion & Apparel",
         icon: 'shopping_bag',
-        description: 'FMCG operations',
-        body: 'Fast-moving goods businesses where volume, shelf life and trade promotion economics drive the system requirements more than the catalogue does.',
-        focus: ['Demand planning and replenishment', 'Batch, expiry and shelf-life control', 'Trade promotion and margin analysis'],
+        description: 'Fast-moving fashion and apparel operations.',
+        body: 'Coordinate styles, sizes, seasons and replenishment across stores, online channels and suppliers with one view of availability and margin.',
+        focus: ['Style, size and colour inventory', 'Seasonal planning and replenishment', 'Channel-level sales and margin'],
       },
       {
         id: 'ecommerce',
-        name: 'E-Commerce & Marketplaces',
+        name: "Household & Décor",
         icon: 'language',
-        description: 'Marketplace ecosystems',
-        body: 'Digital-first sellers operating across their own storefront and third-party marketplaces, each with its own listing rules, fees and fulfilment expectations.',
-        focus: ['Multi-marketplace listing and order sync', 'Fulfilment and returns workflows', 'Channel fee and profitability analysis'],
+        description: 'Product and inventory control for home goods.',
+        body: 'Manage household and décor assortments across physical and digital channels, including variants, bulky items, fulfilment and returns.',
+        focus: ['Product variants and rich catalog data', 'Inventory by location and channel', 'Delivery and returns coordination'],
       },
       {
         id: 'brand-distributors',
-        name: 'Brand Owners & Distributors',
+        name: "Food & Beverages",
         icon: 'campaign',
-        description: 'Brand and distribution',
-        body: 'Brands selling through distribution need visibility past their own invoice — into sell-through, stock held in the channel and territory performance.',
-        focus: ['Distributor and territory management', 'Sell-through and channel stock visibility', 'Pricing, rebates and claims'],
+        description: 'Traceable food and beverage operations.',
+        body: 'Connect batch, shelf-life, demand and distribution information so food and beverage teams can respond quickly to quality and availability issues.',
+        focus: ['Batch and expiry tracking', 'Demand and replenishment planning', 'Distribution and recall visibility'],
       },
       {
         id: 'private-label',
-        name: 'Private Label Manufacturers',
+        name: "Footwear",
         icon: 'layers',
-        description: 'Private label operations',
-        body: 'Producing under someone else’s brand means many specifications, short runs and exacting compliance documentation per customer.',
-        focus: ['Customer specification management', 'Short-run planning and costing', 'Compliance and certification records'],
+        description: 'Footwear from assortment to fulfilment.',
+        body: 'Track footwear sizes, styles and seasonal ranges while keeping inventory, supplier orders and customer channels aligned.',
+        focus: ['Size and style matrix management', 'Supplier and production visibility', 'Omnichannel availability and returns'],
       },
     ],
     feature: {
@@ -156,7 +158,7 @@ export const industryCategories = [
 
   {
     id: 'manufacturing-industries',
-    name: 'Manufacturing & Industries',
+    name: "Manufacturing",
     shortName: 'Manufacturing',
     icon: 'factory',
     image: '/images/industries/ind-manufacturing.jpg',
@@ -165,7 +167,7 @@ export const industryCategories = [
     accent: 'Telling the same story.',
     description:
       'Digital platforms for production, traceability and smart factory operations, built to reconcile what the plan says with what the shop floor is actually doing.',
-    overviewTitle: 'Close the gap between the plan and the floor.',
+    overviewTitle: 'Connect production planning with execution.',
     lead: 'Planning systems and production reality drift apart daily.',
     overviewBody:
       'In most plants the schedule lives in one system, actual output in another, and quality in a third — reconciled by someone at the end of a shift. We connect production equipment, material movements and operational reporting so the picture is current rather than retrospective, and so traceability holds when a customer or auditor asks.',
@@ -183,43 +185,43 @@ export const industryCategories = [
     segments: [
       {
         id: 'manufacturing-ops',
-        name: 'Manufacturing Operations',
+        name: "Spinning Mills",
         icon: 'factory',
-        description: 'End-to-end operations',
-        body: 'General manufacturing environments where planning, materials, production and quality need to sit on one operational picture rather than four disconnected ones.',
-        focus: ['Production planning and scheduling', 'Material requirements and inventory', 'Quality recording and non-conformance'],
+        description: 'Production planning for spinning mills.',
+        body: 'Connect cotton intake, blends, counts, machine capacity and yarn output to keep spinning plans grounded in actual mill performance.',
+        focus: ['Blend, count and lot planning', 'Machine utilization and downtime', 'Yarn quality and process costing'],
       },
       {
         id: 'textile-apparel',
-        name: 'Textile & Apparel Manufacturing',
+        name: "Home Textile",
         icon: 'shopping_bag',
-        description: 'Textile and apparel operations',
-        body: 'Textile and apparel production carries style, size and colour dimensions that generic manufacturing systems handle badly. Costing and material planning have to work at that granularity.',
-        focus: ['Style, colour and size matrix handling', 'Material planning and fabric utilization', 'Order-level costing and margin visibility'],
+        description: homeTextile.tagline,
+        body: homeTextile.body,
+        focus: homeTextile.focus,
       },
       {
         id: 'spinning-mills',
-        name: 'Spinning Mills & Processing Units',
+        name: "Garments",
         icon: 'settings',
-        description: 'Spinning and processing units',
-        body: 'Continuous processing has its own economics — count changes, blend ratios and machine-level efficiency drive cost more than headcount does. Systems have to record at that level to be useful.',
-        focus: ['Count, blend and process parameter tracking', 'Machine-level efficiency and downtime', 'Process costing and yield analysis'],
+        description: 'Connected garment production workflows.',
+        body: 'Track styles, sizes, lines and work in progress from sampling through finishing and dispatch, with clear visibility into output and defects.',
+        focus: ['Style and size order management', 'Line planning and work-in-progress tracking', 'Quality and shipment readiness'],
       },
       {
         id: 'industry-4-0-factories',
-        name: 'Industry 4.0 & Smart Factories',
+        name: "Fertilizers",
         icon: 'neurology',
-        description: 'Connected factory systems',
-        body: 'Connecting equipment is the straightforward part. The value comes from deciding which signals matter, what they trigger, and who acts — which is where we start.',
-        focus: ['Equipment and sensor data integration', 'Condition monitoring and alerting', 'Predictive and preventive maintenance'],
+        description: 'Controlled fertilizer production and distribution.',
+        body: 'Connect plant operations, batch quality, maintenance and dispatch records to support reliable fertilizer supply and compliance.',
+        focus: ['Batch and formulation records', 'Plant performance and maintenance', 'Quality, inventory and dispatch traceability'],
       },
       {
         id: 'heavy-light',
-        name: 'Heavy & Light Industrial Enterprises',
+        name: "Food Packaging",
         icon: 'build',
-        description: 'Industrial enterprises',
-        body: 'Industrial businesses running mixed make-to-order and make-to-stock work, where the same platform has to serve engineering, production and after-sales service.',
-        focus: ['Make-to-order and project manufacturing', 'Asset and maintenance management', 'After-sales service and spares'],
+        description: 'Traceable food packaging operations.',
+        body: 'Manage specifications, materials, production runs and quality evidence for packaging that serves food and beverage supply chains.',
+        focus: ['Material and specification control', 'Run-level production and waste', 'Food-contact quality and traceability'],
       },
     ],
     feature: {
@@ -239,7 +241,7 @@ export const industryCategories = [
 
   {
     id: 'logistics-supply-chain',
-    name: 'Logistics & Supply Chain Operations',
+    name: "Logistics & Supply Chain",
     shortName: 'Logistics & Supply Chain',
     icon: 'local_shipping',
     image: '/images/industries/ind-logistics.jpg',
@@ -266,43 +268,43 @@ export const industryCategories = [
     segments: [
       {
         id: 'warehousing',
-        name: 'Logistics & Warehousing',
+        name: "Warehouse Automation",
         icon: 'deployed_code',
-        description: 'Warehouse operations',
-        body: 'Warehouse operations where accuracy comes from scanned, enforced processes rather than from counting more often.',
-        focus: ['Receipt, putaway and location control', 'Directed picking and dispatch', 'Cycle counting and stock accuracy'],
+        description: 'Automate accurate warehouse movement.',
+        body: 'Use scanning, directed tasks and real-time stock updates across receiving, putaway, picking and dispatch.',
+        focus: ['Barcode or RFID capture', 'Directed warehouse workflows', 'Stock accuracy and exception reporting'],
       },
       {
         id: 'transportation-fleet',
-        name: 'Transportation & Fleet Operations',
+        name: "Last-Mile Delivery",
         icon: 'local_shipping',
-        description: 'Fleet operations',
-        body: 'Fleet operators balancing utilization against service commitments, where vehicle cost and driver hours are the constraints that matter.',
-        focus: ['Route and load planning', 'Vehicle utilization and maintenance', 'Driver scheduling and compliance'],
+        description: lastMileDelivery.tagline,
+        body: lastMileDelivery.body,
+        focus: lastMileDelivery.focus,
       },
       {
         id: 'distribution-fulfillment',
-        name: 'Distribution & Fulfillment Centers',
+        name: "Shipment Management Automation",
         icon: 'hub',
-        description: 'Distribution networks',
-        body: 'Multi-site distribution where the question is which site serves which order, and how stock is balanced across the network.',
-        focus: ['Network stock balancing', 'Order allocation and sourcing rules', 'Site-level throughput reporting'],
+        description: 'Manage shipments from booking to delivery.',
+        body: 'Automate shipment creation, carrier assignment, milestone tracking and exception handling across transport partners.',
+        focus: ['Shipment booking and documentation', 'Carrier and milestone integration', 'Delay alerts and delivery confirmation'],
       },
       {
         id: 'last-mile',
-        name: 'Last-Mile Delivery',
+        name: "Ocean Logistics Intelligence",
         icon: 'route',
-        description: 'Last-mile logistics',
-        body: 'Final delivery is where most cost and nearly all customer experience sit. Proof, failure handling and re-attempt logic matter more than the route optimizer.',
-        focus: ['Delivery sequencing and tracking', 'Proof of delivery and exceptions', 'Failed delivery and re-attempt handling'],
+        description: 'Visibility into ocean freight movement.',
+        body: 'Bring booking, vessel, container and port events into a usable operating view so teams can manage delays and plan downstream work.',
+        focus: ['Booking and container visibility', 'Milestone and exception tracking', 'ETA and downstream planning'],
       },
       {
         id: 'supply-chain-ops',
-        name: 'Supply Chain Operations',
+        name: "Courier Integration",
         icon: 'account_tree',
-        description: 'Supply chain execution',
-        body: 'End-to-end supply chain teams needing one view across suppliers, inbound movement, stock and outbound commitments.',
-        focus: ['Supplier and inbound visibility', 'Demand and replenishment planning', 'End-to-end performance measurement'],
+        description: 'Connect courier services to core operations.',
+        body: 'Integrate courier rates, label generation, tracking and delivery events with order and service workflows.',
+        focus: ['Courier selection and booking', 'Label and tracking integration', 'Status updates, exceptions and returns'],
       },
     ],
     feature: {
@@ -349,27 +351,27 @@ export const industryCategories = [
     segments: [
       {
         id: 'real-estate-dev',
-        name: 'Real Estate Developers',
+        name: "Project Management",
         icon: 'apartment',
-        description: 'Development operations',
-        body: 'Developers managing capital commitment across a pipeline of schemes, where cash flow and sales progress drive every decision.',
-        focus: ['Development appraisal and cost planning', 'Sales and reservation pipelines', 'Cash flow and funding reporting'],
+        description: 'Control projects from plan to handover.',
+        body: 'Connect schedules, budgets, approvals and progress reporting so property and construction teams can see commitments and issues early.',
+        focus: ['Programme and milestone tracking', 'Budget, commitments and variations', 'Document control and handover'],
       },
       {
         id: 'facilities',
-        name: 'Property & Facilities Management',
+        name: "Facility Management",
         icon: 'settings',
-        description: 'Facilities operations',
-        body: 'Operators responsible for buildings in use, where planned maintenance, reactive work and tenant obligations compete for the same resources.',
-        focus: ['Planned and reactive maintenance', 'Tenant requests and service levels', 'Contractor and compliance management'],
+        description: 'Keep buildings and services running.',
+        body: 'Bring asset registers, maintenance schedules, service requests and vendor work into one facilities operating view.',
+        focus: ['Asset and location registers', 'Preventive and reactive maintenance', 'Service levels and vendor performance'],
       },
       {
         id: 'construction-controls',
-        name: 'Construction & Project Controls',
+        name: "Asset Management",
         icon: 'construction',
-        description: 'Project delivery',
-        body: 'Contractors and project teams needing programme, cost and variation control tight enough to defend a final account.',
-        focus: ['Programme and progress tracking', 'Variation and change control', 'Subcontractor and valuation management'],
+        description: 'Know what assets you own and maintain.',
+        body: 'Create reliable asset records from acquisition through operation, maintenance and retirement, linked to locations and responsibilities.',
+        focus: ['Asset identification and hierarchy', 'Lifecycle and maintenance history', 'Condition, cost and replacement planning'],
       },
       {
         id: 'infrastructure',
@@ -413,16 +415,16 @@ export const industryCategories = [
     headline: 'Time is the product.',
     accent: 'Track it properly.',
     description:
-      'Structured systems for consulting, legal, financial and managed service firms, where utilization and recoverability decide the result.',
-    overviewTitle: 'You cannot manage a margin you cannot see until month end.',
-    lead: 'Recoverability is decided during the engagement, not after it.',
+      'Workflow automation for agencies, audit teams, legal operations and ESG assurance.',
+    overviewTitle: 'Turn specialist work into accountable workflows.',
+    lead: 'Professional work needs flexibility without losing the record of how decisions were made.',
     overviewBody:
-      'Professional firms lose margin quietly: unbilled time, scope that expanded without a variation, engagements that were never profitable from the second week. We build the time capture, engagement structure and reporting that make those visible early enough to act on, with the confidentiality controls the work requires.',
+      'ITG helps service teams manage intake, assignments, evidence, reviews and deliverables in connected systems. The result is clearer ownership and a reliable record from request through completion.',
     outcomes: [
-      { icon: 'bar_chart', title: 'Margin visible early', body: 'Engagement profitability tracked during delivery rather than after invoicing.' },
-      { icon: 'groups', title: 'Utilization you can act on', body: 'Chargeable time and capacity visible by person, team and practice.' },
-      { icon: 'lock', title: 'Confidentiality maintained', body: 'Client separation and access control enforced by the platform.' },
-    ],
+        { icon: 'route', title: 'Work with clear ownership', body: 'Requests, tasks and approvals assigned to the right team at the right time.' },
+        { icon: 'verified_user', title: 'Evidence ready for review', body: 'Decisions, documents and findings kept with the engagement record.' },
+        { icon: 'bar_chart', title: 'Visible service performance', body: 'Progress, turnaround and exceptions available without manual status chasing.' },
+      ],
     capabilities: [
       { icon: 'route', title: 'Engagement and project management', body: 'Scope, resourcing and delivery tracked from proposal to close.' },
       { icon: 'bar_chart', title: 'Time, billing and recoverability', body: 'Time capture through to invoice, with write-off visibility.' },
@@ -432,35 +434,35 @@ export const industryCategories = [
     segments: [
       {
         id: 'consulting',
-        name: 'Consulting Firms',
+        name: "Agency Automation",
         icon: 'groups',
-        description: 'Advisory operations',
-        body: 'Advisory businesses where resourcing decisions and scope discipline determine whether an engagement makes money.',
-        focus: ['Resource planning and utilization', 'Engagement scope and change control', 'Project profitability reporting'],
+        description: 'Coordinate agency work and clients.',
+        body: 'Connect briefs, staffing, approvals, deliverables and billing so agency teams can manage client work without losing visibility into scope and margin.',
+        focus: ['Client intake and project setup', 'Resource and deliverable workflows', 'Time, cost and margin visibility'],
       },
       {
         id: 'financial-advisory',
-        name: 'Financial Advisory',
+        name: "Test & Audit Automation",
         icon: 'account_balance',
-        description: 'Financial advisory firms',
-        body: 'Advisory firms operating under regulatory obligation, where client suitability records and reporting have to be complete and retrievable.',
-        focus: ['Client onboarding and suitability records', 'Regulatory reporting and retention', 'Portfolio and performance reporting'],
+        description: 'Automate testing and audit evidence.',
+        body: 'Plan tests, collect evidence, record findings and track remediation through a consistent review workflow.',
+        focus: ['Audit plans and test procedures', 'Evidence collection and review', 'Findings and remediation tracking'],
       },
       {
         id: 'legal-compliance',
-        name: 'Legal & Compliance Firms',
+        name: "Legal & Compliance Automation",
         icon: 'balance',
-        description: 'Legal operations',
-        body: 'Legal practices where matter management, conflict checking and privileged document handling are foundational requirements.',
-        focus: ['Matter and document management', 'Conflict checking and confidentiality', 'Time recording and billing'],
+        description: 'Organize legal and compliance work.',
+        body: 'Route matters, obligations, approvals and supporting records through workflows that preserve ownership and a clear audit trail.',
+        focus: ['Matter and obligation registers', 'Review and approval workflows', 'Deadlines, evidence and reporting'],
       },
       {
         id: 'accounting-audit',
-        name: 'Accounting & Audit Firms',
+        name: "ESG & Audit Automation",
         icon: 'bar_chart',
-        description: 'Accounting and audit',
-        body: 'Firms managing cyclical workload peaks and strict working paper standards, where evidence and review trails must be complete.',
-        focus: ['Engagement and working paper management', 'Review, approval and sign-off trails', 'Deadline and workload planning'],
+        description: 'Connect ESG data with audit review.',
+        body: 'Collect sustainability evidence, apply review controls and track audit requests so disclosures can be supported by traceable source information.',
+        focus: ['ESG evidence collection', 'Control and approval workflows', 'Audit requests and issue resolution'],
       },
       {
         id: 'managed-services',
@@ -471,28 +473,9 @@ export const industryCategories = [
         focus: ['Service desk and ticket workflows', 'Service level measurement and reporting', 'Contract and per-client profitability'],
       },
     ],
-    feature: {
-      eyebrow: 'The habit that decides it',
-      title: 'Time recorded weekly is time already lost.',
-      body: 'Recoverability tracks almost exactly with how promptly time is recorded. Entries made days later are estimates, and estimates are written off. Making capture take seconds, on whatever device is to hand, does more for margin than any pricing exercise.',
-      points: ['Capture in seconds, on any device', 'Unbilled time visible weekly', 'Write-offs attributed to a cause'],
-      image: '/images/company/meeting.jpg',
-      imageAlt: 'Professional services team reviewing an engagement',
-    },
-    cta: {
-      title: 'Margin leaking between engagements?',
-      body: 'Tell us how time is captured today and where recoverability drops. That is usually where the answer is.',
-      label: 'Discuss a Professional Services Engagement',
-    },
+    feature: { eyebrow: 'Built around expert judgment', title: 'Automate the handoffs, preserve the decisions.', body: 'Specialist teams still need to exercise judgment. We make intake, evidence collection and review steps more reliable while leaving professional decisions with the people accountable for them.', points: ['Clear intake and assignment', 'Evidence attached to each decision', 'Escalations and approvals traceable'], image: '/images/company/meeting.jpg', imageAlt: 'Professional services team reviewing an engagement' },
+    cta: { title: 'Which service workflow needs better control?', body: 'Tell us where requests, evidence or approvals get lost. We will help define a practical automation scope.', label: 'Discuss Professional Services' },
   },
 ];
 
-import { alignPageContent } from '@/data/shared/align-page-content.js';
-
-export const industryPages = industryCategories.map(category => {
-  const href = industryPaths[category.id];
-  return alignPageContent('industries', href, { ...category, href }, {
-    childrenKey: 'segments', pageTitleKey: 'name', childTitleKey: 'name',
-    childSummaryKey: 'description', childBodyKey: 'body',
-  });
-});
+export const industryPages = industryCategories.map(category => ({ ...category, href: industryPaths[category.id] }));

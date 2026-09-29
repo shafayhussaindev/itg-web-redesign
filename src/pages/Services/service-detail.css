@@ -34,7 +34,7 @@
 }
 
 /* Services read as a scope of work followed by a delivery timeline.
-   The hero is the shared full-bleed photo + gradient from tier2/shared/base.css
+   The hero is the shared full-bleed photo + gradient from styles/detail-pages.css
    (the old split hero, photo on the right half only, was removed on request). */
 .service-category .sd-hero-copy { max-width: 680px; }
 .service-category #delivery > .section-container { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 80px; align-items: start; }
