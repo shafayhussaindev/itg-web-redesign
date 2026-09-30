@@ -1,15 +1,9 @@
-import LawIntoActionContent from './custom/LawIntoActionContent';
-import ConsumerGoodsIntelligenceContent from './custom/ConsumerGoodsIntelligenceContent';
-import HomeTextileContent from './custom/HomeTextileContent';
-import SvitchContent from './custom/SvitchContent';
-import DigitalShowroomContent from './custom/DigitalShowroomContent';
-import RilitsContent from './custom/RilitsContent';
-import TracemeContent from './custom/TracemeContent';
 import { useEffect } from 'react';
 import { ArrowRight, MSym } from '@/components/common/Icons';
 import { useHashScroll } from '@/hooks/useHashScroll';
-import { itemFamilies } from '@/data/site/item-page.js';
-import { itemLabel as label,} from '@/data/itemPages';
+import { itemFamilies } from '@/data/items/item-page.js';
+import { itemLabel as label,} from '@/data/items/item-pages.js';
+import { customContent } from './custom';
 
 import '@/styles/detail-pages.css';
 import './item-page.css';
@@ -18,17 +12,11 @@ import '@/styles/detail-pages-theme.css';
 const pad = (n) => String(n + 1).padStart(2, '0');
 
 /* One template for every Tier 3 page (a capability, product, service or
-   industry segment). All words come from itemPages.js, which reads them from
+   industry segment). All words come from data/items/item-pages.js, which reads them from
    the Tier 2 content files. */
 export default function ItemPage({ page }) {
   const family = itemFamilies[page.family];
-  const isLia = page.path === '/sourcing/law-into-action';
-  const isCgi = page.path === '/sourcing/consumer-goods-intelligence';
-  const isHomeTextile = page.path === '/manufacturing-industries/home-textile';
-  const isSvitch = page.path === '/supplier-info-risk-management/svitch';
-  const isShowroom = page.path === '/product-lifecycle-management/digital-showroom';
-  const isRilits = page.path === '/supply-chain/rilits';
-  const isTraceme = page.path === '/product-lifecycle-management/traceme-dpp';
+  const CustomContent = customContent[page.path];
   const { hero, contact } = page;
   const overview = page.overview ?? { title: 'Overview', body: [page.body] };
 
@@ -69,14 +57,14 @@ export default function ItemPage({ page }) {
               ))}</dl>}
               <p className="t3-tagline">{page.tagline}</p>
               <div className="sd-actions">
-                <a className="btn-modern" href={isLia ? 'https://www.lawintoaction.com' : hero?.primary.href ?? '#contact'}>{isLia ? 'Start a compliance check' : hero?.primary.label ?? label('discuss', page)}<ArrowRight size={18} /></a>
-                <a className="btn-modern-ghost" href={hero?.secondary.href ?? page.parent.href}>{hero?.secondary.label ?? label('backTo', page)}</a>
+                <a className="btn-modern" href={hero?.primary?.href ?? '#contact'}>{hero?.primary?.label ?? label('discuss', page)}<ArrowRight size={18} /></a>
+                <a className="btn-modern-ghost" href={hero?.secondary?.href ?? page.parent.href}>{hero?.secondary?.label ?? label('backTo', page)}</a>
               </div>
             </div>
           </div>
         </section>
 
-        {isLia ? <LawIntoActionContent /> : isCgi ? <ConsumerGoodsIntelligenceContent /> : isHomeTextile ? <HomeTextileContent /> : isSvitch ? <SvitchContent /> : isShowroom ? <DigitalShowroomContent /> : isRilits ? <RilitsContent /> : isTraceme ? <TracemeContent /> : <>
+        {CustomContent ? <CustomContent /> : <>
         {overview && (
           <section id="overview" className="sd-section">
             <div className="section-container sd-intro-grid">
@@ -172,12 +160,11 @@ export default function ItemPage({ page }) {
         <section id="contact" className="sd-section sd-contact">
           <div className="section-container">
             <p className="sd-eyebrow">{label('contactEyebrow', page)}</p>
-            <h2>{isLia ? 'Ready to expand confidently?' : contact?.title ?? label('contactTitle', page)}</h2>
-            <p>{isLia ? 'Access the LIA portal to initiate a compliance check, or consult our engineering team regarding direct Partner API keys.' : contact?.body ?? label('contactBody', page)}</p>
+            <h2>{contact?.title ?? label('contactTitle', page)}</h2>
+            <p>{contact?.body ?? label('contactBody', page)}</p>
             {contact?.email && <p className="t3-direct">{contact.person && <>{contact.person} · </>}<a href={`mailto:${contact.email}`}>{contact.email}</a></p>}
             <div className="sd-actions">
-              {!isLia && <a href={page.contactHref} className="btn-modern">{contact?.cta ?? label('discuss', page)}<ArrowRight size={18} /></a>}
-              {isLia && <a href={page.contactHref} className="sd-text-link">Discuss Partner API access<ArrowRight size={18} /></a>}
+              <a href={page.contactHref} className={contact?.ctaStyle === 'link' ? 'sd-text-link' : 'btn-modern'}>{contact?.cta ?? label('discuss', page)}<ArrowRight size={18} /></a>
               <a href={page.parent.href} className="sd-text-link">{label('backTo', page)}<ArrowRight size={18} /></a>
             </div>
           </div>

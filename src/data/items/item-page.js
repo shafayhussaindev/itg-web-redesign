@@ -1,4 +1,5 @@
 import { aullect } from '@/data/platforms/aullect';
+import { lawIntoAction } from '@/data/platforms/law-into-action';
 import { amaanah } from '@/data/platforms/amaanah';
 import { digitalShowroom } from '@/data/platforms/digital-showroom';
 import { rilits } from '@/data/platforms/rilits';
@@ -78,13 +79,14 @@ export const itemFamilies = {
  *       title: 'A short heading.',
  *       body: ['First paragraph.', 'Second paragraph.'],
  *     },
- *     hero: {                               // replaces the two hero buttons
+ *     hero: {                               // replaces the hero buttons (either may be left out)
  *       primary: { label: 'Request a Demo', href: '#contact' },
  *       secondary: { label: 'Talk to us', href: 'mailto:someone@example.com' },
  *     },
  *     contact: {                            // replaces the closing contact band's words
  *       title: 'Heading', body: 'One line.', cta: 'Button label',
  *       person: 'Name, role (optional)', email: 'someone@example.com (optional)',
+ *       ctaStyle: 'link',                   // optional: a text link instead of a button
  *     },
  *   },
  * ------------------------------------------------------------------------ */
@@ -113,12 +115,14 @@ export const pageExtras = {
     why: aullect.why,
     applied: aullect.applied,
     steps: aullect.steps,
-  },  '/data-privacy/amaanah': {
+  },
+  '/data-privacy/amaanah': {
     overview: amaanah.overview,
     why: amaanah.why,
     applied: amaanah.applied,
     steps: amaanah.steps,
-  },  '/product-lifecycle-management/digital-showroom': {
+  },
+  '/product-lifecycle-management/digital-showroom': {
     hero: digitalShowroom.hero,
     contact: digitalShowroom.contact,
   },
@@ -126,6 +130,10 @@ export const pageExtras = {
     metrics: traceme.metrics,
     hero: traceme.hero,
     contact: traceme.contact,
+  },
+  '/sourcing/law-into-action': {
+    hero: lawIntoAction.hero,
+    contact: lawIntoAction.contact,
   },
   '/supply-chain/rilits': {
     metrics: rilits.metrics,

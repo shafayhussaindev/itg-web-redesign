@@ -1,9 +1,9 @@
-import { itemPageLabels, itemFamilies, pageExtras } from './site/item-page.js';
-import { solutionDetail } from './solutions/solution-detail.js';
-import { platformPages, platformDetail } from './platforms/platform-detail.js';
-import { servicePages, serviceDetail } from './services/service-detail.js';
-import { industryPages, industryDetail } from './industries/industry-detail.js';
-import { solutionPages } from './solutions/solutionPages';
+import { itemPageLabels, itemFamilies, pageExtras } from './item-page.js';
+import { solutionDetail } from '@/data/solutions/solution-detail.js';
+import { platformPages, platformDetail } from '@/data/platforms/platform-detail.js';
+import { servicePages, serviceDetail } from '@/data/services/service-detail.js';
+import { industryPages, industryDetail } from '@/data/industries/industry-detail.js';
+import { solutionPages } from '@/data/solutions/solution-pages.js';
 import { contactLink } from '@/lib/contact-link';
 
 /* Every Tier 3 page, built from the item's entry on its Tier 2 page so the two
@@ -85,7 +85,7 @@ export const itemPages = [...solutionParents, ...platformParents, ...servicePare
     };
   }));
 
-// Fills {kind}, {kinds}, {parent} and {title} in a label from site/item-page.js.
+// Fills {kind}, {kinds}, {parent} and {title} in a label from items/item-page.js.
 export function itemLabel(key, page) {
   const family = itemFamilies[page.family];
   return itemPageLabels[key]

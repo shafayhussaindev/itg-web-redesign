@@ -1,9 +1,13 @@
 # ITG Technologies — Corporate Website
 
 Marketing site for ITG Technologies. React 18 + JavaScript (JSX), built with Vite,
-styled with Tailwind (home and legal pages) and plain CSS (everything else),
-routed with React Router, smooth scrolling by Lenis, GSAP for the home hero.
-No backend: all content is static and lives in `src/data/`.
+routed with React Router, styled with Tailwind (home, legal and the site chrome)
+and plain CSS (everything else). Lenis gives the smooth scrolling, GSAP the home
+hero entrance, Lottie the /solutions diagram.
+
+**There is no backend.** Every word, menu entry and image path is a JavaScript
+object in `src/data/`, bundled at build time. The only outside calls are Google
+Fonts, Google Analytics (with consent) and the contact form's optional endpoint.
 
 ## Running locally
 
@@ -20,89 +24,160 @@ npm run dev
 | `npm run build` | Production build to `dist/` |
 | `npm run preview` | Serve the production build locally |
 | `npm run lint` | ESLint over the project |
-| `npm run test` | Run the Vitest suite once |
+| `npm test` | Run the Vitest suite once (`npm run test:watch` to keep it running) |
 
-## Where things live
+## Project structure
 
 ```
+index.html                 page shell: SEO defaults, fonts, the icon-font subset
 src/
-  main.jsx            starts the app, loads styles/global.css
-  App.jsx             wraps the site in the router
-  routes/             EVERY URL — AppRoutes.jsx (with a map at the top)
-  layouts/            MainLayout.jsx (navbar + footer around every page),
-                      LandingPageLayout.jsx (wrapper for /solutions /platforms /services /industries /company)
-  pages/              one folder per page; the page file sits at the top, its pieces in sections/
-    Home/  Solutions/  Platforms/  Services/  Industries/  Company/  Contact/  Legal/
-    ItemPage/         the ONE template behind all 90 item pages (e.g. /esg-solutions/data-privacy-and-information-security)
-  components/
-    navigation/       Navbar, Footer, BackToTop
-    common/           CookieBanner, MeasurementManager, Icons (Material Symbols)
-    sections/         blocks shared by several landing pages (CategoryCards, WhyITG, CtaLabel)
-    ui/               shadcn/ui primitives (lowercase file names are the shadcn convention)
-  data/               ALL the words, menus and image paths — see src/data/README.md
-  styles/             global.css, landing-pages.css, detail-pages.css, detail-pages-theme.css
-  hooks/              reusable React hooks (useLenis, useInView, useHashScroll, …)
-  lib/                small helpers (analytics, cookie consent, contact links, class names)
-public/images/<section>/   every photo and video
+  main.jsx                 starts React, loads styles/global.css
+  App.jsx                  router + loading fallback
+  routes/AppRoutes.jsx     EVERY URL, with a map at the top
+  layouts/
+    MainLayout.jsx         navbar, footer, cookie banner, back-to-top around every page
+    LandingPageLayout.jsx  wrapper for the five landing pages (title, smooth scroll, their CSS)
+  pages/                   one folder per area of the site
+    Home/                  HomePage.jsx + sections/
+    Solutions/             SolutionsPage.jsx (/solutions), SolutionDetailPage.jsx (6 pages), sections/
+    Platforms/             PlatformsPage.jsx, PlatformDetailPage.jsx (6 pages), sections/
+    Services/              ServicesPage.jsx, ServiceDetailPage.jsx (5 pages), sections/
+    Industries/            IndustriesPage.jsx, IndustryDetailPage.jsx (5 pages), sections/
+    Company/               CompanyPage.jsx + sections/
+    ItemPage/              ItemPage.jsx — the ONE template behind all ~90 item pages
+      custom/              the 7 item pages with a custom middle section (list in custom/index.js)
+    Contact/  Legal/  NotFound.jsx
+  components/              pieces used on more than one page
+    navigation/            Navbar, MegaMenu (desktop drop-down), MobileMenu, Footer, BackToTop
+    common/                Icons (Material Symbols), CookieBanner, MeasurementManager (analytics)
+    sections/              blocks shared by landing pages: CategoryCards, WhyITG, CtaLabel
+    ui/                    shadcn/Radix primitives used by the navbar (button, navigation-menu, collapsible)
+  data/                    ALL the words — see src/data/README.md
+    navigation/            the menu bar: navigation.js (Tier 1), tier2.js, tier3.js
+    items/                 item-pages.js (builds the ~90 item pages), item-page.js (their shared labels)
+    site/                  home.js, site.js (footer, cookie popup), contact.js
+    solutions/ platforms/ services/ industries/ company/
+  styles/                  global.css (colours, Tailwind), landing-pages.css, detail-pages*.css
+  hooks/                   useLenis, useHashScroll, useInView, useAnimationActivity, useFrostClip
+  lib/                     analytics, cookie consent, contact links, cn()
+public/images/<section>/   every photo, video and logo (referenced as '/images/…')
 ```
 
-**Page names.** Each section has three levels. Your spreadsheets call them tiers:
+Not part of the site: `media-originals/` (source artwork), `output/` and `tmp/`
+(PDF side work), `dist/` (build output, git-ignored).
 
-| Tier | Example URL | Page file |
-| --- | --- | --- |
-| Tier 1: landing page | `/solutions` | `pages/Solutions/SolutionsPage.jsx` |
-| Tier 2: detail page | `/esg-solutions` | `pages/Solutions/SolutionDetailPage.jsx` (one template for all six solutions) |
-| Tier 3: item page | `/esg-solutions/data-privacy-and-information-security` | `pages/ItemPage/ItemPage.jsx` (one template for all items in all four sections) |
+## How pages are made
 
-## How do I…
+Each area of the site has three levels. The spreadsheets call them tiers:
 
-**…change a page's text?** Search for a few of its words (`Ctrl+Shift+F` in
-VS Code). They are in one file under `src/data/`. `src/data/README.md` has a
-table of which file holds which page, and a worked example.
+| Tier | Example URL | Page file | Words |
+| --- | --- | --- | --- |
+| 1: landing page | `/solutions` | `pages/Solutions/SolutionsPage.jsx` | `data/solutions/landing-page.js` |
+| 2: detail page | `/esg-solutions` | `pages/Solutions/SolutionDetailPage.jsx` (one template, 6 pages) | `data/solutions/esg-solutions.js` |
+| 3: item page | `/esg-solutions/sbti-management` | `pages/ItemPage/ItemPage.jsx` (one template, ~90 pages) | the item's entry in its Tier 2 file |
 
-**…change a page's hero?**
-- Words: the page's data file (for `/esg-solutions/data-privacy-and-information-security`, the `carbon-circularity` block in `src/data/solutions/esg-solutions.js`).
-- Photo: the `image:` field in that same file.
-- Layout: the page template (`pages/ItemPage/ItemPage.jsx`, the `<section className="sd-hero">`).
-- Styling: `.sd-hero` rules in `src/styles/detail-pages.css`, with the site-wide look in `src/styles/detail-pages-theme.css`.
+Only the fixed pages are written out in `routes/AppRoutes.jsx`. The Tier 2 and
+Tier 3 routes are generated from the data: `AppRoutes` loops over the page lists
+the data files export (`solutionPages`, `platformPages`, `servicePages`,
+`industryPages`, `itemPages`) and hands each page its data as the `page` prop.
+**Add an entry to a data file and its page exists.**
 
-**…change an image?** Put the file in `public/images/<section>/` and write its
-path without `public` in the data file: `'/images/solutions/cat-ai.jpg'`. The live
-site caches images for a year, so use a **new file name** for a changed image.
+Item pages have no words of their own. `data/items/item-pages.js` builds each
+one from the item's entry in its Tier 2 file (a solution capability, platform
+product, service or industry segment) plus its parent's outcomes and steps, so
+the menu, the Tier 2 page and the item page can never disagree.
+`pageExtras` in `data/items/item-page.js` adds things to ONE item page (its own
+photo, hero buttons, contact wording). Seven items also swap the standard middle
+of the page for a custom block; those are listed in `pages/ItemPage/custom/index.js`.
 
-**…change global colours or fonts?**
-- Home and legal pages: CSS variables at the top of `src/styles/global.css`, plus `tailwind.config.js`.
-- Landing pages: the `.tier1-site` variables at the top of `src/styles/landing-pages.css`.
-- Detail and item pages: they use the global variables.
+## Navigation
 
-Fonts are loaded in `index.html`.
+```
+Tier 1  data/navigation/navigation.js   the four menus: label, landing page, "View All" text
+Tier 2  data/navigation/tier2.js        which detail pages each menu lists, in order
+Tier 3  data/navigation/tier3.js        which items appear under each detail page
+          → URL  <tier 2 href>/<item id>
+          → page ItemPage.jsx
+```
 
-**…add a component?**
-- Used by one page only: put it in that page's `sections/` folder.
-- Shared by several pages: put it in `src/components/sections/`, or `src/components/common/` if it isn't a page section.
-- File names are PascalCase, e.g. `PricingTable.jsx`.
+Names in the menu are read from the pages themselves, so renaming a page renames
+its menu entry. `components/navigation/Navbar.jsx` renders the bar, `MegaMenu.jsx`
+the desktop drop-down, `MobileMenu.jsx` the small-screen menu. Every link is a
+plain `<a href>`, so each click loads the new page from the server.
 
-**…add a new detail or item page?** Add an entry to the right data file.
-The page and its URL appear automatically, because routes are generated from
-the data. Add its id to `src/data/site/navbar-tier3.js` to show it in the menu.
-See `src/data/README.md` → Common jobs.
+## Finding things
 
-**…add a completely new page (new URL, new layout)?**
-1. Create `src/pages/Careers/CareersPage.jsx`.
-2. Add a line to `src/routes/AppRoutes.jsx`:
+| To change… | Open |
+| --- | --- |
+| Any sentence you can see | Search a few of its words (`Ctrl+Shift+F`); it is in one file under `src/data/` |
+| Menu labels, "View All" text, Company link, Contact us button | `src/data/navigation/navigation.js` |
+| Which pages a menu lists (Tier 2) | `src/data/navigation/tier2.js` |
+| Which items appear under a page (Tier 3) | `src/data/navigation/tier3.js` |
+| How the menu looks or behaves | `src/components/navigation/Navbar.jsx`, `MegaMenu.jsx`, `MobileMenu.jsx` |
+| Footer text, cookie popup text | `src/data/site/site.js` |
+| Home page text | `src/data/site/home.js` |
+| The `/solutions` landing page | words `src/data/solutions/landing-page.js`, layout `src/pages/Solutions/SolutionsPage.jsx` |
+| One solution page, e.g. `/esg-solutions` | `src/data/solutions/esg-solutions.js` (file name = URL) |
+| One platform / service / industry page | `src/data/platforms/platform-detail.js`, `services/service-detail.js`, `industries/industry-detail.js` |
+| An item page | the item's block in its Tier 2 file (search for its id) |
+| Labels on every item page ("Back to…") | `src/data/items/item-page.js` |
+| Layout of all item pages | `src/pages/ItemPage/ItemPage.jsx` |
+| Filled button colour everywhere | `--btn-navy` in `src/styles/global.css` |
+| The navbar's shadcn button | `src/components/ui/button.jsx` |
+| Global colours | the `:root` block at the top of `src/styles/global.css` (used by every page) |
+| Fonts | `index.html` (loading) and `tailwind.config.js` (`fontFamily`) |
+| One page's styling | the `.css` file in that page's folder |
+| All landing pages / all detail pages | `src/styles/landing-pages.css` / `src/styles/detail-pages.css` and `detail-pages-theme.css` |
+| Legal text | `src/pages/Legal/PrivacyPolicy.jsx`, `TermsAndConditions.jsx` |
+| Where contact-form messages go | `connect` in `src/data/site/contact.js` |
+
+## Adding things
+
+**A new item page** (e.g. a new ESG capability)
+1. Copy an item block in `src/data/solutions/esg-solutions.js`, give it a new `id`, change the words.
+2. Add `{ id: "your-new-id" },` under `/esg-solutions` in `src/data/navigation/tier3.js`.
+
+The page `/esg-solutions/your-new-id` now exists. Platforms, services and
+industries work the same way in their own Tier 2 files.
+
+**A new Tier 2 page**
+- Solution: create `src/data/solutions/<id>.js` (copy an existing one) and add it to the list in `src/data/solutions/solution-pages.js`.
+- Platform: add it to `platforms` in `src/data/platforms/landing-page.js`.
+- Service / industry: add a category in `service-detail.js` / `industry-detail.js` and its URL in `serviceCategoryPaths` / `industryPaths`.
+- Then add a row with its `href` to that menu in `src/data/navigation/tier2.js`.
+
+**A completely new page (new URL, new layout)**
+1. Create `src/pages/Careers/CareersPage.jsx`, and its words in `src/data/careers/`.
+2. In `src/routes/AppRoutes.jsx` add
    `const CareersPage = lazy(() => import("@/pages/Careers/CareersPage"));` and
    `<Route path="/careers" element={<CareersPage />} />`.
-3. Put its words in `src/data/`.
+3. If it uses Tailwind classes, add its path to `content` in `tailwind.config.js`.
+4. Link to it, e.g. from `extraLinks` in `src/data/navigation/navigation.js` or the footer in `src/data/site/site.js`.
 
-**…rename a URL?** Change the `id` in the data file and in `site/navbar-tier3.js`.
-The id is the URL, so keep it matching the page title. Old addresses are not forwarded.
+**A new section on an existing page**: create `src/pages/<Page>/sections/NewThing.jsx`,
+put its words in that page's data file as a new `export const`, and place
+`<NewThing />` in the page file.
+
+**A new component**: used by one page → that page's `sections/` folder. Shared by
+several pages → `src/components/sections/` (page blocks) or `src/components/common/`.
+File names are PascalCase, e.g. `PricingTable.jsx`.
+
+**A new icon**: icons are Material Symbols names (`icon: 'neurology'`). A name not
+used anywhere yet must be added to the `icon_names=` list in `index.html`, or it
+shows as text.
+
+**A new or changed image**: put it in `public/images/<section>/` and write its path
+without `public`: `'/images/solutions/cat-ai.jpg'`. The live site caches images
+for a year, so give a changed image a **new file name**.
 
 ## Good to know
 
-- Imports use `@/…` for anything in `src/` (e.g. `@/components/navigation/Navbar`), and `./…` inside the same folder.
-- Landing pages load `landing-pages.css` **before** their own stylesheet, and the import order is deliberate. Keep `LandingPageLayout` as the first import in those page files.
-- Tailwind only scans the files listed under `content` in `tailwind.config.js` (home, legal, contact, detail pages, shared components). The landing-page files use plain CSS classes, not Tailwind; add a new Tailwind-styled file to that list.
-- After a change, run `npm run build` **and** open the page in the browser. A passing build doesn't prove the page renders.
+- Imports use `@/…` for anything in `src/` and `./…` inside the same folder.
+- Landing pages load `landing-pages.css` **before** their own stylesheet, and the order is deliberate. Keep `LandingPageLayout` as the first import in those page files.
+- Detail pages load `detail-pages.css`, then their own stylesheet, then `detail-pages-theme.css`. Keep that order too.
+- Tailwind only scans the files listed under `content` in `tailwind.config.js`. The landing pages and data files use plain CSS class names; add a new Tailwind-styled file to that list.
+- After a change, run `npm run build` **and** open the page in the browser. There is no type checker, so a typo can build fine and still blank the page.
+- Don't edit `node_modules/`, `dist/` or `package-lock.json` by hand.
 
 ## Analytics
 

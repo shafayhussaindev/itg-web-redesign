@@ -16,12 +16,12 @@ import { traceme } from './traceme';
  * everything else on the page is here.
  *
  * TIER 3 = the products on each page (`products` below). Each product is a
- * section of its platform page; add the matching link in navbar-tier3.js:
+ * section of its platform page; add the matching link in data/navigation/tier3.js:
  *   /supply-chain#aullect
  * Keep product `id`s stable so shared links keep working.
  *
  * A platform with no products yet (`products: []`) still gets its page; the
- * navbar-tier3.js has a single "overview" link for it, and the page hides its empty
+ * menu (data/navigation/tier3.js) has a single "overview" link for it, and the page hides its empty
  * products section.
  *
  * The platform copy (headline, overview, tags) is a first draft written when

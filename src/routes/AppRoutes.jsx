@@ -1,11 +1,11 @@
 import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "@/layouts/MainLayout";
-import { solutionPages } from "@/data/solutions/solutionPages";
+import { solutionPages } from "@/data/solutions/solution-pages.js";
 import { platformPages } from "@/data/platforms/platform-detail.js";
 import { servicePages } from "@/data/services/service-detail.js";
 import { industryPages } from "@/data/industries/industry-detail.js";
-import { itemPages } from "@/data/itemPages";
+import { itemPages } from "@/data/items/item-pages.js";
 import HomePage from "@/pages/Home/HomePage";
 
 /* EVERY URL ON THE SITE

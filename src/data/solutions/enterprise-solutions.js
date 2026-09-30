@@ -1,5 +1,5 @@
 /* Tier 2: /enterprise-solutions. All page copy and imagery are editable here.
- * Keep capability ids in sync with the links in site.js. */
+ * Keep capability ids in sync with the links in data/navigation/tier3.js. */
 export const solutionPage = {
   id: 'enterprise-solutions',
   name: 'Enterprise Solutions',

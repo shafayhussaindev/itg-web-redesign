@@ -1,4 +1,4 @@
-/* Tier 2: /industrial-solutions. Keep capability ids aligned with site.js. */
+/* Tier 2: /industrial-solutions. Keep capability ids aligned with data/navigation/tier3.js. */
 export const solutionPage = {
   id: 'industrial-solutions', name: 'Industrial Solutions', shortName: 'Industrial', icon: 'factory',
   image: '/images/industries/ind-manufacturing.jpg',

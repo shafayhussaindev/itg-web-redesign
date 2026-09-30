@@ -188,7 +188,7 @@ export const serviceIndustries = {
   intro: 'Digital solutions that transform ideas into measurable business outcomes.',
   statement: 'Delivery is always aligned with industry context and regulation.',
   items: [
-    // The five Services pages, in menu order. Keep in step with site.js.
+    // The five Services pages, in menu order. Keep in step with data/navigation/tier2.js.
     { id: 'engineering', title: 'Engineering Services', image: '/images/services/ind-enterprise.jpg' },
     { id: 'data', title: 'Data Management Services', image: '/images/services/ind-manufacturing.jpg' },
     { id: 'esg', title: 'ESG Services', image: '/images/industries/ind-sustainability.jpg' },

@@ -15,7 +15,7 @@
  * TWO RULES WORTH KEEPING
  *   1. Keep the slugs in `serviceCategoryPaths` stable. The navigation menu,
  *      the footer and any link you have shared point at them.
- *   2. Keep each service `id` in step with the menu in `navbar-tier3.js`. The menu
+ *   2. Keep each service `id` in step with the menu in `data/navigation/tier3.js`. The menu
  *      links to `/<slug>#<id>`, and the page scrolls to that section.
  *
  * ICONS are Material Symbols names. A name that is not listed in the

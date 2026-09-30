@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from 'react-dom/server';
 import { expect, it } from 'vitest';
-import { solutionPages } from '@/data/solutions/solutionPages';
-import { itemPages } from '@/data/itemPages';
+import { solutionPages } from '@/data/solutions/solution-pages.js';
+import { itemPages } from '@/data/items/item-pages.js';
 import ItemPage from '@/pages/ItemPage/ItemPage';
 
 // Every solution item written with `coreCapabilities` (AI, Enterprise, ESG).

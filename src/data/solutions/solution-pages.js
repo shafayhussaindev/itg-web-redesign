@@ -6,7 +6,7 @@ import { solutionPage as automation } from '@/data/solutions/industrial-solution
 import { solutionPage as dataPrivacy } from '@/data/solutions/data-privacy-solutions.js';
 
 // Order matters: it is the order of the "related solutions" cards on each page,
-// and matches the Solutions menu in data/site/site.js. Every page here gets the
+// and matches the Solutions menu in data/navigation/tier2.js. Every page here gets the
 // route /<id> automatically (see routes/AppRoutes.jsx).
 export const solutionPages = [ai, enterprise, sustainability, digital, automation, dataPrivacy]
   // An item with `coreCapabilities` lists their titles as its bullet points.

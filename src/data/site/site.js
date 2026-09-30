@@ -1,62 +1,8 @@
-import { tier2Navbar } from './navbar-tier2.js';
-import { tier3Navbar } from './navbar-tier3.js';
-import { solutionPages } from '@/data/solutions/solutionPages';
-import { platformPages } from '@/data/platforms/platform-detail.js';
-import { servicePages } from '@/data/services/service-detail.js';
-import { industryPages } from '@/data/industries/industry-detail.js';
-
-/* The top navigation: navbar-tier2.js and navbar-tier3.js choose WHICH pages
- * appear in each menu and in what order. The names (and, unless a menu row
- * gives its own `description`, the short line under each name) are read from
- * the pages themselves, so the menu and the page can never disagree.
- * Footer and cookie settings remain in this file. */
-
-const families = {
-  solutions:  { pages: solutionPages.map(page => ({ ...page, href: `/${page.id}` })), name: 'name', items: 'capabilities', itemName: 'title', itemLine: 'subtitle' },
-  platforms:  { pages: platformPages, name: 'title', items: 'products', itemName: 'name', itemLine: 'description' },
-  services:   { pages: servicePages, name: 'name', items: 'services', itemName: 'name', itemLine: 'description' },
-  industries: { pages: industryPages, name: 'name', items: 'segments', itemName: 'name', itemLine: 'description' },
-};
-
-function withChildren(family) {
-  const f = families[family];
-  return tier2Navbar[family].map(row => {
-    const page = f.pages.find(p => p.href === row.href);
-    return {
-      title: page[f.name],
-      ...row,
-      children: (tier3Navbar[family][row.href] ?? []).map(({ id, href, ...menuRow }) => {
-        const item = page[f.items].find(i => i.id === id);
-        return {
-          ...(item && { title: item[f.itemName], description: item[f.itemLine] }),
-          ...menuRow,
-          href: href ?? `${row.href}/${id}`,
-        };
-      }),
-    };
-  });
-}
-
-/* MENU BAR */
-export const mainNav = {
-  // The drop-down menus.
-  solutions:  withChildren('solutions'),
-  industries: withChildren('industries'),
-  platforms:  withChildren('platforms'),
-  services:   withChildren('services'),
-
-  // Plain links with no drop-down, shown after the menus above.
-  extraLinks: [
-    { label: "Company", href: "/company" },
-  ],
-
-  // The button on the right of the bar.
-  cta: { label: "Contact us", href: "/contact" },
-};
-
+/* The footer and the cookie popup, shown on every page.
+ * The menu bar is in src/data/navigation/. */
 
 /* ============================================================================
- * 7. FOOTER (the dark band at the bottom of every page)
+ * FOOTER (the dark band at the bottom of every page)
  * ========================================================================= */
 
 export const footer = {
@@ -104,7 +50,7 @@ export const footer = {
 
 
 /* ============================================================================
- * 8. COOKIE SETTINGS (the popup on a visitor's first visit)
+ * COOKIE SETTINGS (the popup on a visitor's first visit)
  * ========================================================================= */
 
 export const cookieBar = {

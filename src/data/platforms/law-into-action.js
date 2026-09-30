@@ -55,4 +55,15 @@ export const lawIntoAction = {
     'Turnkey value-added regulatory services without hosting infrastructure',
   ],
   apiExample: JSON.stringify({ regulation: 'EUTR', status: 'Active', jurisdiction: 'EU', obligations: ['Due Diligence', 'Traceability'] }, null, 2),
+
+  // Hero button and closing band on /sourcing/law-into-action.
+  hero: {
+    primary: { label: 'Start a compliance check', href: 'https://www.lawintoaction.com' },
+  },
+  contact: {
+    title: 'Ready to expand confidently?',
+    body: 'Access the LIA portal to initiate a compliance check, or consult our engineering team regarding direct Partner API keys.',
+    cta: 'Discuss Partner API access',
+    ctaStyle: 'link',
+  },
 };

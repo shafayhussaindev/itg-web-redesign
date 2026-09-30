@@ -88,7 +88,7 @@ export const industries = {
   cardLinkLabel: 'Explore Industry',
   cardLinkHref: '/industries',
   cta: { label: 'Explore Industries', href: '/industries' },
-  // The five industries, in menu order. Keep in step with site.js.
+  // The five industries, in menu order. Keep in step with data/navigation/tier2.js.
   cards: [
     {
       icon: 'shopping_bag',
@@ -158,14 +158,7 @@ export const insights = {
   ],
 };
 
-/* 10 — Global presence. */
-export const globalPresence = {
-  title: 'Global Reach with Local Understanding',
-  body: 'With teams and partners across regions, ITG delivers platforms aligned with local business needs and global enterprise standards.',
-  regions: ['Middle East', 'Europe', 'Asia'],
-};
-
-/* 11 — The closing band above the footer. */
+/* 10 — The closing band above the footer. */
 export const finalCta = {
   title: 'Engineering What’s Next — Together',
   body: 'Partner with ITG to modernize systems, deploy scalable platforms, and unlock intelligent enterprise performance.',

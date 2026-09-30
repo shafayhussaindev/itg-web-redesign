@@ -12,7 +12,9 @@ written in exactly one file here.
 | Page (URL) | File |
 | --- | --- |
 | Home `/` | `site/home.js` |
-| Menu bar: which pages appear, and in what order | `site/navbar-tier2.js` (menus), `site/navbar-tier3.js` (their items) |
+| Menu bar: the four menu names, "View All" links, Company link, Contact us button | `navigation/navigation.js` |
+| Menu bar: which pages appear in each menu, and in what order | `navigation/tier2.js` |
+| Menu bar: which items appear under each page | `navigation/tier3.js` |
 | Footer, cookie popup | `site/site.js` |
 | Contact `/contact` | `site/contact.js` |
 | Company `/company` | `company/landing-page.js` |
@@ -22,7 +24,7 @@ written in exactly one file here.
 | One service area, e.g. `/esg-services` | `services/service-detail.js` |
 | One industry, e.g. `/consumer-goods` | `industries/industry-detail.js` |
 | An item page, e.g. `/esg-solutions/data-privacy-and-information-security` | the item's entry in its parent's file above (search for its id) |
-| Labels shared by all item pages ("Back to…", "Discuss this…") | `site/item-page.js` |
+| Labels shared by all item pages ("Back to…", "Discuss this…") | `items/item-page.js` |
 | Labels shared by all solution / platform / service / industry pages | `solutions/solution-detail.js`, top of `platforms/platform-detail.js`, `services/service-detail.js`, `industries/industry-detail.js` |
 
 ### Worked example: `/esg-solutions/data-privacy-and-information-security`
@@ -38,7 +40,7 @@ Everything on that page comes from the `id: 'carbon-circularity'` block in
 
 The hero photo is the parent page's `image:` near the top of the same file
 (`/images/solutions/cat-sustainability.jpg` = `public/images/solutions/cat-sustainability.jpg`).
-To give ONE item page its own photo, add it under `pageExtras` in `site/item-page.js`.
+To give ONE item page its own photo, add it under `pageExtras` in `items/item-page.js`.
 
 Note: the id `carbon-circularity` is older than the title. Ids are part of the
 page address, so they stay the same when a title changes.
@@ -76,7 +78,7 @@ one, copy an existing block, paste it below and change the words. An item's
 
 **Add a new item page** (e.g. a new ESG capability): copy a block in
 `solutions/esg-solutions.js`, give it a new `id`, change the words, then add
-`{ id: "your-new-id" },` to the `/esg-solutions` list in `site/navbar-tier3.js`
+`{ id: "your-new-id" },` to the `/esg-solutions` list in `navigation/tier3.js`
 so it appears in the menu. The page `/esg-solutions/your-new-id` exists
 automatically.
 

@@ -65,7 +65,7 @@ export const solutionCategories = [
 ];
 
 // The /industries photo grid (IndustriesGrid.jsx). The five industries, in
-// menu order — keep in step with site.js.
+// menu order — keep in step with data/navigation/tier2.js.
 export const industries = [
   {
     id: 'consumer-goods',

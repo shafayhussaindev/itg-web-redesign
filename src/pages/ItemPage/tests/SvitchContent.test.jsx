@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from 'react-dom/server';
 import { expect, it } from 'vitest';
-import { itemPages } from '@/data/itemPages';
+import { itemPages } from '@/data/items/item-pages.js';
 import ItemPage from '@/pages/ItemPage/ItemPage';
 
 it('replaces the Svitch route content with the supplied overview and five modules', () => {

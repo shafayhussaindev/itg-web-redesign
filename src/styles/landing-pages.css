@@ -9,10 +9,10 @@
 
 .tier1-site *,.tier1-site *::before,.tier1-site *::after{box-sizing:border-box;margin:0;padding:0;}
   .tier1-site{
-    --navy:#0D2140; --navy-mid:#1A3A6B; --sky:#D0E2F4; --ice:#EAF0F8;
-    --white:#FFFFFF; --charcoal:#4A5568; --light-text:#5C6B80;
-    --brand-accent:#3D6FB4; --brand-accent-soft:#A8C6EA; --cyan:var(--brand-accent); --teal:#0D9488; --teal-deep:#0F766E; --border:rgba(13,33,64,0.1);
-    --error:#B91C1C; --success:#047857; --warning:#B45309;
+    /* Brand colours come from :root in global.css. --border is the one
+       exception: here it is a ready-made colour, there an HSL triplet for
+       the Tailwind pages. */
+    --border:rgba(13,33,64,0.1);
 
     /* Frosted-glass radius for the two CTA frosts (.ind-cta-frost and
        .co-cta-frost). Those are rasterised at 1/6 scale and blown back up

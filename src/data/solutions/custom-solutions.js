@@ -1,6 +1,6 @@
 import { enterpriseAppDevelopment } from '@/data/solutions/enterprise-app-development';
 import { mobileAppDevelopment } from '@/data/solutions/mobile-app-development';
-/* Tier 2: /custom-solutions. Keep capability ids aligned with site.js. */
+/* Tier 2: /custom-solutions. Keep capability ids aligned with data/navigation/tier3.js. */
 export const solutionPage = {
   id: 'custom-solutions', name: 'Custom Solutions', shortName: 'Custom Solutions', icon: 'devices',
   image: '/images/solutions/cat-digital.jpg',

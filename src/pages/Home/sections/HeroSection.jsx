@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useAnimationActivity } from '@/hooks/useAnimationActivity';
 import gsap from 'gsap';
-import { Spotlight } from '@/components/ui/spotlight';
+import { Spotlight } from './Spotlight';
 import { ArrowRight, ChevronDown } from "@/components/common/Icons";
 import "@/styles/global.css"
 import { hero } from "@/data/site/home.js";

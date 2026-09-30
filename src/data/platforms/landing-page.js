@@ -61,13 +61,13 @@ export const platformsHeading = 'Our Platforms';
  * THE SIX PLATFORMS
  *
  * Each block is one card on this page AND one Tier 2 platform page.
- * Keep its navbar entry in data/site/navbar-tier2.js aligned with this block. The page's address is its id:  id: 'supply-chain'  →  /supply-chain
+ * Keep its navbar entry in data/navigation/tier2.js aligned with this block. The page's address is its id:  id: 'supply-chain'  →  /supply-chain
  *
  *   icon      a Material Symbols name (see src/data/README.md, "Change an icon")
  *   includes  the product names listed on the card. The products themselves
  *             (their descriptions and page content) live in
  *             data/platforms/platform-detail.js; Tier 3 navbar links live in
- *             data/site/navbar-tier3.js — keep the lists in step.
+ *             data/navigation/tier3.js — keep the lists in step.
  *   feature   true on ONE platform only: it gets the large card at the top.
  *   focus     which part of the image stays in frame (x% y%).
  * ------------------------------------------------------------------------- */

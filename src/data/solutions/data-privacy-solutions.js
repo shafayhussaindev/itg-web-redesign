@@ -8,7 +8,7 @@
  * data/solutions/landing-page.js.
  *
  * The capability `id`s are also the Tier 3 links in the Solutions menu
- * (data/site/site.js). Change one, change the other. */
+ * (data/navigation/tier3.js). Change one, change the other. */
 export const solutionPage = {
   id: 'data-privacy-solutions', name: 'Data Privacy Solutions', shortName: 'Data Privacy', icon: 'privacy_tip',
   image: '/images/company/security.jpg',

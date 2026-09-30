@@ -1,5 +1,5 @@
 // Tier 2 menu labels and order follow ITG Website Menu Review.xlsx (Site Map).
-// Keep href aligned with the page route; Tier 3 entries are in navbar-tier3.js.
+// Keep href aligned with the page route; Tier 3 entries are in tier3.js.
 export const tier2Navbar = {
   solutions: [
     {
