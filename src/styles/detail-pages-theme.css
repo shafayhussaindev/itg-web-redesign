@@ -6,8 +6,6 @@
 }
 
 .solution-detail .sd-hero {
-  min-height: 620px;
-  min-height: min(82svh, 720px);
   background: #091a32;
 }
 .solution-detail .sd-hero-image { opacity: .58; }
@@ -95,7 +93,6 @@
 .service-category .sd-steps li:last-child { padding-bottom: 0; }
 .service-category .sd-steps h3 { margin: 0 0 12px; }
 
-.tier3-detail .sd-hero { min-height: 540px; min-height: min(72svh, 640px); }
 .tier3-detail .sd-hero h1 { font-size: clamp(40px, 4.4vw, 64px); margin-bottom: 16px; }
 .tier3-detail .t3-tagline {
   max-width: 680px;

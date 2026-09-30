@@ -38,9 +38,11 @@ Everything on that page comes from the `id: 'carbon-circularity'` block in
 - `outcome` — the "why it matters" cards
 - `coreCapabilities` — the "Core capabilities" cards (and the bullet list on `/esg-solutions`)
 
-The hero photo is the parent page's `image:` near the top of the same file
-(`/images/solutions/cat-sustainability.jpg` = `public/images/solutions/cat-sustainability.jpg`).
-To give ONE item page its own photo, add it under `pageExtras` in `items/item-page.js`.
+The hero photo (the big picture at the top) is listed in `site/hero-images.js`,
+one line per page address. This page's photo is
+`/images/hero/esg-solutions/data-privacy-and-information-security.jpg`
+(= `public/images/hero/esg-solutions/data-privacy-and-information-security.jpg`).
+An item page missing from that list uses its parent page's hero photo.
 
 Note: the id `carbon-circularity` is older than the title. Ids are part of the
 page address, so they stay the same when a title changes.

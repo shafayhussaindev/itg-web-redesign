@@ -5,6 +5,7 @@ import { servicePages, serviceDetail } from '@/data/services/service-detail.js';
 import { industryPages, industryDetail } from '@/data/industries/industry-detail.js';
 import { solutionPages } from '@/data/solutions/solution-pages.js';
 import { contactLink } from '@/lib/contact-link';
+import { heroImages } from '@/data/site/hero-images.js';
 
 /* Every Tier 3 page, built from the item's entry on its Tier 2 page so the two
    can't disagree. routes/AppRoutes.jsx turns each entry into a route at `path`. */
@@ -69,7 +70,7 @@ export const itemPages = [...solutionParents, ...platformParents, ...servicePare
     return {
       path, family: parent.family, id: item.id,
       title: item.title, tagline: extras.tagline ?? item.tagline, body: item.body, icon: item.icon,
-      image: extras.image ?? parent.image,
+      image: extras.image ?? heroImages[path] ?? heroImages[parent.href] ?? parent.image,
       imagePosition: extras.image ? undefined : parent.imagePosition,
       parent: { name: parent.name, shortName: parent.shortName, href: parent.href, icon: parent.icon },
       focus: item.focus, outcomes: item.outcomes ?? [],

@@ -6,6 +6,7 @@ import { solutionDetail as copy } from '@/data/solutions/solution-detail.js';
 import { solutionPages } from '@/data/solutions/solution-pages.js';
 
 import '@/styles/detail-pages.css';
+import { heroImages } from '@/data/site/hero-images.js';
 import '@/styles/detail-pages-theme.css';
 
 export default function SolutionDetailPage({ page }) {
@@ -67,7 +68,7 @@ export default function SolutionDetailPage({ page }) {
 
       <main id="solution-main" className="solution-detail solution-category" tabIndex={-1}>
         <section className="sd-hero" data-dark-hero aria-labelledby="solution-title">
-          <img className="sd-hero-image" src={page.image} alt="" loading="eager" />
+          <img className="sd-hero-image" src={heroImages[`/${page.id}`] ?? page.image} alt="" loading="eager" />
           <div className="sd-hero-scrim" />
           <div className="section-container sd-hero-content">
             <nav className="sd-breadcrumb" aria-label="Breadcrumb">

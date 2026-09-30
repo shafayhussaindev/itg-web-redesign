@@ -5,6 +5,7 @@ import { contactLink } from '@/lib/contact-link';
 import { servicePages, serviceDetail as copy } from '@/data/services/service-detail.js';
 import '@/styles/detail-pages.css';
 import './service-detail.css';
+import { heroImages } from '@/data/site/hero-images.js';
 import '@/styles/detail-pages-theme.css';
 
 
@@ -47,7 +48,7 @@ export default function ServiceDetailPage({ page }) {
 
       <main id="service-main" className="solution-detail service-category" tabIndex={-1}>
         <section className="sd-hero" data-dark-hero aria-labelledby="service-title">
-          <img className="sd-hero-image" src={page.image} alt="" style={{ objectPosition: page.focus }} loading="eager" />
+          <img className="sd-hero-image" src={heroImages[page.href] ?? page.image} alt="" style={{ objectPosition: page.focus }} loading="eager" />
           <div className="sd-hero-scrim" />
           <div className="section-container sd-hero-content">
             <nav className="sd-breadcrumb" aria-label="Breadcrumb">

@@ -5,6 +5,7 @@ import { contactLink } from '@/lib/contact-link';
 import { industryPages, industryDetail as copy } from '@/data/industries/industry-detail.js';
 import '@/styles/detail-pages.css';
 import './industry-detail.css';
+import { heroImages } from '@/data/site/hero-images.js';
 import '@/styles/detail-pages-theme.css';
 
 
@@ -49,7 +50,7 @@ export default function IndustryDetailPage({ page }) {
 
       <main id="industry-main" className="solution-detail industry-detail" tabIndex={-1}>
         <section className="sd-hero" data-dark-hero aria-labelledby="industry-title">
-          <img className="sd-hero-image" src={page.image} alt="" style={{ objectPosition: page.focus }} loading="eager" />
+          <img className="sd-hero-image" src={heroImages[page.href] ?? page.image} alt="" style={{ objectPosition: page.focus }} loading="eager" />
           <div className="sd-hero-scrim" />
           <div className="section-container sd-hero-content">
             <nav className="sd-breadcrumb" aria-label="Breadcrumb">

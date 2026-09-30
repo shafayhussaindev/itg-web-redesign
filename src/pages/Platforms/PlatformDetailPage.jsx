@@ -5,6 +5,7 @@ import { contactLink } from '@/lib/contact-link';
 import { platformPages, platformDetail as copy } from '@/data/platforms/platform-detail.js';
 import '@/styles/detail-pages.css';
 import './platform-detail.css';
+import { heroImages } from '@/data/site/hero-images.js';
 import '@/styles/detail-pages-theme.css';
 
 
@@ -41,7 +42,7 @@ export default function PlatformDetailPage({ page }) {
 
       <main id="product-main" className="solution-detail product-category" tabIndex={-1}>
         <section className="sd-hero" data-dark-hero aria-labelledby="product-title">
-          <img className="sd-hero-image" src={page.image} alt="" style={{ objectPosition: page.focus }} loading="eager" />
+          <img className="sd-hero-image" src={heroImages[page.href] ?? page.image} alt="" style={{ objectPosition: page.focus }} loading="eager" />
           <div className="sd-hero-scrim" />
           <div className="section-container sd-hero-content">
             <nav className="sd-breadcrumb" aria-label="Breadcrumb">
