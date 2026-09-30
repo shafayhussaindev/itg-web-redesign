@@ -1,0 +1,11 @@
+/* Business Process Re-engineering (custom/BusinessProcessReengineeringContent.jsx).
+   Shared building blocks (steps, cases) live in ../item-page.css. The doubled
+   class outranks the shared .t3-applied rule, which loads after this file. */
+.tier3-detail .t3-applied.bpr-why { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+@media (max-width: 1023px) {
+  .tier3-detail .t3-applied.bpr-why { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 767px) {
+  .tier3-detail .t3-applied.bpr-why { grid-template-columns: minmax(0, 1fr); }
+}

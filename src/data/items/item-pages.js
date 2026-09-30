@@ -68,7 +68,7 @@ export const itemPages = [...solutionParents, ...platformParents, ...servicePare
       : contactLink(parent.contact.contactFallback.href, item.title);
     return {
       path, family: parent.family, id: item.id,
-      title: item.title, tagline: item.tagline, body: item.body, icon: item.icon,
+      title: item.title, tagline: extras.tagline ?? item.tagline, body: item.body, icon: item.icon,
       image: extras.image ?? parent.image,
       imagePosition: extras.image ? undefined : parent.imagePosition,
       parent: { name: parent.name, shortName: parent.shortName, href: parent.href, icon: parent.icon },

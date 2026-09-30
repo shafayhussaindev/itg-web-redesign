@@ -45,7 +45,7 @@ src/
     Industries/            IndustriesPage.jsx, IndustryDetailPage.jsx (5 pages), sections/
     Company/               CompanyPage.jsx + sections/
     ItemPage/              ItemPage.jsx — the ONE template behind all ~90 item pages
-      custom/              the 7 item pages with a custom middle section (list in custom/index.js)
+      custom/              the item pages with a custom middle section (list in custom/index.jsx)
     Contact/  Legal/  NotFound.jsx
   components/              pieces used on more than one page
     navigation/            Navbar, MegaMenu (desktop drop-down), MobileMenu, Footer, BackToTop
@@ -87,8 +87,10 @@ one from the item's entry in its Tier 2 file (a solution capability, platform
 product, service or industry segment) plus its parent's outcomes and steps, so
 the menu, the Tier 2 page and the item page can never disagree.
 `pageExtras` in `data/items/item-page.js` adds things to ONE item page (its own
-photo, hero buttons, contact wording). Seven items also swap the standard middle
-of the page for a custom block; those are listed in `pages/ItemPage/custom/index.js`.
+photo, hero line, hero buttons, contact wording). Some items also swap the standard
+middle of the page for a custom block; those are listed in `pages/ItemPage/custom/index.jsx`.
+E-commerce & Marketplaces and Generative Media Production share one such layout,
+`CapabilityPageContent.jsx`; each page's words are in its own file in `data/solutions/`.
 
 ## Navigation
 

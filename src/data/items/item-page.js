@@ -7,6 +7,9 @@ import { traceme } from '@/data/platforms/traceme';
 import { enterpriseAppDevelopment } from '@/data/solutions/enterprise-app-development';
 import { lastMileDelivery } from '@/data/industries/last-mile-delivery';
 import { mobileAppDevelopment } from '@/data/solutions/mobile-app-development';
+import { businessProcessReengineering } from '@/data/solutions/business-process-re-engineering';
+import { eCommerceAndMarketplaces } from '@/data/solutions/e-commerce-and-marketplaces';
+import { generativeMediaProduction } from '@/data/solutions/generative-media-production';
 
 /* ============================================================================
  * ITEM PAGES (the third menu level)
@@ -75,6 +78,7 @@ export const itemFamilies = {
  *
  *   '/enterprise-solutions/digital-transformation': {
  *     image: '/images/solutions/some-photo.jpg', // hero photo (default: the Tier 2 page's)
+ *     tagline: 'A longer line under the hero heading.', // default: the item's short line, which the menu also uses
  *     overview: {                           // adds an Overview section under the hero
  *       title: 'A short heading.',
  *       body: ['First paragraph.', 'Second paragraph.'],
@@ -103,6 +107,17 @@ export const pageExtras = {
     why: lastMileDelivery.why,
     applied: lastMileDelivery.applied,
     steps: lastMileDelivery.steps,
+  },
+  '/custom-solutions/business-process-re-engineering': {
+    contact: businessProcessReengineering.contact,
+  },
+  '/custom-solutions/e-commerce-and-marketplaces': {
+    tagline: eCommerceAndMarketplaces.tagline,
+    contact: eCommerceAndMarketplaces.contact,
+  },
+  '/custom-solutions/generative-media-production': {
+    tagline: generativeMediaProduction.tagline,
+    contact: generativeMediaProduction.contact,
   },
   '/custom-solutions/desktop-and-web-app-development': {
     overview: enterpriseAppDevelopment.overview,

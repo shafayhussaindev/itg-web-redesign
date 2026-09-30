@@ -142,3 +142,44 @@
   .tier3-detail .ds-prompts, .tier3-detail .ds-view { padding: 24px; }
   .tier3-detail .ds-compare th, .tier3-detail .ds-compare td { padding: 14px 12px; font-size: 14px; }
 }
+
+/* Building blocks for custom item pages (Business Process Re-engineering,
+   E-commerce & Marketplaces). */
+.tier3-detail .t3-prose { margin-top: 24px; }
+.tier3-detail .t3-outcomes li strong { color: var(--navy); font-weight: 600; }
+
+/* Optional "Use cases" line under a capability card's description. */
+.tier3-detail .sd-outcome .t3-use-cases-label { margin: 20px 0 6px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--navy); }
+
+/* Five process steps in one row on wide screens (the shared grid is four). */
+@media (min-width: 1181px) {
+  .tier3-detail .sd-steps.t3-steps-five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+.tier3-detail .t3-steps-five h3 { margin-bottom: 4px; }
+.tier3-detail .t3-steps-five .t3-step-stage { margin-bottom: 12px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--teal-deep); }
+
+/* Case study cards: one card fills the row, two sit side by side. */
+.tier3-detail .t3-cases { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr)); gap: 24px; }
+.tier3-detail .t3-case { padding: 32px; background: white; border: 1px solid rgba(13, 33, 64, .12); border-top: 3px solid var(--brand-accent); }
+.tier3-detail .t3-case-sector { margin-bottom: 12px; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--teal-deep); }
+.tier3-detail .t3-case h3 { margin-bottom: 24px; }
+.tier3-detail .t3-case dl { display: grid; gap: 16px; }
+.tier3-detail .t3-case dt { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--navy); }
+.tier3-detail .t3-case dd { margin-top: 4px; font-size: 14px; line-height: 1.6; color: var(--charcoal); }
+.tier3-detail .t3-case-impact { padding-top: 16px; border-top: 1px solid rgba(13, 33, 64, .12); }
+.tier3-detail .t3-case-impact dd { font-size: 15px; font-weight: 600; color: var(--navy); }
+
+/* Two-way comparison table. */
+.tier3-detail .t3-compare-wrap { overflow-x: auto; background: white; border: 1px solid rgba(13, 33, 64, .12); }
+.tier3-detail .t3-compare { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 15px; line-height: 1.6; text-align: left; }
+.tier3-detail .t3-compare th, .tier3-detail .t3-compare td { padding: 20px 24px; border-bottom: 1px solid rgba(13, 33, 64, .12); vertical-align: top; }
+.tier3-detail .t3-compare tbody tr:last-child > * { border-bottom: 0; }
+.tier3-detail .t3-compare thead th { background: var(--navy); color: white; font-size: 13px; font-weight: 600; letter-spacing: .04em; }
+.tier3-detail .t3-compare tbody th { width: 22%; font-weight: 600; color: var(--navy); }
+.tier3-detail .t3-compare td { color: var(--charcoal); }
+.tier3-detail .t3-compare td:last-child { background: var(--ice); color: var(--navy); font-weight: 500; }
+
+@media (max-width: 767px) {
+  .tier3-detail .t3-case { padding: 24px; }
+  .tier3-detail .t3-compare th, .tier3-detail .t3-compare td { padding: 16px; }
+}
