@@ -21,11 +21,11 @@ written in exactly one file here.
 | One platform, e.g. `/supply-chain` | `platforms/platform-detail.js` (card title/image: `platforms/landing-page.js`) |
 | One service area, e.g. `/esg-services` | `services/service-detail.js` |
 | One industry, e.g. `/consumer-goods` | `industries/industry-detail.js` |
-| An item page, e.g. `/esg-solutions/carbon-circularity` | the item's entry in its parent's file above (search for its id) |
+| An item page, e.g. `/esg-solutions/data-privacy-and-information-security` | the item's entry in its parent's file above (search for its id) |
 | Labels shared by all item pages ("Back to…", "Discuss this…") | `site/item-page.js` |
 | Labels shared by all solution / platform / service / industry pages | `solutions/solution-detail.js`, top of `platforms/platform-detail.js`, `services/service-detail.js`, `industries/industry-detail.js` |
 
-### Worked example: `/esg-solutions/carbon-circularity`
+### Worked example: `/esg-solutions/data-privacy-and-information-security`
 
 Everything on that page comes from the `id: 'carbon-circularity'` block in
 `solutions/esg-solutions.js`:

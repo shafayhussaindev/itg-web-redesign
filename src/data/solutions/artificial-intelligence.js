@@ -10,7 +10,7 @@
 /* One long block per capability, in page order. */
 const capabilities = [
   {
-    id: 'ai-strategy', icon: 'target', title: 'AI Compliance & Risk Advisory',
+    id: 'ai-compliance-and-risk-advisory', icon: 'target', title: 'AI Compliance & Risk Advisory',
     subtitle: 'Govern AI throughout its lifecycle with technical controls and auditable policies.',
     description: 'Enterprise AI needs systematic oversight to manage liability, protect brand trust and address regulatory obligations. We establish governance from data curation through continuous post-deployment monitoring, translating the EU AI Act, NIST AI RMF 1.0 and ISO/IEC 42001 into practical guardrails and evidence for review.',
     outcome: ['Documented regulatory readiness', 'Explainable and accountable model decisions', 'Earlier visibility into emerging AI risks'],
@@ -25,7 +25,7 @@ const capabilities = [
     ],
   },
   {
-    id: 'applied-ai-ml', icon: 'neurology', title: 'Applied AI',
+    id: 'applied-ai', icon: 'neurology', title: 'Applied AI',
     subtitle: 'Put production-grade intelligence into core business workflows.',
     description: 'Applied AI connects machine learning with enterprise software engineering. We build custom models, production MLOps pipelines and low-latency integrations that turn experiments into resilient systems for predictive planning, automated reasoning and intelligent execution.',
     outcome: ['Scalable intelligence inside existing workflows', 'More informed inventory, pricing and operational decisions', 'Reproducible model delivery and monitoring'],
@@ -40,7 +40,7 @@ const capabilities = [
     ],
   },
   {
-    id: 'enterprise-analytics',
+    id: 'enterprise-analytics-and-business-intelligence',
     icon: 'bar_chart',
     title: 'Enterprise Analytics & Business Intelligence',
     subtitle: 'From Static Reporting to Decision Intelligence',
@@ -58,7 +58,7 @@ const capabilities = [
     ],
   },
   {
-    id: 'data-platforms', icon: 'hub', title: 'AI Enabled SaaS Platforms',
+    id: 'ai-enabled-saas-platforms', icon: 'hub', title: 'AI Enabled SaaS Platforms',
     subtitle: 'Build AI into the foundations of enterprise SaaS.',
     description: 'We engineer multi-tenant SaaS platforms whose core value comes from AI. Cloud architectures balance shared infrastructure efficiency with the compute, memory and privacy demands of intelligent models serving distinct enterprise customers at scale.',
     outcome: ['Isolated customer data and model workflows', 'Scalable inference with visible compute costs', 'Extensible platforms with resilient deployment'],
@@ -73,7 +73,7 @@ const capabilities = [
     ],
   },
   {
-    id: 'ai-document-intel', icon: 'menu_book', title: 'Document AI',
+    id: 'document-ai', icon: 'menu_book', title: 'Document AI',
     subtitle: 'Turn unstructured documents into structured, validated enterprise data.',
     description: 'Document AI combines OCR, visual document understanding, natural language processing and multimodal models to process scanned forms, contracts and financial ledgers. Normalized, validated outputs feed enterprise workflows while confidence scoring and human review manage exceptions.',
     outcome: ['Less manual document processing', 'Validated information ready for enterprise systems', 'Searchable evidence with controlled handling of sensitive data'],
@@ -88,7 +88,7 @@ const capabilities = [
     ],
   },
   {
-    id: 'industry-4-0', icon: 'factory', title: 'Industrial AI',
+    id: 'industrial-ai', icon: 'factory', title: 'Industrial AI',
     subtitle: 'Turn industrial sensor data into better maintenance, quality and safety decisions.',
     description: 'Industrial AI brings machine intelligence into operational technology and manufacturing. Combining edge computing with physical systems modeling, we turn sensor data into actions that reduce downtime, support safety protocols and improve equipment performance in factory, field and processing environments.',
     outcome: ['Earlier warning of equipment failure', 'More consistent quality and process performance', 'Reliable inference in environments with limited connectivity'],
@@ -129,7 +129,7 @@ export const solutionPage = {
   capabilities: [
     ...capabilities,
     {
-      id: 'dpp-ai', icon: 'verified_user', title: 'AI Based Audit',
+      id: 'ai-based-audit', icon: 'verified_user', title: 'AI Based Audit',
       subtitle: 'Move from sampled reviews to continuous, full-population audit analysis.',
       description: 'AI-Based Audit applies unsupervised learning, statistical process control and pattern analysis across operational and accounting transactions. Continuous verification helps teams detect non-compliance, financial leakage and potential fraud, with traceable evidence for auditor review.',
       outcome: ['Broader transaction coverage', 'Earlier detection of control gaps and suspicious patterns', 'Traceable findings and evidence for regulatory review'],

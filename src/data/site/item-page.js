@@ -1,5 +1,8 @@
 import { aullect } from '@/data/platforms/aullect';
 import { amaanah } from '@/data/platforms/amaanah';
+import { digitalShowroom } from '@/data/platforms/digital-showroom';
+import { rilits } from '@/data/platforms/rilits';
+import { traceme } from '@/data/platforms/traceme';
 import { enterpriseAppDevelopment } from '@/data/solutions/enterprise-app-development';
 import { lastMileDelivery } from '@/data/industries/last-mile-delivery';
 import { mobileAppDevelopment } from '@/data/solutions/mobile-app-development';
@@ -11,9 +14,9 @@ import { mobileAppDevelopment } from '@/data/solutions/mobile-app-development';
  * platform product, each service and each industry segment. The address is
  * its parent page's address, then the item's id:
  *
- *   /esg-solutions/carbon-circularity
- *   /supply-chain/aullect
- *   /engineering-services/web-development
+ *   /esg-solutions/data-privacy-and-information-security
+ *   /supply-chain/cgi-industrial-erp
+ *   /engineering-services/ai-and-agentic-systems-integration
  *
  * WHERE THE WORDS COME FROM
  *   An item page has no copy of its own. Its title, tagline, description and
@@ -69,35 +72,43 @@ export const itemFamilies = {
  * Keyed by the page address. Everything is optional; leave a page out and it
  * uses what its Tier 2 entry already says.
  *
- *   '/enterprise-solutions/erp-solutions': {
+ *   '/enterprise-solutions/digital-transformation': {
  *     image: '/images/solutions/some-photo.jpg', // hero photo (default: the Tier 2 page's)
  *     overview: {                           // adds an Overview section under the hero
  *       title: 'A short heading.',
  *       body: ['First paragraph.', 'Second paragraph.'],
  *     },
+ *     hero: {                               // replaces the two hero buttons
+ *       primary: { label: 'Request a Demo', href: '#contact' },
+ *       secondary: { label: 'Talk to us', href: 'mailto:someone@example.com' },
+ *     },
+ *     contact: {                            // replaces the closing contact band's words
+ *       title: 'Heading', body: 'One line.', cta: 'Button label',
+ *       person: 'Name, role (optional)', email: 'someone@example.com (optional)',
+ *     },
  *   },
  * ------------------------------------------------------------------------ */
 export const pageExtras = {
-  '/custom-solutions/mobile-apps': {
+  '/custom-solutions/mobile-app-development': {
     metrics: mobileAppDevelopment.metrics,
     overview: mobileAppDevelopment.overview,
     why: mobileAppDevelopment.why,
     applied: mobileAppDevelopment.applied,
     steps: mobileAppDevelopment.steps,
   },
-  '/logistics-supply-chain-operations/transportation-fleet': {
+  '/logistics-supply-chain-operations/last-mile-delivery': {
     overview: lastMileDelivery.overview,
     why: lastMileDelivery.why,
     applied: lastMileDelivery.applied,
     steps: lastMileDelivery.steps,
   },
-  '/custom-solutions/enterprise-web': {
+  '/custom-solutions/desktop-and-web-app-development': {
     overview: enterpriseAppDevelopment.overview,
     why: enterpriseAppDevelopment.why,
     applied: enterpriseAppDevelopment.applied,
     steps: enterpriseAppDevelopment.steps,
   },
-  '/supply-chain/cyclo-erp': {
+  '/supply-chain/aullect': {
     overview: aullect.overview,
     why: aullect.why,
     applied: aullect.applied,
@@ -107,5 +118,18 @@ export const pageExtras = {
     why: amaanah.why,
     applied: amaanah.applied,
     steps: amaanah.steps,
+  },  '/product-lifecycle-management/digital-showroom': {
+    hero: digitalShowroom.hero,
+    contact: digitalShowroom.contact,
+  },
+  '/product-lifecycle-management/traceme-dpp': {
+    metrics: traceme.metrics,
+    hero: traceme.hero,
+    contact: traceme.contact,
+  },
+  '/supply-chain/rilits': {
+    metrics: rilits.metrics,
+    hero: rilits.hero,
+    contact: rilits.contact,
   },
 };

@@ -7,8 +7,7 @@
  *
  * Re-organised Sept 2026 from six categories. Two were removed (Enterprise
  * Platforms and Implementations, AI and Advanced Technologies) together with
- * their services; their old addresses forward to /services
- * (src/routes/oldAddresses.js).
+ * their services.
  *
  * Everything you might want to reword or re-image is in this file. Change the
  * text between the quote marks and save — the site picks it up on its own.
@@ -93,7 +92,7 @@ export const serviceCategories = [
     ],
     services: [
       {
-        id: 'web-development',
+        id: 'ai-and-agentic-systems-integration',
         name: 'AI & Agentic Systems Integration',
         icon: 'language',
         description: 'Connect AI agents to business systems.',
@@ -101,7 +100,7 @@ export const serviceCategories = [
         focus: ['Use-case and workflow design', 'Model, tool and data integration', 'Human approval, observability and governance'],
       },
       {
-        id: 'application-development',
+        id: 'embedded-iot-and-edge-computing',
         name: 'Embedded / IoT & Edge Computing',
         icon: 'deployed_code',
         description: 'Software for connected devices and the edge.',
@@ -109,7 +108,7 @@ export const serviceCategories = [
         focus: ['Device and sensor integration', 'Edge processing and connectivity', 'Secure data exchange and fleet management'],
       },
       {
-        id: 'ui-ux-design',
+        id: 'cloud-and-platform-modernization',
         name: 'Cloud & Platform Modernization',
         icon: 'devices',
         description: 'Modernize cloud foundations and platforms.',
@@ -117,7 +116,7 @@ export const serviceCategories = [
         focus: ['Platform and workload assessment', 'Cloud architecture and migration', 'Reliability, security and operating model'],
       },
       {
-        id: 'graphic-design',
+        id: 'dedicated-product-engineering-pods',
         name: 'Dedicated Product Engineering (PODs)',
         icon: 'palette',
         description: 'A dedicated team for sustained product delivery.',
@@ -167,7 +166,7 @@ export const serviceCategories = [
       ],
     services: [
       {
-        id: 'power-bi',
+        id: 'data-cleansing-validation-and-hygiene',
         name: 'Data Cleansing, Validation & Hygiene',
         icon: 'bar_chart',
         description: 'Improve data quality at the source.',
@@ -175,7 +174,7 @@ export const serviceCategories = [
         focus: ['Data profiling and quality rules', 'Cleansing and deduplication workflows', 'Validation, monitoring and ownership'],
       },
       {
-        id: 'bi-solutions',
+        id: 'data-migration-and-etl-pipeline-services',
         name: 'Data Migration & ETL Pipeline Services',
         icon: 'trending_up',
         description: 'Move data through controlled pipelines.',
@@ -183,7 +182,7 @@ export const serviceCategories = [
         focus: ['Source mapping and migration planning', 'ETL pipeline design and orchestration', 'Reconciliation, testing and cutover'],
       },
       {
-        id: 'data-visualization',
+        id: 'data-warehousing',
         name: 'Data Warehousing',
         icon: 'grid_view',
         description: 'Organize data for reliable analysis.',
@@ -218,7 +217,7 @@ export const serviceCategories = [
     ],
     services: [
       {
-        id: 'esg-data-reporting',
+        id: 'carbon-accounting-and-esg-dashboards',
         name: 'Carbon Accounting & ESG Dashboards',
         icon: 'bar_chart',
         description: 'Measure emissions and report ESG performance.',
@@ -226,7 +225,7 @@ export const serviceCategories = [
         focus: ['Emissions data and calculation workflows', 'ESG indicator dashboards', 'Review, approval and source traceability'],
       },
       {
-        id: 'csrd-readiness',
+        id: 'supply-chain-esg-and-vendor-sustainability',
         name: 'Supply Chain ESG & Vendor Sustainability',
         icon: 'verified_user',
         description: 'Understand sustainability across suppliers.',
@@ -234,7 +233,7 @@ export const serviceCategories = [
         focus: ['Supplier questionnaires and data requests', 'Risk and performance assessment', 'Follow-up actions and evidence records'],
       },
       {
-        id: 'carbon-accounting',
+        id: 'green-it-and-carbon-footprint-optimization',
         name: 'Green IT & Carbon Footprint Optimization',
         icon: 'eco',
         description: 'Reduce the footprint of technology operations.',
@@ -242,7 +241,7 @@ export const serviceCategories = [
         focus: ['IT energy and emissions baseline', 'Infrastructure and workload optimization', 'Progress tracking and reporting'],
       },
       {
-        id: 'supplier-due-diligence',
+        id: 'automated-regulatory-disclosure-engines',
         name: 'Automated Regulatory Disclosure Engines',
         icon: 'account_tree',
         description: 'Prepare disclosures with controlled data flows.',
@@ -288,7 +287,7 @@ export const serviceCategories = [
       ],
     services: [
       {
-        id: 'cloud-consulting',
+        id: 'cloud-and-infrastructure-security',
         name: 'Cloud & Infrastructure Security',
         icon: 'cloud',
         description: 'Secure cloud and infrastructure foundations.',
@@ -296,7 +295,7 @@ export const serviceCategories = [
         focus: ['Architecture and configuration review', 'Identity and access controls', 'Monitoring, hardening and recovery'],
       },
       {
-        id: 'cloud-migration',
+        id: 'security-assessment-and-testing',
         name: 'Security Assessment and Testing',
         icon: 'architecture',
         description: 'Find and validate security weaknesses.',
@@ -304,7 +303,7 @@ export const serviceCategories = [
         focus: ['Assessment scope and threat scenarios', 'Technical testing and evidence', 'Risk-ranked findings and retesting'],
       },
       {
-        id: 'hybrid-multicloud',
+        id: 'soc-maturity-assessment',
         name: 'SOC Maturity Assessment',
         icon: 'hub',
         description: 'Assess the maturity of security operations.',
@@ -347,7 +346,7 @@ export const serviceCategories = [
       ],
     services: [
       {
-        id: 'workflow-automation',
+        id: 'technical-support-and-it-help-desk',
         name: 'Technical Support & IT Help Desk',
         icon: 'route',
         description: 'Responsive support for users and systems.',
@@ -355,7 +354,7 @@ export const serviceCategories = [
         focus: ['Ticket intake and classification', 'Resolution and escalation workflows', 'Knowledge base and service metrics'],
       },
       {
-        id: 'rpa',
+        id: 'ai-training-data-operations',
         name: 'AI Training Data Operations',
         icon: 'bolt',
         description: 'High-quality data operations for AI teams.',
@@ -363,7 +362,7 @@ export const serviceCategories = [
         focus: ['Data preparation and annotation', 'Quality sampling and review', 'Secure handling and throughput reporting'],
       },
       {
-        id: 'digital-transformation',
+        id: 'b2b-sdr-support',
         name: 'B2B SDR Support',
         icon: 'auto_awesome',
         description: 'Support business-to-business prospecting.',
@@ -371,7 +370,7 @@ export const serviceCategories = [
         focus: ['Account and contact research', 'Outreach workflow support', 'CRM hygiene and activity reporting'],
       },
       {
-        id: 'finance-accounting-outsourcing',
+        id: 'finance-and-accounting-outsourcing-fao',
         name: 'Finance & Accounting Outsourcing (FAO)',
         icon: 'account_balance',
         description: 'Finance and accounting outsourcing',

@@ -4,7 +4,7 @@ import { itemPages } from '@/data/itemPages';
 import ItemPage from '@/pages/ItemPage/ItemPage';
 
 it('replaces the Svitch route content with the supplied overview and five modules', () => {
-  const page = itemPages.find(page => page.path === '/supplier-info-risk-management/ecomagnet');
+  const page = itemPages.find(page => page.path === '/supplier-info-risk-management/svitch');
   expect(page).toBeDefined();
   const document = new DOMParser().parseFromString(renderToStaticMarkup(<ItemPage page={page} />), 'text/html');
   expect(document.querySelector('h1')?.textContent).toBe('Svitch');

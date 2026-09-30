@@ -16,5 +16,3 @@ export const solutionPages = [ai, enterprise, sustainability, digital, automatio
       ? { ...item, focus: item.coreCapabilities.map(core => core.title) }
       : item),
   }));
-// The addresses these pages had before they were renamed are forwarded by
-// src/routes/oldAddresses.js.

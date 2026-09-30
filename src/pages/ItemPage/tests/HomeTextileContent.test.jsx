@@ -4,7 +4,7 @@ import { itemPages } from '@/data/itemPages';
 import ItemPage from '@/pages/ItemPage/ItemPage';
 
 it('renders the Home Textile brief on the existing industry route', () => {
-  const page = itemPages.find(page => page.path === '/manufacturing-industries/textile-apparel');
+  const page = itemPages.find(page => page.path === '/manufacturing-industries/home-textile');
   expect(page).toBeDefined();
   const document = new DOMParser().parseFromString(renderToStaticMarkup(<ItemPage page={page} />), 'text/html');
   expect(document.querySelector('h1')?.textContent).toBe('Home Textile');

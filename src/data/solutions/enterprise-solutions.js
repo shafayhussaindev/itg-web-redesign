@@ -33,7 +33,7 @@ export const solutionPage = {
   capabilitiesIntro: 'From a single business function to a multi-entity platform, build a foundation that works across your organization.',
   capabilities: [
     {
-      id: 'erp-solutions', icon: 'layers', title: 'Digital Transformation',
+      id: 'digital-transformation', icon: 'layers', title: 'Digital Transformation',
       subtitle: 'Modernize legacy systems, workflows and the enterprise operating model.',
       description: 'Digital Transformation modernizes enterprise operations by systematically transitioning legacy workflows into integrated, digital-first architectures. This discipline moves beyond surface-level digitization to fundamentally re-engineer business processes, break down operational data silos, and establish agile technology ecosystems. By aligning organizational strategy with modern cloud platforms, automation pipelines, and API-driven architectures, enterprises establish continuous adaptability, operational resilience, and cross-functional visibility.',
       outcome: ['More adaptable and resilient operations', 'Connected data across departments', 'Lower complexity across the technology portfolio'],
@@ -48,7 +48,7 @@ export const solutionPage = {
       ],
     },
     {
-      id: 'financial-ops', icon: 'account_balance', title: 'Supply Chain Management',
+      id: 'supply-chain-management', icon: 'account_balance', title: 'Supply Chain Management',
       subtitle: 'Connect sourcing, inventory, fulfillment and distribution in one responsive network.',
       description: 'Modern supply chain management focuses on building resilient, transparent, and responsive logistics and fulfillment ecosystems across global networks. By connecting supplier networks, production scheduling, warehouse operations, and distribution channels into a single data fabric, this practice mitigates operational disruptions, optimizes working capital, and enables demand-driven supply chain planning.',
       outcome: ['Greater visibility across the supply chain', 'Demand-led inventory and replenishment', 'More resilient logistics and supplier networks'],
@@ -63,7 +63,7 @@ export const solutionPage = {
       ],
     },
     {
-      id: 'crm-engagement', icon: 'groups', title: 'Customer Relationship Management',
+      id: 'customer-relationship-management', icon: 'groups', title: 'Customer Relationship Management',
       subtitle: 'Unify customer engagement, sales pipelines and lifecycle support.',
       description: 'Customer Relationship Management (CRM) architectures unify customer engagement, sales operations, and lifecycle support across every touchpoint. This domain designs, deploys, and optimizes centralized CRM systems that eliminate customer data fragmentation, align marketing and sales pipelines, and provide complete visibility into customer acquisition, retention, and service histories.',
       outcome: ['A consistent view of every customer', 'Coordinated sales and service workflows', 'Better visibility into retention and account health'],
@@ -78,7 +78,7 @@ export const solutionPage = {
       ],
     },
     {
-      id: 'procurement-vendor', icon: 'handshake', title: 'Vendor Info & Risk Management',
+      id: 'vendor-info-and-risk-management', icon: 'handshake', title: 'Vendor Info & Risk Management',
       subtitle: 'Govern third-party information, performance and risk throughout the relationship.',
       description: 'Vendor Information and Risk Management establishes proactive governance over third-party ecosystems, suppliers, and service providers. This capability creates standardized workflows for vendor onboarding, ongoing due diligence, financial risk scoring, and security posture monitoring, safeguarding organizations against operational disruptions, regulatory penalties, and third-party security breaches.',
       outcome: ['Validated vendor records and due diligence', 'Earlier visibility into security and compliance risks', 'Stronger continuity across supplier relationships'],
@@ -93,7 +93,7 @@ export const solutionPage = {
       ],
     },
     {
-      id: 'manufacturing-erp', icon: 'factory', title: 'Product Lifecycle Management',
+      id: 'product-lifecycle-management', icon: 'factory', title: 'Product Lifecycle Management',
       subtitle: 'Connect engineering and product data from concept through retirement.',
       description: 'Product Lifecycle Management (PLM) orchestrates the end-to-end trajectory of a product from initial concept, design engineering, and prototyping through manufacturing, service support, and retirement. By uniting cross-functional product data into a single source of truth, this discipline aligns engineering, quality assurance, regulatory compliance, and procurement teams to accelerate time-to-market and control engineering changes.',
       outcome: ['Controlled product revisions and engineering changes', 'Aligned engineering, manufacturing and procurement data', 'Traceability throughout the product lifecycle'],
@@ -108,7 +108,7 @@ export const solutionPage = {
       ],
     },
     {
-      id: 'multi-entity-systems', icon: 'domain', title: 'Contract Management',
+      id: 'contract-management', icon: 'domain', title: 'Contract Management',
       subtitle: 'Manage agreements from drafting and negotiation to obligations and renewal.',
       description: 'Contract Management modernizes the creation, negotiation, execution, and post-award administration of legal agreements. By transitioning manual, fragmented legal workflows into structured Contract Lifecycle Management (CLM) environments, this practice reduces contract cycle times, eliminates unmonitored contractual liabilities, and ensures continuous commercial and legal compliance.',
       outcome: ['Faster, structured agreement workflows', 'Clearer ownership of obligations and deadlines', 'Searchable contracts with traceable approvals'],

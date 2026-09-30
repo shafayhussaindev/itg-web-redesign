@@ -28,15 +28,15 @@ npm run dev
 src/
   main.jsx            starts the app, loads styles/global.css
   App.jsx             wraps the site in the router
-  routes/             EVERY URL — AppRoutes.jsx (with a map at the top) + oldAddresses.js (redirects)
+  routes/             EVERY URL — AppRoutes.jsx (with a map at the top)
   layouts/            MainLayout.jsx (navbar + footer around every page),
                       LandingPageLayout.jsx (wrapper for /solutions /platforms /services /industries /company)
   pages/              one folder per page; the page file sits at the top, its pieces in sections/
     Home/  Solutions/  Platforms/  Services/  Industries/  Company/  Contact/  Legal/
-    ItemPage/         the ONE template behind all 90 item pages (e.g. /esg-solutions/carbon-circularity)
+    ItemPage/         the ONE template behind all 90 item pages (e.g. /esg-solutions/data-privacy-and-information-security)
   components/
     navigation/       Navbar, Footer, BackToTop
-    common/           CookieBanner, MeasurementManager, RedirectTo, Icons (Material Symbols)
+    common/           CookieBanner, MeasurementManager, Icons (Material Symbols)
     sections/         blocks shared by several landing pages (CategoryCards, WhyITG, CtaLabel)
     ui/               shadcn/ui primitives (lowercase file names are the shadcn convention)
   data/               ALL the words, menus and image paths — see src/data/README.md
@@ -52,7 +52,7 @@ public/images/<section>/   every photo and video
 | --- | --- | --- |
 | Tier 1: landing page | `/solutions` | `pages/Solutions/SolutionsPage.jsx` |
 | Tier 2: detail page | `/esg-solutions` | `pages/Solutions/SolutionDetailPage.jsx` (one template for all six solutions) |
-| Tier 3: item page | `/esg-solutions/carbon-circularity` | `pages/ItemPage/ItemPage.jsx` (one template for all items in all four sections) |
+| Tier 3: item page | `/esg-solutions/data-privacy-and-information-security` | `pages/ItemPage/ItemPage.jsx` (one template for all items in all four sections) |
 
 ## How do I…
 
@@ -61,7 +61,7 @@ VS Code). They are in one file under `src/data/`. `src/data/README.md` has a
 table of which file holds which page, and a worked example.
 
 **…change a page's hero?**
-- Words: the page's data file (for `/esg-solutions/carbon-circularity`, the `carbon-circularity` block in `src/data/solutions/esg-solutions.js`).
+- Words: the page's data file (for `/esg-solutions/data-privacy-and-information-security`, the `carbon-circularity` block in `src/data/solutions/esg-solutions.js`).
 - Photo: the `image:` field in that same file.
 - Layout: the page template (`pages/ItemPage/ItemPage.jsx`, the `<section className="sd-hero">`).
 - Styling: `.sd-hero` rules in `src/styles/detail-pages.css`, with the site-wide look in `src/styles/detail-pages-theme.css`.
@@ -94,9 +94,8 @@ See `src/data/README.md` → Common jobs.
    `<Route path="/careers" element={<CareersPage />} />`.
 3. Put its words in `src/data/`.
 
-**…rename a URL?** Change it, then add the old address to BOTH
-`src/routes/oldAddresses.js` and the `redirects` in `vercel.json`, so shared
-links keep working.
+**…rename a URL?** Change the `id` in the data file and in `site/navbar-tier3.js`.
+The id is the URL, so keep it matching the page title. Old addresses are not forwarded.
 
 ## Good to know
 

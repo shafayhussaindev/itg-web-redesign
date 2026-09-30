@@ -128,7 +128,7 @@ export const platforms = [
     lead: 'Manage products from design to end of life',
     body:
       'Platforms that connect product records, catalogs and traceability data across every stage of the lifecycle.',
-    includes: ['Digital Product Passport Platform', 'StyleLab'],
+    includes: ['TraceMe DPP', 'Digital Showroom'],
     cta: 'Explore Product Lifecycle Management',
     image: '/images/platforms/cat-experience.webp',
     focus: '38% 72%',

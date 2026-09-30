@@ -4,6 +4,9 @@ import { platforms } from '@/data/platforms/landing-page.js';
 import { svitch } from './svitch';
 import { aullect } from './aullect';
 import { amaanah } from './amaanah';
+import { digitalShowroom } from './digital-showroom';
+import { rilits } from './rilits';
+import { traceme } from './traceme';
 
 /* ============================================================================
  * TIER 2: THE SIX PLATFORM PAGES
@@ -60,8 +63,8 @@ const platformDetails = {
     overviewTitle: 'Make sourcing decisions with connected information.',
     overviewBody: 'Bring product, supplier and regulatory information into a consistent decision process so teams can compare options and act with greater confidence.',
     products: [
-      { id: 'integra-erp', name: 'Consumer Goods Intelligence', icon: 'domain', description: consumerGoodsIntelligence.tagline, body: consumerGoodsIntelligence.body, focus: consumerGoodsIntelligence.sections[0].items.map(item => item.title) },
-      { id: 'integra-crm', name: 'Law Into Action', icon: 'groups', description: lawIntoAction.tagline, body: lawIntoAction.body, focus: ['4-step compliance check wizard', 'Product-level regulation and HS code matching', 'Conversational AI legal intelligence', 'Regulatory views and governance mapping', 'CBAM carbon cost estimator', 'Weekly AI Radar and Partner API'] },
+      { id: 'consumer-goods-intelligence', name: 'Consumer Goods Intelligence', icon: 'domain', description: consumerGoodsIntelligence.tagline, body: consumerGoodsIntelligence.body, focus: consumerGoodsIntelligence.sections[0].items.map(item => item.title) },
+      { id: 'law-into-action', name: 'Law Into Action', icon: 'groups', description: lawIntoAction.tagline, body: lawIntoAction.body, focus: ['4-step compliance check wizard', 'Product-level regulation and HS code matching', 'Conversational AI legal intelligence', 'Regulatory views and governance mapping', 'CBAM carbon cost estimator', 'Weekly AI Radar and Partner API'] },
     ], body: 'Intelligence and tools that support informed sourcing decisions across products, suppliers and legal requirements.', lead: 'Source with a clearer view of products, obligations and demand.',
   },
   'supply-chain': {
@@ -70,9 +73,9 @@ const platformDetails = {
     overviewTitle: 'Connect planning, movement and industrial assets.',
     overviewBody: 'Supply chain decisions rely on current information from production, logistics and assets. These products create focused operating views for each of those needs.',
     products: [
-      { id: 'aullect', name: 'CGI Industrial ERP', icon: 'local_shipping', description: 'ERP for industrial production and planning.', body: 'Connect materials, production orders, costing and operational reporting in an ERP workflow designed for industrial teams.', focus: ['Production and material planning', 'Inventory and cost control', 'Shop-floor and management reporting'] },
-      { id: 'astaric', name: 'RILITS', icon: 'deployed_code', description: 'Visibility into logistics and industrial assets.', body: 'Track the identity, location and status of assets and movements across sites and partners so teams can resolve exceptions sooner.', focus: ['Asset and shipment identification', 'Location and event tracking', 'Exception and performance views'] },
-      { id: 'cyclo-erp', name: 'Aullect', icon: 'route', description: aullect.tagline, body: aullect.body, focus: aullect.focus },
+      { id: 'cgi-industrial-erp', name: 'CGI Industrial ERP', icon: 'local_shipping', description: 'ERP for industrial production and planning.', body: 'Connect materials, production orders, costing and operational reporting in an ERP workflow designed for industrial teams.', focus: ['Production and material planning', 'Inventory and cost control', 'Shop-floor and management reporting'] },
+      { id: 'rilits', name: 'RILITS', icon: 'deployed_code', description: rilits.tagline, body: rilits.body, focus: rilits.focus },
+      { id: 'aullect', name: 'Aullect', icon: 'route', description: aullect.tagline, body: aullect.body, focus: aullect.focus },
     ], body: 'Platforms for industrial planning, logistics intelligence and asset visibility across the supply chain.',
   },
   'contract-lifecycle': {
@@ -81,8 +84,8 @@ const platformDetails = {
     overviewTitle: 'Control commitments before they become costs.',
     overviewBody: 'Connect purchasing and people-related spend to approved workflows, current records and useful reporting.',
     products: [
-      { id: 'documax', name: 'Enterprise Procurement', icon: 'menu_book', description: 'Enterprise purchasing under control.', body: 'Manage requisitions, supplier decisions, purchase orders and approvals in one procurement process with traceable commitments.', focus: ['Purchase request and approval workflows', 'Supplier and order management', 'Spend visibility and controls'] },
-      { id: 'zeito', name: 'Human Resource', icon: 'auto_awesome', description: 'Workforce information and HR processes.', body: 'Organize employee records and recurring HR workflows with appropriate access, approvals and management visibility.', focus: ['Employee records and lifecycle', 'HR requests and approvals', 'Workforce reporting and access control'] },
+      { id: 'enterprise-procurement', name: 'Enterprise Procurement', icon: 'menu_book', description: 'Enterprise purchasing under control.', body: 'Manage requisitions, supplier decisions, purchase orders and approvals in one procurement process with traceable commitments.', focus: ['Purchase request and approval workflows', 'Supplier and order management', 'Spend visibility and controls'] },
+      { id: 'human-resource', name: 'Human Resource', icon: 'auto_awesome', description: 'Workforce information and HR processes.', body: 'Organize employee records and recurring HR workflows with appropriate access, approvals and management visibility.', focus: ['Employee records and lifecycle', 'HR requests and approvals', 'Workforce reporting and access control'] },
     ], body: 'Platforms to manage procurement and workforce spending with clearer controls and visibility.', lead: 'Keep purchasing and workforce commitments visible.',
   },
   'supplier-info-risk-management': {
@@ -91,17 +94,17 @@ const platformDetails = {
     overviewTitle: 'Keep supplier information current and risk in view.',
     overviewBody: 'Supplier data, sustainability information and risk indicators are only useful when they are up to date and easy to review. Explore products that bring supplier and ESG information into a structured, reportable environment.',
     products: [
-      { id: 'ecomagnet', name: 'Svitch', icon: 'eco', description: svitch.tagline, body: svitch.body, focus: svitch.modules.map(module => module.title) },
+      { id: 'svitch', name: 'Svitch', icon: 'eco', description: svitch.tagline, body: svitch.body, focus: svitch.modules.map(module => module.title) },
     ],
   },
   'product-lifecycle-management': {
     icon: 'deployed_code', shortName: 'Product Lifecycle',
     headline: 'Follow every product.', accent: 'From design to end of life.',
     overviewTitle: 'Connect product records across the lifecycle.',
-    overviewBody: 'Product data, catalogs and traceability records need to stay connected as products move from design to market and beyond. Explore products for digital product passports and structured catalog presentation.',
+    overviewBody: 'Product data, catalogs and traceability records need to stay connected as products move from design to market and beyond. Explore products for digital product passports and live, buyer-ready availability lists.',
     products: [
-      { id: 'dpp-platform', name: 'TraceMe -DPP', icon: 'account_tree', description: 'EU DPP & traceability infrastructure', body: 'Connect product information with a structured approach to traceability. Explore how digital product passports can fit your product data, supply chain relationships and transparency requirements.', focus: ['Digital product records', 'Product traceability', 'Value chain transparency'] },
-      { id: 'style-lab', name: 'StyleLab', icon: 'palette', description: 'Catalog & digital branding system', body: 'Bring catalog presentation and digital branding into a shared framework. Discuss how your product content, visual identity and digital channels should work together.', focus: ['Digital catalog presentation', 'Digital branding', 'Experience consistency'] },
+      { id: 'traceme-dpp', name: 'TraceMe DPP', icon: 'account_tree', description: traceme.tagline, body: traceme.body, focus: traceme.focus },
+      { id: 'digital-showroom', name: 'Digital Showroom', icon: 'storefront', description: digitalShowroom.tagline, body: digitalShowroom.body, focus: digitalShowroom.focus },
     ],
   },
   'data-privacy': {

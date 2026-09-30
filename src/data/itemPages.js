@@ -79,6 +79,8 @@ export const itemPages = [...solutionParents, ...platformParents, ...servicePare
       })),
       overview: extras.overview,
       metrics: extras.metrics,
+      hero: extras.hero,
+      contact: extras.contact,
       contactHref,
     };
   }));

@@ -4,7 +4,7 @@ import { itemPages } from '@/data/itemPages';
 import ItemPage from '@/pages/ItemPage/ItemPage';
 
 it('renders enterprise web and desktop engineering on the existing custom solution route', () => {
-  const page = itemPages.find(page => page.path === '/custom-solutions/enterprise-web');
+  const page = itemPages.find(page => page.path === '/custom-solutions/desktop-and-web-app-development');
   expect(page).toBeDefined();
   const document = new DOMParser().parseFromString(renderToStaticMarkup(<ItemPage page={page} />), 'text/html');
   expect(document.querySelector('h1')?.textContent).toBe('Desktop & Web App Development');

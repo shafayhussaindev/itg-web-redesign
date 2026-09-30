@@ -4,7 +4,7 @@ import { itemPages } from '@/data/itemPages';
 import ItemPage from '@/pages/ItemPage/ItemPage';
 
 it('renders CGI on its published route with the product journey and reporting pipeline', () => {
-  const page = itemPages.find(page => page.path === '/sourcing/integra-erp');
+  const page = itemPages.find(page => page.path === '/sourcing/consumer-goods-intelligence');
   expect(page).toBeDefined();
   const document = new DOMParser().parseFromString(renderToStaticMarkup(<ItemPage page={page} />), 'text/html');
   expect(document.querySelector('h1')?.textContent).toBe('Consumer Goods Intelligence');

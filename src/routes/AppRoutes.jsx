@@ -1,8 +1,6 @@
 import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "@/layouts/MainLayout";
-import { RedirectTo } from "@/components/common/RedirectTo";
-import { oldAddresses } from "./oldAddresses";
 import { solutionPages } from "@/data/solutions/solutionPages";
 import { platformPages } from "@/data/platforms/platform-detail.js";
 import { servicePages } from "@/data/services/service-detail.js";
@@ -20,10 +18,9 @@ import HomePage from "@/pages/Home/HomePage";
  *   /supply-chain (one per platform)      Platforms/PlatformDetailPage.jsx      platforms/platform-detail.js
  *   /esg-services (one per service area)  Services/ServiceDetailPage.jsx        services/service-detail.js
  *   /consumer-goods (one per industry)    Industries/IndustryDetailPage.jsx     industries/industry-detail.js
- *   /esg-solutions/carbon-circularity     ItemPage/ItemPage.jsx (ALL 90 item    the item's entry in its parent's
+ *   /esg-solutions/data-privacy-and-information-security     ItemPage/ItemPage.jsx (ALL 90 item    the item's entry in its parent's
  *     (parent URL + item id)                pages share this one template)        file above (e.g. esg-solutions.js)
  *   /contact  /terms  /privacy            Contact/ Legal/
- *   old URLs                              forwarded, see ./oldAddresses.js (+ vercel.json)
  *
  * The detail and item URLs are generated from the data files, so adding an
  * entry there adds its page — no edit here needed.
@@ -59,7 +56,6 @@ export default function AppRoutes() {
         {servicePages.map(page => <Route key={page.id} path={page.href} element={<ServiceDetailPage page={page} />} />)}
         {industryPages.map(page => <Route key={page.id} path={page.href} element={<IndustryDetailPage page={page} />} />)}
         {itemPages.map(page => <Route key={page.path} path={page.path} element={<ItemPage page={page} />} />)}
-        {Object.entries(oldAddresses).map(([from, to]) => <Route key={from} path={from} element={<RedirectTo to={to} />} />)}
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/terms" element={<TermsAndConditions />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />

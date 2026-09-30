@@ -4,7 +4,7 @@ import { itemPages } from '@/data/itemPages';
 import ItemPage from '@/pages/ItemPage/ItemPage';
 
 it('renders GCC last-mile context on the correct industry route', () => {
-  const page = itemPages.find(page => page.path === '/logistics-supply-chain-operations/transportation-fleet');
+  const page = itemPages.find(page => page.path === '/logistics-supply-chain-operations/last-mile-delivery');
   expect(page).toBeDefined();
   const document = new DOMParser().parseFromString(renderToStaticMarkup(<ItemPage page={page} />), 'text/html');
   expect(document.querySelector('h1')?.textContent).toBe('Last-Mile Delivery');
@@ -13,5 +13,5 @@ it('renders GCC last-mile context on the correct industry route', () => {
   }
   expect(document.querySelectorAll('.t3-applied article')).toHaveLength(4);
   expect(document.body.textContent).not.toContain('Driver tracking and proof of delivery');
-  expect(itemPages.find(page => page.path === '/logistics-supply-chain-operations/last-mile')?.title).toBe('Ocean Logistics Intelligence');
+  expect(itemPages.find(page => page.path === '/logistics-supply-chain-operations/ocean-logistics-intelligence')?.title).toBe('Ocean Logistics Intelligence');
 });

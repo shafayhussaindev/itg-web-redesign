@@ -24,7 +24,7 @@ export const solutionPage = {
   capabilitiesIntro: 'Build the systems that help teams collect, connect and explain sustainability and compliance information.',
   capabilities: [
     {
-      id: 'esg-solutions', icon: 'eco', title: 'Sustainability Reporting & Management',
+      id: 'sustainability-reporting-and-management', icon: 'eco', title: 'Sustainability Reporting & Management',
       subtitle: 'Turn sustainability information into traceable, audit-ready disclosures.',
       description: 'Sustainability Reporting & Management establishes verifiable, auditable frameworks for collecting, validating, and disclosing corporate environmental, social, and governance (ESG) metrics. This capability bridges operational activities with global disclosure mandates—such as the Corporate Sustainability Due Diligence Directive (CSDDD), Corporate Sustainability Reporting Directive (CSRD/ESRS), Global Reporting Initiative (GRI), and IFRS Sustainability Disclosure Standards (ISSB S1/S2). By transitioning from fragmented annual surveys to automated, audit-ready data pipelines, organizations provide stakeholders, investors, and regulatory bodies with transparent, traceable sustainability performance.',
       outcome: ['Connected and validated ESG data', 'Evidence-backed stakeholder disclosures', 'Visible progress against transition plans'],
@@ -39,7 +39,7 @@ export const solutionPage = {
       ],
     },
     {
-      id: 'csrd', icon: 'bar_chart', title: 'SBTi Management',
+      id: 'sbti-management', icon: 'bar_chart', title: 'SBTi Management',
       subtitle: 'Translate science-based climate targets into monitored reduction roadmaps.',
       description: 'Science Based Targets initiative (SBTi) Management guides enterprises through setting, submitting, validating, and monitoring corporate decarbonization targets aligned with climate science and the 1.5°C threshold of the Paris Agreement. This discipline focuses on building granular greenhouse gas (GHG) inventories across Scope 1, Scope 2, and Scope 3 emissions, converting long-term net-zero commitments into actionable, trajectory-modeled reduction roadmaps across the corporate value chain.',
       outcome: ['Consistent Scope 1, 2 and 3 inventories', 'Documented target submissions and boundaries', 'Clear progress and variance tracking'],
@@ -54,7 +54,7 @@ export const solutionPage = {
       ],
     },
     {
-      id: 'dpp-eu', icon: 'verified_user', title: 'ESG Risk Management',
+      id: 'esg-risk-management', icon: 'verified_user', title: 'ESG Risk Management',
       subtitle: 'Identify and manage environmental, social and governance exposures.',
       description: 'ESG Risk Management identifies, evaluates, and mitigates material exposures arising from environmental shifts, social responsibilities, and governance vulnerabilities across enterprise operations and value chains. By embedding ESG factors into existing Enterprise Risk Management (ERM) frameworks, this practice enables organizations to quantify physical, transition, regulatory, and reputational risks, protecting balance sheets from climate liabilities and compliance penalties.',
       outcome: ['ESG risks connected to enterprise risk management', 'Better visibility into climate and supply chain exposure', 'Defined mitigation and incident escalation'],
@@ -69,7 +69,7 @@ export const solutionPage = {
       ],
     },
     {
-      id: 'traceability', icon: 'route', title: 'Circularity Management',
+      id: 'circularity-management', icon: 'route', title: 'Circularity Management',
       subtitle: 'Retain material value through circular design, recovery and reuse.',
       description: 'Circularity Management guides organizations from linear "take-make-waste" operating models to closed-loop circular systems. This practice evaluates material flows, optimizes product architecture for remanufacturing, and implements take-back logistics to retain material value throughout the economic lifecycle. By decoupling revenue generation from virgin resource extraction, companies lower material acquisition costs, reduce operational waste, and fulfill expanding circular economy regulations.',
       outcome: ['Traceable material flows and recovery potential', 'Connected take-back and reuse programs', 'Evidence for circular product decisions'],
@@ -84,7 +84,7 @@ export const solutionPage = {
       ],
     },
     {
-      id: 'compliance-audit', icon: 'shield', title: 'Compliance & Audit Management',
+      id: 'compliance-and-audit-management', icon: 'shield', title: 'Compliance & Audit Management',
       subtitle: 'Connect obligations, internal controls, audit evidence and remediation.',
       description: 'Compliance & Audit Management establishes unified governance architectures to systematically manage corporate compliance obligations, internal policy enforcement, and audit cycles. By consolidating multiple regulatory standards into an integrated control framework, this domain eliminates redundant verification workflows, closes policy enforcement gaps, and maintains continuous audit-readiness across business units.',
       outcome: ['Less duplicated control testing', 'Accountable corrective actions', 'Continuous readiness for audit and review'],
@@ -99,7 +99,7 @@ export const solutionPage = {
       ],
     },
     {
-      id: 'carbon-circularity', icon: 'eco', title: 'Data Privacy & Information Security',
+      id: 'data-privacy-and-information-security', icon: 'eco', title: 'Data Privacy & Information Security',
       subtitle: 'Protect information through integrated privacy and security governance.',
       description: 'Data Privacy & Information Security establishes the administrative, technical, and physical safeguards needed to protect corporate data assets, preserve customer trust, and maintain compliance with global privacy regimes. This practice delivers integrated security and privacy governance programs, aligning infrastructure controls with frameworks like ISO/IEC 27001, SOC 2, NIST CSF, GDPR, and regional privacy frameworks.',
       outcome: ['Visibility into sensitive data and processing risks', 'Consistent privacy and security controls', 'Prepared incident and breach response workflows'],

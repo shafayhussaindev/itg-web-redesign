@@ -16,10 +16,6 @@ import { lastMileDelivery } from '@/data/industries/last-mile-delivery';
  *   2. Keep each segment `id` in step with the menu in `navbar-tier3.js`. The menu
  *      links to `/<slug>#<id>`, and the page scrolls to that section.
  *
- * The six sectors removed in Sept 2026 (Enterprise & Corporate, Healthcare,
- * Government, Energy & ESG, Education, Travel) forward to /industries
- * (src/routes/oldAddresses.js).
- *
  * ICONS are Material Symbols names. A name that is not listed in the
  * `icon_names=` list in `index.html` renders as an empty box — add it there
  * first if you introduce a new one.
@@ -101,7 +97,7 @@ export const industryCategories = [
     ],
     segments: [
       {
-        id: 'omnichannel',
+        id: 'electronics',
         name: "Electronics",
         icon: 'shopping_cart',
         description: 'Connected electronics retail and distribution.',
@@ -109,7 +105,7 @@ export const industryCategories = [
         focus: ['Serial-number and warranty records', 'Stock visibility across stores and channels', 'Returns and after-sales workflows'],
       },
       {
-        id: 'fmcg',
+        id: 'fashion-and-apparel',
         name: "Fashion & Apparel",
         icon: 'shopping_bag',
         description: 'Fast-moving fashion and apparel operations.',
@@ -117,7 +113,7 @@ export const industryCategories = [
         focus: ['Style, size and colour inventory', 'Seasonal planning and replenishment', 'Channel-level sales and margin'],
       },
       {
-        id: 'ecommerce',
+        id: 'household-and-decor',
         name: "Household & Décor",
         icon: 'language',
         description: 'Product and inventory control for home goods.',
@@ -125,7 +121,7 @@ export const industryCategories = [
         focus: ['Product variants and rich catalog data', 'Inventory by location and channel', 'Delivery and returns coordination'],
       },
       {
-        id: 'brand-distributors',
+        id: 'food-and-beverages',
         name: "Food & Beverages",
         icon: 'campaign',
         description: 'Traceable food and beverage operations.',
@@ -133,7 +129,7 @@ export const industryCategories = [
         focus: ['Batch and expiry tracking', 'Demand and replenishment planning', 'Distribution and recall visibility'],
       },
       {
-        id: 'private-label',
+        id: 'footwear',
         name: "Footwear",
         icon: 'layers',
         description: 'Footwear from assortment to fulfilment.',
@@ -184,7 +180,7 @@ export const industryCategories = [
     ],
     segments: [
       {
-        id: 'manufacturing-ops',
+        id: 'spinning-mills',
         name: "Spinning Mills",
         icon: 'factory',
         description: 'Production planning for spinning mills.',
@@ -192,7 +188,7 @@ export const industryCategories = [
         focus: ['Blend, count and lot planning', 'Machine utilization and downtime', 'Yarn quality and process costing'],
       },
       {
-        id: 'textile-apparel',
+        id: 'home-textile',
         name: "Home Textile",
         icon: 'shopping_bag',
         description: homeTextile.tagline,
@@ -200,7 +196,7 @@ export const industryCategories = [
         focus: homeTextile.focus,
       },
       {
-        id: 'spinning-mills',
+        id: 'garments',
         name: "Garments",
         icon: 'settings',
         description: 'Connected garment production workflows.',
@@ -208,7 +204,7 @@ export const industryCategories = [
         focus: ['Style and size order management', 'Line planning and work-in-progress tracking', 'Quality and shipment readiness'],
       },
       {
-        id: 'industry-4-0-factories',
+        id: 'fertilizers',
         name: "Fertilizers",
         icon: 'neurology',
         description: 'Controlled fertilizer production and distribution.',
@@ -216,7 +212,7 @@ export const industryCategories = [
         focus: ['Batch and formulation records', 'Plant performance and maintenance', 'Quality, inventory and dispatch traceability'],
       },
       {
-        id: 'heavy-light',
+        id: 'food-packaging',
         name: "Food Packaging",
         icon: 'build',
         description: 'Traceable food packaging operations.',
@@ -267,7 +263,7 @@ export const industryCategories = [
     ],
     segments: [
       {
-        id: 'warehousing',
+        id: 'warehouse-automation',
         name: "Warehouse Automation",
         icon: 'deployed_code',
         description: 'Automate accurate warehouse movement.',
@@ -275,7 +271,7 @@ export const industryCategories = [
         focus: ['Barcode or RFID capture', 'Directed warehouse workflows', 'Stock accuracy and exception reporting'],
       },
       {
-        id: 'transportation-fleet',
+        id: 'last-mile-delivery',
         name: "Last-Mile Delivery",
         icon: 'local_shipping',
         description: lastMileDelivery.tagline,
@@ -283,7 +279,7 @@ export const industryCategories = [
         focus: lastMileDelivery.focus,
       },
       {
-        id: 'distribution-fulfillment',
+        id: 'shipment-management-automation',
         name: "Shipment Management Automation",
         icon: 'hub',
         description: 'Manage shipments from booking to delivery.',
@@ -291,7 +287,7 @@ export const industryCategories = [
         focus: ['Shipment booking and documentation', 'Carrier and milestone integration', 'Delay alerts and delivery confirmation'],
       },
       {
-        id: 'last-mile',
+        id: 'ocean-logistics-intelligence',
         name: "Ocean Logistics Intelligence",
         icon: 'route',
         description: 'Visibility into ocean freight movement.',
@@ -299,7 +295,7 @@ export const industryCategories = [
         focus: ['Booking and container visibility', 'Milestone and exception tracking', 'ETA and downstream planning'],
       },
       {
-        id: 'supply-chain-ops',
+        id: 'courier-integration',
         name: "Courier Integration",
         icon: 'account_tree',
         description: 'Connect courier services to core operations.',
@@ -350,7 +346,7 @@ export const industryCategories = [
     ],
     segments: [
       {
-        id: 'real-estate-dev',
+        id: 'project-management',
         name: "Project Management",
         icon: 'apartment',
         description: 'Control projects from plan to handover.',
@@ -358,7 +354,7 @@ export const industryCategories = [
         focus: ['Programme and milestone tracking', 'Budget, commitments and variations', 'Document control and handover'],
       },
       {
-        id: 'facilities',
+        id: 'facility-management',
         name: "Facility Management",
         icon: 'settings',
         description: 'Keep buildings and services running.',
@@ -366,7 +362,7 @@ export const industryCategories = [
         focus: ['Asset and location registers', 'Preventive and reactive maintenance', 'Service levels and vendor performance'],
       },
       {
-        id: 'construction-controls',
+        id: 'asset-management',
         name: "Asset Management",
         icon: 'construction',
         description: 'Know what assets you own and maintain.',
@@ -374,7 +370,7 @@ export const industryCategories = [
         focus: ['Asset identification and hierarchy', 'Lifecycle and maintenance history', 'Condition, cost and replacement planning'],
       },
       {
-        id: 'infrastructure',
+        id: 'infrastructure-and-utilities',
         name: 'Infrastructure & Utilities',
         icon: 'power',
         description: 'Infrastructure operations',
@@ -382,7 +378,7 @@ export const industryCategories = [
         focus: ['Asset condition and criticality', 'Regulatory and safety compliance', 'Long-range investment planning'],
       },
       {
-        id: 'asset-intensive',
+        id: 'asset-intensive-organizations',
         name: 'Asset-Intensive Organizations',
         icon: 'deployed_code',
         description: 'Asset-heavy enterprises',
@@ -433,7 +429,7 @@ export const industryCategories = [
     ],
     segments: [
       {
-        id: 'consulting',
+        id: 'agency-automation',
         name: "Agency Automation",
         icon: 'groups',
         description: 'Coordinate agency work and clients.',
@@ -441,7 +437,7 @@ export const industryCategories = [
         focus: ['Client intake and project setup', 'Resource and deliverable workflows', 'Time, cost and margin visibility'],
       },
       {
-        id: 'financial-advisory',
+        id: 'test-and-audit-automation',
         name: "Test & Audit Automation",
         icon: 'account_balance',
         description: 'Automate testing and audit evidence.',
@@ -449,7 +445,7 @@ export const industryCategories = [
         focus: ['Audit plans and test procedures', 'Evidence collection and review', 'Findings and remediation tracking'],
       },
       {
-        id: 'legal-compliance',
+        id: 'legal-and-compliance-automation',
         name: "Legal & Compliance Automation",
         icon: 'balance',
         description: 'Organize legal and compliance work.',
@@ -457,7 +453,7 @@ export const industryCategories = [
         focus: ['Matter and obligation registers', 'Review and approval workflows', 'Deadlines, evidence and reporting'],
       },
       {
-        id: 'accounting-audit',
+        id: 'esg-and-audit-automation',
         name: "ESG & Audit Automation",
         icon: 'bar_chart',
         description: 'Connect ESG data with audit review.',
@@ -465,7 +461,7 @@ export const industryCategories = [
         focus: ['ESG evidence collection', 'Control and approval workflows', 'Audit requests and issue resolution'],
       },
       {
-        id: 'managed-services',
+        id: 'it-and-managed-services-providers',
         name: 'IT & Managed Services Providers',
         icon: 'cloud',
         description: 'Managed services',

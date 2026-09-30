@@ -4,7 +4,7 @@ import { itemPages } from '@/data/itemPages';
 import ItemPage from '@/pages/ItemPage/ItemPage';
 
 it('renders the mobile service metrics, pillars, stack and lifecycle on its route', () => {
-  const page = itemPages.find(page => page.path === '/custom-solutions/mobile-apps');
+  const page = itemPages.find(page => page.path === '/custom-solutions/mobile-app-development');
   expect(page).toBeDefined();
   const document = new DOMParser().parseFromString(renderToStaticMarkup(<ItemPage page={page} />), 'text/html');
   expect(document.querySelector('h1')?.textContent).toBe('Mobile App Development');
@@ -15,5 +15,5 @@ it('renders the mobile service metrics, pillars, stack and lifecycle on its rout
   expect(document.querySelectorAll('#approach li')).toHaveLength(5);
   expect(document.body.textContent).toContain('30–90 days');
   expect(document.body.textContent).not.toContain('App Center');
-  expect(itemPages.find(page => page.path === '/custom-solutions/enterprise-web')?.metrics).toBeUndefined();
+  expect(itemPages.find(page => page.path === '/custom-solutions/desktop-and-web-app-development')?.metrics).toBeUndefined();
 });

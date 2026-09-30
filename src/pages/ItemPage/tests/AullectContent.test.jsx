@@ -4,7 +4,7 @@ import { itemPages } from '@/data/itemPages';
 import ItemPage from '@/pages/ItemPage/ItemPage';
 
 it('renders Aullect address intelligence on its published route', () => {
-  const page = itemPages.find(page => page.path === '/supply-chain/cyclo-erp');
+  const page = itemPages.find(page => page.path === '/supply-chain/aullect');
   expect(page).toBeDefined();
   const document = new DOMParser().parseFromString(renderToStaticMarkup(<ItemPage page={page} />), 'text/html');
   expect(document.querySelector('h1')?.textContent).toBe('Aullect');
@@ -16,5 +16,5 @@ it('renders Aullect address intelligence on its published route', () => {
   expect(document.body.textContent).not.toContain('spinning mills ERP');
   expect(document.body.textContent).not.toContain('A clear path from scope to adoption');
   expect(document.querySelector('#contact a')?.getAttribute('href')).toContain('/contact');
-  expect(itemPages.find(page => page.path === '/supply-chain/aullect')?.title).toBe('CGI Industrial ERP');
+  expect(itemPages.find(page => page.path === '/supply-chain/cgi-industrial-erp')?.title).toBe('CGI Industrial ERP');
 });
