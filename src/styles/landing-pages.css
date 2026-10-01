@@ -40,9 +40,6 @@
     --card-shadow: 0 20px 50px rgba(10, 35, 65, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.40);
 
   }
-  /* Scrolling is smoothed by Lenis (see LandingPageLayout); CSS smooth scroll on
-     top of it makes anchor jumps fight the inertia. */
-  .tier1-site{scroll-behavior:auto;}
   /* overflow-x: clip, not hidden. `hidden` quietly turns this wrapper into a
      scroll container (overflow-y computes to auto), which breaks anything
      that binds to the nearest scroll container (scroll-driven animations,

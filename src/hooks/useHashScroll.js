@@ -1,20 +1,16 @@
 import { useEffect } from 'react';
-import { useLenis } from './useLenis';
 
 /**
  * Scrolls to `location.hash` on a tier-2 page, and keeps it there while the
  * page is still growing.
  *
  * This is the shared version of the effect that SolutionDetail, ProductCategory,
- * ServiceCategory and IndustryDetail each used to carry a copy of. The three
+ * ServiceCategory and IndustryDetail each used to carry a copy of. The two
  * parts that matter:
  *
- * - `lenis.resize()` first. Lenis caches the scroll height; without this it
- *   clamps the jump to the height it last measured.
  * - `behavior: 'instant'`. A deep link should arrive already there rather than
  *   animate past several sections. This also keeps `scroll-margin-top` (112px
- *   in styles/detail-pages.css, to clear the fixed header) doing the work, which a
- *   Lenis `scrollTo` would bypass.
+ *   in styles/detail-pages.css, to clear the fixed header) doing the work.
  * - Re-alignment while the page grows. At mount none of the section
  *   photography has loaded and none of it carries width/height, so the
  *   document can still be close to hero-height and the jump lands short. A
@@ -25,7 +21,6 @@ import { useLenis } from './useLenis';
  * the visitor scrolling for themselves, so it never fights a real user.
  */
 export function useHashScroll(key) {
-  const lenis = useLenis();
 
   useEffect(() => {
     let frame = 0;
@@ -50,7 +45,6 @@ export function useHashScroll(key) {
         try { id = decodeURIComponent(window.location.hash.slice(1)); } catch { return; }
         const target = id && document.getElementById(id);
         if (!target) return;
-        lenis.current?.resize();
         target.scrollIntoView({ block: 'start', behavior: 'instant' });
       });
     };
@@ -75,7 +69,7 @@ export function useHashScroll(key) {
       stop();
       window.removeEventListener('hashchange', start);
     };
-  }, [key, lenis]);
+  }, [key]);
 }
 
 // A deliberate scroll by the visitor ends the re-alignment immediately.

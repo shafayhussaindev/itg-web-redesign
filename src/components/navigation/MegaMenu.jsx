@@ -75,7 +75,7 @@ export function MegaMenu({ items, categoryWidth, panelWidth }) {
           </li>
         ))}
       </ul>
-      <div id={panelId} data-lenis-prevent className={cn("shrink-0 p-4 max-h-[calc(100dvh-200px)] overflow-y-auto overscroll-contain", panelWidth)}>
+      <div id={panelId} className={cn("shrink-0 p-4 max-h-[calc(100dvh-200px)] overflow-y-auto overscroll-contain", panelWidth)}>
         {/* Keep the flyout sized to its longest list. Inactive lists still take
             up space, but are hidden from view and keyboard navigation. */}
         <div className="grid">

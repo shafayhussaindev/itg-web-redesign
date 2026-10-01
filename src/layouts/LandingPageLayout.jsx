@@ -1,12 +1,8 @@
 import { useEffect,} from "react";
-import { useLenis } from "@/hooks/useLenis";
 import "@/styles/landing-pages.css";
 
 
 export default function LandingPageLayout({ title, children }) {
-  // Same inertial scrolling the home page runs, so moving between tiers does
-  // not change how the site feels under the wheel.
-  useLenis();
 
   useEffect(() => {
     document.title = `${title} — ITG Technologies`;

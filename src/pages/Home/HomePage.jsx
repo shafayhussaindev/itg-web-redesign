@@ -8,11 +8,8 @@ import { HowWeWorkSection } from './sections/HowWeWorkSection';
 import { WhyITGSection } from './sections/WhyITGSection';
 import { InsightsSection } from './sections/InsightsSection';
 import { FinalCTASection } from './sections/FinalCTASection';
-import { useLenis } from '@/hooks/useLenis';
 
 const HomePage = () => {
-  // Inertial smooth scrolling, shared with the tier-1 pages.
-  useLenis();
 
   return (
     <>

@@ -8,10 +8,9 @@
 .solution-detail .sd-hero {
   background: #091a32;
 }
-.solution-detail .sd-hero-image { opacity: .58; }
 .solution-detail .sd-hero-scrim {
-  background: linear-gradient(90deg, rgba(5, 19, 39, .97) 0%, rgba(8, 28, 53, .9) 42%, rgba(9, 31, 56, .42) 100%),
-    linear-gradient(0deg, rgba(5, 19, 39, .46), transparent 55%);
+  background: linear-gradient(90deg, rgba(5, 19, 39, .82) 0%, rgba(8, 28, 53, .6) 45%, rgba(9, 31, 56, .1) 100%),
+    linear-gradient(0deg, rgba(5, 19, 39, .35), transparent 50%);
 }
 .solution-detail .sd-hero-content { padding-top: 118px; padding-bottom: 72px; }
 .solution-detail .sd-breadcrumb { margin-bottom: 56px; color: rgba(255,255,255,.76); }

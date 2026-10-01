@@ -283,8 +283,7 @@
 
   /* ── Reduced motion ───────────────────────────────────────────
      An accessibility requirement, not optional polish. Entrance
-     animation resolves instantly and smooth scrolling is dropped;
-     the Lenis instance bails out separately in useLenis. */
+     animation resolves instantly and smooth scrolling is dropped. */
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after {
@@ -591,26 +590,6 @@
   
   
   
-  /* Lenis Smooth Scroll */
-  html.lenis, html.lenis body {
-    height: auto;
-  }
-  
-  .lenis.lenis-smooth {
-    scroll-behavior: auto !important;
-  }
-  
-  .lenis.lenis-smooth [data-lenis-prevent] {
-    overscroll-behavior: contain;
-  }
-  
-  .lenis.lenis-stopped {
-    overflow: hidden;
-  }
-  
-  .lenis.lenis-scrolling iframe {
-    pointer-events: none;
-  }
 
   
   

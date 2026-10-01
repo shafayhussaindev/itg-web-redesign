@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { ArrowUp } from "@/components/common/Icons";
-import { getActiveLenis } from "@/hooks/useLenis";
 import { cn } from "@/lib/utils";
 
 // How far down the page (px) before the button appears.
@@ -20,10 +19,6 @@ export function BackToTop() {
   }, []);
 
   const scrollToTop = () => {
-    // Pages with Lenis smooth scroll must scroll through it; a native smooth
-    // scroll gets overridden and jumps.
-    const lenis = getActiveLenis();
-    if (lenis) return lenis.scrollTo(0);
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
   };

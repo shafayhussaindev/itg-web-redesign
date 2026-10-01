@@ -1,5 +1,4 @@
 import { useEffect,} from "react";
-import { useLenis } from "@/hooks/useLenis";
 
 
 
@@ -9,7 +8,6 @@ import { useLenis } from "@/hooks/useLenis";
  * through this so a change to one lands on both.
  */
 export function LegalPage({ title, intro, effective, sections, children }) {
-  useLenis();
 
   useEffect(() => {
     document.title = `${title} — ITG Technologies`;

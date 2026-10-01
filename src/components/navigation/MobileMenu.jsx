@@ -10,7 +10,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
  */
 export function MobileMenu({ menus, extraLinks, cta, contactHref, open, onToggle, onClose }) {
   return (
-    <div id="mobile-navigation" data-lenis-prevent className="lg:hidden absolute top-full left-0 right-0 max-h-[calc(100dvh-80px)] overflow-y-auto overscroll-contain bg-background border-b border-border shadow-lg">
+    <div id="mobile-navigation" className="lg:hidden absolute top-full left-0 right-0 max-h-[calc(100dvh-80px)] overflow-y-auto overscroll-contain bg-background border-b border-border shadow-lg">
       <nav aria-label="Mobile navigation" className="section-container py-4 pb-8 flex flex-col gap-1 [&_button]:min-h-11 [&_button]:text-left [&_a]:min-h-11 [&_a]:flex [&_a]:items-center [&_a]:leading-snug [&_button_.msym]:shrink-0">
         <div className="space-y-2">
           {menus.map((menu) => (

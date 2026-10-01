@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ChevronDown, MSym } from '@/components/common/Icons';
 import { contactLink } from '@/lib/contact-link';
-import { useLenis } from '@/hooks/useLenis';
 import { solutionDetail as copy } from '@/data/solutions/solution-detail.js';
 import { solutionPages } from '@/data/solutions/solution-pages.js';
 
@@ -12,7 +11,6 @@ import '@/styles/detail-pages-theme.css';
 export default function SolutionDetailPage({ page }) {
   const [expanded, setExpanded] = useState([page.capabilities[0].id]);
   const pendingAnchor = useRef(null);
-  const lenis = useLenis();
 
   useEffect(() => {
     const previousTitle = document.title;
@@ -49,13 +47,12 @@ export default function SolutionDetailPage({ page }) {
     const frame = requestAnimationFrame(() => {
       const target = document.getElementById(id);
       if (target) {
-        lenis.current?.resize();
         target.scrollIntoView({ block: 'start', behavior: 'instant' });
       }
       pendingAnchor.current = null;
     });
     return () => cancelAnimationFrame(frame);
-  }, [expanded, lenis]);
+  }, [expanded]);
 
   const related = solutionPages.filter(item => item.id !== page.id);
   const contactHref = copy.contactEmail

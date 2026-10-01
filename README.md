@@ -2,7 +2,7 @@
 
 Marketing site for ITG Technologies. React 18 + JavaScript (JSX), built with Vite,
 routed with React Router, styled with Tailwind (home, legal and the site chrome)
-and plain CSS (everything else). Lenis gives the smooth scrolling, GSAP the home
+and plain CSS (everything else). Native browser scrolling (no Lenis). GSAP the home
 hero entrance, Lottie the /solutions diagram.
 
 **There is no backend.** Every word, menu entry and image path is a JavaScript
@@ -58,7 +58,7 @@ src/
     site/                  home.js, site.js (footer, cookie popup), contact.js
     solutions/ platforms/ services/ industries/ company/
   styles/                  global.css (colours, Tailwind), landing-pages.css, detail-pages*.css
-  hooks/                   useLenis, useHashScroll, useInView, useAnimationActivity, useFrostClip
+  hooks/                   useHashScroll, useInView, useAnimationActivity, useFrostClip
   lib/                     analytics, cookie consent, contact links, cn()
 public/images/<section>/   every photo, video and logo (referenced as '/images/…')
 ```
