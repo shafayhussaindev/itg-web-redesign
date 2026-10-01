@@ -18,7 +18,7 @@ import HomePage from "@/pages/Home/HomePage";
  *   /supply-chain (one per platform)      Platforms/PlatformDetailPage.jsx      platforms/platform-detail.js
  *   /esg-services (one per service area)  Services/ServiceDetailPage.jsx        services/service-detail.js
  *   /consumer-goods (one per industry)    Industries/IndustryDetailPage.jsx     industries/industry-detail.js
- *   /esg-solutions/data-privacy-and-information-security     ItemPage/ItemPage.jsx (ALL 90 item    the item's entry in its parent's
+ *   /esg-solutions/sbti-management         ItemPage/ItemPage.jsx (ALL 90 item    the item's entry in its parent's
  *     (parent URL + item id)                pages share this one template)        file above (e.g. esg-solutions.js)
  *   /contact  /terms  /privacy            Contact/ Legal/
  *

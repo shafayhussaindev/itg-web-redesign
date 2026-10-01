@@ -1,6 +1,6 @@
 import { aullect } from '@/data/platforms/aullect';
 import { lawIntoAction } from '@/data/platforms/law-into-action';
-import { amaanah } from '@/data/platforms/amaanah';
+import { amanah } from '@/data/platforms/amanah';
 import { digitalShowroom } from '@/data/platforms/digital-showroom';
 import { rilits } from '@/data/platforms/rilits';
 import { traceme } from '@/data/platforms/traceme';
@@ -18,7 +18,7 @@ import { generativeMediaProduction } from '@/data/solutions/generative-media-pro
  * platform product, each service and each industry segment. The address is
  * its parent page's address, then the item's id:
  *
- *   /esg-solutions/data-privacy-and-information-security
+ *   /esg-solutions/sbti-management
  *   /supply-chain/cgi-industrial-erp
  *   /engineering-services/ai-and-agentic-systems-integration
  *
@@ -131,11 +131,11 @@ export const pageExtras = {
     applied: aullect.applied,
     steps: aullect.steps,
   },
-  '/data-privacy/amaanah': {
-    overview: amaanah.overview,
-    why: amaanah.why,
-    applied: amaanah.applied,
-    steps: amaanah.steps,
+  '/data-privacy/amanah': {
+    overview: amanah.overview,
+    why: amanah.why,
+    applied: amanah.applied,
+    steps: amanah.steps,
   },
   '/product-lifecycle-management/digital-showroom': {
     hero: digitalShowroom.hero,

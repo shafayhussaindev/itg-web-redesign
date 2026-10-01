@@ -3,7 +3,7 @@ import { lawIntoAction } from '@/data/platforms/law-into-action';
 import { platforms } from '@/data/platforms/landing-page.js';
 import { svitch } from './svitch';
 import { aullect } from './aullect';
-import { amaanah } from './amaanah';
+import { amanah } from './amanah';
 import { digitalShowroom } from './digital-showroom';
 import { rilits } from './rilits';
 import { traceme } from './traceme';
@@ -111,9 +111,9 @@ const platformDetails = {
     icon: 'privacy_tip', shortName: 'Data Privacy',
     headline: 'Know your personal data.', accent: 'Protect it by design.',
     overviewTitle: 'A platform foundation for privacy.',
-    overviewBody: 'Personal data spreads across applications, documents and suppliers. Explore Amaanah for PDPL compliance across processing activities, vendors and cross-border transfers.',
+    overviewBody: 'Personal data spreads across applications, documents and suppliers. Explore Amanah for PDPL compliance across processing activities, vendors and cross-border transfers.',
     products: [
-      { id: 'amaanah', name: 'Amaanah', icon: 'privacy_tip', description: amaanah.tagline, body: amaanah.body, focus: amaanah.focus },
+      { id: 'amanah', name: 'Amanah', icon: 'privacy_tip', description: amanah.tagline, body: amanah.body, focus: amanah.focus },
     ],
   },
 };

@@ -32,7 +32,9 @@ const MEGA_MENU_WIDTHS = {
 // No chip at rest — the hover glow is a radial gradient on a pseudo-element that
 // fades in, so it reads as light spilling behind the label rather than a pill.
 const NAV_ITEM_BASE =
-  "relative bg-transparent shadow-none rounded-none text-[15px] font-medium tracking-[0.005em] px-3.5 py-2 h-10 " +
+  // focus:bg-transparent cancels the shadcn trigger's focus box, which showed
+  // after a click.
+  "relative bg-transparent focus:bg-transparent shadow-none rounded-none text-[15px] font-medium tracking-[0.005em] px-3.5 py-2 h-10 " +
   "transition-colors duration-200 ease-out " +
   // Hairline indicator, drawn from the centre out on hover and held open while
   // the mega-menu is showing.

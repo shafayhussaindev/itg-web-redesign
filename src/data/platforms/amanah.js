@@ -1,14 +1,14 @@
 // Product content from the Amanah Privacy Suite deck (2026) supplied by the user.
-export const amaanah = {
+export const amanah = {
   tagline: 'PDPL compliance intelligence for Saudi Arabia.',
-  body: 'Amaanah turns scattered policies, vendor contracts and consent records into one auditable compliance score. Built for the Saudi Personal Data Protection Law (PDPL), it scores every vendor, transfer and processing activity as it enters the business.',
+  body: 'Amanah turns scattered policies, vendor contracts and consent records into one auditable compliance score. Built for the Saudi Personal Data Protection Law (PDPL), it scores every vendor, transfer and processing activity as it enters the business.',
   focus: ['Record of Processing Activities with automatic DPIA triggering', 'Data subject requests tracked against an internal SLA', 'Cross-border transfer risk scored across 249 countries', 'Vendor and sub-processor registry from Tier 1 to Tier 3', 'Incident register with a 72-hour notification clock', 'Evidence reports for SDAIA submission'],
   overview: {
     title: 'Every PDPL obligation. One system.',
     body: [
-      'PDPL applies to every entity, inside or outside the Kingdom, that processes the personal data of individuals in Saudi Arabia. Amaanah brings the registers, assessments and evidence that obligation requires into one platform with a full English and Arabic interface.',
+      'PDPL applies to every entity, inside or outside the Kingdom, that processes the personal data of individuals in Saudi Arabia. Amanah brings the registers, assessments and evidence that obligation requires into one platform with a full English and Arabic interface.',
       'Scoring is algorithm-driven, not AI-guessed. Deterministic, published formulas move each case from inherent risk, through safeguard reductions, to a residual score and a decision band, so an auditor can reproduce any number.',
-      'Amaanah is SDAIA-aligned. It is not certified or endorsed by SDAIA.',
+      'Amanah is SDAIA-aligned. It is not certified or endorsed by SDAIA.',
     ],
   },
   why: [

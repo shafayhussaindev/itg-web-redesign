@@ -23,29 +23,33 @@ written in exactly one file here.
 | One platform, e.g. `/supply-chain` | `platforms/platform-detail.js` (card title/image: `platforms/landing-page.js`) |
 | One service area, e.g. `/esg-services` | `services/service-detail.js` |
 | One industry, e.g. `/consumer-goods` | `industries/industry-detail.js` |
-| An item page, e.g. `/esg-solutions/data-privacy-and-information-security` | the item's entry in its parent's file above (search for its id) |
+| An item page, e.g. `/data-privacy-solutions/data-privacy-and-information-security` | the item's entry in its parent's file above (search for its id) |
 | Labels shared by all item pages ("Back to…", "Discuss this…") | `items/item-page.js` |
 | Labels shared by all solution / platform / service / industry pages | `solutions/solution-detail.js`, top of `platforms/platform-detail.js`, `services/service-detail.js`, `industries/industry-detail.js` |
 
-### Worked example: `/esg-solutions/data-privacy-and-information-security`
+### Worked example: `/data-privacy-solutions/data-privacy-and-information-security`
 
-Everything on that page comes from the `id: 'carbon-circularity'` block in
-`solutions/esg-solutions.js`:
+Everything on that page comes from the `id: 'data-privacy-and-information-security'`
+block in `solutions/data-privacy-solutions.js`:
 
 - `title` — the big heading, "Data Privacy & Information Security" (also used in the menu)
 - `subtitle` — the line under it, "Protect information through integrated…" (also the menu's short line)
 - `description` — the Overview paragraph
 - `outcome` — the "why it matters" cards
-- `coreCapabilities` — the "Core capabilities" cards (and the bullet list on `/esg-solutions`)
+- `coreCapabilities` — the "Core capabilities" cards (and the bullet list on `/data-privacy-solutions`)
 
 The hero photo (the big picture at the top) is listed in `site/hero-images.js`,
 one line per page address. This page's photo is
-`/images/hero/esg-solutions/data-privacy-and-information-security.jpg`
-(= `public/images/hero/esg-solutions/data-privacy-and-information-security.jpg`).
+`/images/hero/data-privacy-solutions/data-privacy-and-information-security.jpg`
+(= `public/images/hero/data-privacy-solutions/data-privacy-and-information-security.jpg`).
 An item page missing from that list uses its parent page's hero photo.
 
-Note: the id `carbon-circularity` is older than the title. Ids are part of the
-page address, so they stay the same when a title changes.
+Note: ids are part of the page address. Moving an item to another parent
+changes its address too: this page was `/esg-solutions/…` until 2026-10-01. To
+move one, cut its block into the new parent's file, move its line in
+`navigation/tier3.js` and in `site/hero-images.js`, and move its photo folder.
+If the block has `coreCapabilities`, the new parent's file needs an `itemPage`
+block too (see `solutions/esg-solutions.js`).
 
 ### A few items have their own file
 

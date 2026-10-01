@@ -24,7 +24,6 @@ export const tier3Navbar = {
       { id: "esg-risk-management" },
       { id: "circularity-management" },
       { id: "compliance-and-audit-management" },
-      { id: "data-privacy-and-information-security" },
     ],
     "/custom-solutions": [
       { id: "desktop-and-web-app-development" },
@@ -43,12 +42,13 @@ export const tier3Navbar = {
       { id: "industrial-audit" },
     ],
     "/data-privacy-solutions": [
-      { description: "Manage privacy obligations and records.", id: "gdpr-pdpl-management" },
-      { description: "Find and classify personal data.", id: "data-discovery-and-classification" },
+      { id: "gdpr-pdpl-management", description: "Manage privacy obligations and records."  },
+      { id: "data-discovery-and-classification", description: "Find and classify personal data." },
       { id: "ropa-automation" },
       { id: "consent-and-preference-management" },
-      { description: "Control access to sensitive data.", id: "data-protection-and-access-control" },
+      { id: "data-protection-and-access-control", description: "Control access to sensitive data." },
       { id: "zero-data-retention" },
+      { id: "data-privacy-and-information-security" },
     ],
   },
   industries: {
@@ -107,7 +107,7 @@ export const tier3Navbar = {
       { description: "Live availability lists for B2B buyers.", id: "digital-showroom" },
     ],
     "/data-privacy": [
-      { description: "Govern personal data across systems.", id: "amaanah" },
+      { description: "Govern personal data across systems.", id: "amanah" },
     ],
   },
   services: {

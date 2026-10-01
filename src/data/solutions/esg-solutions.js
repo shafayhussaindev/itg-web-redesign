@@ -98,21 +98,6 @@ export const solutionPage = {
         { icon: 'eco', title: 'Audit Trail & Regulatory Inquiries Preparation', body: 'Compiling evidence repositories and traceable testing documentation to respond efficiently to external regulatory inquiries, statutory audits, and certifications.' },
       ],
     },
-    {
-      id: 'data-privacy-and-information-security', icon: 'eco', title: 'Data Privacy & Information Security',
-      subtitle: 'Protect information through integrated privacy and security governance.',
-      description: 'Data Privacy & Information Security establishes the administrative, technical, and physical safeguards needed to protect corporate data assets, preserve customer trust, and maintain compliance with global privacy regimes. This practice delivers integrated security and privacy governance programs, aligning infrastructure controls with frameworks like ISO/IEC 27001, SOC 2, NIST CSF, GDPR, and regional privacy frameworks.',
-      outcome: ['Visibility into sensitive data and processing risks', 'Consistent privacy and security controls', 'Prepared incident and breach response workflows'],
-      // Listed on this solution's page as bullet points and on the item's own page as cards.
-      coreCapabilities: [
-        { icon: 'policy', title: 'Privacy Program Governance & Cross-Border Compliance', body: 'Designing operational privacy programs covering data subject access requests (DSAR), cross-border data transfer mechanisms, and privacy notice management under GDPR, CCPA/CPRA, and equivalent regimes.' },
-        { icon: 'layers', title: 'Data Discovery, Classification & Sensitive Data Lineage', body: 'Deploying automated discovery engines to catalog, tag, and trace Personally Identifiable Information (PII) and corporate intellectual property across cloud, on-premises, and SaaS environments.' },
-        { icon: 'hub', title: 'Information Security Management Systems (ISMS)', body: 'Developing and maintaining comprehensive ISMS frameworks in full alignment with ISO/IEC 27001, NIST Cybersecurity Framework, and CIS Controls.' },
-        { icon: 'verified_user', title: 'Data Protection Impact Assessments (DPIA)', body: 'Evaluating privacy risks introduced by new product architectures, third-party software, or automated processing systems prior to operational deployment.' },
-        { icon: 'groups', title: 'Incident Response & Breach Notification Protocols', body: 'Formulating defined incident classification matrices, technical containment procedures, forensic procedures, and regulatory notification workflows for data compromise events.' },
-        { icon: 'eco', title: 'Privacy-by-Design Technical Implementations', body: 'Establishing engineering standards for pseudonymization, encryption in transit and at rest, tokenization, dynamic masking, and automated data retention/deletion rules.' },
-      ],
-    },
   ],
   applications: [
     { icon: 'factory', title: 'Manufacturers & exporters', body: 'Connect materials, production and product records to support customer and market information needs.' },

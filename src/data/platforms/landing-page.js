@@ -140,7 +140,7 @@ export const platforms = [
     lead: 'Govern personal data across your systems',
     body:
       'Platforms that help discover, protect and account for the personal data your organization holds.',
-    includes: ['Amaanah'],
+    includes: ['Amanah'],
     cta: 'Explore Data Privacy',
     image: '/images/platforms/hero-ecosystem.webp',
     focus: '50% 50%',

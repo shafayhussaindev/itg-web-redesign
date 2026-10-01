@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { cookieBar } from "@/data/site/site.js";
-import { Cookie, X } from "./Icons";
+import { X } from "./Icons";
 import {
   getCookieConsent,
   setCookieConsent,
@@ -36,7 +36,7 @@ export function CookieBanner() {
         <Dialog.Overlay className="cookie-settings-overlay" />
         <Dialog.Content className="cookie-settings-dialog">
           <div className="cookie-settings-head">
-            <span className="cookie-settings-icon" aria-hidden="true"><Cookie size={24} /></span>
+            <span className="cookie-settings-brand">Powered by <img className="cookie-settings-logo" src="/amanah-logo.webp" alt="Amanah" /></span>
             <Dialog.Close className="cookie-settings-close" aria-label={cookieBar.close}>
               <X size={20} />
             </Dialog.Close>
