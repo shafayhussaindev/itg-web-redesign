@@ -175,12 +175,10 @@ export const globalPresence = {
     // `map` pins Texas exactly on the dot artwork (pixels of the 1614x689
     // world-dot-map.png): just north-west of the Gulf of Mexico's NW corner.
     // The map is stylised, so latitude/longitude alone landed it over Arkansas.
-    { name: 'Texas', latitude: 31.9686, longitude: -99.9018, map: { x: 332, y: 257 } },
-    { name: 'Finland', latitude: 61.9241, longitude: 25.7482 },
-    { name: 'Pakistan', latitude: 30.3753, longitude: 69.3451 },
-    { name: 'UAE', latitude: 23.4241, longitude: 53.8478 },
-    { name: 'Bangladesh', latitude: 23.685, longitude: 90.3563 },
-    { name: 'Hong Kong', latitude: 22.3193, longitude: 114.1694 },
+    { name: 'North America', latitude: 31.9686, longitude: -99.9018, map: { x: 332, y: 257 } },
+    { name: 'Europe', latitude: 61.9241, longitude: 25.7482 },
+    { name: 'Middle East', latitude: 23.4241, longitude: 53.8478 },
+    { name: 'Asia Pacific', latitude: 22.3193, longitude: 114.1694 },
     { name: 'Australia', latitude: -25.2744, longitude: 133.7751 },
   ],
   items: [

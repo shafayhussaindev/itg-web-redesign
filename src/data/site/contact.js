@@ -45,8 +45,8 @@ export const contact = {
   // How enquiries reach ITG. Read the note at the top of this file.
   connect: {
     formEndpoint: '',
-    email: 'zahid@itg.net.pk',
-    phone: '+92 3351982198',
+    email: 'info@itginnovators.com',
+    phone: '+923351982198',
     // Optional. When set, shown as "We typically reply within …". Leave blank
     // rather than promise something the team cannot keep.
     responseTime: '',
